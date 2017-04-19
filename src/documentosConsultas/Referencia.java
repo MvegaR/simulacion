@@ -25,6 +25,11 @@ public class Referencia {
 		this.tipo = tipo;
 	}
 	
+	@Override
+	public String toString() {
+		return "Referencia [x=" + x + ", tipo=" + tipo + ", y=" + y + "]";
+	}
+
 	public Integer getX() {
 		return x;
 	}

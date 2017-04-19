@@ -13,7 +13,7 @@ public class Documento {
 	private String fecha; //.B
 	private ArrayList<String> autores; //.A
 	private ArrayList<String> tags; //.K
-	private ArrayList<Double> codigos; //.C
+	private ArrayList<String> codigos; //.C
 	private String infoPublicacion; //.N
 	private ArrayList<Referencia> referencias; //.X
 
@@ -22,7 +22,7 @@ public class Documento {
 	}
 
 	public Documento(Integer id, String titulo, String cuerpo, String fecha, 
-			ArrayList<String> tags, ArrayList<Double> codigos,
+			ArrayList<String> tags, ArrayList<String> codigos,
 			ArrayList<String> autores, String infoPubliacion, 
 			ArrayList<Referencia> referencias) {
 		this.id = id;
@@ -35,6 +35,8 @@ public class Documento {
 		this.infoPublicacion = infoPubliacion;
 		this.referencias = referencias;
 	}
+	
+	
 	
 
 	public Integer getId() {
@@ -55,7 +57,7 @@ public class Documento {
 	public String getInfoPublicacion() {
 		return infoPublicacion;
 	}
-	public ArrayList<Double> getCodigos() {
+	public ArrayList<String> getCodigos() {
 		return codigos;
 	}
 	public ArrayList<String> getTags() {
@@ -93,7 +95,7 @@ public class Documento {
 	public void setReferencias(ArrayList<Referencia> referencias) {
 		this.referencias = referencias;
 	}
-	public void setCodigos(ArrayList<Double> codigos) {
+	public void setCodigos(ArrayList<String> codigos) {
 		this.codigos = codigos;
 	}
 	public void setTags(ArrayList<String> tags) {
@@ -102,7 +104,9 @@ public class Documento {
 
 	@Override
 	public String toString() {
-		return this.id.toString();
+		return "Documento [id=" + id + ", titulo=" + titulo + ", cuerpo=" + cuerpo + ", fecha=" + fecha + ", autores="
+				+ autores + ", tags=" + tags + ", codigos=" + codigos + ", infoPublicacion=" + infoPublicacion
+				+ ", referencias=" + referencias + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -131,25 +135,40 @@ public class Documento {
 			Scanner sc = new Scanner(origen);
 			Documento doc = null;
 			String line = "";
+			Boolean bloqueo = false; //variable para controlar el caso de que exista una etiqueta sin contenido
 			
 			while (sc.hasNextLine()) {
-				line = sc.nextLine();
-				
+				if(!bloqueo){
+					line = sc.nextLine();
+					bloqueo = false;
+				}else{
+					//System.out.println(line);
+				}
+
 				if(doc != null && line.contains(".X")  && line.substring(0, 1).equals(".")){
 					ArrayList<Referencia> referencias = new ArrayList<Referencia>();
-					while(!line.substring(0, 1).equals(".") && !sc.hasNextLine()){
+					line = sc.nextLine();
+					while(!line.substring(0, 1).equals(".") && sc.hasNextLine()){
+						if(!line.equals("None")){
+							referencias.add(new Referencia(Integer.parseInt(line.split("[\t ]")[0]), Integer.parseInt(line.split("[\t ]")[1]), Integer.parseInt(line.split("[\t ]")[2])));
+						}
 						line = sc.nextLine();
-						referencias.add(new Referencia(Integer.parseInt(line.split("\t")[0]), Integer.parseInt(line.split("\t")[1]), Integer.parseInt(line.split("\t")[2])));
 					}
+					bloqueo = false;
 					doc.setReferencias(referencias);
 				
 				}
 				
 				if(doc != null && line.contains(".A") && line.substring(0, 1).equals(".")){
 						ArrayList<String> autores = new ArrayList<String>();
+						line = sc.nextLine();
 						while(!line.substring(0, 1).equals(".") && sc.hasNextLine()){
-							autores.add(sc.nextLine());
+							if(!line.equals("None")){
+								autores.add(line);
+							}
+							line = sc.nextLine();
 						}
+						bloqueo = false;
 						doc.setAutores(autores);
 				}
 				
@@ -160,17 +179,40 @@ public class Documento {
 						cuerpo +=line+" ";
 						line = sc.nextLine();
 					}
-					doc.setCuerpo(cuerpo);
+					bloqueo = false;
+					if(!cuerpo.equals("None")){
+						doc.setCuerpo(cuerpo);
+					}
 				}
 				if(doc != null && line .contains(".K") && line.substring(0,1).equals(".")){
 					ArrayList<String> t = new ArrayList<String>();
+					line = sc.nextLine();
 					while(!line.substring(0, 1).equals(".") && sc.hasNextLine()){
-						String tags[] = sc.nextLine().split(", ");
+						String tags[] = line.split(", ");
 						for(String s: tags){
-							t.add(s);
+							if(!s.equals("None")){
+								t.add(s);
+							}
 						}
+						line = sc.nextLine();
 					}
+					bloqueo = false;
 					doc.setTags(t);			
+				}
+				if(doc != null && line .contains(".C") && line.substring(0,1).equals(".")){
+					ArrayList<String> c = new ArrayList<String>();
+					line = sc.nextLine();
+					while(!line.substring(0, 1).equals(".") && sc.hasNextLine()){
+						String tags[] = line.split("(, )|( )");
+						for(String s: tags){
+							if(!s.equals("None")){
+								c.add(s);
+							}
+						}
+						line = sc.nextLine();
+					}
+					doc.setCodigos(c);
+					bloqueo = false;
 				}
 				
 				
@@ -179,12 +221,32 @@ public class Documento {
 					Integer id = Integer.parseInt(line.substring(3, line.length()));
 					doc.setId(id);
 					documentos.add(doc);
+					bloqueo = false;
 				}else if(line.contains(".T") && line.substring(0, 1).equals(".")){
-					doc.setTitulo(sc.nextLine());
+					line = sc.nextLine();
+					if(!line.substring(0, 1).equals(".") && !line.equals("None")){
+						doc.setTitulo(line);
+						bloqueo = false;
+					}else{
+						bloqueo = true;
+					}
 				}else if(line.contains(".B")  && line.substring(0, 1).equals(".")){
-					doc.setFecha(sc.nextLine());
+					line = sc.nextLine();
+					if(!line.substring(0, 1).equals(".") && !line.equals("None")){
+						doc.setFecha(line);
+						bloqueo = false;
+					}else{
+						bloqueo = true;
+					}
+					
 				}else if(line.contains(".N")  && line.substring(0, 1).equals(".")){
-					doc.setInfoPublicacion(sc.nextLine());
+					line = sc.nextLine();
+					if(!line.substring(0, 1).equals(".") && !line.equals("None")){
+						doc.setInfoPublicacion(line);
+						bloqueo = false;
+					}else{
+						bloqueo = true;
+					}
 				}
 				
 				

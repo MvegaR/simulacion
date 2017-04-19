@@ -15,6 +15,9 @@ public class Generar {
 		ArrayList<Documento> documentos = new ArrayList<>();
 		Documento.generarDocumentos(file, documentos);
 		System.out.println(documentos.size());
+		for(Documento d: documentos){
+			System.out.println(d);
+		}
 		
 	}
 	
