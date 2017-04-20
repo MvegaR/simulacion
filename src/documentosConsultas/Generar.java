@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Generar {
@@ -43,6 +42,11 @@ public class Generar {
 		}
 		//*/
 		
+		/*for(String s:documentos.get(1061).getCuerpo().split("")){
+			System.out.println(s);
+		}*/
+		
+		//*
 		HashMap<Consulta, ArrayList<Documento>> mapRevelancia = Generar.detectarRelevancia(documentos, consultas, palabrasComunes);
 		for(Consulta c: mapRevelancia.keySet()){
 			System.out.print(c.getId()+" -> { ");
@@ -51,6 +55,7 @@ public class Generar {
 			}
 			System.out.println("}");
 		}
+		//*/
 		
 		
 	}
@@ -64,9 +69,9 @@ public class Generar {
 		//query -> titulo documento, query -> cuerpo documento, && -PalabrasComunes
 		
 		//autores?, Tipo Referencias?, peso?
-		
+		//caso split vacio
 		for(Consulta q: consultas){
-			String[] querySplit = q.getQuery().split("");	
+			String[] querySplit = q.getQuery().split("[ ,.\n]+");	
 			ArrayList<Documento> valorList = new ArrayList<Documento>();
 			mapRelevancia.put(q, valorList);
 			System.out.println("Analizando consulta:" + q.getFullId());
@@ -74,14 +79,14 @@ public class Generar {
 				String[] tituloSplit = null;
 				String[] cuerpoSplit = null;
 				if(d.getTitulo() != null){
-					tituloSplit = d.getTitulo().split("");
+					tituloSplit = d.getTitulo().split("[ ,.\n]+");
 				}
 				if(d.getCuerpo() != null){
-					cuerpoSplit = d.getCuerpo().split("");
+					cuerpoSplit = d.getCuerpo().split("[ ,.\n]+");
 				}
 
 				for(String qs: querySplit){
-					if(!palabrasComunes.contains(qs)){
+					if(!palabrasComunes.contains(qs) && qs.length()>3){
 						if(tituloSplit != null){
 							for(String ts: tituloSplit){
 								if(qs.equals(ts) && !mapRelevancia.get(q).contains(d)){
