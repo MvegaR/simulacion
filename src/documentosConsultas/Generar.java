@@ -3,7 +3,7 @@ package documentosConsultas;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.Scanner;
 
 public class Generar {
@@ -46,7 +46,7 @@ public class Generar {
 			System.out.println(s);
 		}*/
 		
-		//*
+		/*
 		HashMap<Consulta, ArrayList<Documento>> mapRevelancia = Generar.detectarRelevancia(documentos, consultas, palabrasComunes);
 		for(Consulta c: mapRevelancia.keySet()){
 			System.out.print(c.getId()+" -> { ");
@@ -60,7 +60,26 @@ public class Generar {
 		
 	}
 	
+	public static void getPalabrasComunes(File file, ArrayList<String> palabras){
+		
+		try {
+			Scanner sc = new Scanner(file);
+			while(sc.hasNextLine()){
+				String line = sc.nextLine();
+				if(!palabras.contains(line)){
+					palabras.add(line);
+				}
+			}
+			sc.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
 	
+	/*
 	public static HashMap<Consulta, ArrayList<Documento>> detectarRelevancia(ArrayList<Documento> documentos, 
 			ArrayList<Consulta> consultas, ArrayList<String> palabrasComunes){
 		
@@ -69,7 +88,6 @@ public class Generar {
 		//query -> titulo documento, query -> cuerpo documento, && -PalabrasComunes
 		
 		//autores?, Tipo Referencias?, peso?
-		//caso split vacio
 		for(Consulta q: consultas){
 			String[] querySplit = q.getQuery().split("[ ,.\n]+");	
 			ArrayList<Documento> valorList = new ArrayList<Documento>();
@@ -109,30 +127,13 @@ public class Generar {
 		}
 		
 		
-		
-		
 		return mapRelevancia;
 	}
+	//*/
+	
+
 	
 	
-	public static void getPalabrasComunes(File file, ArrayList<String> palabras){
-		
-		try {
-			Scanner sc = new Scanner(file);
-			while(sc.hasNextLine()){
-				String line = sc.nextLine();
-				if(!palabras.contains(line)){
-					palabras.add(line);
-				}
-			}
-			sc.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-	}
 	
 	
 	

@@ -7,10 +7,10 @@ import java.util.Scanner;
 
 public class Consulta {
 
-	private Integer id;
-	private String query;
-	private ArrayList<String> autores;
-	private String fullId;
+	private Integer id; //I.
+	private String query; //.W
+	private ArrayList<String> autores; //.A ?
+	private String fullId; //.N ?
 	
 	public Consulta() {
 	

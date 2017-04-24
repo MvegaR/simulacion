@@ -19,6 +19,16 @@ public class Documento {
 
 	public Documento() {
 		// TODO Auto-generated constructor stub
+		id = 0;
+		titulo = "";
+		cuerpo = "";
+		fecha = "";
+		autores = new ArrayList<>();
+		tags = new ArrayList<>();
+		codigos = new ArrayList<>();
+		infoPublicacion = "";
+		referencias = new ArrayList<>();
+		
 	}
 
 	public Documento(Integer id, String titulo, String cuerpo, String fecha, 
