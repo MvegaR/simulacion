@@ -58,8 +58,9 @@ public class Consulta {
 	 * @param palabrasComunes Lista de palabras comunes para no agregar a la lista de this.palabrasValidas
 	 */
 	public void generarSetPalabras(ArrayList<String> palabrasComunes){
-		if(palabrasValidas != null && this.query.equals("")){
+		if(palabrasValidas != null && !this.query.equals("")){
 			String[] palabras = this.query.split("[\\W\\d]+");// \W = no word character, \d digit character, \D no digit
+			//System.out.println("test:"+palabras);
 			palabrasValidas.clear();
 			for(String s: palabras){
 				if(s.length() > 2 && !palabrasComunes.contains(s.toLowerCase())){

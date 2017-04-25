@@ -3,10 +3,8 @@ package analisis;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashSet;
 //import java.util.HashMap;
 import java.util.Scanner;
-import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -58,8 +56,16 @@ public class Generar {
 		System.out.println("PalabrasTotales sin repetir: " + setDePalabras.size());
 		
 		MatrizFrecuencia matriz = new MatrizFrecuencia(setDePalabras, documentos, consultas, relevancias);
-		matriz.obtenerFrecuencias();
-		matriz.imprimirMatriz();
+		
+		
+		
+		//Euristica profesor
+		matriz.euristicaProfesor();
+		
+		//Euristica libro
+		
+		//matriz.obtenerFrecuencias();
+		//matriz.imprimirMatriz();
 		/*
 		for(String d: setDePalabras){
 			System.out.println(d);

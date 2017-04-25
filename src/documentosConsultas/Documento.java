@@ -3,7 +3,6 @@ package documentosConsultas;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Scanner;
 

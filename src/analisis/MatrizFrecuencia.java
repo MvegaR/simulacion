@@ -1,7 +1,6 @@
 package analisis;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.SortedSet;
 
@@ -33,6 +32,52 @@ public class MatrizFrecuencia {
 		this.documentos = documentos;
 		this.consultas = consultas;
 		this.relevancias = relevancias;
+	}
+	
+	public void euristicaProfesor(){
+		ArrayList<Double> precisiones = new ArrayList<>();
+		for(Consulta q: consultas){
+			Double precisionAcumulada = 0.0;
+			ArrayList<Documento> documentosEnOrdenDeRelevancia = new ArrayList<>();
+			//agregando los documentos con relevancia primero
+			for(Relevancia r: relevancias){
+				if(r.getQueryID().equals(q.getId())){
+					//se asume que documentos esta ordenado por id, lo estan. 
+					documentosEnOrdenDeRelevancia.add(documentos.get(r.getDocID()-1));
+				}	
+			}
+			//agregando el resto de documentos
+			for(Documento d: documentos){
+				if(!documentosEnOrdenDeRelevancia.contains(d)){
+					documentosEnOrdenDeRelevancia.add(d);
+				}
+			}
+			//Por cada palabra no comun de la consulta, obtener su frecuencia por cada documento.
+			ArrayList<Integer> frecuencias = new ArrayList<>();
+			for(Documento d: documentosEnOrdenDeRelevancia){
+				Integer frecuenciaAcumuladaDocumento = 0; //sumatoria de frecuencias de cada palabra en el documento d
+				for(String palabraNoCumunQuery: q.getPalabrasValidas()){
+					frecuenciaAcumuladaDocumento += Collections.frequency(d.getPalabrasValidas(), palabraNoCumunQuery);
+				}
+				frecuencias.add(frecuenciaAcumuladaDocumento);
+			}
+			
+			//por cada frecuencia, si es distinto de 0, dividir frecuenciaAcumulada entre cantidad de documentos revisados, si es cero, no incrementar frecuencia y dividir
+			Integer contadorDocumento = 0;
+			Integer frecuenciaAcumulada = 0;
+			for(Integer i: frecuencias){
+				contadorDocumento++;
+				frecuenciaAcumulada+=i;
+				System.out.println(frecuenciaAcumulada+"/"+contadorDocumento);
+				precisionAcumulada += ((double)frecuenciaAcumulada/(double)contadorDocumento);
+			}
+			precisiones.add(precisionAcumulada);
+		}
+		Integer idQuery = 0;
+		for(Double d: precisiones){
+			System.out.println("QueryID: "+ (++idQuery) +" precisión: "+String.format("%.32f", d));
+		}
+		
 	}
 	
 	/**
