@@ -7,6 +7,11 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+/**
+ * Clase de documentos, identificador, título, cuerpo, fecha, autores, tags, codigos, información de publicación, referencias y palabras validas (no comunes).
+ * @author Marcos
+ *
+ */
 public class Documento {
 	
 	private Integer id; //.I
@@ -52,9 +57,9 @@ public class Documento {
 	}
 	
 	/**
-	 * Se quitan todas las palabras comunes y se deja en una lista enlazada todas las palabras en minisculas.
+	 * Para generar contenido de la lista this.palabrasComunes,se quitan todas las palabras comunes y se deja en una lista enlazada todas las palabras en minisculas.
 	 * Se asume que todas palabras no validas (comunes) se encuentran en minusculas.
-	 * @param palabrasComunes Lista de palabras a rellenar
+	 * @param palabrasComunes Lista de palabras comunes para no agregar a la lista de this.palabrasValidas
 	 */
 	public void generarSetPalabras(ArrayList<String> palabrasComunes){
 		if(palabrasValidas != null && !this.cuerpo.equals("")){

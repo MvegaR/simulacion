@@ -5,7 +5,11 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
-
+/**
+ * Clase de consultas, con identificador, query (cuerpo consulta), autores, identificador detallado, palabras validas (no comunes)
+ * @author Marcos
+ *
+ */
 public class Consulta {
 
 	private Integer id; //I.
@@ -50,9 +54,9 @@ public class Consulta {
 	}
 	
 	/**
-	 * Se quitan todas las palabras comunes y se deja en una lista enlazada todas las palabras en minisculas.
+	 * Para generar contenido de la lista this.palabrasComunes,se quitan todas las palabras comunes y se deja en una lista enlazada todas las palabras en minisculas.
 	 * Se asume que todas palabras no validas (comunes) se encuentran en minusculas.
-	 * @param palabrasComunes Lista a rellenar con palabras comunes, no nula.
+	 * @param palabrasComunes Lista de palabras comunes para no agregar a la lista de this.palabrasValidas
 	 */
 	public void generarSetPalabras(ArrayList<String> palabrasComunes){
 		if(palabrasValidas != null && this.query.equals("")){
