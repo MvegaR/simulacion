@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 /**
  * Clase de documentos, identificador, título, cuerpo, fecha, autores, tags, codigos, información de publicación, referencias y palabras validas (no comunes).
- * @author Marcos
+ * 
  *
  */
 public class Documento {

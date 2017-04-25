@@ -34,6 +34,7 @@ public class Relevancia {
 		this.queryID = queryID;
 	}
 	
+	
 	/**
 	 * Obtiene desde un archivo la información de relevancia de una consuta y un documento, rellenandolo en una lista con esa información
 	 * @param file Archivo con la relevancia en formato: qid did 0 0                                          

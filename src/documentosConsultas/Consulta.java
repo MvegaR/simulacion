@@ -7,7 +7,6 @@ import java.util.LinkedList;
 import java.util.Scanner;
 /**
  * Clase de consultas, con identificador, query (cuerpo consulta), autores, identificador detallado, palabras validas (no comunes)
- * @author Marcos
  *
  */
 public class Consulta {

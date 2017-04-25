@@ -12,7 +12,7 @@ import documentosConsultas.Relevancia;
  * luego se utiliza para reemplazar las frecuencias por su valor calculado, considerando primero los documentos relevante
  * de la lista "relevancias", obtienendo el log de la divición del total de frecuencia entre el total de documentos chequeados.
  * La sumatoria es la precisión.
- * @author Marcos
+ * Los valores se almazenan en una lista  de listas de double.
  *
  */
 
