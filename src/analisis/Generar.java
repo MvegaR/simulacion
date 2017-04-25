@@ -53,7 +53,7 @@ public class Generar {
 			}
 		}
 		
-		System.out.println("PalabrasTotales sin repetir: " + setDePalabras.size());
+		System.out.println("Palabras Totales sin repetir: " + setDePalabras.size());
 		
 		MatrizFrecuencia matriz = new MatrizFrecuencia(setDePalabras, documentos, consultas, relevancias);
 		

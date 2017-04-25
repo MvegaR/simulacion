@@ -68,14 +68,14 @@ public class MatrizFrecuencia {
 			for(Integer i: frecuencias){
 				contadorDocumento++;
 				frecuenciaAcumulada+=i;
-				System.out.println(frecuenciaAcumulada+"/"+contadorDocumento);
+				//System.out.println(frecuenciaAcumulada+"/"+contadorDocumento);
 				precisionAcumulada += ((double)frecuenciaAcumulada/(double)contadorDocumento);
 			}
 			precisiones.add(precisionAcumulada);
 		}
 		Integer idQuery = 0;
 		for(Double d: precisiones){
-			System.out.println("QueryID: "+ (++idQuery) +" precisión: "+String.format("%.32f", d));
+			System.out.println("QueryID: "+ (++idQuery) +" precisión: "+String.format("%.16f", d));
 		}
 		
 	}

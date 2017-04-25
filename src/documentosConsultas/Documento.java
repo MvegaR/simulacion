@@ -64,7 +64,7 @@ public class Documento {
 		if(palabrasValidas != null && !this.cuerpo.equals("")){
 			String[] palabras = cuerpo.split("[\\W\\d]+");// \W = no word character, \d digit character, \D no digit
 			palabrasValidas.clear();
-			System.out.println(palabras.length);
+			//System.out.println(palabras.length);
 			for(String s: palabras){
 				if(s.length() > 2 && !palabrasComunes.contains(s.toLowerCase())){ //eliminar palabras de dos letras y comunes
 					this.palabrasValidas.add(s.toLowerCase()); //Solo palabras minusculas
