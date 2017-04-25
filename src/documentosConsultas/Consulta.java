@@ -3,6 +3,7 @@ package documentosConsultas;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Consulta {
@@ -11,9 +12,14 @@ public class Consulta {
 	private String query; //.W
 	private ArrayList<String> autores; //.A ?
 	private String fullId; //.N ?
+	private LinkedList<String> palabrasValidas;
 	
 	public Consulta() {
-	
+		this.id = 0;
+		this.query = "";
+		this.autores = new ArrayList<>();
+		this.fullId = "";
+		this.palabrasValidas = new LinkedList<>();
 	}
 	
 	@Override
@@ -26,7 +32,34 @@ public class Consulta {
 		this.query = query;
 		this.autores = autores;
 		this.fullId = fullId;
+		this.palabrasValidas = new LinkedList<>();
 		
+		
+	}
+	
+	/**
+	 * Se quitan todas las palabras comunes y se deja en una lista enlazada todas las palabras en minisculas.
+	 * Se asume que todas palabras no validas (comunes) se encuentran en minusculas.
+	 */
+	public void generarSetPalabras(ArrayList<String> palabrasComunes){
+		if(palabrasValidas != null && this.query.equals("")){
+			String[] palabras = this.query.split("[\\W\\d]+");// \W = no word character, \d digit character, \D no digit
+			palabrasValidas.clear();
+			for(String s: palabras){
+				if(s.length() > 2 && !palabrasComunes.contains(s.toLowerCase())){
+					this.palabrasValidas.add(s.toLowerCase());
+				}
+			}
+			/*//nota ordenamiento, probar diferencias
+			palabrasValidas.sort(new Comparator<String>() {
+				 @Override
+				public int compare(String o1, String o2) {
+					return o1.compareTo(o2); //ordenamiento natural de la clase String.
+				}
+			});
+			*/
+			
+		}
 	}
 	
 	public static void generarConsultas(File origen, ArrayList<Consulta> consultas){
@@ -135,6 +168,9 @@ public class Consulta {
 	@Override
 	public int hashCode() {
 		return id;
+	}
+	public LinkedList<String> getPalabrasValidas() {
+		return palabrasValidas;
 	}
 
 	@Override

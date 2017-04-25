@@ -3,6 +3,8 @@ package documentosConsultas;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Documento {
@@ -16,6 +18,7 @@ public class Documento {
 	private ArrayList<String> codigos; //.C
 	private String infoPublicacion; //.N
 	private ArrayList<Referencia> referencias; //.X
+	private LinkedList<String> palabrasValidas;
 
 	public Documento() {
 		// TODO Auto-generated constructor stub
@@ -28,6 +31,7 @@ public class Documento {
 		codigos = new ArrayList<>();
 		infoPublicacion = "";
 		referencias = new ArrayList<>();
+		palabrasValidas = new LinkedList<>();
 		
 	}
 
@@ -44,9 +48,34 @@ public class Documento {
 		this.codigos = codigos;
 		this.infoPublicacion = infoPubliacion;
 		this.referencias = referencias;
+		this.palabrasValidas = new LinkedList<>();
 	}
 	
-	
+	/**
+	 * Se quitan todas las palabras comunes y se deja en una lista enlazada todas las palabras en minisculas.
+	 * Se asume que todas palabras no validas (comunes) se encuentran en minusculas.
+	 */
+	public void generarSetPalabras(ArrayList<String> palabrasComunes){
+		if(palabrasValidas != null && !this.cuerpo.equals("")){
+			String[] palabras = cuerpo.split("[\\W\\d]+");// \W = no word character, \d digit character, \D no digit
+			palabrasValidas.clear();
+			System.out.println(palabras.length);
+			for(String s: palabras){
+				if(s.length() > 2 && !palabrasComunes.contains(s.toLowerCase())){ //eliminar palabras de dos letras y comunes
+					this.palabrasValidas.add(s.toLowerCase()); //Solo palabras minusculas
+				}
+			}
+			/*//nota ordenamiento, probar diferencias
+			palabrasValidas.sort(new Comparator<String>() {
+				 @Override
+				public int compare(String o1, String o2) {
+					return o1.compareTo(o2); //ordenamiento natural de la clase String.
+				}
+			});
+			*/
+			
+		}
+	}
 	
 
 	public Integer getId() {
@@ -111,6 +140,10 @@ public class Documento {
 	public void setTags(ArrayList<String> tags) {
 		this.tags = tags;
 	}
+	public LinkedList<String> getPalabrasValidas() {
+		return palabrasValidas;
+	}
+	
 
 	@Override
 	public String toString() {
