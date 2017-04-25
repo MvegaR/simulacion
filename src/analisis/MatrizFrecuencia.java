@@ -42,10 +42,13 @@ public class MatrizFrecuencia {
 		//quitar documentos sin cuerpo
 		matriz.clear();
 		for(Documento d: documentos){
-			ArrayList<Double> lista = new ArrayList<>();
-			matriz.add(lista);
-			for(String p: palabras){
-				lista.add(Collections.frequency(d.getPalabrasValidas(), p)*1.0);
+			if(!d.getPalabrasValidas().isEmpty()){ //quitando documentos sin cuerpo
+				ArrayList<Double> lista = new ArrayList<>();
+				matriz.add(lista);
+				lista.add(d.getId()*1.0); //agregando id docuemnto al inicio de cada lista (como double)
+				for(String p: palabras){
+					lista.add(Collections.frequency(d.getPalabrasValidas(), p)*1.0);
+				}
 			}
 		}
 	}
