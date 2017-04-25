@@ -54,6 +54,7 @@ public class Documento {
 	/**
 	 * Se quitan todas las palabras comunes y se deja en una lista enlazada todas las palabras en minisculas.
 	 * Se asume que todas palabras no validas (comunes) se encuentran en minusculas.
+	 * @param palabrasComunes Lista de palabras a rellenar
 	 */
 	public void generarSetPalabras(ArrayList<String> palabrasComunes){
 		if(palabrasValidas != null && !this.cuerpo.equals("")){
@@ -172,7 +173,11 @@ public class Documento {
 			return false;
 		return true;
 	}
-	
+	/**
+	 * Obtiene los documentos desde un archivo de texto y rellena una lista entregada por parametro de documentos generados.
+	 * @param origen Archivo de texto con los documentos
+	 * @param documentos Lista de documentos a rellenar
+	 */
 	public static void generarDocumentos(File origen, ArrayList<Documento> documentos){
 		try {
 			Scanner sc = new Scanner(origen);

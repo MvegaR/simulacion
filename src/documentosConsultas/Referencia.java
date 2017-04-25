@@ -1,7 +1,7 @@
 package documentosConsultas;
 
 public class Referencia {
-	/*
+	/**
 	 * 
      * 
     4 : "bibliographic coupling" - if document id Y appears in the bibliographic

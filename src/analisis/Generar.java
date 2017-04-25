@@ -1,4 +1,4 @@
-package documentosConsultas;
+package analisis;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,6 +9,10 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
+
+import documentosConsultas.Consulta;
+import documentosConsultas.Documento;
+import documentosConsultas.Relevancia;
 
 public class Generar {
 	
@@ -51,7 +55,7 @@ public class Generar {
 			}
 		}
 		
-		System.out.println("PalabrasTotales sin repetir: " + setDePalabras.size() );
+		System.out.println("PalabrasTotales sin repetir: " + setDePalabras.size());
 		/*
 		for(String d: setDePalabras){
 			System.out.println(d);
@@ -61,7 +65,11 @@ public class Generar {
 		
 	}
 	
-	
+	/**
+	 * Obtiene las palabras comunes para omitir en el procesamiento
+	 * @param file Archivo con palabras a omitir
+	 * @param palabras Lista de palabras a omitir, no nulo, puede tener con anterioridad más palabras, para el uso de multiples archivos a través de más llamadas.
+	 */
 	
 	public static void getPalabrasComunes(File file, ArrayList<String> palabras){
 		

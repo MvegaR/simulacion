@@ -13,7 +13,9 @@ public class Consulta {
 	private ArrayList<String> autores; //.A ?
 	private String fullId; //.N ?
 	private LinkedList<String> palabrasValidas;
-	
+	/**
+	 * Contructor consulta, inicialización de variables.
+	 */
 	public Consulta() {
 		this.id = 0;
 		this.query = "";
@@ -21,11 +23,21 @@ public class Consulta {
 		this.fullId = "";
 		this.palabrasValidas = new LinkedList<>();
 	}
-	
+	/**
+	 * Formato en String de la clase Consulta
+	 */
 	@Override
 	public String toString() {
 		return "Consulta [id=" + id + ", query=" + query + ", autores=" + autores + ", fullId=" + fullId + "]";
 	}
+	
+	/**
+	 * Contructor de consulta
+	 * @param id Identificador consulta
+	 * @param query Cuerpo consulta
+	 * @param autores Lista de autores de la consulta
+	 * @param fullId Identificador largo de la consuta
+	 */
 
 	public Consulta(Integer id, String query, ArrayList<String> autores, String fullId) {
 		this.id = id;
@@ -40,6 +52,7 @@ public class Consulta {
 	/**
 	 * Se quitan todas las palabras comunes y se deja en una lista enlazada todas las palabras en minisculas.
 	 * Se asume que todas palabras no validas (comunes) se encuentran en minusculas.
+	 * @param palabrasComunes Lista a rellenar con palabras comunes, no nula.
 	 */
 	public void generarSetPalabras(ArrayList<String> palabrasComunes){
 		if(palabrasValidas != null && this.query.equals("")){
@@ -61,6 +74,12 @@ public class Consulta {
 			
 		}
 	}
+	
+	/**
+	 * Realiza la lectura de archivo de consultas y los inserta en una lista
+	 * @param origen Archivo de texto con querys, no nula.
+	 * @param consultas Colección de consultas a rellenar, no nula.
+	 */
 	
 	public static void generarConsultas(File origen, ArrayList<Consulta> consultas){
 
