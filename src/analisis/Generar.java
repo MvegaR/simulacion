@@ -21,6 +21,7 @@ public class Generar {
 		File consultasFile = new File("files/query.text");
 		File palabrasComunesFile1 = new File("files/common_words");
 		File palabrasComunesFile2 = new File("files/stopwords.txt");
+		File relevanciasFile = new File("files/qrels.text");
 
 		ArrayList<Documento> documentos = new ArrayList<>();
 		ArrayList<Consulta> consultas = new ArrayList<>();
@@ -29,9 +30,12 @@ public class Generar {
 		
 		Documento.generarDocumentos(documentosFIle, documentos);
 		Consulta.generarConsultas(consultasFile, consultas);
+		Relevancia.getRelevancia(relevanciasFile, relevancias);
 		
 		Generar.getPalabrasComunes(palabrasComunesFile1, palabrasComunes);
 		Generar.getPalabrasComunes(palabrasComunesFile2, palabrasComunes);
+		
+		
 		
 		for(Documento d: documentos){
 			d.generarSetPalabras(palabrasComunes);
@@ -59,13 +63,11 @@ public class Generar {
 		
 		
 		
-		//Euristica profesor
+	
 		matriz.obtenerPrecision();
+
 		
-		//Euristica libro
-		
-		//matriz.obtenerFrecuencias();
-		//matriz.imprimirMatriz();
+
 		/*
 		for(String d: setDePalabras){
 			System.out.println(d);

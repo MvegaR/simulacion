@@ -24,6 +24,12 @@ import documentosConsultas.Relevancia;
 
 public class MatrizFrecuencia {
 	
+	/**
+	 * 
+	 * Clase que relaciona un documento con un determinado valor de similitud, 
+	 * para poder ordenar de mayor a menor por similitud sin perder la referencia del documento
+	 *
+	 */
 	class Similitud{
 		private Double valor;
 		private Integer idDocumento;
@@ -40,7 +46,7 @@ public class MatrizFrecuencia {
 	
 	}
 
-	private SortedSet<String> palabras;
+	private SortedSet<String> palabras; //Conjunto de palabras sin repetir, minusculas, ordenadas por alfabeto
 	private ArrayList<ArrayList<Integer>> matrizFrecuncias;
 	private ArrayList<ArrayList<Double>> matrizFrecunciasInversas;
 	private ArrayList<Documento> documentos;
@@ -85,7 +91,7 @@ public class MatrizFrecuencia {
 					precision += (contadorDocumentosRelevantes *1.0)/(contadorTotalDocumentos*1.0);
 				}
 			}
-			System.out.println("Pricisión consulta Q"+q.getId()+" es: "+ String.format("%.16f", precision));
+			System.out.println("Pricisión consulta Q"+q.getId()+" es: "+ String.format("%.32f", precision)+" Docs Relevantes: "+contadorDocumentosRelevantes);
 						
 		}
 		
@@ -150,7 +156,7 @@ public class MatrizFrecuencia {
 	}//*/
 	
 	/**
-	 * Metodo que rellena la matriz con las frecuencias de las palabras (set de palabras), en cada documento.
+	 * Metodo que rellena la matriz con las frecuencias de las palabras (set de palabras), de cada documento.
 	 */
 	public void obtenerFrecuencias(){
 		//quitar documentos sin cuerpo
@@ -166,7 +172,9 @@ public class MatrizFrecuencia {
 			}
 		}
 	}
-	
+	/**
+	 * Metodo que rellena la matriz con las frecuencias inversa de las palabras (set de palabras), de cada documento.
+	 */
 	public void obtenerFrecuenciasInversas(){
 		// log(totalDocumentos/cantidadOcurrenciasEnTodosLosDocumentos)
 		matrizFrecunciasInversas.clear();
@@ -182,7 +190,11 @@ public class MatrizFrecuencia {
 			}
 		}
 	}
-	
+	/**
+	 * Metodo principal que realiza el calculo de similitud de la consulta entregada por parametro
+	 * @param q Consulta a calcular similitud
+	 * @return Lista de similitudes de cada documento 
+	 */
 	public ArrayList<Similitud> calculoSimilitud(Consulta q){
 		ArrayList<Double> vectorQ = new ArrayList<>();
 		ArrayList<Similitud> vectorSimilitud = new ArrayList<>();
