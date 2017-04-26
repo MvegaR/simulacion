@@ -59,11 +59,13 @@ public class MatrizFrecuencia {
 	
 	public void obtenerPrecision(){
 		
-		ArrayList<Double> precisiones = new ArrayList<>();
+		//ArrayList<Double> precisiones = new ArrayList<>();
 		this.obtenerFrecuencias(); //se guardan en matrizFrecuencias
+		System.out.println("Matriz de frecuencias calculada");
 		this.obtenerFrecuenciasInversas(); // se guardan en matrizFrecuencaisInversa
+		System.out.println("matriz de frecuencias inversas calculadas");
 		for(Consulta q: consultas){
-	
+			System.out.println("Inicio consulta :"+q.getId());
 			ArrayList<Similitud> similitudes = calculoSimilitud(q);
 			similitudes.sort(new Comparator<Similitud>() { //Ordenando por valor mayor primero.
 				@Override
@@ -71,11 +73,32 @@ public class MatrizFrecuencia {
 					return o2.getValor().compareTo(o1.getValor());
 				}
 			});
-			
-			
-			
+			Double precision = 0.0;
+			Integer contadorDocumentosRelevantes = 0;
+			Integer contadorTotalDocumentos = 0;
+			for(Similitud s: similitudes){
+				contadorTotalDocumentos++;
+				if(isRelevante(q.getId(), s.getIdDocumento())){
+					contadorDocumentosRelevantes++;
+					precision += (contadorDocumentosRelevantes *1.0)/(contadorTotalDocumentos*1.0);
+				}else{
+					precision += (contadorDocumentosRelevantes *1.0)/(contadorTotalDocumentos*1.0);
+				}
+			}
+			System.out.println("Pricisión consulta Q"+q.getId()+" es: "+ String.format("%.16f", precision));
+						
 		}
 		
+		
+	}
+	
+	private Boolean isRelevante(Integer idConsulta, Integer idDocumento){
+		for(Relevancia r: relevancias){
+			if(r.getQueryID().equals(idConsulta) && r.getDocID().equals(idDocumento)){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/*
@@ -148,6 +171,7 @@ public class MatrizFrecuencia {
 		// log(totalDocumentos/cantidadOcurrenciasEnTodosLosDocumentos)
 		matrizFrecunciasInversas.clear();
 		for(Documento d: documentos){
+			System.out.println("Frecuencia inversa documento: "+d.getId());
 			if(!d.getPalabrasValidas().isEmpty()){//quitando documentos sin cuerpo
 				ArrayList<Double> lista = new ArrayList<>();
 				matrizFrecunciasInversas.add(lista);
@@ -187,6 +211,12 @@ public class MatrizFrecuencia {
 		
 		
 	}
+	
+	/**
+	 * Metodo que obtiene la cantidad de documentos que tiene la palabra entregada por parametro
+	 * @param palabra String a buscar en los documentos
+	 * @return
+	 */
 	
 	public Integer totalDocumentos(String palabra){
 		Integer posPalabrasEnSet = -1;
