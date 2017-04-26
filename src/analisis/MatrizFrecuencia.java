@@ -74,12 +74,13 @@ public class MatrizFrecuencia {
 			similitudes.sort(new Comparator<Similitud>() { //Ordenando por valor mayor primero.
 				@Override
 				public int compare(Similitud o1, Similitud o2) {
-					return o2.getValor().compareTo(o1.getValor());
+					return o1.getValor().compareTo(o2.getValor());
 				}
 			});
 			Double precision = 0.0;
 			Integer contadorDocumentosRelevantes = 0;
 			Integer contadorTotalDocumentos = 0;
+			Integer mostrarPrimeros = 40;
 			for(Similitud s: similitudes){
 				contadorTotalDocumentos++;
 				if(isRelevante(q.getId(), s.getIdDocumento())){
@@ -88,8 +89,13 @@ public class MatrizFrecuencia {
 				}else{
 					precision += (contadorDocumentosRelevantes *1.0)/(contadorTotalDocumentos*1.0);
 				}
+				if(mostrarPrimeros > 0){
+					System.out.println("Q"+q.getId()+" Documento: " + s.getIdDocumento() + " Distancia:"+ s.getValor() + " Relevante: " +isRelevante(q.getId(), s.getIdDocumento()));
+					mostrarPrimeros--;
+				}
 			}
-			System.out.println("Pricisión consulta Q"+q.getId()+" es: "+ String.format("%.32f", precision)+" Docs Relevantes: "+contadorDocumentosRelevantes);
+			precision/=contadorTotalDocumentos;
+			System.out.println("Pricisión consulta Q"+q.getId()+" es: "+ String.format("%.10f", precision)+" Docs Relevantes: "+contadorDocumentosRelevantes);
 						
 		}
 		
