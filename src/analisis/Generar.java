@@ -60,7 +60,7 @@ public class Generar {
 		
 		
 		//Euristica profesor
-		matriz.euristicaProfesor();
+		matriz.obtenerPrecision();
 		
 		//Euristica libro
 		
