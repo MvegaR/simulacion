@@ -54,6 +54,7 @@ public class MatrizFrecuencia {
 	private ArrayList<Relevancia> relevancias;
 	
 	
+	
 	public MatrizFrecuencia(SortedSet<String> palabras, ArrayList<Documento> documentos, ArrayList<Consulta> consultas, ArrayList<Relevancia> relevancias) {
 		this.palabras = palabras;
 		this.matrizFrecuncias = new ArrayList<>();
@@ -107,53 +108,7 @@ public class MatrizFrecuencia {
 		return false;
 	}
 	
-	/*
-	public void obtenerPrecision(){
-		ArrayList<Double> precisiones = new ArrayList<>();
-		for(Consulta q: consultas){
-			Double precisionAcumulada = 0.0;
-			ArrayList<Documento> documentosEnOrdenDeRelevancia = new ArrayList<>();
-			//agregando los documentos con relevancia primero
-			for(Relevancia r: relevancias){
-				if(r.getQueryID().equals(q.getId())){
-					//se asume que documentos esta ordenado por id, lo estan. 
-					documentosEnOrdenDeRelevancia.add(documentos.get(r.getDocID()-1));
-				}	
-			}
-			//agregando el resto de documentos
-			for(Documento d: documentos){
-				if(!documentosEnOrdenDeRelevancia.contains(d)){
-					documentosEnOrdenDeRelevancia.add(d);
-				}
-			}
-			//Por cada palabra no comun de la consulta, obtener su frecuencia por cada documento.
-			ArrayList<Integer> frecuencias = new ArrayList<>();
-			for(Documento d: documentosEnOrdenDeRelevancia){
-				Integer frecuenciaAcumuladaDocumento = 0; //sumatoria de frecuencias de cada palabra en el documento d
-				for(String palabraNoCumunQuery: q.getPalabrasValidas()){
-					frecuenciaAcumuladaDocumento += Collections.frequency(d.getPalabrasValidas(), palabraNoCumunQuery);
-				}
-				frecuencias.add(frecuenciaAcumuladaDocumento);
-			}
-			
-			//por cada frecuencia, si es distinto de 0, dividir frecuenciaAcumulada entre cantidad de documentos revisados, 
-			//si es cero, no incrementar frecuencia y dividir
-			Integer contadorDocumento = 0;
-			Integer frecuenciaAcumulada = 0;
-			for(Integer i: frecuencias){
-				contadorDocumento++;
-				frecuenciaAcumulada+=i;
-				//System.out.println(frecuenciaAcumulada+"/"+contadorDocumento);
-				precisionAcumulada += (double)frecuenciaAcumulada/(double)contadorDocumento;
-			}
-			precisiones.add(precisionAcumulada);
-		}
-		Integer idQuery = 0;
-		for(Double d: precisiones){
-			System.out.println("QueryID: "+ (++idQuery) +" precisión: "+String.format("%.16f", d));
-		}
-		
-	}//*/
+
 	
 	/**
 	 * Metodo que rellena la matriz con las frecuencias de las palabras (set de palabras), de cada documento.
@@ -227,7 +182,7 @@ public class MatrizFrecuencia {
 	/**
 	 * Metodo que obtiene la cantidad de documentos que tiene la palabra entregada por parametro
 	 * @param palabra String a buscar en los documentos
-	 * @return
+	 * @return Retorna la cantidad calculadora
 	 */
 	
 	public Integer totalDocumentos(String palabra){
@@ -270,12 +225,52 @@ public class MatrizFrecuencia {
 		
 	}
 	
-	
-	
-	
-		
-	
-	
-	
-	
 }
+
+/*
+public void obtenerPrecision(){
+	ArrayList<Double> precisiones = new ArrayList<>();
+	for(Consulta q: consultas){
+		Double precisionAcumulada = 0.0;
+		ArrayList<Documento> documentosEnOrdenDeRelevancia = new ArrayList<>();
+		//agregando los documentos con relevancia primero
+		for(Relevancia r: relevancias){
+			if(r.getQueryID().equals(q.getId())){
+				//se asume que documentos esta ordenado por id, lo estan. 
+				documentosEnOrdenDeRelevancia.add(documentos.get(r.getDocID()-1));
+			}	
+		}
+		//agregando el resto de documentos
+		for(Documento d: documentos){
+			if(!documentosEnOrdenDeRelevancia.contains(d)){
+				documentosEnOrdenDeRelevancia.add(d);
+			}
+		}
+		//Por cada palabra no comun de la consulta, obtener su frecuencia por cada documento.
+		ArrayList<Integer> frecuencias = new ArrayList<>();
+		for(Documento d: documentosEnOrdenDeRelevancia){
+			Integer frecuenciaAcumuladaDocumento = 0; //sumatoria de frecuencias de cada palabra en el documento d
+			for(String palabraNoCumunQuery: q.getPalabrasValidas()){
+				frecuenciaAcumuladaDocumento += Collections.frequency(d.getPalabrasValidas(), palabraNoCumunQuery);
+			}
+			frecuencias.add(frecuenciaAcumuladaDocumento);
+		}
+		
+		//por cada frecuencia, si es distinto de 0, dividir frecuenciaAcumulada entre cantidad de documentos revisados, 
+		//si es cero, no incrementar frecuencia y dividir
+		Integer contadorDocumento = 0;
+		Integer frecuenciaAcumulada = 0;
+		for(Integer i: frecuencias){
+			contadorDocumento++;
+			frecuenciaAcumulada+=i;
+			//System.out.println(frecuenciaAcumulada+"/"+contadorDocumento);
+			precisionAcumulada += (double)frecuenciaAcumulada/(double)contadorDocumento;
+		}
+		precisiones.add(precisionAcumulada);
+	}
+	Integer idQuery = 0;
+	for(Double d: precisiones){
+		System.out.println("QueryID: "+ (++idQuery) +" precisión: "+String.format("%.16f", d));
+	}
+	
+}//*/
