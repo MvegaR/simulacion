@@ -2,7 +2,11 @@ package analisis;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.SortedMap;
 import java.util.SortedSet;
+import java.util.TreeMap;
 
 import documentosConsultas.Consulta;
 import documentosConsultas.Documento;
@@ -19,6 +23,22 @@ import documentosConsultas.Relevancia;
  */
 
 public class MatrizFrecuencia {
+	
+	class Similitud{
+		private Double valor;
+		private Integer idDocumento;
+		public Similitud(Double valor, Integer idDocumento) {
+			this.valor = valor;
+			this.idDocumento = idDocumento;
+		}
+		public Double getValor() {
+			return valor;
+		}
+		public Integer getIdDocumento() {
+			return idDocumento;
+		}
+	
+	}
 
 	private SortedSet<String> palabras;
 	private ArrayList<ArrayList<Integer>> matrizFrecuncias;
@@ -37,6 +57,28 @@ public class MatrizFrecuencia {
 		this.relevancias = relevancias;
 	}
 	
+	public void obtenerPrecision(){
+		
+		ArrayList<Double> precisiones = new ArrayList<>();
+		this.obtenerFrecuencias(); //se guardan en matrizFrecuencias
+		this.obtenerFrecuenciasInversas(); // se guardan en matrizFrecuencaisInversa
+		for(Consulta q: consultas){
+	
+			ArrayList<Similitud> similitudes = calculoSimilitud(q);
+			similitudes.sort(new Comparator<Similitud>() { //Ordenando por valor mayor primero.
+				@Override
+				public int compare(Similitud o1, Similitud o2) {
+					return o2.getValor().compareTo(o1.getValor());
+				}
+			});
+			
+			
+			
+		}
+		
+	}
+	
+	/*
 	public void obtenerPrecision(){
 		ArrayList<Double> precisiones = new ArrayList<>();
 		for(Consulta q: consultas){
@@ -82,7 +124,7 @@ public class MatrizFrecuencia {
 			System.out.println("QueryID: "+ (++idQuery) +" precisión: "+String.format("%.16f", d));
 		}
 		
-	}
+	}//*/
 	
 	/**
 	 * Metodo que rellena la matriz con las frecuencias de las palabras (set de palabras), en cada documento.
@@ -102,7 +144,7 @@ public class MatrizFrecuencia {
 		}
 	}
 	
-	public void calculoDeFrecuenciasInversas(){
+	public void obtenerFrecuenciasInversas(){
 		// log(totalDocumentos/cantidadOcurrenciasEnTodosLosDocumentos)
 		matrizFrecunciasInversas.clear();
 		for(Documento d: documentos){
@@ -117,9 +159,9 @@ public class MatrizFrecuencia {
 		}
 	}
 	
-	public ArrayList<Double> CalculoSimilitud(Consulta q){
+	public ArrayList<Similitud> calculoSimilitud(Consulta q){
 		ArrayList<Double> vectorQ = new ArrayList<>();
-		ArrayList<Double> vectorSimilitud = new ArrayList<>();
+		ArrayList<Similitud> vectorSimilitud = new ArrayList<>();
 		for(String s: palabras){
 			if(q.getPalabrasValidas().contains(s)){
 				vectorQ.add(Math.log(matrizFrecuncias.size()*1.0/ totalDocumentos(s)*1.0)/Math.log(2));
@@ -131,10 +173,12 @@ public class MatrizFrecuencia {
 		
 		for(ArrayList<Double> list: matrizFrecunciasInversas){
 			Double sumatoria = 0.0;
-			for(Double d: vectorQ){
-				sumatoria += d*list.get(vectorQ.indexOf(d)+1); // +1 por que matrizFrecunciasInversas tiene el id del documento en primer lugar
+			Integer contador = 0;
+			for(Double d: vectorQ){ //vectorQ es menos largo en una unidad que list actual
+				sumatoria += d*list.get(contador+1); // +1 por que matrizFrecunciasInversas tiene el id del documento en primer lugar
+				contador++;
 			}
-			vectorSimilitud.add(sumatoria);
+			vectorSimilitud.add(new Similitud(sumatoria, list.get(0).intValue()));
 		}
 		
 		
@@ -165,7 +209,7 @@ public class MatrizFrecuencia {
 	 * Metodo para imprimir matriz por pantalla
 	 */
 	
-	public void imprimirMatriz(){
+	public void imprimirMatrizFrecuencias(){
 		
 		Thread hilo = new Thread(new Runnable() {
 			@Override
