@@ -3,10 +3,7 @@ package analisis;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.SortedMap;
 import java.util.SortedSet;
-import java.util.TreeMap;
 
 import documentosConsultas.Consulta;
 import documentosConsultas.Documento;
