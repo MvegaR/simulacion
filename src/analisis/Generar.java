@@ -65,6 +65,7 @@ public class Generar {
 		
 	
 		matriz.obtenerPrecision();
+		matriz.imprimirMatrizFrecuenciasInversas();
 
 		
 

@@ -74,7 +74,7 @@ public class MatrizFrecuencia {
 			similitudes.sort(new Comparator<Similitud>() { //Ordenando por valor mayor primero.
 				@Override
 				public int compare(Similitud o1, Similitud o2) {
-					return o1.getValor().compareTo(o2.getValor());
+					return o2.getValor().compareTo(o1.getValor());
 				}
 			});
 			Double precision = 0.0;
@@ -142,8 +142,14 @@ public class MatrizFrecuencia {
 				ArrayList<Double> lista = new ArrayList<>();
 				matrizFrecunciasInversas.add(lista);
 				lista.add(d.getId()*1.0);  //agregando id documento al inicio de cada lista (como double)
+				Integer contador = 0;
 				for(String s: palabras){
-					lista.add(Math.log(matrizFrecuncias.size()*1.0/ totalDocumentos(s)*1.0)/Math.log(2));
+					contador++;
+					if(matrizFrecuncias.get(matrizFrecunciasInversas.size()-1).get(contador-1) != 0){
+						lista.add(Math.log(matrizFrecuncias.size()*1.0/ totalDocumentos(s)*1.0));
+					}else{
+						lista.add(0.0);
+					}
 				}
 			}
 		}
@@ -158,7 +164,7 @@ public class MatrizFrecuencia {
 		ArrayList<Similitud> vectorSimilitud = new ArrayList<>();
 		for(String s: palabras){
 			if(q.getPalabrasValidas().contains(s)){
-				vectorQ.add(Math.log(matrizFrecuncias.size()*1.0/ totalDocumentos(s)*1.0)/Math.log(2));
+				vectorQ.add(Math.log(matrizFrecuncias.size()*1.0/ totalDocumentos(s)*1.0));
 			}else{
 				vectorQ.add(0.0);
 			}
@@ -216,6 +222,25 @@ public class MatrizFrecuencia {
 			public void run() {
 				for(ArrayList<Integer> l: matrizFrecuncias ){
 					for(Integer s: l){
+						System.out.print(s+"\t");
+					}
+					System.out.println();
+				}
+				
+			}
+		});
+		hilo.start();
+		
+		
+	}
+	
+public void imprimirMatrizFrecuenciasInversas(){
+		
+		Thread hilo = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				for(ArrayList<Double> l: matrizFrecunciasInversas ){
+					for(Double s: l){
 						System.out.print(s+"\t");
 					}
 					System.out.println();
