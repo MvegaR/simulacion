@@ -65,7 +65,8 @@ public class Generar {
 		
 	
 		matriz.obtenerPrecision();
-		matriz.imprimirMatrizFrecuenciasInversas();
+		
+		System.out.println("Palabras Inicio \n"+setDePalabras+"\nFin palabras");
 
 		
 

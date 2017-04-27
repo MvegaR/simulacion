@@ -80,7 +80,7 @@ public class MatrizFrecuencia {
 			Double precision = 0.0;
 			Integer contadorDocumentosRelevantes = 0;
 			Integer contadorTotalDocumentos = 0;
-			Integer mostrarPrimeros = 40;
+			Integer mostrarPrimeros = 20;
 			for(Similitud s: similitudes){
 				contadorTotalDocumentos++;
 				if(isRelevante(q.getId(), s.getIdDocumento())){
@@ -90,7 +90,7 @@ public class MatrizFrecuencia {
 					precision += (contadorDocumentosRelevantes *1.0)/(contadorTotalDocumentos*1.0);
 				}
 				if(mostrarPrimeros > 0){
-					System.out.println("Q"+q.getId()+" Documento: " + s.getIdDocumento() + " Distancia:"+ s.getValor() + " Relevante: " +isRelevante(q.getId(), s.getIdDocumento()));
+					System.out.println("\tQ"+q.getId()+" Documento: " + s.getIdDocumento() + " Distancia:"+ s.getValor() + " Relevante: " +isRelevante(q.getId(), s.getIdDocumento()));
 					mostrarPrimeros--;
 				}
 			}
@@ -145,7 +145,7 @@ public class MatrizFrecuencia {
 				Integer contador = 0;
 				for(String s: palabras){
 					contador++;
-					if(matrizFrecuncias.get(matrizFrecunciasInversas.size()-1).get(contador-1) != 0){
+					if(matrizFrecuncias.get(matrizFrecunciasInversas.size()-1).get(contador) != 0){ //no contador-1 por que tiene el id al inicio
 						lista.add(Math.log(matrizFrecuncias.size()*1.0/ totalDocumentos(s)*1.0));
 					}else{
 						lista.add(0.0);
