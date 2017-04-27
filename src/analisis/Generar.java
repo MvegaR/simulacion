@@ -67,6 +67,7 @@ public class Generar {
 		matriz.obtenerPrecision();
 		
 		System.out.println("Palabras Inicio \n"+setDePalabras+"\nFin palabras");
+		
 
 		
 

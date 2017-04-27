@@ -146,7 +146,7 @@ public class MatrizFrecuencia {
 				for(String s: palabras){
 					contador++;
 					if(matrizFrecuncias.get(matrizFrecunciasInversas.size()-1).get(contador) != 0){ //no contador-1 por que tiene el id al inicio
-						lista.add(Math.log(matrizFrecuncias.size()*1.0/ totalDocumentos(s)*1.0));
+						lista.add(Math.log10(matrizFrecuncias.size()*1.0/ totalDocumentos(s)*1.0));
 					}else{
 						lista.add(0.0);
 					}
@@ -164,7 +164,7 @@ public class MatrizFrecuencia {
 		ArrayList<Similitud> vectorSimilitud = new ArrayList<>();
 		for(String s: palabras){
 			if(q.getPalabrasValidas().contains(s)){
-				vectorQ.add(Math.log(matrizFrecuncias.size()*1.0/ totalDocumentos(s)*1.0));
+				vectorQ.add(Math.log10(matrizFrecuncias.size()*1.0/ totalDocumentos(s)*1.0));
 			}else{
 				vectorQ.add(0.0);
 			}
