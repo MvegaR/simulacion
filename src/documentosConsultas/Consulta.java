@@ -63,7 +63,7 @@ public class Consulta {
 			//System.out.println("test:"+palabras);
 			palabrasValidas.clear();
 			for(String s: palabras){
-				if(s.length() > 2 && !palabrasComunes.contains(s.toLowerCase())){
+				if(s.length() > 1 && !palabrasComunes.contains(s.toLowerCase())){
 					this.palabrasValidas.add(s.toLowerCase());
 				}
 			}

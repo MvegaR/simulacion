@@ -68,7 +68,6 @@ public class Generar {
 		
 		System.out.println("Palabras Inicio \n"+setDePalabras+"\nFin palabras");
 		
-
 		
 
 		/*
