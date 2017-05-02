@@ -88,15 +88,17 @@ public class MatrizFrecuencia {
 				@Override
 				public int compare(Similitud o1, Similitud o2) { 
 					if(o2.getValor().compareTo(o1.getValor()) == 0){ //desempatando por relevancia si es igual (false = 0, true = 1)
-						return isRelevante(q.getId(), o2.getIdDocumento()).compareTo(isRelevante(q.getId(), o1.getIdDocumento()));
+						//el metodo isRelevente es ajeno a la clase Similitud, pero Comparator es un orden alternativo y no natural
+						return isRelevante(q.getId(), o2.getIdDocumento()).compareTo(isRelevante(q.getId(), o1.getIdDocumento())); //orden natural inverso de Boolean
+						
 					}
-					return o2.getValor().compareTo(o1.getValor());
+					return o2.getValor().compareTo(o1.getValor()); //orden natural inverso de valor de Double (mayor primero y no menor)
 				}
 			});
 			Double precision = 0.0;
 			Integer contadorDocumentosRelevantes = 0;
 			Integer contadorTotalDocumentos = 0;
-			Integer mostrarPrimeros = 40;
+			Integer mostrarPrimeros = 30;
 			for(Similitud s: similitudes){
 				contadorTotalDocumentos++;
 				if(isRelevante(q.getId(), s.getIdDocumento())){
@@ -106,7 +108,7 @@ public class MatrizFrecuencia {
 					precision += (contadorDocumentosRelevantes *1.0)/(contadorTotalDocumentos*1.0);
 				}
 				if(mostrarPrimeros > 0){
-					System.out.println("\tQ"+q.getId()+" Documento: " + s.getIdDocumento() + " Distancia: "+ s.getValor() + " Relevante: " +isRelevante(q.getId(), s.getIdDocumento()));
+					System.out.println("\tQ"+q.getId()+" Documento: " + String.format("%4d", s.getIdDocumento()) + " Distancia: "+ String.format("%19.16f",  s.getValor()) + " Relevante: " +isRelevante(q.getId(), s.getIdDocumento()));
 					mostrarPrimeros--;
 				}
 			}
