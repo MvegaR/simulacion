@@ -14,7 +14,6 @@ import documentosConsultas.Relevancia;
 
 public class Generar {
 	
-	public static Integer contador = 0;
 
 	public static void main(String[] args) {
 		File documentosFIle = new File("files/cacm.all");
@@ -67,16 +66,11 @@ public class Generar {
 		matriz.obtenerPrecision();
 		
 		System.out.println("Palabras Inicio \n"+setDePalabras+"\nFin palabras");
-		
-		
-
 		/*
 		for(String d: setDePalabras){
 			System.out.println(d);
 		}//*/
-		
-		
-		
+			
 	}
 	
 	/**
@@ -102,92 +96,6 @@ public class Generar {
 		}
 		
 		
-	}
-	
-	/*
-	public static HashMap<Consulta, ArrayList<Documento>> detectarRelevancia(ArrayList<Documento> documentos, 
-			ArrayList<Consulta> consultas, ArrayList<String> palabrasComunes){
-		
-		HashMap<Consulta, ArrayList<Documento>> mapRelevancia = new HashMap<Consulta,ArrayList<Documento>>();
-		
-		//query -> titulo documento, query -> cuerpo documento, && -PalabrasComunes
-		
-		//autores?, Tipo Referencias?, peso?
-		for(Consulta q: consultas){
-			String[] querySplit = q.getQuery().split("[ ,.\n]+");	
-			ArrayList<Documento> valorList = new ArrayList<Documento>();
-			mapRelevancia.put(q, valorList);
-			System.out.println("Analizando consulta:" + q.getFullId());
-			for(Documento d: documentos){
-				String[] tituloSplit = null;
-				String[] cuerpoSplit = null;
-				if(d.getTitulo() != null){
-					tituloSplit = d.getTitulo().split("[ ,.\n]+");
-				}
-				if(d.getCuerpo() != null){
-					cuerpoSplit = d.getCuerpo().split("[ ,.\n]+");
-				}
-
-				for(String qs: querySplit){
-					if(!palabrasComunes.contains(qs) && qs.length()>3){
-						if(tituloSplit != null){
-							for(String ts: tituloSplit){
-								if(qs.equals(ts) && !mapRelevancia.get(q).contains(d)){
-									mapRelevancia.get(q).add(d);
-								}
-							}
-						}
-						if(cuerpoSplit != null){
-							for(String ts: cuerpoSplit){
-								if(qs.equals(ts) && !mapRelevancia.get(q).contains(d)){
-									mapRelevancia.get(q).add(d);
-								}
-							}
-						}
-					}
-					
-				}
-				
-			}
-		}
-		
-		
-		return mapRelevancia;
-	}
-	//*/
-	
-
-	/*//Para Imprimir todos los documentos, agregar un '/' al inicio de esta linea para descomentar codigo.
-	for(Documento d: documentos){
-		System.out.println(d);
-	}
-	//*/
-	
-	/*//Para imprimir todas las consultas, agregar un '/' al inicio de esta linea para descomentar codigo.
-	for(Consulta c: consultas){
-		System.out.println(c);
-	}
-	//*/
-	
-	/*for(String s:documentos.get(1061).getCuerpo().split("")){
-		System.out.println(s);
-	}*/
-	
-	/*
-	HashMap<Consulta, ArrayList<Documento>> mapRevelancia = Generar.detectarRelevancia(documentos, consultas, palabrasComunes);
-	for(Consulta c: mapRevelancia.keySet()){
-		System.out.print(c.getId()+" -> { ");
-		for(Documento d: mapRevelancia.get(c)){
-			System.out.print(d.getId()+", ");
-		}
-		System.out.println("}");
-	}
-	//*/
-	
-	
-	
-	
-	
-	
+	}	
 	
 }

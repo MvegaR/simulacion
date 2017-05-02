@@ -62,7 +62,7 @@ public class Documento {
 	 */
 	public void generarSetPalabras(ArrayList<String> palabrasComunes){
 		if(palabrasValidas != null){
-			String[] palabras = (cuerpo +" " +titulo).split("[\\W\\d]+");// \W = no word character, \d digit character, \D no digit
+			String[] palabras = (cuerpo + " " + titulo).split("[\\W\\d]+");// \W = no word character, \d digit character, \D no digit
 			palabrasValidas.clear();
 			//System.out.println(palabras.length);
 			for(String s: palabras){
@@ -70,14 +70,6 @@ public class Documento {
 					this.palabrasValidas.add(s.toLowerCase()); //Solo palabras minusculas
 				}
 			}
-			/*//nota ordenamiento, probar diferencias
-			palabrasValidas.sort(new Comparator<String>() {
-				 @Override
-				public int compare(String o1, String o2) {
-					return o1.compareTo(o2); //ordenamiento natural de la clase String.
-				}
-			});
-			*/
 			
 		}
 	}
