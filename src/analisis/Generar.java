@@ -55,21 +55,13 @@ public class Generar {
 				setDePalabras.add(s);
 			}
 		}
-		
 		System.out.println("Palabras Totales sin repetir: " + setDePalabras.size());
-		
+
 		MatrizFrecuencia matriz = new MatrizFrecuencia(setDePalabras, documentos, consultas, relevancias);
-		
-		
-		
-	
+
 		matriz.obtenerPrecision();
 		
 		System.out.println("Palabras Inicio \n"+setDePalabras+"\nFin palabras");
-		/*
-		for(String d: setDePalabras){
-			System.out.println(d);
-		}//*/
 			
 	}
 	

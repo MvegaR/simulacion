@@ -84,7 +84,7 @@ public class MatrizFrecuencia {
 		for(Consulta q: consultas){
 			System.out.println("Inicio consulta :"+q.getId());
 			ArrayList<Similitud> similitudes = calculoSimilitud(q); //uso de la clase local Similitud
-			similitudes.sort(new Comparator<Similitud>() { //Ordenando por valor mayor primero, si es igual por relevancia (true or false)
+			similitudes.sort(new Comparator<Similitud>() { //Ordenando por *valor* mayor primero, si es igual por *relevancia* (true or false)
 				@Override
 				public int compare(Similitud o1, Similitud o2) { 
 					if(o2.getValor().compareTo(o1.getValor()) == 0){ //desempatando por relevancia si es igual (false = 0, true = 1)
