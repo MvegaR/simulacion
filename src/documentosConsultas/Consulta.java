@@ -67,14 +67,6 @@ public class Consulta {
 					this.palabrasValidas.add(s.toLowerCase());
 				}
 			}
-			/*//nota ordenamiento, probar diferencias
-			palabrasValidas.sort(new Comparator<String>() {
-				 @Override
-				public int compare(String o1, String o2) {
-					return o1.compareTo(o2); //ordenamiento natural de la clase String.
-				}
-			});
-			*/
 			
 		}
 	}
@@ -192,6 +184,10 @@ public class Consulta {
 	public int hashCode() {
 		return id;
 	}
+	/**
+	 * Retorna la colección de palabras validas, se nececita generar con el metodo generar 
+	 * @return
+	 */
 	public LinkedList<String> getPalabrasValidas() {
 		return palabrasValidas;
 	}
