@@ -59,7 +59,10 @@ public class Generar {
 
 		MatrizFrecuencia matriz = new MatrizFrecuencia(setDePalabras, documentos, consultas, relevancias);
 
-		matriz.obtenerPrecision();
+		//matriz.obtenerPrecision();
+		for(Consulta q: consultas){
+			matriz.obtenerPrecision(q, 10);
+		}
 		
 		System.out.println("Palabras Inicio \n"+setDePalabras+"\nFin palabras");
 			

@@ -53,14 +53,14 @@ public class MatrizFrecuencia {
 	private ArrayList<Relevancia> relevancias;
 	//fin atributos
 
-/**
- * Contructor
- * @param palabras Conjunto (SortedSet) de palabras, por definicion sin repetición (por hashcode() de String no equals()) y orden natural (alfabetico)
- * @param documentos Colección de documentos (ArrayList, arreglo tamaño adaptativo, no lista enlazada)
- * @param consultas Colección de consultas (ArrayList, arreglo tamaño adaptativo, no lista enlazada)
- * @param relevancias Colección de relevancia (ArrayList, arreglo tamaño adaptativo, no lista enlazada)
- */
-	
+	/**
+	 * Contructor
+	 * @param palabras Conjunto (SortedSet) de palabras, por definicion sin repetición (por hashcode() de String no equals()) y orden natural (alfabetico)
+	 * @param documentos Colección de documentos (ArrayList, arreglo tamaño adaptativo, no lista enlazada)
+	 * @param consultas Colección de consultas (ArrayList, arreglo tamaño adaptativo, no lista enlazada)
+	 * @param relevancias Colección de relevancia (ArrayList, arreglo tamaño adaptativo, no lista enlazada)
+	 */
+
 	public MatrizFrecuencia(SortedSet<String> palabras, ArrayList<Documento> documentos, ArrayList<Consulta> consultas, ArrayList<Relevancia> relevancias) {
 		this.palabras = palabras;
 		this.matrizFrecuncias = new ArrayList<>();
@@ -71,7 +71,52 @@ public class MatrizFrecuencia {
 	}
 
 	/**
-	 * Obtiene la precicion de cada documento por cada consulta y lo imprime por pantalla.
+	 * Obtiene la precisión de cada documento para la consulta q con un p@ entregado por parametro
+	 * @param q Consulta a calcular precisión
+	 * @param p Valor de p@
+	 */
+
+	public void obtenerPrecision(Consulta q, int p){
+
+		//ArrayList<Double> precisiones = new ArrayList<>();
+		if(matrizFrecuncias.size() == 0){
+			this.obtenerFrecuencias(); //se guardan en matrizFrecuencias
+			System.out.println("Matriz de frecuencias calculada");
+		}
+		if(matrizFrecunciasInversas.size() == 0){
+			this.obtenerFrecuenciasInversas(); // se guardan en matrizFrecuencaisInversa
+			System.out.println("matriz de frecuencias inversas calculadas");
+		}
+
+		System.out.println("Inicio consulta :"+q.getId());
+		ArrayList<Similitud> similitudes = calculoSimilitud(q); //uso de la clase local Similitud
+		similitudes.sort(new Comparator<Similitud>() { //Ordenando por *valor* mayor primero
+			@Override
+			public int compare(Similitud o1, Similitud o2) { 
+				return o2.getValor().compareTo(o1.getValor()); //orden natural inverso de Double (mayor primero y no menor)
+			}
+		});
+		Double precision = 0.0;
+		Integer contadorDocumentosRelevantes = 0;
+		Integer contadorTotalDocumentos = 0;
+		for(int i = 0; i < p; i++){
+			contadorTotalDocumentos++;
+			if(isRelevante(q.getId(), similitudes.get(i).getIdDocumento())){
+				contadorDocumentosRelevantes++;
+				precision += (contadorDocumentosRelevantes * 1.0) / (contadorTotalDocumentos*1.0);
+			}else{
+				precision += (contadorDocumentosRelevantes *1.0) / (contadorTotalDocumentos*1.0);
+			}
+			System.out.println("\tQ"+q.getId()+" Documento: " + String.format("%4d", similitudes.get(i).getIdDocumento()) + " Similitud: "+ String.format("%19.16f",   similitudes.get(i).getValor()) + " Relevante: " +isRelevante(q.getId(), similitudes.get(i).getIdDocumento()));
+
+		}
+		precision /= contadorTotalDocumentos;
+		System.out.println("Precisión consulta Q"+q.getId()+" es: "+ String.format("%.10f", precision)+" Docs Relevantes: "+contadorDocumentosRelevantes);
+	}
+
+
+	/**
+	 * Obtiene la precision de cada documento por cada consulta y lo imprime por pantalla.
 	 */
 
 	public void obtenerPrecision(){
@@ -90,7 +135,7 @@ public class MatrizFrecuencia {
 					/*if(o2.getValor().compareTo(o1.getValor()) == 0){ //desempatando por relevancia si es igual (false = 0, true = 1)
 						//el metodo isRelevente es ajeno a la clase Similitud, pero Comparator es un orden alternativo y no natural
 						return isRelevante(q.getId(), o2.getIdDocumento()).compareTo(isRelevante(q.getId(), o1.getIdDocumento())); //orden natural inverso de Boolean
-						
+
 					}*/
 					return o2.getValor().compareTo(o1.getValor()); //orden natural inverso de Double (mayor primero y no menor)
 				}
@@ -108,7 +153,7 @@ public class MatrizFrecuencia {
 				}else{
 					precision += (contadorDocumentosRelevantes *1.0) / (contadorTotalDocumentos*1.0);
 				}
-				
+
 				if(mostrarPrimeros > 0){
 					System.out.println("\tQ"+q.getId()+" Documento: " + String.format("%4d", s.getIdDocumento()) + " Similitud: "+ String.format("%19.16f",  s.getValor()) + " Relevante: " +isRelevante(q.getId(), s.getIdDocumento()));
 					mostrarPrimeros--;
@@ -211,7 +256,7 @@ public class MatrizFrecuencia {
 				vectorQ.add(0.0);
 			}
 		}
-		System.out.println("Vector q" +q.getId()+": "+ vectorQ);
+		//System.out.println("Vector q" +q.getId()+": "+ vectorQ);
 		for(ArrayList<Double> list: matrizFrecunciasInversas){
 			Double sumatoria = 0.0;
 			Double sumatoria2 = 0.0;
