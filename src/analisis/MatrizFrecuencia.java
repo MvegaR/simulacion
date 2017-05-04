@@ -85,10 +85,9 @@ public class MatrizFrecuencia {
 		}
 		if(matrizFrecunciasInversas.size() == 0){
 			this.obtenerFrecuenciasInversas(); // se guardan en matrizFrecuencaisInversa
-			System.out.println("matriz de frecuencias inversas calculadas");
+			System.out.println("Matriz de frecuencias inversas calculadas");
 		}
-
-		System.out.println("Inicio consulta :"+q.getId());
+		//System.out.println("Consulta: q"+q.getId());
 		ArrayList<Similitud> similitudes = calculoSimilitud(q); //uso de la clase local Similitud
 		similitudes.sort(new Comparator<Similitud>() { //Ordenando por *valor* mayor primero
 			@Override
@@ -125,9 +124,9 @@ public class MatrizFrecuencia {
 		this.obtenerFrecuencias(); //se guardan en matrizFrecuencias
 		System.out.println("Matriz de frecuencias calculada");
 		this.obtenerFrecuenciasInversas(); // se guardan en matrizFrecuencaisInversa
-		System.out.println("matriz de frecuencias inversas calculadas");
+		System.out.println("Matriz de frecuencias inversas calculadas");
 		for(Consulta q: consultas){
-			System.out.println("Inicio consulta :"+q.getId());
+			System.out.println("Consulta: q"+q.getId());
 			ArrayList<Similitud> similitudes = calculoSimilitud(q); //uso de la clase local Similitud
 			similitudes.sort(new Comparator<Similitud>() { //Ordenando por *valor* mayor primero
 				@Override
