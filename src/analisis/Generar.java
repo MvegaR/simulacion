@@ -57,11 +57,12 @@ public class Generar {
 		}
 		System.out.println("Palabras Totales sin repetir: " + setDePalabras.size());
 
-		MatrizFrecuencia matriz = new MatrizFrecuencia(setDePalabras, documentos, consultas, relevancias);
+		Matrices matriz = new Matrices(setDePalabras, documentos, consultas, relevancias);
+		ArrayList<Precision> precisiones = new ArrayList<>();
 
 		//matriz.obtenerPrecision();
 		for(Consulta q: consultas){
-			matriz.obtenerPrecision(q, 10);
+			matriz.obtenerPrecision(q, 10, precisiones);
 		}
 		
 		System.out.println("Palabras Inicio \n"+setDePalabras+"\nFin palabras");
