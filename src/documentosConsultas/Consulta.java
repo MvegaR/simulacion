@@ -97,7 +97,7 @@ public class Consulta {
 					if(con != null && line.contains(".W")  && line.substring(0, 1).equals(".")){
 						String cuerpo = "";
 						line = sc.nextLine();
-						while(!line.substring(0, 1).equals(".") && sc.hasNextLine()){
+						while(line.length() > 1 && !line.substring(0, 1).equals(".") && sc.hasNextLine()){
 							cuerpo +=line+" ";
 							line = sc.nextLine();
 						}

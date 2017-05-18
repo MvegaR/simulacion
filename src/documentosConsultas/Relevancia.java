@@ -39,16 +39,17 @@ public class Relevancia {
 	 * Obtiene desde un archivo la información de relevancia de una consuta y un documento, rellenandolo en una lista con esa información
 	 * @param file Archivo con la relevancia en formato: qid did 0 0                                          
 	 * @param relevancias Listado de Relevancias a rellenar
+	 * @param Indica la columna a leer el asociado en el fichero en el archivo de relevancia
 	 */
 
-	public static void getRelevancia(File file, ArrayList<Relevancia> relevancias){
+	public static void getRelevancia(File file, ArrayList<Relevancia> relevancias, Integer number){
 
 		try {
 			Scanner sc = new Scanner(file);
 			while(sc.hasNextLine()){
 				String line = sc.nextLine();
 				String[] lineSplit = line.split("[\\D]+");
-				Relevancia r = new Relevancia(Integer.parseInt(lineSplit[0]),Integer.parseInt(lineSplit[1]));
+				Relevancia r = new Relevancia(Integer.parseInt(lineSplit[0]),Integer.parseInt(lineSplit[number]));
 				relevancias.add(r);
 			}
 			sc.close();
