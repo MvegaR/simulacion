@@ -11,14 +11,8 @@ import documentosConsultas.Documento;
 import documentosConsultas.Relevancia;
 
 /**
- * Matriz de frecuencias, por cada palabra del SortedSet "palabras", 
- * se registrará su frecuencia por cada documento, 
- * luego se utiliza para crear la matriz tf-idf las frecuencias por 
- * su valor calculado, considerando primero los documentos relevante
- * de la lista "relevancias", obtienendo el log en base 10 de la divición 
- * del total de frecuencia entre el total de documentos chequeados.
- * La sumatoria es la precisión.
  * Incluye los metodos para calcular las matrizes de frecuencia y frecuencia inversa
+ * 
  */
 
 public class Matrices {

@@ -1,4 +1,10 @@
 package analisis;
+/**
+ * Atributos: (Integer) IDConsulta, (Double) precision, (Integer) DocumentosRelevantes, (Integer) PIn.
+ * 
+ * @author Marcos
+ *
+ */
 
 public class Precision {
 	

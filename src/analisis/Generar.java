@@ -14,28 +14,17 @@ import documentosConsultas.Relevancia;
 
 public class Generar {
 	
-
-	public static void main(String[] args) {
-		File documentosFIle = new File("files/cacm.all");
-		File consultasFile = new File("files/query.text");
-		File palabrasComunesFile1 = new File("files/common_words");
-		File palabrasComunesFile2 = new File("files/stopwords.txt");
-		File relevanciasFile = new File("files/qrels.text");
-
+	private ArrayList<Precision> relevante(File documentosFile, File consultasFile, File palabrasComunesFile, File relevanciasFile, String nombreDB){
 		ArrayList<Documento> documentos = new ArrayList<>();
 		ArrayList<Consulta> consultas = new ArrayList<>();
 		ArrayList<String> palabrasComunes = new ArrayList<>();
 		ArrayList<Relevancia> relevancias = new ArrayList<>();
 		
-		Documento.generarDocumentos(documentosFIle, documentos);
+		Documento.generarDocumentos(documentosFile, documentos);
 		Consulta.generarConsultas(consultasFile, consultas);
 		Relevancia.getRelevancia(relevanciasFile, relevancias);
-		
-		Generar.getPalabrasComunes(palabrasComunesFile1, palabrasComunes);
-		Generar.getPalabrasComunes(palabrasComunesFile2, palabrasComunes);
-		
-		
-		
+		Generar.getPalabrasComunes(palabrasComunesFile, palabrasComunes);
+
 		for(Documento d: documentos){
 			d.generarSetPalabras(palabrasComunes);
 		}
@@ -49,8 +38,7 @@ public class Generar {
 		System.out.println("PalabrasComunes: "+palabrasComunes.size());
 		SortedSet<String> setDePalabras = new TreeSet<String>();
 		for(Documento d: documentos){
-			System.out.println("Documento "+ d.getId()+" tiene: "+ d.getPalabrasValidas().size() + " palabras Validas");
-			
+			//System.out.println("Documento "+ d.getId()+" tiene: "+ d.getPalabrasValidas().size() + " palabras Validas");
 			for(String s: d.getPalabrasValidas()){
 				setDePalabras.add(s);
 			}
@@ -61,11 +49,30 @@ public class Generar {
 		ArrayList<Precision> precisiones = new ArrayList<>();
 
 		//matriz.obtenerPrecision();
+		System.out.println("Inicio"+nombreDB);
 		for(Consulta q: consultas){
-			matriz.obtenerPrecision(q, 10, precisiones);
+			matriz.obtenerPrecision(q, 20, precisiones);
 		}
+		System.out.println("Fin "+nombreDB);
 		
-		System.out.println("Palabras Inicio \n"+setDePalabras+"\nFin palabras");
+		
+		return precisiones;
+		
+	}
+	
+
+	public static void main(String[] args) {
+		
+		/**
+		 * Ficheros BD CACM
+		 */
+		File documentosFileCACM = new File("files/cacm/cacm.all");
+		File consultasFileCACM = new File("files/cacm/query.text");
+		File palabrasComunesFileCACM = new File("files/cacm/common_words");
+		File relevanciasFileCACM = new File("files/cacm/qrels.text");
+		
+
+		
 			
 	}
 	
