@@ -23,9 +23,8 @@ public class Generar {
 		 */
 		File palabrasComunesFile = new File("files/cacm/common_words");
 		
-		/**
-		 * Archivos BD CACM
-		 */
+		//Archivos BD CACM
+		
 		File documentosFileCACM = new File("files/cacm/cacm.all");
 		File consultasFileCACM = new File("files/cacm/query.text");
 		File relevanciasFileCACM = new File("files/cacm/qrels.text");
@@ -33,20 +32,19 @@ public class Generar {
 		ArrayList<Precision> precisionCACM = getPrecisiones(documentosFileCACM, consultasFileCACM, relevanciasFileCACM, palabrasComunesFile, "CACM");
 	
 		
-		/**
-		 * Archivos BD MED
-		 */
+		//Archivos BD MED
+		
 		File documentosFileMED = new File("files/med/MED.ALL");
 		File consultasFileMED = new File("files/med/MED.QRY");
 		File relevanciasFileMED = new File("files/med/MED.REL");
 		ArrayList<Precision> precisionMED = getPrecisiones(documentosFileMED, consultasFileMED, relevanciasFileMED, palabrasComunesFile, "MED");
 		
-		/**
-		 * Archivos BD CRAN
-		 */
+		// Archivos BD CRAN
+		 
+		
 		File documentosFileCRAN = new File("files/cran/cran.all.1400");
 		File consultasFileCRAN = new File("files/cran/cran.qry");
-		File relevanciasFileCRAN = new File("files/cran/cranqrel");
+		File relevanciasFileCRAN = new File("files/cran/cranFix.rel");
 		ArrayList<Precision> precisionCRAN = getPrecisiones(documentosFileCRAN, consultasFileCRAN, relevanciasFileCRAN, palabrasComunesFile, "CRAN");
 		
 
@@ -87,6 +85,7 @@ public class Generar {
 		System.out.println("Documentos: "+documentos.size());
 		System.out.println("Consultas: "+consultas.size());
 		System.out.println("PalabrasComunes: "+palabrasComunes.size());
+
 		SortedSet<String> setDePalabras = new TreeSet<String>();
 		for(Documento d: documentos){
 			//System.out.println("Documento "+ d.getId()+" tiene: "+ d.getPalabrasValidas().size() + " palabras Validas");
@@ -97,6 +96,13 @@ public class Generar {
 		System.out.println("Palabras Totales sin repetir: " + setDePalabras.size());
 
 		Matrices matriz = new Matrices(setDePalabras, documentos, consultas, relevancias);
+		/*FIX REL FILE CRAN
+
+		if(nombreDB.equals("CRAN")){
+			matriz.fixFileRel();
+			System.exit(0);
+		}
+		//*/
 		ArrayList<Precision> precisiones = new ArrayList<>();
 
 		//matriz.obtenerPrecision();

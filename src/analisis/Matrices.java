@@ -1,10 +1,16 @@
 package analisis;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Random;
 import java.util.SortedSet;
 
+import javax.management.Query;
 
 import documentosConsultas.Consulta;
 import documentosConsultas.Documento;
@@ -98,7 +104,7 @@ public class Matrices {
 		Double precision = 0.0;
 		Integer contadorDocumentosRelevantes = 0;
 		Integer contadorTotalDocumentos = 0;
-		for(int i = 0; i < p; i++){
+		for(int i = 0; i < p && i < similitudes.size(); i++){
 			contadorTotalDocumentos++;
 			if(isRelevante(q.getId(), similitudes.get(i).getIdDocumento())){
 				contadorDocumentosRelevantes++;
@@ -331,6 +337,27 @@ public class Matrices {
 			}
 		});
 		hilo.start();
+	}
+	/**
+	 * Metodo para crear un archivo de relevancia ID -> Documento, para el caso de que los id del archivo de relevancias original este considerando pociciones de un arreglo en vez del ID
+	 */
+	public void fixFileRel(){
+		try {
+			File fix = new File("relFix");
+			if(fix.createNewFile()){
+				FileWriter escritor = new FileWriter("relFix");
+				for(Relevancia r: relevancias){
+					escritor.write(consultas.get(r.getQueryID()-1).getId()+" "+r.getDocID()+"\n");
+				}
+				escritor.close();
+				
+			}else{
+				System.err.println("Error al crear fichero");
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 
 }

@@ -21,6 +21,37 @@ public class Relevancia {
 		this.docID = docID;
 	}
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((docID == null) ? 0 : docID.hashCode());
+		result = prime * result + ((queryID == null) ? 0 : queryID.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Relevancia other = (Relevancia) obj;
+		if (docID == null) {
+			if (other.docID != null)
+				return false;
+		} else if (!docID.equals(other.docID))
+			return false;
+		if (queryID == null) {
+			if (other.queryID != null)
+				return false;
+		} else if (!queryID.equals(other.queryID))
+			return false;
+		return true;
+	}
+
 	public Integer getDocID() {
 		return docID;
 	}
