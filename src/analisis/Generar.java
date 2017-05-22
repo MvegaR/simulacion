@@ -41,6 +41,14 @@ public class Generar {
 		File relevanciasFileMED = new File("files/med/MED.REL");
 		ArrayList<Precision> precisionMED = getPrecisiones(documentosFileMED, consultasFileMED, relevanciasFileMED, palabrasComunesFile, "MED");
 		
+		/**
+		 * Archivos BD CRAN
+		 */
+		File documentosFileCRAN = new File("files/cran/cran.all.1400");
+		File consultasFileCRAN = new File("files/cran/cran.qry");
+		File relevanciasFileCRAN = new File("files/cran/cranqrel");
+		ArrayList<Precision> precisionCRAN = getPrecisiones(documentosFileCRAN, consultasFileCRAN, relevanciasFileCRAN, palabrasComunesFile, "CRAN");
+		
 
 		
 			
@@ -60,10 +68,10 @@ public class Generar {
 		
 		Documento.generarDocumentos(documentosFile, documentos);
 		Consulta.generarConsultas(consultasFile, consultas);
-		if(nombreDB.equals("CACM")){
-			Relevancia.getRelevancia(relevanciasFile, relevancias, 1);
-		}else if(nombreDB.equals("MED")){
+		if(nombreDB.equals("MED")){
 			Relevancia.getRelevancia(relevanciasFile, relevancias, 2);
+		}else{
+			Relevancia.getRelevancia(relevanciasFile, relevancias, 1);
 		}
 		
 		Generar.getPalabrasComunes(palabrasComunesFile, palabrasComunes);
