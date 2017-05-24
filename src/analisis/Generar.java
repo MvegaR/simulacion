@@ -18,34 +18,53 @@ public class Generar {
 	
 
 	public static void main(String[] args) {
-		/**
-		 * Archivos palabras comunes
-		 */
-		File palabrasComunesFile = new File("files/cacm/common_words");
 		
+		String fsp = System.getProperty("file.separator").toString();
+		
+		//palabras comunes
+		
+		File palabrasComunesFile = new File("files"+fsp+"cacm"+fsp+"common_words");
+		/*
 		//Archivos BD CACM
 		
-		File documentosFileCACM = new File("files/cacm/cacm.all");
-		File consultasFileCACM = new File("files/cacm/query.text");
-		File relevanciasFileCACM = new File("files/cacm/qrels.text");
+		File documentosFileCACM = new File("files"+fsp+"cacm"+fsp+"cacm.all");
+		File consultasFileCACM = new File("files"+fsp+"cacm"+fsp+"query.text");
+		File relevanciasFileCACM = new File("files"+fsp+"cacm"+fsp+"qrels.text");
 		
-		ArrayList<Precision> precisionCACM = getPrecisiones(null,documentosFileCACM, consultasFileCACM, relevanciasFileCACM, palabrasComunesFile, "CACM");
+		ArrayList<Precision> precisionesCACM = getPrecisiones(null,documentosFileCACM, consultasFileCACM, relevanciasFileCACM, palabrasComunesFile, "CACM");
 	
 		
 		//Archivos BD MED
 		
-		File documentosFileMED = new File("files/med/MED.ALL");
-		File consultasFileMED = new File("files/med/MED.QRY");
-		File relevanciasFileMED = new File("files/med/MED.REL");
-		ArrayList<Precision> precisionMED = getPrecisiones(null,documentosFileMED, consultasFileMED, relevanciasFileMED, palabrasComunesFile, "MED");
+		File documentosFileMED = new File("files"+fsp+"med"+fsp+"MED.ALL");
+		File consultasFileMED = new File("files"+fsp+"med"+fsp+"MED.QRY");
+		File relevanciasFileMED = new File("files"+fsp+"med"+fsp+"MED.REL");
+		ArrayList<Precision> precisionesMED = getPrecisiones(null,documentosFileMED, consultasFileMED, relevanciasFileMED, palabrasComunesFile, "MED");
 		
 		// Archivos BD CRAN
 		 
 		
-		File documentosFileCRAN = new File("files/cran/cran.all.1400");
-		File consultasFileCRAN = new File("files/cran/cran.qry");
-		File relevanciasFileCRAN = new File("files/cran/cranFix.rel");
-		ArrayList<Precision> precisionCRAN = getPrecisiones(null, documentosFileCRAN, consultasFileCRAN, relevanciasFileCRAN, palabrasComunesFile, "CRAN");
+		File documentosFileCRAN = new File("files"+fsp+"cran"+fsp+"cran.all.1400");
+		File consultasFileCRAN = new File("files"+fsp+"cran"+fsp+"cran.qry");
+		File relevanciasFileCRAN = new File("files"+fsp+"cran"+fsp+"cranFix.rel");
+		ArrayList<Precision> precisionesCRAN = getPrecisiones(null, documentosFileCRAN, consultasFileCRAN, relevanciasFileCRAN, palabrasComunesFile, "CRAN");
+		//*/
+		
+		//Archivos BD LISA
+		ArrayList<File> documentosFilesLisa = new ArrayList<>();
+		documentosFilesLisa.add(new File("files"+fsp+"lisa"+fsp+"LISA0.501"));
+		documentosFilesLisa.add(new File("files"+fsp+"lisa"+fsp+"LISA1.501"));
+		documentosFilesLisa.add(new File("files"+fsp+"lisa"+fsp+"LISA2.501"));
+		documentosFilesLisa.add(new File("files"+fsp+"lisa"+fsp+"LISA3.501"));
+		documentosFilesLisa.add(new File("files"+fsp+"lisa"+fsp+"LISA4.501"));
+		documentosFilesLisa.add(new File("files"+fsp+"lisa"+fsp+"LISA5.501"));
+		documentosFilesLisa.add(new File("files"+fsp+"lisa"+fsp+"LISA5.627"));
+		documentosFilesLisa.add(new File("files"+fsp+"lisa"+fsp+"LISA5.850"));
+		File ConsultasFileLISA = new File("files"+fsp+"lisa"+fsp+"LISA.QUE");
+		File RelevanciasFileLisa = new File("files"+fsp+"lisa"+fsp+"LISA.REL");
+		ArrayList<Precision> PrecisionesLISA = getPrecisiones(documentosFilesLisa, null, ConsultasFileLISA, RelevanciasFileLisa, palabrasComunesFile, "LISA");
+		
+		
 		
 
 		
