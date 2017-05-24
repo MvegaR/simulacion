@@ -312,13 +312,24 @@ public class Documento {
 	public static void generarDocumentosLisa(ArrayList<File> origenes, ArrayList<Documento> documentos){
 		try {
 			for(File origen: origenes){
+
 				Scanner sc = new Scanner(origen);
-				Documento doc = null;
-				String line = "";
-				
+
 				while (sc.hasNextLine()) {
+					Documento doc = null;
+					String line = "";
 					line = sc.nextLine();
-					if(doc != null && line.equals("\n")){
+					if(doc == null && line.contains("Document") && line.split("[ ]+").length == 2){
+						doc = new Documento();
+						Integer id = Integer.parseInt(line.split("[ ]+")[1]);
+						doc.setId(id);
+						documentos.add(doc);
+					
+						//titulo:
+						line = sc.nextLine();
+						doc.setTitulo(line);
+					}
+					if(doc != null && !line.equals("********************************************")){
 						String cuerpo = "";
 						line = sc.nextLine();
 						while(!line.equals("********************************************") && sc.hasNextLine()){
@@ -327,16 +338,8 @@ public class Documento {
 						}
 						doc.setCuerpo(cuerpo);
 					}
-					if(line.contains("Document") && line.split(" ").length == 2){
-						doc = new Documento();
-						Integer id = Integer.parseInt(line.substring(9, line.length()));
-						doc.setId(id);
-						documentos.add(doc);
 					
-						//titulo:
-						line = sc.nextLine();
-						doc.setTitulo(line);
-					}
+				
 					
 					
 				}
