@@ -1,16 +1,12 @@
 package analisis;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Random;
 import java.util.SortedSet;
 
-import javax.management.Query;
 
 import documentosConsultas.Consulta;
 import documentosConsultas.Documento;

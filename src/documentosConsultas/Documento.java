@@ -302,6 +302,51 @@ public class Documento {
 		}
 		
 		
+	}
+	
+	/**
+	 * PARA BD LISA: Obtiene los documentos desde un archivo de texto y rellena una lista entregada por parametro de documentos generados.
+	 * @param origen Archivo de texto con los documentos
+	 * @param documentos Lista de documentos a rellenar
+	 */
+	public static void generarDocumentosLisa(ArrayList<File> origenes, ArrayList<Documento> documentos){
+		try {
+			for(File origen: origenes){
+				Scanner sc = new Scanner(origen);
+				Documento doc = null;
+				String line = "";
+				
+				while (sc.hasNextLine()) {
+					if(doc != null && line.equals("\n")){
+						String cuerpo = "";
+						line = sc.nextLine();
+						while(!line.equals("********************************************") && sc.hasNextLine()){
+							cuerpo +=line+" ";
+							line = sc.nextLine();
+						}
+					}
+					if(line.contains("Document") && line.substring(0, 1).equals(".")){
+						doc = new Documento();
+						Integer id = Integer.parseInt(line.substring(9, line.length()));
+						doc.setId(id);
+						documentos.add(doc);
+					
+						//titulo:
+						line = sc.nextLine();
+						doc.setTitulo(line);
+					}
+					
+					
+				}
+				sc.close();
+			}
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		
 		
 	}

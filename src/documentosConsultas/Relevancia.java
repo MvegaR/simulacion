@@ -91,6 +91,45 @@ public class Relevancia {
 
 
 	}
+	
+	/**
+	 * ONLY LISA DB: Obtiene desde un archivo la información de relevancia de una consuta y un documento, rellenandolo en una lista con esa información
+	 * @param file Archivo con la relevancia en formato: qid did 0 0                                          
+	 * @param relevancias Listado de Relevancias a rellenar
+	 * @param Indica la columna a leer el asociado en el fichero en el archivo de relevancia
+	 */
+
+	public static void getRelevanciaLisa(File file, ArrayList<Relevancia> relevancias){
+
+		try {
+			Scanner sc = new Scanner(file);
+			while(sc.hasNextLine()){
+				
+				String line = sc.nextLine(); //id
+				String[] lineSplit = line.split("[\\D]+");
+				Integer idQuery = Integer.parseInt(lineSplit[0]);
+				line = sc.nextLine(); //info contador relevantes
+				line = sc.nextLine(); //relevancias separadas por espacio terminado en -1
+				for(String s: line.split("[\\D]+")){
+					if(s.equals("-1")){
+						break;
+					}
+					Relevancia r = new Relevancia(idQuery,Integer.parseInt(s));
+					relevancias.add(r);
+				}
+				line = sc.nextLine(); //salto de linea
+				
+			}
+			sc.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+	}
+	
+	
 
 
 }

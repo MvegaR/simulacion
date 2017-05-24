@@ -145,9 +145,49 @@ public class Consulta {
 				e.printStackTrace();
 			}
 			
-			
-			
-			
+		
+		
+	}
+	
+	/**
+	 * ONLY LISA DB: Realiza la lectura de archivo de consultas y los inserta en una lista
+	 * @param origen Archivo de texto con querys, no nula.
+	 * @param consultas Colección de consultas a rellenar, no nula.
+	 */
+	
+	public static void generarConsultasLisa(File origen, ArrayList<Consulta> consultas){
+
+			try {
+				Scanner sc = new Scanner(origen);
+				Consulta con = null;
+				String line = "";
+				Boolean bloqueo = false; //variable para controlar el caso de que exista una etiqueta sin contenido
+				
+				while (sc.hasNextLine()) {
+					
+						con = new Consulta();
+						Integer id = Integer.parseInt(line);
+						con.setId(id);
+						consultas.add(con);
+						bloqueo = false;
+						String cuerpo = "";
+						line = sc.nextLine();
+						while(sc.hasNextLine()){
+							cuerpo +=line+" ";
+							if(line.contains("#")){
+								break;
+							}
+							line = sc.nextLine();
+						}
+						con.setQuery(cuerpo);
+					
+				}
+				sc.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		
 	}
 	

@@ -29,7 +29,7 @@ public class Generar {
 		File consultasFileCACM = new File("files/cacm/query.text");
 		File relevanciasFileCACM = new File("files/cacm/qrels.text");
 		
-		ArrayList<Precision> precisionCACM = getPrecisiones(documentosFileCACM, consultasFileCACM, relevanciasFileCACM, palabrasComunesFile, "CACM");
+		ArrayList<Precision> precisionCACM = getPrecisiones(null,documentosFileCACM, consultasFileCACM, relevanciasFileCACM, palabrasComunesFile, "CACM");
 	
 		
 		//Archivos BD MED
@@ -37,7 +37,7 @@ public class Generar {
 		File documentosFileMED = new File("files/med/MED.ALL");
 		File consultasFileMED = new File("files/med/MED.QRY");
 		File relevanciasFileMED = new File("files/med/MED.REL");
-		ArrayList<Precision> precisionMED = getPrecisiones(documentosFileMED, consultasFileMED, relevanciasFileMED, palabrasComunesFile, "MED");
+		ArrayList<Precision> precisionMED = getPrecisiones(null,documentosFileMED, consultasFileMED, relevanciasFileMED, palabrasComunesFile, "MED");
 		
 		// Archivos BD CRAN
 		 
@@ -45,7 +45,7 @@ public class Generar {
 		File documentosFileCRAN = new File("files/cran/cran.all.1400");
 		File consultasFileCRAN = new File("files/cran/cran.qry");
 		File relevanciasFileCRAN = new File("files/cran/cranFix.rel");
-		ArrayList<Precision> precisionCRAN = getPrecisiones(documentosFileCRAN, consultasFileCRAN, relevanciasFileCRAN, palabrasComunesFile, "CRAN");
+		ArrayList<Precision> precisionCRAN = getPrecisiones(null, documentosFileCRAN, consultasFileCRAN, relevanciasFileCRAN, palabrasComunesFile, "CRAN");
 		
 
 		
@@ -58,16 +58,26 @@ public class Generar {
 	 * @param palabras Lista de palabras a omitir, no nulo, puede tener con anterioridad más palabras, para el uso de multiples archivos a través de más llamadas.
 	 */
 	
-	public static ArrayList<Precision> getPrecisiones(File documentosFile, File consultasFile, File relevanciasFile, File palabrasComunesFile, String nombreDB){
+	public static ArrayList<Precision> getPrecisiones(ArrayList<File> documentosFiles, File documentosFile, File consultasFile, File relevanciasFile, File palabrasComunesFile, String nombreDB){
 		ArrayList<Documento> documentos = new ArrayList<>();
 		ArrayList<Consulta> consultas = new ArrayList<>();
 		ArrayList<String> palabrasComunes = new ArrayList<>();
 		ArrayList<Relevancia> relevancias = new ArrayList<>();
 		
-		Documento.generarDocumentos(documentosFile, documentos);
-		Consulta.generarConsultas(consultasFile, consultas);
+		
+		if(nombreDB.equals("LISA")){
+			Documento.generarDocumentosLisa(documentosFiles, documentos);
+			Consulta.generarConsultasLisa(consultasFile, consultas);
+		}else{
+			Documento.generarDocumentos(documentosFile, documentos);
+			Consulta.generarConsultas(consultasFile, consultas);
+		}
+		
+		
 		if(nombreDB.equals("MED")){
 			Relevancia.getRelevancia(relevanciasFile, relevancias, 2);
+		}else if(nombreDB.equals("LISA")){
+			Relevancia.getRelevanciaLisa(relevanciasFile, relevancias);
 		}else{
 			Relevancia.getRelevancia(relevanciasFile, relevancias, 1);
 		}
