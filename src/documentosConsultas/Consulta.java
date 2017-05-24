@@ -93,6 +93,18 @@ public class Consulta {
 						//System.out.println(line);
 					}
 
+					if(con != null && line.contains(".A") && line.substring(0, 1).equals(".")){
+						ArrayList<String> autores = new ArrayList<String>();
+						line = sc.nextLine();
+						while(!line.substring(0, 1).equals(".") && sc.hasNextLine()){
+							if(!line.equals("None")){
+								autores.add(line);
+							}
+							line = sc.nextLine();
+						}
+						bloqueo = false;
+						con.setAutores(autores);
+					}
 					
 					if(con != null && line.contains(".W")  && line.substring(0, 1).equals(".")){
 						String cuerpo = "";
@@ -107,18 +119,7 @@ public class Consulta {
 						}
 					}
 					
-					if(con != null && line.contains(".A") && line.substring(0, 1).equals(".")){
-						ArrayList<String> autores = new ArrayList<String>();
-						line = sc.nextLine();
-						while(!line.substring(0, 1).equals(".") && sc.hasNextLine()){
-							if(!line.equals("None")){
-								autores.add(line);
-							}
-							line = sc.nextLine();
-						}
-						bloqueo = false;
-						con.setAutores(autores);
-					}
+				
 					
 					
 					if(line.contains(".I") && line.substring(0, 1).equals(".")){
@@ -164,7 +165,7 @@ public class Consulta {
 				Boolean bloqueo = false; //variable para controlar el caso de que exista una etiqueta sin contenido
 				
 				while (sc.hasNextLine()) {
-					
+						line = sc.nextLine();
 						con = new Consulta();
 						Integer id = Integer.parseInt(line);
 						con.setId(id);

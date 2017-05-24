@@ -79,7 +79,7 @@ public class Relevancia {
 			Scanner sc = new Scanner(file);
 			while(sc.hasNextLine()){
 				String line = sc.nextLine();
-				String[] lineSplit = line.split("[\\D]+");
+				String[] lineSplit = line.replaceFirst("[ ]+","").split("[\\D\\t]+");
 				Relevancia r = new Relevancia(Integer.parseInt(lineSplit[0]),Integer.parseInt(lineSplit[number]));
 				relevancias.add(r);
 			}
@@ -106,18 +106,22 @@ public class Relevancia {
 			while(sc.hasNextLine()){
 				
 				String line = sc.nextLine(); //id
-				String[] lineSplit = line.split("[\\D]+");
-				Integer idQuery = Integer.parseInt(lineSplit[0]);
+				String[] lineSplit = line.split("Query ");
+				Integer idQuery = Integer.parseInt(lineSplit[1]);
+				System.out.println(idQuery);
 				line = sc.nextLine(); //info contador relevantes
-				line = sc.nextLine(); //relevancias separadas por espacio terminado en -1
-				for(String s: line.split("[\\D]+")){
-					if(s.equals("-1")){
-						break;
+				while(!line.equals("") && sc.hasNextLine()){
+					line = sc.nextLine();
+					for(String s: line.split("[ ]")){
+						if(s.equals("-1") || s.equals("") ){
+							break;
+						}
+						Relevancia r = new Relevancia(idQuery,Integer.parseInt(s));
+						relevancias.add(r);
 					}
-					Relevancia r = new Relevancia(idQuery,Integer.parseInt(s));
-					relevancias.add(r);
+					
 				}
-				line = sc.nextLine(); //salto de linea
+			
 				
 			}
 			sc.close();

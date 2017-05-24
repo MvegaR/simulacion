@@ -1,5 +1,6 @@
 package analisis;
 
+import java.awt.SystemTray;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -265,7 +266,13 @@ public class Matrices {
 				sumatoria3 += list.get(contador+1) *list.get(contador+1);
 				contador++;
 			}
+			
+			if(Double.isNaN(sumatoria/ Math.sqrt(sumatoria2*sumatoria3))){
+				System.out.println(q);
+				System.exit(1);
+			}
 			vectorSimilitud.add(new Similitud(sumatoria/ Math.sqrt(sumatoria2*sumatoria3), list.get(0).intValue())); //list.get(0) tiene el id del documento
+			
 		}
 		return vectorSimilitud;
 	}

@@ -219,7 +219,7 @@ public class Documento {
 				if(doc != null && line.contains(".W")  && line.substring(0, 1).equals(".")){
 					String cuerpo = "";
 					line = sc.nextLine();
-					while(!line.substring(0, 1).equals(".") && sc.hasNextLine()){
+					while(line.length() > 1 && !line.substring(0, 1).equals(".") && sc.hasNextLine()){
 						cuerpo +=line+" ";
 						line = sc.nextLine();
 					}
@@ -317,6 +317,7 @@ public class Documento {
 				String line = "";
 				
 				while (sc.hasNextLine()) {
+					line = sc.nextLine();
 					if(doc != null && line.equals("\n")){
 						String cuerpo = "";
 						line = sc.nextLine();
@@ -325,7 +326,7 @@ public class Documento {
 							line = sc.nextLine();
 						}
 					}
-					if(line.contains("Document") && line.substring(0, 1).equals(".")){
+					if(line.contains("Document") && line.split(" ").length == 2){
 						doc = new Documento();
 						Integer id = Integer.parseInt(line.substring(9, line.length()));
 						doc.setId(id);

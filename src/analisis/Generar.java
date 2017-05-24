@@ -48,8 +48,18 @@ public class Generar {
 		File consultasFileCRAN = new File("files"+fsp+"cran"+fsp+"cran.qry");
 		File relevanciasFileCRAN = new File("files"+fsp+"cran"+fsp+"cranFix.rel");
 		ArrayList<Precision> precisionesCRAN = getPrecisiones(null, documentosFileCRAN, consultasFileCRAN, relevanciasFileCRAN, palabrasComunesFile, "CRAN");
-		//*/
 		
+		*/
+		// Archivos DB CISI
+		
+		File documentosFileCISI = new File("files"+fsp+"cisi"+fsp+"CISI.all");
+		File consultasFileCISI = new File("files"+fsp+"cisi"+fsp+"CISI.qry");
+		File relevanciasFileCISI = new File("files"+fsp+"cisi"+fsp+"CISI.rel");
+		
+		ArrayList<Precision> precisionesCISI = getPrecisiones(null, documentosFileCISI, consultasFileCISI, relevanciasFileCISI, palabrasComunesFile, "CISI");
+		
+		
+		/*
 		//Archivos BD LISA
 		ArrayList<File> documentosFilesLisa = new ArrayList<>();
 		documentosFilesLisa.add(new File("files"+fsp+"lisa"+fsp+"LISA0.501"));
@@ -63,7 +73,7 @@ public class Generar {
 		File ConsultasFileLISA = new File("files"+fsp+"lisa"+fsp+"LISA.QUE");
 		File RelevanciasFileLisa = new File("files"+fsp+"lisa"+fsp+"LISA.REL");
 		ArrayList<Precision> PrecisionesLISA = getPrecisiones(documentosFilesLisa, null, ConsultasFileLISA, RelevanciasFileLisa, palabrasComunesFile, "LISA");
-		
+		*/
 		
 		
 
@@ -135,7 +145,7 @@ public class Generar {
 		ArrayList<Precision> precisiones = new ArrayList<>();
 
 		//matriz.obtenerPrecision();
-		System.out.println("Inicio"+nombreDB);
+		System.out.println("Inicio "+nombreDB);
 		for(Consulta q: consultas){
 			matriz.obtenerPrecision(q, 20, precisiones);
 		}
