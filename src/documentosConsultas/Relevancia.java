@@ -79,7 +79,7 @@ public class Relevancia {
 			Scanner sc = new Scanner(file);
 			while(sc.hasNextLine()){
 				String line = sc.nextLine();
-				String[] lineSplit = line.replaceFirst("[ ]+","").split("[\\D\\t]+");
+				String[] lineSplit = line.replaceFirst("^[ ]+","").split("[\\D\\t]+");
 				Relevancia r = new Relevancia(Integer.parseInt(lineSplit[0]),Integer.parseInt(lineSplit[number]));
 				relevancias.add(r);
 			}
