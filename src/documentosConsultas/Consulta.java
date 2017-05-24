@@ -106,6 +106,7 @@ public class Consulta {
 						con.setAutores(autores);
 					}
 					
+					
 					if(con != null && line.contains(".W")  && line.substring(0, 1).equals(".")){
 						String cuerpo = "";
 						line = sc.nextLine();
@@ -119,6 +120,7 @@ public class Consulta {
 						}
 					}
 					
+					
 				
 					
 					
@@ -128,7 +130,9 @@ public class Consulta {
 						con.setId(id);
 						consultas.add(con);
 						bloqueo = false;
-					}else if(line.contains(".N") && line.substring(0, 1).equals(".")){
+					}
+					
+					if(line.contains(".N") && line.substring(0, 1).equals(".")){
 						line = sc.nextLine();
 						if(!line.substring(0, 1).equals(".") && !line.equals("None")){
 							con.setFullId(line);

@@ -267,10 +267,6 @@ public class Matrices {
 				contador++;
 			}
 			
-			if(Double.isNaN(sumatoria/ Math.sqrt(sumatoria2*sumatoria3))){
-				System.out.println(q);
-				System.exit(1);
-			}
 			vectorSimilitud.add(new Similitud(sumatoria/ Math.sqrt(sumatoria2*sumatoria3), list.get(0).intValue())); //list.get(0) tiene el id del documento
 			
 		}
