@@ -108,12 +108,19 @@ public class Matrices {
 			}else{
 				precision += (contadorDocumentosRelevantes *1.0) / (contadorTotalDocumentos*1.0);
 			}
-			System.out.println("\tQ"+q.getId()+" Documento: " + String.format("%4d", similitudes.get(i).getIdDocumento()) + " Similitud: "+ String.format("%19.16f",   similitudes.get(i).getValor()) + " Relevante: " +isRelevante(q.getId(), similitudes.get(i).getIdDocumento()));
+			//System.out.println("\tQ"+q.getId()+" Documento: " + String.format("%4d", similitudes.get(i).getIdDocumento()) + " Similitud: "+ String.format("%19.16f",   similitudes.get(i).getValor()) + " Relevante: " +isRelevante(q.getId(), similitudes.get(i).getIdDocumento()));
+			int r = 0;
+			if(isRelevante(q.getId(), similitudes.get(i).getIdDocumento())){
+				r = 1;
+			}
+			System.out.println(q.getId()+"\t" + similitudes.get(i).getIdDocumento() + "\t" +  similitudes.get(i).getValor() + "\t" + r);
 
 		}
 		precision /= contadorTotalDocumentos;
 		precisiones.add(new Precision(q.getId(), precision, contadorDocumentosRelevantes, p));
-		System.out.println("\t\tPrecisión consulta Q"+q.getId()+"p@"+p+" es: "+ String.format("%.10f", precision)+" Docs Relevantes: "+contadorDocumentosRelevantes+"\n");
+		//System.out.println("\t\tPrecisión consulta Q"+q.getId()+"p@"+p+" es: "+ String.format("%.10f", precision)+" Docs Relevantes: "+contadorDocumentosRelevantes+"\n");
+		System.out.println("\t\t\t\t"+precision);
+		System.out.println();
 	}
 
 
