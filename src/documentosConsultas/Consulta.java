@@ -166,7 +166,6 @@ public class Consulta {
 				Scanner sc = new Scanner(origen);
 				Consulta con = null;
 				String line = "";
-				Boolean bloqueo = false; //variable para controlar el caso de que exista una etiqueta sin contenido
 				
 				while (sc.hasNextLine()) {
 						line = sc.nextLine();
@@ -174,7 +173,6 @@ public class Consulta {
 						Integer id = Integer.parseInt(line);
 						con.setId(id);
 						consultas.add(con);
-						bloqueo = false;
 						String cuerpo = "";
 						line = sc.nextLine();
 						while(sc.hasNextLine()){

@@ -108,7 +108,7 @@ public class Relevancia {
 				String line = sc.nextLine(); //id
 				String[] lineSplit = line.split("Query ");
 				Integer idQuery = Integer.parseInt(lineSplit[1]);
-				System.out.println(idQuery);
+				
 				line = sc.nextLine(); //info contador relevantes
 				while(!line.equals("") && sc.hasNextLine()){
 					line = sc.nextLine();

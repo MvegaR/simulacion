@@ -325,6 +325,7 @@ public class Documento {
 							cuerpo +=line+" ";
 							line = sc.nextLine();
 						}
+						doc.setCuerpo(cuerpo);
 					}
 					if(line.contains("Document") && line.split(" ").length == 2){
 						doc = new Documento();

@@ -1,6 +1,5 @@
 package analisis;
 
-import java.awt.SystemTray;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
