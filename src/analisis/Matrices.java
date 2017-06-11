@@ -25,7 +25,9 @@ public class Matrices {
 	 * a menor por similitud sin perder la referencia del documento
 	 */
 	class Similitud{
+		/** valor de similitud */
 		private Double valor;
+		/** Identificador del documento de la similitud */
 		private Integer idDocumento;
 		public Similitud(Double valor, Integer idDocumento) {
 			this.valor = valor;
@@ -42,11 +44,17 @@ public class Matrices {
 
 
 	//inicio atributos de this
-	private SortedSet<String> palabras; //Conjunto de palabras sin repetir, minusculas, ordenadas por alfabeto
+	/** Conjunto de palabras sin repetir, minusculas, ordenadas por alfabeto */
+	private SortedSet<String> palabras; //
+	/** Lista de lista de Integer, matriz de frecuencias */
 	private ArrayList<ArrayList<Integer>> matrizFrecuncias;
+	/** Lista de lista de Double, matriz de frecuencia inversa */
 	private ArrayList<ArrayList<Double>> matrizFrecunciasInversas;
+	/** Lista de documentos */
 	private ArrayList<Documento> documentos;
+	/** Lista de consultas */
 	private ArrayList<Consulta> consultas;
+	/** Lista de relevancias */
 	private ArrayList<Relevancia> relevancias;
 	//fin atributos
 
@@ -108,18 +116,22 @@ public class Matrices {
 			}else{
 				precision += (contadorDocumentosRelevantes *1.0) / (contadorTotalDocumentos*1.0);
 			}
-			//System.out.println("\tQ"+q.getId()+" Documento: " + String.format("%4d", similitudes.get(i).getIdDocumento()) + " Similitud: "+ String.format("%19.16f",   similitudes.get(i).getValor()) + " Relevante: " +isRelevante(q.getId(), similitudes.get(i).getIdDocumento()));
+			System.out.println("\tQ"+q.getId()+" Documento: " + String.format("%4d", similitudes.get(i).getIdDocumento()) 
+			+ " Similitud: "+ String.format("%19.16f",   similitudes.get(i).getValor()) 
+			+ " Relevante: " +isRelevante(q.getId(), similitudes.get(i).getIdDocumento()));
+			/*
+			//codigo para imprimir con formato para copiar a archivo excel.
 			int r = 0;
 			if(isRelevante(q.getId(), similitudes.get(i).getIdDocumento())){
 				r = 1;
 			}
 			System.out.println(q.getId()+"\t" + similitudes.get(i).getIdDocumento() + "\t" +  similitudes.get(i).getValor() + "\t" + r);
-
+			//*/
 		}
 		precision /= contadorTotalDocumentos;
 		precisiones.add(new Precision(q.getId(), precision, contadorDocumentosRelevantes, p));
-		//System.out.println("\t\tPrecisión consulta Q"+q.getId()+"p@"+p+" es: "+ String.format("%.10f", precision)+" Docs Relevantes: "+contadorDocumentosRelevantes+"\n");
-		System.out.println("\t\t\t\t"+precision);
+		System.out.println("\t\tPrecisión consulta Q"+q.getId()+"p@"+p+" es: "+ String.format("%.10f", precision)+" Docs Relevantes: "+contadorDocumentosRelevantes+"\n");
+		//System.out.println("\t\t\t\t"+precision);
 		System.out.println();
 	}
 
@@ -261,6 +273,7 @@ public class Matrices {
 			}
 		}
 		//System.out.println("Vector q" +q.getId()+": "+ vectorQ);
+		//distancia coseno
 		for(ArrayList<Double> list: matrizFrecunciasInversas){
 			Double sumatoria = 0.0;
 			Double sumatoria2 = 0.0;
@@ -344,7 +357,7 @@ public class Matrices {
 		hilo.start();
 	}
 	/**
-	 * Metodo para crear un archivo de relevancia ID -> Documento, para el caso de que los id del archivo de relevancias original este considerando pociciones de un arreglo en vez del ID
+	 * Metodo para crear un archivo de relevancia ID - Documento, para el caso de que los id del archivo de relevancias original este considerando pociciones de un arreglo en vez del ID
 	 */
 	public void fixFileRel(){
 		try {

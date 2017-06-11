@@ -7,8 +7,9 @@ import java.util.Scanner;
 
 public class Relevancia {
 
-	
+	/** Identificador de la consulta */
 	private Integer queryID;
+	/** Identificador del documento relevante para la consulta */
 	private Integer docID;
 	
 	public Relevancia() {
@@ -70,7 +71,7 @@ public class Relevancia {
 	 * Obtiene desde un archivo la información de relevancia de una consuta y un documento, rellenandolo en una lista con esa información
 	 * @param file Archivo con la relevancia en formato: qid did 0 0                                          
 	 * @param relevancias Listado de Relevancias a rellenar
-	 * @param Indica la columna a leer el asociado en el fichero en el archivo de relevancia
+	 * @param number Indica la columna a leer el asociado en el fichero en el archivo de relevancia
 	 */
 
 	public static void getRelevancia(File file, ArrayList<Relevancia> relevancias, Integer number){
@@ -96,7 +97,6 @@ public class Relevancia {
 	 * ONLY LISA DB: Obtiene desde un archivo la información de relevancia de una consuta y un documento, rellenandolo en una lista con esa información
 	 * @param file Archivo con la relevancia en formato: qid did 0 0                                          
 	 * @param relevancias Listado de Relevancias a rellenar
-	 * @param Indica la columna a leer el asociado en el fichero en el archivo de relevancia
 	 */
 
 	public static void getRelevanciaLisa(File file, ArrayList<Relevancia> relevancias){

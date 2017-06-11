@@ -7,10 +7,13 @@ package analisis;
  */
 
 public class Precision {
-	
+	/** Identificador de la consulta */
 	Integer idConsulta;
+	/** Precisión calculada de la consulta */
 	Double precision;
+	/** Cantidad de docuemntos relevantes para la consulta */
 	Integer documentosRelevantes;
+	/** Numero de documentos maximos a desplegar y a incluir en el calculo de precisión */
 	Integer pIn;
 	
 	public Precision(Integer idConsulta, Double precision, Integer documentosRelevantes, Integer pIn) {

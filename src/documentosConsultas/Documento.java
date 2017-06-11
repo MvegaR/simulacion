@@ -12,16 +12,25 @@ import java.util.Scanner;
  *
  */
 public class Documento {
-	
+	/** Identificador del documento */
 	private Integer id; //.I
+	/** Titulo del documento */
 	private String titulo; //.T
+	/** Cuerpo del documento */
 	private String cuerpo; //.W
+	/** Fecha del documento */
 	private String fecha; //.B
+	/** Autores del documento */
 	private ArrayList<String> autores; //.A
+	/** Tags para indexar el documento */
 	private ArrayList<String> tags; //.K
+	/** Codigos de identifiación del documento */
 	private ArrayList<String> codigos; //.C
+	/** Información de la publicación del documento */
 	private String infoPublicacion; //.N
+	/** Referencias presentes en el documento */
 	private ArrayList<Referencia> referencias; //.X
+	/** Palabras validas en una lista enlazada */
 	private LinkedList<String> palabrasValidas;
 
 	public Documento() {
@@ -306,7 +315,7 @@ public class Documento {
 	
 	/**
 	 * PARA BD LISA: Obtiene los documentos desde un archivo de texto y rellena una lista entregada por parametro de documentos generados.
-	 * @param origen Archivo de texto con los documentos
+	 * @param origenes Archivo de texto con los documentos
 	 * @param documentos Lista de documentos a rellenar
 	 */
 	public static void generarDocumentosLisa(ArrayList<File> origenes, ArrayList<Documento> documentos){

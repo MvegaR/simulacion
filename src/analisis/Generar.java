@@ -26,7 +26,7 @@ public class Generar {
 		File palabrasComunesFile = new File("files"+fsp+"cacm"+fsp+"common_words");
 		
 		//Archivos BD CACM
-		/*/
+		//*/
 		File documentosFileCACM = new File("files"+fsp+"cacm"+fsp+"cacm.all");
 		File consultasFileCACM = new File("files"+fsp+"cacm"+fsp+"query.text");
 		File relevanciasFileCACM = new File("files"+fsp+"cacm"+fsp+"qrels.text");
@@ -35,7 +35,7 @@ public class Generar {
 		//*/
 		
 		//Archivos BD MED
-		/*/
+		//*/
 		File documentosFileMED = new File("files"+fsp+"med"+fsp+"MED.ALL");
 		File consultasFileMED = new File("files"+fsp+"med"+fsp+"MED.QRY");
 		File relevanciasFileMED = new File("files"+fsp+"med"+fsp+"MED.REL");
@@ -43,7 +43,7 @@ public class Generar {
 		//*/
 		// Archivos BD CRAN
 		 
-		/*/
+		//*/
 		File documentosFileCRAN = new File("files"+fsp+"cran"+fsp+"cran.all.1400");
 		File consultasFileCRAN = new File("files"+fsp+"cran"+fsp+"cran.qry");
 		File relevanciasFileCRAN = new File("files"+fsp+"cran"+fsp+"cranFix.rel");
@@ -51,7 +51,7 @@ public class Generar {
 		//*/
 		
 		// Archivos DB CISI
-		/*/
+		//*/
 		File documentosFileCISI = new File("files"+fsp+"cisi"+fsp+"CISI.all");
 		File consultasFileCISI = new File("files"+fsp+"cisi"+fsp+"CISI.qry");
 		File relevanciasFileCISI = new File("files"+fsp+"cisi"+fsp+"CISI.rel");
@@ -83,9 +83,14 @@ public class Generar {
 	}
 	
 	/**
-	 * Obtiene las palabras comunes para omitir en el procesamiento
-	 * @param file Archivo con palabras a omitir
-	 * @param palabras Lista de palabras a omitir, no nulo, puede tener con anterioridad más palabras, para el uso de multiples archivos a través de más llamadas.
+	 * Metodo que realiza la ejecucion del algoritmo para obtener matriz frecuenica, matriz frecuencia inversa, similitud y precisión.
+	 * @param documentosFiles Lista de Archivo con los documentos, si es null, el siguiente parametro no puede serlo.
+	 * @param documentosFile Archivo con los documentos
+	 * @param consultasFile Archivo con las consultas
+	 * @param relevanciasFile Archivo con la relevancia de los documentos por consulta
+	 * @param palabrasComunesFile Archivo con las palabras comunes
+	 * @param nombreDB Cadena de texto con el nombre de la base de datos.
+	 * @return Lista de precisiones para ser utilizada para posibles procesos siguientes
 	 */
 	
 	public static ArrayList<Precision> getPrecisiones(ArrayList<File> documentosFiles, File documentosFile, File consultasFile, File relevanciasFile, File palabrasComunesFile, String nombreDB){
@@ -156,6 +161,12 @@ public class Generar {
 		return precisiones;
 		
 	}
+	
+	/**
+	 * Metodo que obtiene la lista de palabras comunes, como pronombres personales, conectores etc
+	 * @param file Archivo con las palabras
+	 * @param palabras lista de palabras a rellenar con las palabras del archivo
+	 */
 	
 	public static void getPalabrasComunes(File file, ArrayList<String> palabras){
 		

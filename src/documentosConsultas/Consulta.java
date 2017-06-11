@@ -11,10 +11,15 @@ import java.util.Scanner;
  */
 public class Consulta {
 
+	/** Identificador de la consulta */
 	private Integer id; //I.
+	/** Texto de la consulta */
 	private String query; //.W
+	/** Autores en la consulta, en el proyecto no se utilizo pero se encuentra presente en el archivo */
 	private ArrayList<String> autores; //.A ?
+	/** Identificador más detallado de la consulta, no se utilizo en el proyecto pero se encuentra presente en el archivo */
 	private String fullId; //.N ?
+	/** Palabras validas presentes en la consulta en una lista enlazada */
 	private LinkedList<String> palabrasValidas;
 	/**
 	 * Contructor consulta, inicialización de variables.
@@ -229,7 +234,7 @@ public class Consulta {
 	}
 	/**
 	 * Retorna la colección de palabras validas, se nececita generar con el metodo generar 
-	 * @return
+	 * @return Lista de palabras validas
 	 */
 	public LinkedList<String> getPalabrasValidas() {
 		return palabrasValidas;
