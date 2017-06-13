@@ -65,7 +65,7 @@ public class Precision {
 	}
 	/**
 	 * Modifica el valor de la cantidad de documentos relevantes
-	 * @param documentosRelevantes
+	 * @param documentosRelevantes Nuevo valor
 	 */
 	public void setDocumentosRelevantes(Integer documentosRelevantes) {
 		this.documentosRelevantes = documentosRelevantes;
