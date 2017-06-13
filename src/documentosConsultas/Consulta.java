@@ -15,9 +15,9 @@ public class Consulta {
 	private Integer id; //I.
 	/** Texto de la consulta */
 	private String query; //.W
-	/** Autores en la consulta, en el proyecto no se utilizo pero se encuentra presente en el archivo */
+	/** Autores de la consulta, en el proyecto no se utilizó pero se encuentra presente en el archivo */
 	private ArrayList<String> autores; //.A ?
-	/** Identificador más detallado de la consulta, no se utilizo en el proyecto pero se encuentra presente en el archivo */
+	/** Identificador más detallado de la consulta, no se utilizó en el proyecto pero se encuentra presente en el archivo */
 	private String fullId; //.N ?
 	/** Palabras validas presentes en la consulta en una lista enlazada */
 	private LinkedList<String> palabrasValidas;
@@ -58,8 +58,8 @@ public class Consulta {
 	}
 	
 	/**
-	 * Para generar contenido de la lista this.palabrasComunes,se quitan todas las palabras comunes y se deja en una lista enlazada todas las palabras en minisculas.
-	 * Se asume que todas palabras no validas (comunes) se encuentran en minusculas.
+	 * Para generar contenido de la lista this.palabrasComunes, se quitan todas las palabras comunes y se deja en una lista enlazada todas las palabras en minisculas.
+	 * Se asume que todas palabras no válidas (comunes) se encuentran en minusculas.
 	 * @param palabrasComunes Lista de palabras comunes para no agregar a la lista de this.palabrasValidas
 	 */
 	public void generarSetPalabras(ArrayList<String> palabrasComunes){
@@ -233,8 +233,8 @@ public class Consulta {
 		return id;
 	}
 	/**
-	 * Retorna la colección de palabras validas, se nececita generar con el metodo generar 
-	 * @return Lista de palabras validas
+	 * Retorna la colección de palabras válidas, se nececita generar con el método generar 
+	 * @return Lista de palabras válidas
 	 */
 	public LinkedList<String> getPalabrasValidas() {
 		return palabrasValidas;

@@ -13,7 +13,7 @@ import documentosConsultas.Documento;
 import documentosConsultas.Relevancia;
 
 /**
- * Incluye los metodos para calcular las matrizes de frecuencia y frecuencia inversa
+ * Incluye los métodos para calcular las matrizes de frecuencia y frecuencia inversa
  * 
  */
 
@@ -59,8 +59,8 @@ public class Matrices {
 	//fin atributos
 
 	/**
-	 * Contructor
-	 * @param palabras Conjunto (SortedSet) de palabras, por definicion sin repetición (por hashcode() de String no equals()) y orden natural (alfabetico)
+	 * Contructor, inicializador de variables
+	 * @param palabras Conjunto (SortedSet) de palabras, por definición sin repetición (por hashcode() de String no equals()) y orden natural (alfabetico)
 	 * @param documentos Colección de documentos (ArrayList, arreglo tamaño adaptativo, no lista enlazada)
 	 * @param consultas Colección de consultas (ArrayList, arreglo tamaño adaptativo, no lista enlazada)
 	 * @param relevancias Colección de relevancia (ArrayList, arreglo tamaño adaptativo, no lista enlazada)
@@ -201,7 +201,7 @@ public class Matrices {
 
 
 	/**
-	 * Metodo que rellena la matriz con las frecuencias de las palabras (set de palabras), de cada documento.
+	 * Método que rellena la matriz con las frecuencias de las palabras (set de palabras), de cada documento.
 	 * Por cada documento <b>d</b> de la lista de documentos (excluyendo documentos sin cuerpo o sin palabras), 
 	 * se crea una <b>lista</b> y se agrega a la lista de listas <b>matrizFrecuencias</b> (atributo de <b>this</b>)
 	 * por cada palabra se agrega a <b>lista</b> la frencuencia de la palabra <b>p</b> en el documento <b>d</b>
@@ -222,7 +222,7 @@ public class Matrices {
 		}
 	}
 	/**
-	 * Metodo que rellena la matriz con las frecuencias inversa de las palabras (set de palabras), de cada documento.
+	 * Método que rellena la matriz con las frecuencias inversa de las palabras (set de palabras), de cada documento.
 	 * Por cada documento, con palabras validas (documentos sin cuerpo no aceptados),
 	 * se crea una <b>lista</b> de double que se almacena en una lista de listas (arraylist, es un arreglo, no lista enlazada),
 	 * la <b>lista</b> se rellena inicialmente con el id del documento, a continuación con los valores del calculo de distancia
@@ -251,7 +251,7 @@ public class Matrices {
 		}
 	}
 	/**
-	 * Metodo que realiza el calculo de similitud de la consulta entregada por parametro
+	 * Método que realiza el calculo de similitud de la consulta entregada por parametro
 	 * Se crea el <b>vectorQ</b> de la consulta <b>q</b> y una 
 	 * lista <b>vectorSimilitud</b> para retornar (de la clase local similitud)
 	 * por cada palabra <b>s</b> si la consulta <b>q</b> contiene la palabra <b>s</b> se calcula 
@@ -293,7 +293,7 @@ public class Matrices {
 	}
 
 	/**
-	 * Metodo que entrega la cantidad de documentos que tiene la palabra entregada por parametro
+	 * Método que entrega la cantidad de documentos que tiene la palabra entregada por parametro
 	 * @param palabra String a buscar en los documentos
 	 * @return Retorna la cantidad calculadora
 	 */
@@ -316,7 +316,7 @@ public class Matrices {
 	}
 
 	/**
-	 * Metodo para imprimir matriz de frecuencias por pantalla
+	 * Método para imprimir matriz de frecuencias por pantalla
 	 */
 
 	public void imprimirMatrizFrecuencias(){
@@ -338,7 +338,7 @@ public class Matrices {
 
 	}
 	/**
-	 * Metodo para imprimir matriz de frecuencia inversa por pantalla
+	 * Método para imprimir matriz de frecuencia inversa por pantalla
 	 */
 	public void imprimirMatrizFrecuenciasInversas(){
 
@@ -357,7 +357,7 @@ public class Matrices {
 		hilo.start();
 	}
 	/**
-	 * Metodo para crear un archivo de relevancia ID - Documento, para el caso de que los id del archivo de relevancias original este considerando pociciones de un arreglo en vez del ID
+	 * Método para crear un archivo de relevancia ID - Documento, para el caso de que los id del archivo de relevancias original este considerando pociciones de un arreglo en vez del ID
 	 */
 	public void fixFileRel(){
 		try {

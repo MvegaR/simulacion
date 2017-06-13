@@ -83,7 +83,7 @@ public class Generar {
 	}
 	
 	/**
-	 * Metodo que realiza la ejecucion del algoritmo para obtener matriz frecuenica, matriz frecuencia inversa, similitud y precisión.
+	 * Método que realiza la ejecución del algoritmo para obtener matriz frecuenica, matriz frecuencia inversa, similitud y precisión.
 	 * @param documentosFiles Lista de Archivo con los documentos, si es null, el siguiente parametro no puede serlo.
 	 * @param documentosFile Archivo con los documentos
 	 * @param consultasFile Archivo con las consultas
@@ -163,7 +163,7 @@ public class Generar {
 	}
 	
 	/**
-	 * Metodo que obtiene la lista de palabras comunes, como pronombres personales, conectores etc
+	 * Método que obtiene la lista de palabras comunes, como pronombres personales, conectores etc
 	 * @param file Archivo con las palabras
 	 * @param palabras lista de palabras a rellenar con las palabras del archivo
 	 */

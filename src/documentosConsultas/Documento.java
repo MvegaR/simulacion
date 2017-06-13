@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 /**
- * Clase de documentos, identificador, título, cuerpo, fecha, autores, tags, codigos, información de publicación, referencias y palabras validas (no comunes).
+ * Clase de documentos, identificador, título, cuerpo, fecha, autores, tags, codigos, información de publicación, referencias y palabras válidas (no comunes).
  * 
  *
  */
@@ -30,7 +30,7 @@ public class Documento {
 	private String infoPublicacion; //.N
 	/** Referencias presentes en el documento */
 	private ArrayList<Referencia> referencias; //.X
-	/** Palabras validas en una lista enlazada */
+	/** Palabras válidas en una lista enlazada */
 	private LinkedList<String> palabrasValidas;
 
 	public Documento() {
@@ -65,8 +65,8 @@ public class Documento {
 	}
 	
 	/**
-	 * Para generar contenido de la lista this.palabrasComunes,se quitan todas las palabras comunes y se deja en una lista enlazada todas las palabras en minisculas.
-	 * Se asume que todas palabras no validas (comunes) se encuentran en minusculas.
+	 * Para generar contenido de la lista this.palabrasComunes, se quitan todas las palabras comunes y se deja en una lista enlazada todas las palabras en minisculas.
+	 * Se asume que todas palabras no válidas (comunes) se encuentran en minusculas.
 	 * @param palabrasComunes Lista de palabras comunes para no agregar a la lista de this.palabrasValidas
 	 */
 	public void generarSetPalabras(ArrayList<String> palabrasComunes){
