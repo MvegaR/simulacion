@@ -12,10 +12,20 @@ import documentosConsultas.Consulta;
 import documentosConsultas.Documento;
 import documentosConsultas.Relevancia;
 
+/**
+ * Clase principal con metodo main, y algoritmo para la ejecución de cada módulo del proyecto paso a paso.
+ * Incluye metodo para la lectura del fichero de palabras comunes
+ * @author Marcos
+ *
+ */
+
 public class Generar {
 	
 	
-	
+	/**
+	 * Método main
+	 * @param args Sin uso.
+	 */
 
 	public static void main(String[] args) {
 		
@@ -31,7 +41,8 @@ public class Generar {
 		File consultasFileCACM = new File("files"+fsp+"cacm"+fsp+"query.text");
 		File relevanciasFileCACM = new File("files"+fsp+"cacm"+fsp+"qrels.text");
 		
-		ArrayList<Precision> precisionesCACM = getPrecisiones(null,documentosFileCACM, consultasFileCACM, relevanciasFileCACM, palabrasComunesFile, "CACM");
+		ArrayList<Precision> precisionesCACM = getPrecisiones(null,documentosFileCACM, 
+				consultasFileCACM, relevanciasFileCACM, palabrasComunesFile, "CACM");
 		//*/
 		
 		//Archivos BD MED
@@ -39,7 +50,8 @@ public class Generar {
 		File documentosFileMED = new File("files"+fsp+"med"+fsp+"MED.ALL");
 		File consultasFileMED = new File("files"+fsp+"med"+fsp+"MED.QRY");
 		File relevanciasFileMED = new File("files"+fsp+"med"+fsp+"MED.REL");
-		ArrayList<Precision> precisionesMED = getPrecisiones(null,documentosFileMED, consultasFileMED, relevanciasFileMED, palabrasComunesFile, "MED");
+		ArrayList<Precision> precisionesMED = getPrecisiones(null,documentosFileMED, 
+				consultasFileMED, relevanciasFileMED, palabrasComunesFile, "MED");
 		//*/
 		// Archivos BD CRAN
 		 
@@ -47,7 +59,8 @@ public class Generar {
 		File documentosFileCRAN = new File("files"+fsp+"cran"+fsp+"cran.all.1400");
 		File consultasFileCRAN = new File("files"+fsp+"cran"+fsp+"cran.qry");
 		File relevanciasFileCRAN = new File("files"+fsp+"cran"+fsp+"cranFix.rel");
-		ArrayList<Precision> precisionesCRAN = getPrecisiones(null, documentosFileCRAN, consultasFileCRAN, relevanciasFileCRAN, palabrasComunesFile, "CRAN");
+		ArrayList<Precision> precisionesCRAN = getPrecisiones(null, documentosFileCRAN, 
+				consultasFileCRAN, relevanciasFileCRAN, palabrasComunesFile, "CRAN");
 		//*/
 		
 		// Archivos DB CISI
@@ -56,7 +69,8 @@ public class Generar {
 		File consultasFileCISI = new File("files"+fsp+"cisi"+fsp+"CISI.qry");
 		File relevanciasFileCISI = new File("files"+fsp+"cisi"+fsp+"CISI.rel");
 		
-		ArrayList<Precision> precisionesCISI = getPrecisiones(null, documentosFileCISI, consultasFileCISI, relevanciasFileCISI, palabrasComunesFile, "CISI");
+		ArrayList<Precision> precisionesCISI = getPrecisiones(null, documentosFileCISI, 
+				consultasFileCISI, relevanciasFileCISI, palabrasComunesFile, "CISI");
 		//*/
 		
 		
@@ -73,7 +87,8 @@ public class Generar {
 		documentosFilesLisa.add(new File("files"+fsp+"lisa"+fsp+"LISA5.850"));
 		File ConsultasFileLISA = new File("files"+fsp+"lisa"+fsp+"LISA.QUE");
 		File RelevanciasFileLisa = new File("files"+fsp+"lisa"+fsp+"LISA.REL");
-		ArrayList<Precision> PrecisionesLISA = getPrecisiones(documentosFilesLisa, null, ConsultasFileLISA, RelevanciasFileLisa, palabrasComunesFile, "LISA");
+		ArrayList<Precision> PrecisionesLISA = getPrecisiones(documentosFilesLisa, null, 
+				ConsultasFileLISA, RelevanciasFileLisa, palabrasComunesFile, "LISA");
 		//*/
 		
 		
@@ -83,8 +98,10 @@ public class Generar {
 	}
 	
 	/**
-	 * Método que realiza la ejecución del algoritmo para obtener matriz frecuenica, matriz frecuencia inversa, similitud y precisión.
-	 * @param documentosFiles Lista de Archivo con los documentos, si es null, el siguiente parametro no puede serlo.
+	 * Método que realiza la ejecución del algoritmo para obtener matriz frecuenica, 
+	 * matriz frecuencia inversa, similitud y precisión.
+	 * @param documentosFiles Lista de Archivo con los documentos, si es null,
+	 *  el siguiente parametro no puede serlo.
 	 * @param documentosFile Archivo con los documentos
 	 * @param consultasFile Archivo con las consultas
 	 * @param relevanciasFile Archivo con la relevancia de los documentos por consulta
@@ -93,7 +110,8 @@ public class Generar {
 	 * @return Lista de precisiones para ser utilizada para posibles procesos siguientes
 	 */
 	
-	public static ArrayList<Precision> getPrecisiones(ArrayList<File> documentosFiles, File documentosFile, File consultasFile, File relevanciasFile, File palabrasComunesFile, String nombreDB){
+	public static ArrayList<Precision> getPrecisiones(ArrayList<File> documentosFiles,
+			File documentosFile, File consultasFile, File relevanciasFile, File palabrasComunesFile, String nombreDB){
 		ArrayList<Documento> documentos = new ArrayList<>();
 		ArrayList<Consulta> consultas = new ArrayList<>();
 		ArrayList<String> palabrasComunes = new ArrayList<>();

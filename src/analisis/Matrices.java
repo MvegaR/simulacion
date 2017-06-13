@@ -14,7 +14,7 @@ import documentosConsultas.Relevancia;
 
 /**
  * Incluye los métodos para calcular las matrizes de frecuencia y frecuencia inversa
- * 
+ *  @author Marcos
  */
 
 public class Matrices {
@@ -33,9 +33,17 @@ public class Matrices {
 			this.valor = valor;
 			this.idDocumento = idDocumento;
 		}
+		/**
+		 * Obtiene el valor de similitud
+		 * @return el valor
+		 */
 		public Double getValor() {
 			return valor;
 		}
+		/**
+		 * Obtiene el identificador del documento correspondiente a tal valor
+		 * @return ID documento
+		 */
 		public Integer getIdDocumento() {
 			return idDocumento;
 		}
@@ -60,14 +68,19 @@ public class Matrices {
 
 	/**
 	 * Contructor, inicializador de variables
-	 * @param palabras Conjunto (SortedSet) de palabras, por definición sin repetición (por hashcode() de String no equals()) y orden natural (alfabetico)
-	 * @param documentos Colección de documentos (ArrayList, arreglo tamaño adaptativo, no lista enlazada)
-	 * @param consultas Colección de consultas (ArrayList, arreglo tamaño adaptativo, no lista enlazada)
-	 * @param relevancias Colección de relevancia (ArrayList, arreglo tamaño adaptativo, no lista enlazada)
+	 * @param palabras Conjunto (SortedSet) de palabras, por definición sin 
+	 * repetición (por hashcode() de String no equals()) y orden natural (alfabetico)
+	 * @param documentos Colección de documentos 
+	 * (ArrayList, arreglo tamaño adaptativo, no lista enlazada)
+	 * @param consultas Colección de consultas 
+	 * (ArrayList, arreglo tamaño adaptativo, no lista enlazada)
+	 * @param relevancias Colección de relevancia 
+	 * (ArrayList, arreglo tamaño adaptativo, no lista enlazada)
 	 * 
 	 */
 
-	public Matrices(SortedSet<String> palabras, ArrayList<Documento> documentos, ArrayList<Consulta> consultas, ArrayList<Relevancia> relevancias) {
+	public Matrices(SortedSet<String> palabras, ArrayList<Documento> documentos, 
+			ArrayList<Consulta> consultas, ArrayList<Relevancia> relevancias) {
 		this.palabras = palabras;
 		this.matrizFrecuncias = new ArrayList<>();
 		this.matrizFrecunciasInversas = new ArrayList<>();
@@ -130,7 +143,8 @@ public class Matrices {
 		}
 		precision /= contadorTotalDocumentos;
 		precisiones.add(new Precision(q.getId(), precision, contadorDocumentosRelevantes, p));
-		System.out.println("\t\tPrecisión consulta Q"+q.getId()+"p@"+p+" es: "+ String.format("%.10f", precision)+" Docs Relevantes: "+contadorDocumentosRelevantes+"\n");
+		System.out.println("\t\tPrecisión consulta Q"+q.getId()+"p@"+p+" es: "
+		+ String.format("%.10f", precision)+" Docs Relevantes: "+contadorDocumentosRelevantes+"\n");
 		//System.out.println("\t\t\t\t"+precision);
 		System.out.println();
 	}
@@ -171,12 +185,16 @@ public class Matrices {
 				}
 
 				if(mostrarPrimeros > 0){
-					System.out.println("\tQ"+q.getId()+" Documento: " + String.format("%4d", s.getIdDocumento()) + " Similitud: "+ String.format("%19.16f",  s.getValor()) + " Relevante: " +isRelevante(q.getId(), s.getIdDocumento()));
+					System.out.println("\tQ"+q.getId()+" Documento: " + String.format("%4d", s.getIdDocumento()) 
+					+ " Similitud: "+ String.format("%19.16f",  s.getValor()) + " Relevante: " 
+							+isRelevante(q.getId(), s.getIdDocumento()));
 					mostrarPrimeros--;
 				}
 			}
 			precision /= contadorTotalDocumentos;
-			System.out.println("\t\tPrecisión consulta Q"+q.getId()+" es: "+ String.format("%.10f", precision)+" Docs Relevantes: "+contadorDocumentosRelevantes+"\n");
+			System.out.println("\t\tPrecisión consulta Q"+q.getId()
+			+" es: "+ String.format("%.10f", precision)
+			+" Docs Relevantes: "+contadorDocumentosRelevantes+"\n");
 		}
 
 	}
@@ -241,7 +259,8 @@ public class Matrices {
 				Integer contador = 0;
 				for(String s: palabras){
 					contador++;
-					if(matrizFrecuncias.get(matrizFrecunciasInversas.size()-1).get(contador) != 0){ //no contador-1 porque tiene el id al inicio
+					if(matrizFrecuncias.get(matrizFrecunciasInversas.size()-1).get(contador) != 0){ 
+						//no contador-1 porque tiene el id al inicio
 						lista.add(Math.log10(matrizFrecuncias.size()*1.0/ totalDocumentos(s)*1.0));
 					}else{
 						lista.add(0.0);
@@ -280,13 +299,15 @@ public class Matrices {
 			Double sumatoria3 = 0.0;
 			Integer contador = 0;
 			for(Double d: vectorQ){ //vectorQ es menos largo en una unidad que list actual
-				sumatoria += d*list.get(contador+1); // +1 porque matrizFrecunciasInversas tiene el id del documento en primer lugar
+				sumatoria += d*list.get(contador+1); 
+				// +1 porque matrizFrecunciasInversas tiene el id del documento en primer lugar
 				sumatoria2 += d*d;
 				sumatoria3 += list.get(contador+1) *list.get(contador+1);
 				contador++;
 			}
 			
-			vectorSimilitud.add(new Similitud(sumatoria/ Math.sqrt(sumatoria2*sumatoria3), list.get(0).intValue())); //list.get(0) tiene el id del documento
+			vectorSimilitud.add(new Similitud(sumatoria/ Math.sqrt(sumatoria2*sumatoria3), list.get(0).intValue())); 
+			//list.get(0) tiene el id del documento
 			
 		}
 		return vectorSimilitud;
@@ -357,7 +378,9 @@ public class Matrices {
 		hilo.start();
 	}
 	/**
-	 * Método para crear un archivo de relevancia ID - Documento, para el caso de que los id del archivo de relevancias original este considerando pociciones de un arreglo en vez del ID
+	 * Método para crear un archivo de relevancia ID - Documento, 
+	 * para el caso de que los id del archivo de relevancias original 
+	 * este considerando pociciones de un arreglo en vez del ID
 	 */
 	public void fixFileRel(){
 		try {

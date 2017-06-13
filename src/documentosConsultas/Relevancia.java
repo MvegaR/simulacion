@@ -4,24 +4,34 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+/**
+ * Clase de Relevancia, contiene metodo para la lectura del fichero de texto de relevancias.
+ * @author Marcos
+ *
+ */
 public class Relevancia {
 
 	/** Identificador de la consulta */
 	private Integer queryID;
 	/** Identificador del documento relevante para la consulta */
 	private Integer docID;
-	
+	/**
+	 * Constructor: Inicializador atributos por defecto.
+	 */
 	public Relevancia() {
 		this.queryID = 0;
 		this.docID = 0;
 	}
-	
+	/**
+	 * Contructor inicializador de atributos
+	 * @param queryID Identificador de la consulta
+	 * @param docID Identificador del documento relevante para la consulta
+	 */
 	public Relevancia(Integer queryID, Integer docID){
 		this.queryID = queryID;
 		this.docID = docID;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -52,23 +62,39 @@ public class Relevancia {
 			return false;
 		return true;
 	}
-
+	/**
+	 * Obtiene el identifiacdor del documento
+	 * @return ID documento
+	 */
 	public Integer getDocID() {
 		return docID;
 	}
+	/**
+	 * Obtiene el identificador de la consulta
+	 * @return identificador de la consulta
+	 */
 	public Integer getQueryID() {
 		return queryID;
 	}
+	/**
+	 * Modifica el identificador del documento
+	 * @param docID Nuevo ID documento
+	 */
 	public void setDocID(Integer docID) {
 		this.docID = docID;
 	}
+	/**
+	 * Modifica el identificador de la consulta
+	 * @param queryID Nuevo ID consulta
+	 */
 	public void setQueryID(Integer queryID) {
 		this.queryID = queryID;
 	}
-	
-	
+
+
 	/**
-	 * Obtiene desde un archivo la información de relevancia de una consuta y un documento, rellenandolo en una lista con esa información
+	 * Obtiene desde un archivo la información de relevancia de una consuta y un documento, 
+	 * rellenandolo en una lista con esa información
 	 * @param file Archivo con la relevancia en formato: qid did 0 0                                          
 	 * @param relevancias Listado de Relevancias a rellenar
 	 * @param number Indica la columna a leer el asociado en el fichero en el archivo de relevancia
@@ -81,7 +107,8 @@ public class Relevancia {
 			while(sc.hasNextLine()){
 				String line = sc.nextLine();
 				String[] lineSplit = line.replaceFirst("^[ ]+","").split("[\\D\\t]+");
-				Relevancia r = new Relevancia(Integer.parseInt(lineSplit[0]),Integer.parseInt(lineSplit[number]));
+				Relevancia r = new Relevancia(Integer.parseInt(lineSplit[0]),
+						Integer.parseInt(lineSplit[number]));
 				relevancias.add(r);
 			}
 			sc.close();
@@ -92,9 +119,10 @@ public class Relevancia {
 
 
 	}
-	
+
 	/**
-	 * ONLY LISA DB: Obtiene desde un archivo la información de relevancia de una consuta y un documento, rellenandolo en una lista con esa información
+	 * ONLY LISA DB: Obtiene desde un archivo la información de relevancia 
+	 * de una consuta y un documento, rellenandolo en una lista con esa información
 	 * @param file Archivo con la relevancia en formato: qid did 0 0                                          
 	 * @param relevancias Listado de Relevancias a rellenar
 	 */
@@ -104,11 +132,11 @@ public class Relevancia {
 		try {
 			Scanner sc = new Scanner(file);
 			while(sc.hasNextLine()){
-				
+
 				String line = sc.nextLine(); //id
 				String[] lineSplit = line.split("Query ");
 				Integer idQuery = Integer.parseInt(lineSplit[1]);
-				
+
 				line = sc.nextLine(); //info contador relevantes
 				while(!line.equals("") && sc.hasNextLine()){
 					line = sc.nextLine();
@@ -119,10 +147,10 @@ public class Relevancia {
 						Relevancia r = new Relevancia(idQuery,Integer.parseInt(s));
 						relevancias.add(r);
 					}
-					
+
 				}
-			
-				
+
+
 			}
 			sc.close();
 		} catch (FileNotFoundException e) {
@@ -132,8 +160,8 @@ public class Relevancia {
 
 
 	}
-	
-	
+
+
 
 
 }

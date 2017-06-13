@@ -8,6 +8,7 @@ import java.util.Scanner;
 /**
  * Clase de consultas, con identificador, query (cuerpo consulta), autores, identificador detallado, palabras válidas (no comunes)
  *
+ * @author Marcos
  */
 public class Consulta {
 
@@ -58,7 +59,8 @@ public class Consulta {
 	}
 	
 	/**
-	 * Para generar contenido de la lista this.palabrasComunes, se quitan todas las palabras comunes y se deja en una lista enlazada todas las palabras en minisculas.
+	 * Para generar contenido de la lista this.palabrasComunes, se quitan todas las palabras
+	 *  comunes y se deja en una lista enlazada todas las palabras en minisculas.
 	 * Se asume que todas palabras no válidas (comunes) se encuentran en minusculas.
 	 * @param palabrasComunes Lista de palabras comunes para no agregar a la lista de this.palabrasValidas
 	 */

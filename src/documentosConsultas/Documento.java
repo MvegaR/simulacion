@@ -7,9 +7,11 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 /**
- * Clase de documentos, identificador, título, cuerpo, fecha, autores, tags, codigos, información de publicación, referencias y palabras válidas (no comunes).
- * 
- *
+ * Clase de documentos
+ * Realiza la lectura de un archivo de texto que entrega identificador, título y cuerpo del documento, 
+ * el resto de atributos no se utilizaron en el proyecto pero estaban presentes en la base de datos,
+ * se asegura una lectura total del archivo documentos.
+ *  @author Marcos
  */
 public class Documento {
 	/** Identificador del documento */
@@ -33,6 +35,9 @@ public class Documento {
 	/** Palabras válidas en una lista enlazada */
 	private LinkedList<String> palabrasValidas;
 
+	/**
+	 * Constructor: inicializador de atributos
+	 */
 	public Documento() {
 		// TODO Auto-generated constructor stub
 		id = 0;
@@ -45,8 +50,21 @@ public class Documento {
 		infoPublicacion = "";
 		referencias = new ArrayList<>();
 		palabrasValidas = new LinkedList<>();
-		
+
 	}
+
+	/**
+	 * Contructor, inicializador de atributos
+	 * @param id Identificador documento
+	 * @param titulo Título del documento
+	 * @param cuerpo Cuerpo del documento
+	 * @param fecha fecha publicación del documento
+	 * @param tags Palabras claves para indexar el documento
+	 * @param codigos Codigos de la publicación
+	 * @param autores Autores del documento
+	 * @param infoPubliacion Información de la publicación
+	 * @param referencias Referencias a otros documentos
+	 */
 
 	public Documento(Integer id, String titulo, String cuerpo, String fecha, 
 			ArrayList<String> tags, ArrayList<String> codigos,
@@ -63,11 +81,15 @@ public class Documento {
 		this.referencias = referencias;
 		this.palabrasValidas = new LinkedList<>();
 	}
-	
+
 	/**
-	 * Para generar contenido de la lista this.palabrasComunes, se quitan todas las palabras comunes y se deja en una lista enlazada todas las palabras en minisculas.
-	 * Se asume que todas palabras no válidas (comunes) se encuentran en minusculas.
-	 * @param palabrasComunes Lista de palabras comunes para no agregar a la lista de this.palabrasValidas
+	 * Para generar contenido de la lista this.palabrasComunes, se quitan 
+	 * todas las palabras comunes y se deja en una lista 
+	 * enlazada todas las palabras en minisculas.
+	 * Se asume que todas palabras no válidas (comunes) 
+	 * se encuentran en minusculas.
+	 * @param palabrasComunes Lista de palabras comunes para no 
+	 * agregar a la lista de this.palabrasValidas
 	 */
 	public void generarSetPalabras(ArrayList<String> palabrasComunes){
 		if(palabrasValidas != null){
@@ -79,77 +101,144 @@ public class Documento {
 					this.palabrasValidas.add(s.toLowerCase()); //Solo palabras minusculas
 				}
 			}
-			
+
 		}
 	}
-	
 
+	/**
+	 * Obtener identificador documento
+	 * @return El identificador
+	 */
 	public Integer getId() {
 		return id;
 	}
+	/**
+	 * Obtener el título del documento
+	 * @return El título
+	 */
 	public String getTitulo() {
 		return titulo;
 	}
+	/**
+	 * Obtener cuerpo documento
+	 * @return El cuerpo
+	 */
 	public String getCuerpo() {
 		return cuerpo;
 	}
+	/**
+	 * Obtiene fecha publicación documento
+	 * @return Fecha
+	 */
 	public String getFecha() {
 		return fecha;
 	}
+	/**
+	 * Obtiene autores del documento
+	 * @return Lista de autores
+	 */
 	public ArrayList<String> getAutores() {
 		return autores;
 	}
+	/**
+	 * Obtiene información de la publicación del documento 
+	 * @return La información de la publicación
+	 */
 	public String getInfoPublicacion() {
 		return infoPublicacion;
 	}
+	/**
+	 * Obtiene códigos de la publicación del documento
+	 * @return Lista de códigos
+	 */
 	public ArrayList<String> getCodigos() {
 		return codigos;
 	}
+	/**
+	 * Obtiene lista de palabras indexadoras del documento
+	 * @return Lista de palabras/tags
+	 */
 	public ArrayList<String> getTags() {
 		return tags;
 	}
-	
+	/**
+	 * Obtiene referencias del documento.
+	 * @return Lista de referencias
+	 */
 	public ArrayList<Referencia> getReferencias() {
 		return referencias;
 	}
-	
+	/**
+	 * Modifica el identificador del documento
+	 * @param id Nuevo id
+	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
+	/**
+	 * Modifica el título del documento
+	 * @param titulo Nuevo título
+	 */
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
-
+	/**
+	 * Modifica el cuerpo del documento
+	 * @param cuerpo Nuevo cuerpo
+	 */
 	public void setCuerpo(String cuerpo) {
 		this.cuerpo = cuerpo;
 	}
-	
+	/**
+	 * Modifica la fecha del documento
+	 * @param fecha Nueva fecha
+	 */
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
-
+	/**
+	 * Modifica la lista de autores
+	 * @param autores Nueva lista de autores
+	 */
 	public void setAutores(ArrayList<String> autores) {
 		this.autores = autores;
 	}
-
+	/**
+	 * Modifica la información de la publicación del documento
+	 * @param infoPublicacion Nueva información del documento
+	 */
 	public void setInfoPublicacion(String infoPublicacion) {
 		this.infoPublicacion = infoPublicacion;
 	}
-
+	/**
+	 * Modifica la lista de referencias del documento
+	 * @param referencias Nueva lista de referencias
+	 */
 	public void setReferencias(ArrayList<Referencia> referencias) {
 		this.referencias = referencias;
 	}
+	/**
+	 * Modifica la lista de códigos de la publicación del documento
+	 * @param codigos Nueva lista
+	 */
 	public void setCodigos(ArrayList<String> codigos) {
 		this.codigos = codigos;
 	}
+	/**
+	 * Modifica la lista de tags del documento
+	 * @param tags Nueva lista de tags
+	 */
 	public void setTags(ArrayList<String> tags) {
 		this.tags = tags;
 	}
+	/**
+	 * Entrega la lista de palabras válidas presentes en el documento, luego del filtrados de palabras comunes.
+	 * @return Lista de palabras válidas
+	 */
 	public LinkedList<String> getPalabrasValidas() {
 		return palabrasValidas;
 	}
-	
+
 
 	@Override
 	public String toString() {
@@ -161,7 +250,7 @@ public class Documento {
 	public int hashCode() {
 		return id;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -189,7 +278,7 @@ public class Documento {
 			Documento doc = null;
 			String line = "";
 			Boolean bloqueo = false; //variable para controlar el caso de que exista una etiqueta sin contenido
-			
+
 			while (sc.hasNextLine()) {
 				if(!bloqueo){
 					line = sc.nextLine();
@@ -209,22 +298,22 @@ public class Documento {
 					}
 					bloqueo = false;
 					doc.setReferencias(referencias);
-				
+
 				}
-				
+
 				if(doc != null && line.contains(".A") && line.substring(0, 1).equals(".")){
-						ArrayList<String> autores = new ArrayList<String>();
-						line = sc.nextLine();
-						while(!line.substring(0, 1).equals(".") && sc.hasNextLine()){
-							if(!line.equals("None")){
-								autores.add(line);
-							}
-							line = sc.nextLine();
+					ArrayList<String> autores = new ArrayList<String>();
+					line = sc.nextLine();
+					while(!line.substring(0, 1).equals(".") && sc.hasNextLine()){
+						if(!line.equals("None")){
+							autores.add(line);
 						}
-						bloqueo = false;
-						doc.setAutores(autores);
+						line = sc.nextLine();
+					}
+					bloqueo = false;
+					doc.setAutores(autores);
 				}
-				
+
 				if(doc != null && line.contains(".W")  && line.substring(0, 1).equals(".")){
 					String cuerpo = "";
 					line = sc.nextLine();
@@ -267,8 +356,8 @@ public class Documento {
 					doc.setCodigos(c);
 					bloqueo = false;
 				}
-				
-				
+
+
 				if(line.contains(".I") && line.substring(0, 1).equals(".")){
 					doc = new Documento();
 					Integer id = Integer.parseInt(line.substring(3, line.length()));
@@ -291,7 +380,7 @@ public class Documento {
 					}else{
 						bloqueo = true;
 					}
-					
+
 				}else if(line.contains(".N")  && line.substring(0, 1).equals(".")){
 					line = sc.nextLine();
 					if(!line.substring(0, 1).equals(".") && !line.equals("None")){
@@ -301,18 +390,18 @@ public class Documento {
 						bloqueo = true;
 					}
 				}
-				
-				
+
+
 			}
 			sc.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
+
 	}
-	
+
 	/**
 	 * PARA BD LISA: Obtiene los documentos desde un archivo de texto y rellena una lista entregada por parametro de documentos generados.
 	 * @param origenes Archivo de texto con los documentos
@@ -333,7 +422,7 @@ public class Documento {
 						Integer id = Integer.parseInt(line.split("[ ]+")[1]);
 						doc.setId(id);
 						documentos.add(doc);
-					
+
 						//titulo:
 						line = sc.nextLine();
 						doc.setTitulo(line);
@@ -347,22 +436,22 @@ public class Documento {
 						}
 						doc.setCuerpo(cuerpo);
 					}
-					
-				
-					
-					
+
+
+
+
 				}
 				sc.close();
 			}
-			
+
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
-		
+
+
+
+
 	}
 
 
