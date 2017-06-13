@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
 /**
- * Clase de consultas, con identificador, query (cuerpo consulta), autores, identificador detallado, palabras validas (no comunes)
+ * Clase de consultas, con identificador, query (cuerpo consulta), autores, identificador detallado, palabras válidas (no comunes)
  *
  */
 public class Consulta {
@@ -19,7 +19,7 @@ public class Consulta {
 	private ArrayList<String> autores; //.A ?
 	/** Identificador más detallado de la consulta, no se utilizó en el proyecto pero se encuentra presente en el archivo */
 	private String fullId; //.N ?
-	/** Palabras validas presentes en la consulta en una lista enlazada */
+	/** Palabras válidas presentes en la consulta en una lista enlazada */
 	private LinkedList<String> palabrasValidas;
 	/**
 	 * Contructor consulta, inicialización de variables.

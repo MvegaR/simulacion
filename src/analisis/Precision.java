@@ -11,16 +11,16 @@ public class Precision {
 	Integer idConsulta;
 	/** Precisión calculada de la consulta */
 	Double precision;
-	/** Cantidad de docuemntos relevantes para la consulta */
+	/** Cantidad de documentos relevantes para la consulta */
 	Integer documentosRelevantes;
-	/** Número de documentos maximos a desplegar y a incluir en el calculo de precisión */
+	/** Número de documentos máximos a desplegar y a incluir en el cálculo de precisión */
 	Integer pIn;
 	/**
 	 * Constructor clase Precision
 	 * @param idConsulta Identificador de la consulta
 	 * @param precision precision de la consulta
-	 * @param documentosRelevantes cantidad de docuemntos relevantes en la consulta
-	 * @param pIn Número de documentos maximos a desplegar y a incluir en el calculo de precisión 
+	 * @param documentosRelevantes cantidad de documentos relevantes en la consulta
+	 * @param pIn Número de documentos máximos a desplegar y a incluir en el cálculo de precisión 
 	 */
 	public Precision(Integer idConsulta, Double precision, Integer documentosRelevantes, Integer pIn) {
 		this.idConsulta = idConsulta;

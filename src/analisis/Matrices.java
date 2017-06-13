@@ -223,11 +223,11 @@ public class Matrices {
 	}
 	/**
 	 * Método que rellena la matriz con las frecuencias inversa de las palabras (set de palabras), de cada documento.
-	 * Por cada documento, con palabras validas (documentos sin cuerpo no aceptados),
+	 * Por cada documento, con palabras válidas (documentos sin cuerpo no aceptados),
 	 * se crea una <b>lista</b> de double que se almacena en una lista de listas (arraylist, es un arreglo, no lista enlazada),
-	 * la <b>lista</b> se rellena inicialmente con el id del documento, a continuación con los valores del calculo de distancia
+	 * la <b>lista</b> se rellena inicialmente con el id del documento, a continuación con los valores del cálculo de distancia
 	 * por cada palabra <b>s</b> se calcula log10(totalDocumentos/totalDocumentosQueTieneLaPalabra<b>S</b>
-	 * si en la matriz de frecuencias tiene el valor de cero no se realiza calculo se se agrega un 0 a la lista.
+	 * si en la matriz de frecuencias tiene el valor de cero no se realiza cálculo se se agrega un 0 a la lista.
 	 */
 	public void obtenerFrecuenciasInversas(){
 		// log(totalDocumeºntos/cantidadOcurrenciasEnTodosLosDocumentos)
@@ -251,7 +251,7 @@ public class Matrices {
 		}
 	}
 	/**
-	 * Método que realiza el calculo de similitud de la consulta entregada por parametro
+	 * Método que realiza el cálculo de similitud de la consulta entregada por parametro
 	 * Se crea el <b>vectorQ</b> de la consulta <b>q</b> y una 
 	 * lista <b>vectorSimilitud</b> para retornar (de la clase local similitud)
 	 * por cada palabra <b>s</b> si la consulta <b>q</b> contiene la palabra <b>s</b> se calcula 

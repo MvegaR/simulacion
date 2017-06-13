@@ -24,7 +24,7 @@ public class Documento {
 	private ArrayList<String> autores; //.A
 	/** Tags para indexar el documento */
 	private ArrayList<String> tags; //.K
-	/** Codigos de identifiación del documento */
+	/** Códigos de identifiación del documento */
 	private ArrayList<String> codigos; //.C
 	/** Información de la publicación del documento */
 	private String infoPublicacion; //.N
