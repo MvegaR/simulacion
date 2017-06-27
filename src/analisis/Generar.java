@@ -36,7 +36,7 @@ public class Generar {
 		File palabrasComunesFile = new File("files"+fsp+"cacm"+fsp+"common_words");
 		
 		//Archivos BD CACM
-		//*/
+		/*/
 		File documentosFileCACM = new File("files"+fsp+"cacm"+fsp+"cacm.all");
 		File consultasFileCACM = new File("files"+fsp+"cacm"+fsp+"query.text");
 		File relevanciasFileCACM = new File("files"+fsp+"cacm"+fsp+"qrels.text");
@@ -46,7 +46,7 @@ public class Generar {
 		//*/
 		
 		//Archivos BD MED
-		//*/
+		/*/
 		File documentosFileMED = new File("files"+fsp+"med"+fsp+"MED.ALL");
 		File consultasFileMED = new File("files"+fsp+"med"+fsp+"MED.QRY");
 		File relevanciasFileMED = new File("files"+fsp+"med"+fsp+"MED.REL");
@@ -55,7 +55,7 @@ public class Generar {
 		//*/
 		// Archivos BD CRAN
 		 
-		//*/
+		/*/
 		File documentosFileCRAN = new File("files"+fsp+"cran"+fsp+"cran.all.1400");
 		File consultasFileCRAN = new File("files"+fsp+"cran"+fsp+"cran.qry");
 		File relevanciasFileCRAN = new File("files"+fsp+"cran"+fsp+"cranFix.rel");
@@ -75,7 +75,7 @@ public class Generar {
 		
 		
 		//Archivos BD LISA
-		//*/
+		/*/
 		ArrayList<File> documentosFilesLisa = new ArrayList<>();
 		documentosFilesLisa.add(new File("files"+fsp+"lisa"+fsp+"LISA0.501"));
 		documentosFilesLisa.add(new File("files"+fsp+"lisa"+fsp+"LISA1.501"));

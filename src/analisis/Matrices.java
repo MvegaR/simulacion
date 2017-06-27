@@ -5,6 +5,8 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.SortedSet;
 
 
@@ -88,7 +90,22 @@ public class Matrices {
 		this.consultas = consultas;
 		this.relevancias = relevancias;
 	}
+	/**
+	 * Obtiene un documento dado su id
+	 * @param idDocumento id del documento a buscar
+	 * @param listaDocumentos lista con todos los documentos
+	 * @return Documento buscado
+	 */
 
+	private Documento getDocumento(Integer idDocumento, ArrayList<Documento> listaDocumentos){
+		for(Documento d: listaDocumentos){
+			if(d.getId().equals(idDocumento)){
+				return d;
+			}
+		}
+		return null;
+	}
+	
 	/**
 	 * Obtiene la precisión de cada documento para la consulta q con un p@ entregado por parametro
 	 * @param q Consulta a calcular precisión
@@ -129,23 +146,49 @@ public class Matrices {
 			}else{
 				precision += (contadorDocumentosRelevantes *1.0) / (contadorTotalDocumentos*1.0);
 			}
+			/*
 			System.out.println("\tQ"+q.getId()+" Documento: " + String.format("%4d", similitudes.get(i).getIdDocumento()) 
 			+ " Similitud: "+ String.format("%19.16f",   similitudes.get(i).getValor()) 
 			+ " Relevante: " +isRelevante(q.getId(), similitudes.get(i).getIdDocumento()));
-			/*
+			//*/
+			//*
 			//codigo para imprimir con formato para copiar a archivo excel.
 			int r = 0;
 			if(isRelevante(q.getId(), similitudes.get(i).getIdDocumento())){
 				r = 1;
 			}
-			System.out.println(q.getId()+"\t" + similitudes.get(i).getIdDocumento() + "\t" +  similitudes.get(i).getValor() + "\t" + r);
+			System.out.print(q.getId()+"\t" + similitudes.get(i).getIdDocumento() + "\t" +  similitudes.get(i).getValor() + "\t" + r +"\t");
+			HashSet<String> palabrasRelevantesSinRepetir = new HashSet<>();
+			HashSet<String> palabrasTotalSinRepetir = new HashSet<>();
+			for(String palabra: getDocumento(similitudes.get(i).getIdDocumento(), documentos).getPalabrasValidas()){
+				palabrasTotalSinRepetir.add(palabra);
+			}
+			System.out.print("\t"+ palabrasTotalSinRepetir.size());
+			if(r == 1){ //imprimir palabras relevantes presentes en el documento y consulta
+				for(String palabra: q.getPalabrasValidas()){
+					if(getDocumento(similitudes.get(i).getIdDocumento(), documentos).getPalabrasValidas().contains(palabra)){
+						palabrasRelevantesSinRepetir.add(palabra);
+					}
+				}
+				for(String palabra: palabrasRelevantesSinRepetir){
+					if(getDocumento(similitudes.get(i).getIdDocumento(), documentos).getPalabrasValidas().contains(palabra)){
+						System.out.print("\t"+palabra);
+					}
+				}
+				
+			}
+			
+			System.out.println();
+			//System.out.println(q.getPalabrasValidas().size() +" - "+ getDocumento(similitudes.get(i).getIdDocumento(), documentos).getPalabrasValidas().size());
 			//*/
 		}
 		precision /= contadorTotalDocumentos;
 		precisiones.add(new Precision(q.getId(), precision, contadorDocumentosRelevantes, p));
+		/*
 		System.out.println("\t\tPrecisión consulta Q"+q.getId()+"p@"+p+" es: "
 		+ String.format("%.10f", precision)+" Docs Relevantes: "+contadorDocumentosRelevantes+"\n");
-		//System.out.println("\t\t\t\t"+precision);
+		//*/
+		System.out.println("\t\t\t\t"+precision);
 		System.out.println();
 	}
 
