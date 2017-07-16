@@ -45,7 +45,7 @@ public class Consulta {
 	 * @param id Identificador consulta
 	 * @param query Cuerpo consulta
 	 * @param autores Lista de autores de la consulta
-	 * @param fullId Identificador largo de la consuta
+	 * @param fullId Identificador largo de la consulta
 	 */
 
 	public Consulta(Integer id, String query, ArrayList<String> autores, String fullId) {

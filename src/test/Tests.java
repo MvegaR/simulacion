@@ -72,7 +72,7 @@ public class Tests {
 	
 	
 	@Test
-	public void testPruebaFuncionalidadBasica() {
+	public void testFuncionalidadBasica() { //bien
 		Matrices matriz = new Matrices(setDePalabras, documentos, consultas, rels);
 		ArrayList<Precision> precisiones = new ArrayList<>();
 
@@ -83,7 +83,36 @@ public class Tests {
 		
 		System.out.println("Fin "+"Test funcionalidad básica");
 	}
+	
+	@Test
+	public void testTestSinDocumentos() { //error
+		documentos.clear();
+		Matrices matriz = new Matrices(setDePalabras, documentos, consultas, rels);
+		ArrayList<Precision> precisiones = new ArrayList<>();
 
+		//matriz.obtenerPrecision();
+		System.out.println("Inicio "+"Test funcionalidad básica");
+		matriz.obtenerPrecision(consultas.get(0), 4, precisiones);
+		assertTrue(precisiones.get(0).getPrecision() == 0.0f); //comparacion de solo dos decimales
+		
+		System.out.println("Fin "+"Test funcionalidad básica");
+	}
+	
+	@Test
+	public void testTestSinPalabras() { //Nan en similitud
+		setDePalabras.clear();
+		Matrices matriz = new Matrices(setDePalabras, documentos, consultas, rels);
+		ArrayList<Precision> precisiones = new ArrayList<>();
+
+		//matriz.obtenerPrecision();
+		System.out.println("Inicio "+"Test funcionalidad básica");
+		matriz.obtenerPrecision(consultas.get(0), 4, precisiones);
+		assertTrue(precisiones.get(0).getPrecision().equals(0.0f) ); //comparacion de solo dos decimales
+		
+		System.out.println("Fin "+"Test funcionalidad básica");
+	}
+
+	
 	
 	
 }

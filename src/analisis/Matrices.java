@@ -146,12 +146,12 @@ public class Matrices {
 			}else{
 				precision += (contadorDocumentosRelevantes *1.0) / (contadorTotalDocumentos*1.0);
 			}
-			/*
+			//*
 			System.out.println("\tQ"+q.getId()+" Documento: " + String.format("%4d", similitudes.get(i).getIdDocumento()) 
 			+ " Similitud: "+ String.format("%19.16f",   similitudes.get(i).getValor()) 
 			+ " Relevante: " +isRelevante(q.getId(), similitudes.get(i).getIdDocumento()));
 			//*/
-			//*
+			/*
 			//codigo para imprimir con formato para copiar a archivo excel.
 			int r = 0;
 			if(isRelevante(q.getId(), similitudes.get(i).getIdDocumento())){

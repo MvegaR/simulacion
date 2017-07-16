@@ -93,7 +93,7 @@ public class Relevancia {
 
 
 	/**
-	 * Obtiene desde un archivo la información de relevancia de una consuta y un documento, 
+	 * Obtiene desde un archivo la información de relevancia de una consulta y un documento, 
 	 * rellenandolo en una lista con esa información
 	 * @param file Archivo con la relevancia en formato: qid did 0 0                                          
 	 * @param relevancias Listado de Relevancias a rellenar
@@ -122,7 +122,7 @@ public class Relevancia {
 
 	/**
 	 * ONLY LISA DB: Obtiene desde un archivo la información de relevancia 
-	 * de una consuta y un documento, rellenandolo en una lista con esa información
+	 * de una consulta y un documento, rellenandolo en una lista con esa información
 	 * @param file Archivo con la relevancia en formato: qid did 0 0                                          
 	 * @param relevancias Listado de Relevancias a rellenar
 	 */
