@@ -85,33 +85,68 @@ public class Tests {
 	}
 	
 	@Test
-	public void testTestSinDocumentos() { //error
+	public void testSinDocumentos() { //error
 		documentos.clear();
 		Matrices matriz = new Matrices(setDePalabras, documentos, consultas, rels);
 		ArrayList<Precision> precisiones = new ArrayList<>();
 
 		//matriz.obtenerPrecision();
-		System.out.println("Inicio "+"Test funcionalidad básica");
+		System.out.println("Inicio "+"Test sin documentos");
 		matriz.obtenerPrecision(consultas.get(0), 4, precisiones);
-		assertTrue(precisiones.get(0).getPrecision() == 0.0f); //comparacion de solo dos decimales
+		assertTrue(precisiones.get(0).getPrecision() == 0.0f); 
 		
-		System.out.println("Fin "+"Test funcionalidad básica");
+		System.out.println("Fin "+"Test sin documentos");
 	}
 	
 	@Test
-	public void testTestSinPalabras() { //Nan en similitud
+	public void testSinPalabras() { //Nan en similitud
 		setDePalabras.clear();
 		Matrices matriz = new Matrices(setDePalabras, documentos, consultas, rels);
 		ArrayList<Precision> precisiones = new ArrayList<>();
 
 		//matriz.obtenerPrecision();
-		System.out.println("Inicio "+"Test funcionalidad básica");
+		System.out.println("Inicio "+"Test sin palabras");
 		matriz.obtenerPrecision(consultas.get(0), 4, precisiones);
-		assertTrue(precisiones.get(0).getPrecision().equals(0.0f) ); //comparacion de solo dos decimales
+		System.out.println(precisiones.get(0).getPrecision());
+		assertTrue(precisiones.get(0).getPrecision().equals(0.0) );
 		
-		System.out.println("Fin "+"Test funcionalidad básica");
+		System.out.println("Fin "+"Test sin palabras");
 	}
 
+	@Test
+	public void testDocumentoNulo() { //Puntero nulo
+		documentos.add(null);
+		Matrices matriz = new Matrices(setDePalabras, documentos, consultas, rels);
+		ArrayList<Precision> precisiones = new ArrayList<>();
+
+		//matriz.obtenerPrecision();
+		System.out.println("Inicio "+"Test documento nulo");
+		matriz.obtenerPrecision(consultas.get(0), 4, precisiones);
+		
+		assertTrue(precisiones.get(0).getPrecision()-0.52 <= 0.009); //comparacion de solo dos decimales
+		
+		
+		System.out.println("Fin "+"Test Documento nulo");
+	}
+	
+	@Test
+	public void testConsultaNula() { //Puntero nulo
+		Matrices matriz = new Matrices(setDePalabras, documentos, consultas, rels);
+		ArrayList<Precision> precisiones = new ArrayList<>();
+
+		//matriz.obtenerPrecision();
+		System.out.println("Inicio "+"Test Consulta nula");
+		matriz.obtenerPrecision(null, 4, precisiones);
+		assertTrue(precisiones.get(0).getPrecision()-0.52 <= 0.009); //comparacion de solo dos decimales
+		
+		System.out.println("Fin "+"Test Consulta nula");
+	}
+	//probar lectura de archivos !!!!!
+	
+	@Test
+	public void testLecturaDocumento(){
+		
+	}
 	
 	
 	

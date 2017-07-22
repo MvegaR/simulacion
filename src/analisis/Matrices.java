@@ -32,6 +32,9 @@ public class Matrices {
 		/** Identificador del documento de la similitud */
 		private Integer idDocumento;
 		public Similitud(Double valor, Integer idDocumento) {
+			if(valor.isNaN()){
+				valor = 0.0;
+			}
 			this.valor = valor;
 			this.idDocumento = idDocumento;
 		}
@@ -118,6 +121,9 @@ public class Matrices {
 		if(precisiones == null){
 			throw new NullPointerException("ArrayList Precisiones no puede se nulo");
 		}
+		if(q == null){
+			q = new Consulta();
+		}
 		//ArrayList<Double> precisiones = new ArrayList<>();
 		if(matrizFrecuncias.size() == 0){
 			this.obtenerFrecuencias(); //se guardan en matrizFrecuencias
@@ -182,7 +188,12 @@ public class Matrices {
 			//System.out.println(q.getPalabrasValidas().size() +" - "+ getDocumento(similitudes.get(i).getIdDocumento(), documentos).getPalabrasValidas().size());
 			//*/
 		}
-		precision /= contadorTotalDocumentos;
+		if(contadorTotalDocumentos != 0){
+			precision /= contadorTotalDocumentos;
+		}
+		if(precision.isNaN() || palabras.isEmpty()){
+			precision = 0.0;
+		}
 		precisiones.add(new Precision(q.getId(), precision, contadorDocumentosRelevantes, p));
 		/*
 		System.out.println("\t\tPrecisión consulta Q"+q.getId()+"p@"+p+" es: "
@@ -272,7 +283,7 @@ public class Matrices {
 		//quitar documentos sin cuerpo
 		matrizFrecuncias.clear();
 		for(Documento d: documentos){
-			if(!d.getPalabrasValidas().isEmpty()){ //quitando documentos no validos
+			if(d != null && !d.getPalabrasValidas().isEmpty()){ //quitando documentos no validos
 				ArrayList<Integer> lista = new ArrayList<>();
 				matrizFrecuncias.add(lista);
 				lista.add(d.getId()); //agregando id documento al inicio de cada lista
@@ -294,8 +305,8 @@ public class Matrices {
 		// log(totalDocumeºntos/cantidadOcurrenciasEnTodosLosDocumentos)
 		matrizFrecunciasInversas.clear();
 		for(Documento d: documentos){
-			System.out.println("Frecuencia inversa documento: "+d.getId());
-			if(!d.getPalabrasValidas().isEmpty()){//quitando documentos sin cuerpo
+			if(d != null) System.out.println("Frecuencia inversa documento: "+d.getId());
+			if(d != null && !d.getPalabrasValidas().isEmpty()){//quitando documentos sin cuerpo
 				ArrayList<Double> lista = new ArrayList<>();
 				matrizFrecunciasInversas.add(lista);
 				lista.add(d.getId()*1.0);  //agregando id documento al inicio de cada lista (como double)
@@ -328,7 +339,11 @@ public class Matrices {
 		ArrayList<Similitud> vectorSimilitud = new ArrayList<>();
 		for(String s: palabras){
 			if(q.getPalabrasValidas().contains(s)){
-				vectorQ.add(Math.log10(matrizFrecuncias.size()/totalDocumentos(s)));
+				try {
+					vectorQ.add(Math.log10(matrizFrecuncias.size()/totalDocumentos(s)));
+				} catch (Exception e) {
+					vectorQ.add(0.0);
+				}
 				//System.out.println(matrizFrecuncias.size() + " ; " + totalDocumentos(s));
 			}else{
 				vectorQ.add(0.0);
