@@ -122,6 +122,9 @@ public class Consulta {
 							line = sc.nextLine();
 						}
 						bloqueo = false;
+						if(!sc.hasNextLine() && cuerpo.equals("") && !line.equals("")){
+							cuerpo+=line;
+						}
 						if(!cuerpo.equals("None")){
 							con.setQuery(cuerpo);
 						}
@@ -188,6 +191,9 @@ public class Consulta {
 								break;
 							}
 							line = sc.nextLine();
+						}
+						if(!sc.hasNextLine() && cuerpo.equals("") && !line.equals("")){
+							cuerpo+=line;
 						}
 						con.setQuery(cuerpo);
 					

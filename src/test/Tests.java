@@ -2,6 +2,7 @@ package test;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -23,6 +24,7 @@ public class Tests {
 	private ArrayList<String> pComunes;
 	private ArrayList<Relevancia> rels;
 	private SortedSet<String> setDePalabras;
+	private String fsp = System.getProperty("file.separator").toString();
 	@Before
 	public void iniVars(){
 		//Ejemplo descrito en el proyecto, se elimino tíldes por problemas con el juego de caracteres del proyecto.
@@ -141,12 +143,47 @@ public class Tests {
 		
 		System.out.println("Fin "+"Test Consulta nula");
 	}
-	//probar lectura de archivos !!!!!
+	
+	//File consultasFileCISI = new File("files"+fsp+"test"+fsp+"CISI.qry");
+	//File relevanciasFileCISI = new File("files"+fsp+"test"+fsp+"CISI.rel");
 	
 	@Test
 	public void testLecturaDocumento(){
+		File docTest = new File("files"+fsp+"test"+fsp+"testDocumento.txt");
+		ArrayList<Documento> docs = new ArrayList<>();
+		Documento.generarDocumentos(docTest, docs);
+		assertTrue(docs.get(0).getId().equals(1));
+		assertTrue(docs.get(0).getTitulo().equals("Titulo Test"));
 		
 	}
+	
+	@Test
+	public void testLecturaDocumentoVacio(){
+		File docTest = new File("files"+fsp+"test"+fsp+"testDocumentoVacio.txt");
+		ArrayList<Documento> docs = new ArrayList<>();
+		Documento.generarDocumentos(docTest, docs);
+		assertTrue(docs.size() == 0);
+	}
+	
+	@Test
+	public void testLecturaConsulta(){
+		File conTest = new File("files"+fsp+"test"+fsp+"testConsulta.txt");
+		ArrayList<Consulta> cons = new ArrayList<>();
+		Consulta.generarConsultas(conTest, cons);
+		assertTrue(cons.get(0).getId().equals(1));
+		assertTrue(cons.get(0).getQuery().equals("Test consulta"));
+	}
+	
+	@Test
+	public void testLecturaConsultaVacia(){
+		File conTest = new File("files"+fsp+"test"+fsp+"testConsultaVacia.txt");
+		ArrayList<Consulta> cons = new ArrayList<>();
+		Consulta.generarConsultas(conTest, cons);
+		assertTrue(cons.size() == 0);
+	}
+	
+
+	
 	
 	
 	

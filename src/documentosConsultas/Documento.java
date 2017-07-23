@@ -321,6 +321,9 @@ public class Documento {
 						cuerpo +=line+" ";
 						line = sc.nextLine();
 					}
+					if(!sc.hasNextLine() && cuerpo.equals("")){
+						cuerpo += line;
+					}
 					bloqueo = false;
 					if(!cuerpo.equals("None")){
 						doc.setCuerpo(cuerpo);
