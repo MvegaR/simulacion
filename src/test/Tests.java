@@ -25,6 +25,84 @@ public class Tests {
 	private ArrayList<Relevancia> rels;
 	private SortedSet<String> setDePalabras;
 	private String fsp = System.getProperty("file.separator").toString();
+	
+	/*
+	 * Prueba unitaria de lectura de archivo de documentos, 
+	 * se espera lectura de id=1, titulo=”Titulo test” y cuerpo=”Cuerpo Test”
+	 */
+	@Test
+	public void testLecturaDocumento(){
+		File docTest = new File("files"+fsp+"test"+fsp+"testDocumento.txt");
+		ArrayList<Documento> docs = new ArrayList<>();
+		Documento.generarDocumentos(docTest, docs);
+		assertTrue(docs.get(0).getId().equals(1));
+		assertTrue(docs.get(0).getTitulo().equals("Titulo Test"));
+		assertTrue(docs.get(0).getCuerpo().equals("Cuerpo Test"));
+
+	}
+	/*
+	 * Prueba unitaria de lectura de archivo de documentos vacío, 
+	 * se espera que la colección tenga tamaño 0
+	 */
+	@Test
+	public void testLecturaDocumentoVacio(){
+		File docTest = new File("files"+fsp+"test"+fsp+"testDocumentoVacio.txt");
+		ArrayList<Documento> docs = new ArrayList<>();
+		Documento.generarDocumentos(docTest, docs);
+		assertTrue(docs.size() == 0);
+	}
+	/*
+	 * Prueba unitaria de lectura de lectura de archivo de consultas, 
+	 * se espera de id=1, cuerpo=”Test consulta”
+	 */
+	@Test
+	public void testLecturaConsulta(){
+		File conTest = new File("files"+fsp+"test"+fsp+"testConsulta.txt");
+		ArrayList<Consulta> cons = new ArrayList<>();
+		Consulta.generarConsultas(conTest, cons);
+		assertTrue(cons.get(0).getId().equals(1));
+		assertTrue(cons.get(0).getQuery().equals("Test consulta"));
+	}
+	/*
+	 * Prueba unitaria de lectura de archivo de consultas vacío, 
+	 * se espera que la colección tenga tamaño 0.
+	 */
+	@Test
+	public void testLecturaConsultaVacia(){
+		File conTest = new File("files"+fsp+"test"+fsp+"testConsultaVacia.txt");
+		ArrayList<Consulta> cons = new ArrayList<>();
+		Consulta.generarConsultas(conTest, cons);
+		assertTrue(cons.size() == 0);
+	}
+
+	/*
+	 * Prueba unitaria de lectura de archivo de relevancias, 
+	 * se espera un queryId de 3 y un DocID de 30 para el primer elemento 
+	 * de la colección.
+	 */
+	@Test
+	public void testLecturaRelevancia(){
+		File relTest = new File("files"+fsp+"test"+fsp+"testRelevancia.txt");
+		ArrayList<Relevancia> rls = new ArrayList<>();
+		Relevancia.getRelevancia(relTest, rls, 1);
+		assertTrue(rls.get(0).getQueryID().equals(3) && rls.get(0).getDocID().equals(30));
+	}
+
+	/*
+	 * Prueba unitaria de lectura de archivo de relevancias vacío, 
+	 * se espera la colección tenga tamaño 0
+	 */
+	@Test
+	public void testLecturaRelevanciaVacia(){
+		File relTest = new File("files"+fsp+"test"+fsp+"testRelevanciaVacia.txt");
+		ArrayList<Relevancia> rls = new ArrayList<>();
+		Relevancia.getRelevancia(relTest, rls, 1);
+		assertTrue(rls.size() == 0);
+	}
+
+
+	
+	
 	/*
 	 * Método para la Inicialización de variables para las pruebas unitarias.
 	 */
@@ -166,80 +244,6 @@ public class Tests {
 		assertTrue(precisiones.get(0).getPrecision()-0.52 <= 0.009); //comparacion de solo dos decimales
 
 		System.out.println("Fin "+"Test Consulta nula");
-	}
-
-	/*
-	 * Prueba unitaria de lectura de archivo de documentos, 
-	 * se espera lectura de id=1, titulo=”Titulo test” y cuerpo=”Cuerpo Test”
-	 */
-	@Test
-	public void testLecturaDocumento(){
-		File docTest = new File("files"+fsp+"test"+fsp+"testDocumento.txt");
-		ArrayList<Documento> docs = new ArrayList<>();
-		Documento.generarDocumentos(docTest, docs);
-		assertTrue(docs.get(0).getId().equals(1));
-		assertTrue(docs.get(0).getTitulo().equals("Titulo Test"));
-		assertTrue(docs.get(0).getCuerpo().equals("Cuerpo Test"));
-
-	}
-	/*
-	 * Prueba unitaria de lectura de archivo de documentos vacío, 
-	 * se espera que la colección tenga tamaño 0
-	 */
-	@Test
-	public void testLecturaDocumentoVacio(){
-		File docTest = new File("files"+fsp+"test"+fsp+"testDocumentoVacio.txt");
-		ArrayList<Documento> docs = new ArrayList<>();
-		Documento.generarDocumentos(docTest, docs);
-		assertTrue(docs.size() == 0);
-	}
-	/*
-	 * Prueba unitaria de lectura de lectura de archivo de consultas, 
-	 * se espera de id=1, cuerpo=”Test consulta”
-	 */
-	@Test
-	public void testLecturaConsulta(){
-		File conTest = new File("files"+fsp+"test"+fsp+"testConsulta.txt");
-		ArrayList<Consulta> cons = new ArrayList<>();
-		Consulta.generarConsultas(conTest, cons);
-		assertTrue(cons.get(0).getId().equals(1));
-		assertTrue(cons.get(0).getQuery().equals("Test consulta"));
-	}
-	/*
-	 * Prueba unitaria de lectura de archivo de consultas vacío, 
-	 * se espera que la colección tenga tamaño 0.
-	 */
-	@Test
-	public void testLecturaConsultaVacia(){
-		File conTest = new File("files"+fsp+"test"+fsp+"testConsultaVacia.txt");
-		ArrayList<Consulta> cons = new ArrayList<>();
-		Consulta.generarConsultas(conTest, cons);
-		assertTrue(cons.size() == 0);
-	}
-
-	/*
-	 * Prueba unitaria de lectura de archivo de relevancias, 
-	 * se espera un queryId de 3 y un DocID de 30 para el primer elemento 
-	 * de la colección.
-	 */
-	@Test
-	public void testLecturaRelevancia(){
-		File relTest = new File("files"+fsp+"test"+fsp+"testRelevancia.txt");
-		ArrayList<Relevancia> rls = new ArrayList<>();
-		Relevancia.getRelevancia(relTest, rls, 1);
-		assertTrue(rls.get(0).getQueryID().equals(3) && rls.get(0).getDocID().equals(30));
-	}
-
-	/*
-	 * Prueba unitaria de lectura de archivo de relevancias vacío, 
-	 * se espera la colección tenga tamaño 0
-	 */
-	@Test
-	public void testLecturaRelevanciaVacia(){
-		File relTest = new File("files"+fsp+"test"+fsp+"testRelevanciaVacia.txt");
-		ArrayList<Relevancia> rls = new ArrayList<>();
-		Relevancia.getRelevancia(relTest, rls, 1);
-		assertTrue(rls.size() == 0);
 	}
 
 
