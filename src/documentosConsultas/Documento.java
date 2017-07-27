@@ -93,11 +93,13 @@ public class Documento {
 	 */
 	public void generarSetPalabras(ArrayList<String> palabrasComunes){
 		if(palabrasValidas != null){
-			String[] palabras = (cuerpo + " " + titulo).split("[\\W\\d]+");// \W = no word character, \d digit character, \D no digit
+			String[] palabras = (cuerpo + " " + titulo).split("[\\W\\d]+");
+			// \W = no word character, \d digit character, \D no digit
 			palabrasValidas.clear();
 			//System.out.println(palabras.length);
 			for(String s: palabras){
-				if(s.length() > 1 && !palabrasComunes.contains(s.toLowerCase())){ //eliminar palabras de dos letras y comunes
+				if(s.length() > 1 && !palabrasComunes.contains(s.toLowerCase())){ 
+					//eliminar palabras de dos letras y comunes
 					this.palabrasValidas.add(s.toLowerCase()); //Solo palabras minusculas
 				}
 			}
@@ -268,7 +270,8 @@ public class Documento {
 		return true;
 	}
 	/**
-	 * Obtiene los documentos desde un archivo de texto y rellena una lista entregada por parametro de documentos generados.
+	 * Obtiene los documentos desde un archivo de texto y rellena 
+	 * una lista entregada por parametro de documentos generados.
 	 * @param origen Archivo de texto con los documentos
 	 * @param documentos Lista de documentos a rellenar
 	 */
@@ -292,7 +295,9 @@ public class Documento {
 					line = sc.nextLine();
 					while(!line.substring(0, 1).equals(".") && sc.hasNextLine()){
 						if(!line.equals("None")){
-							referencias.add(new Referencia(Integer.parseInt(line.split("[\t ]")[0]), Integer.parseInt(line.split("[\t ]")[1]), Integer.parseInt(line.split("[\t ]")[2])));
+							referencias.add(new Referencia(Integer.parseInt(line.split("[\t ]")[0]), 
+									Integer.parseInt(line.split("[\t ]")[1]), 
+									Integer.parseInt(line.split("[\t ]")[2])));
 						}
 						line = sc.nextLine();
 					}
@@ -406,11 +411,13 @@ public class Documento {
 	}
 
 	/**
-	 * PARA BD LISA: Obtiene los documentos desde un archivo de texto y rellena una lista entregada por parametro de documentos generados.
+	 * Solo para BD LISA: Obtiene los documentos desde un archivo de texto 
+	 * y rellena una lista entregada por parametro de documentos generados.
 	 * @param origenes Archivo de texto con los documentos
 	 * @param documentos Lista de documentos a rellenar
 	 */
-	public static void generarDocumentosLisa(ArrayList<File> origenes, ArrayList<Documento> documentos){
+	public static void generarDocumentosLisa(ArrayList<File> origenes, 
+			ArrayList<Documento> documentos){
 		try {
 			for(File origen: origenes){
 
@@ -433,7 +440,8 @@ public class Documento {
 					if(doc != null && !line.equals("********************************************")){
 						String cuerpo = "";
 						line = sc.nextLine();
-						while(!line.equals("********************************************") && sc.hasNextLine()){
+						while(!line.equals("********************************************") 
+								&& sc.hasNextLine()){
 							cuerpo +=line+" ";
 							line = sc.nextLine();
 						}
@@ -452,10 +460,5 @@ public class Documento {
 			e.printStackTrace();
 		}
 
-
-
-
 	}
-
-
 }

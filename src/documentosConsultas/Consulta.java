@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
 /**
- * Clase de consultas, con identificador, query (cuerpo consulta), autores, identificador detallado, palabras válidas (no comunes)
+ * Clase de consultas, con identificador, query (cuerpo consulta),
+ * autores, identificador detallado, palabras válidas (no comunes)
  *
  * @author Marcos
  */
@@ -18,7 +19,8 @@ public class Consulta {
 	private String query; //.W
 	/** Autores de la consulta, en el proyecto no se utilizó pero se encuentra presente en el archivo */
 	private ArrayList<String> autores; //.A ?
-	/** Identificador más detallado de la consulta, no se utilizó en el proyecto pero se encuentra presente en el archivo */
+	/** Identificador más detallado de la consulta, no se utilizó 
+	 * en el proyecto pero se encuentra presente en el archivo */
 	private String fullId; //.N ?
 	/** Palabras válidas presentes en la consulta en una lista enlazada */
 	private LinkedList<String> palabrasValidas;
@@ -39,7 +41,7 @@ public class Consulta {
 	public String toString() {
 		return "Consulta [id=" + id + ", query=" + query + ", autores=" + autores + ", fullId=" + fullId + "]";
 	}
-	
+
 	/**
 	 * Contructor de consulta
 	 * @param id Identificador consulta
@@ -54,10 +56,10 @@ public class Consulta {
 		this.autores = autores;
 		this.fullId = fullId;
 		this.palabrasValidas = new LinkedList<>();
-		
-		
+
+
 	}
-	
+
 	/**
 	 * Para generar contenido de la lista this.palabrasComunes, se quitan todas las palabras
 	 *  comunes y se deja en una lista enlazada todas las palabras en minisculas.
@@ -66,7 +68,8 @@ public class Consulta {
 	 */
 	public void generarSetPalabras(ArrayList<String> palabrasComunes){
 		if(palabrasValidas != null && !this.query.equals("")){
-			String[] palabras = this.query.split("[\\W\\d]+");// \W = no word character, \d digit character, \D no digit
+			String[] palabras = this.query.split("[\\W\\d]+");
+			// \W = no word character, \d digit character, \D no digit
 			//System.out.println("test:"+palabras);
 			palabrasValidas.clear();
 			for(String s: palabras){
@@ -74,139 +77,139 @@ public class Consulta {
 					this.palabrasValidas.add(s.toLowerCase());
 				}
 			}
-			
+
 		}
 	}
-	
+
 	/**
 	 * Realiza la lectura de archivo de consultas y los inserta en una lista
 	 * @param origen Archivo de texto con querys, no nula.
 	 * @param consultas Colección de consultas a rellenar, no nula.
 	 */
-	
+
 	public static void generarConsultas(File origen, ArrayList<Consulta> consultas){
 
-			try {
-				Scanner sc = new Scanner(origen);
-				Consulta con = null;
-				String line = "";
-				Boolean bloqueo = false; //variable para controlar el caso de que exista una etiqueta sin contenido
-				
-				while (sc.hasNextLine()) {
-					if(!bloqueo){
+		try {
+			Scanner sc = new Scanner(origen);
+			Consulta con = null;
+			String line = "";
+			Boolean bloqueo = false; //variable para controlar el caso de que exista una etiqueta sin contenido
+
+			while (sc.hasNextLine()) {
+				if(!bloqueo){
+					line = sc.nextLine();
+					bloqueo = false;
+				}else{
+					//System.out.println(line);
+				}
+
+				if(con != null && line.contains(".A") && line.substring(0, 1).equals(".")){
+					ArrayList<String> autores = new ArrayList<String>();
+					line = sc.nextLine();
+					while(!line.substring(0, 1).equals(".") && sc.hasNextLine()){
+						if(!line.equals("None")){
+							autores.add(line);
+						}
 						line = sc.nextLine();
+					}
+					bloqueo = false;
+					con.setAutores(autores);
+				}
+
+
+				if(con != null && line.contains(".W")  && line.substring(0, 1).equals(".")){
+					String cuerpo = "";
+					line = sc.nextLine();
+					while(line.length() > 1 && !line.substring(0, 1).equals(".") && sc.hasNextLine()){
+						cuerpo +=line+" ";
+						line = sc.nextLine();
+					}
+					bloqueo = false;
+					if(!sc.hasNextLine() && cuerpo.equals("") && !line.equals("")){
+						cuerpo+=line;
+					}
+					if(!cuerpo.equals("None")){
+						con.setQuery(cuerpo);
+					}
+				}
+
+
+
+
+
+				if(line.contains(".I") && line.substring(0, 1).equals(".")){
+					con = new Consulta();
+					Integer id = Integer.parseInt(line.substring(3, line.length()));
+					con.setId(id);
+					consultas.add(con);
+					bloqueo = false;
+				}
+
+				if(line.contains(".N") && line.substring(0, 1).equals(".")){
+					line = sc.nextLine();
+					if(!line.substring(0, 1).equals(".") && !line.equals("None")){
+						con.setFullId(line);
 						bloqueo = false;
 					}else{
-						//System.out.println(line);
+						bloqueo = true;
 					}
-
-					if(con != null && line.contains(".A") && line.substring(0, 1).equals(".")){
-						ArrayList<String> autores = new ArrayList<String>();
-						line = sc.nextLine();
-						while(!line.substring(0, 1).equals(".") && sc.hasNextLine()){
-							if(!line.equals("None")){
-								autores.add(line);
-							}
-							line = sc.nextLine();
-						}
-						bloqueo = false;
-						con.setAutores(autores);
-					}
-					
-					
-					if(con != null && line.contains(".W")  && line.substring(0, 1).equals(".")){
-						String cuerpo = "";
-						line = sc.nextLine();
-						while(line.length() > 1 && !line.substring(0, 1).equals(".") && sc.hasNextLine()){
-							cuerpo +=line+" ";
-							line = sc.nextLine();
-						}
-						bloqueo = false;
-						if(!sc.hasNextLine() && cuerpo.equals("") && !line.equals("")){
-							cuerpo+=line;
-						}
-						if(!cuerpo.equals("None")){
-							con.setQuery(cuerpo);
-						}
-					}
-					
-					
-				
-					
-					
-					if(line.contains(".I") && line.substring(0, 1).equals(".")){
-						con = new Consulta();
-						Integer id = Integer.parseInt(line.substring(3, line.length()));
-						con.setId(id);
-						consultas.add(con);
-						bloqueo = false;
-					}
-					
-					if(line.contains(".N") && line.substring(0, 1).equals(".")){
-						line = sc.nextLine();
-						if(!line.substring(0, 1).equals(".") && !line.equals("None")){
-							con.setFullId(line);
-							bloqueo = false;
-						}else{
-							bloqueo = true;
-						}
-					}
-					
-					
 				}
-				sc.close();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+
+
 			}
-			
-		
-		
+			sc.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+
 	}
-	
+
 	/**
 	 * ONLY LISA DB: Realiza la lectura de archivo de consultas y los inserta en una lista
 	 * @param origen Archivo de texto con querys, no nula.
 	 * @param consultas Colección de consultas a rellenar, no nula.
 	 */
-	
+
 	public static void generarConsultasLisa(File origen, ArrayList<Consulta> consultas){
 
-			try {
-				Scanner sc = new Scanner(origen);
-				Consulta con = null;
-				String line = "";
-				
-				while (sc.hasNextLine()) {
-						line = sc.nextLine();
-						con = new Consulta();
-						Integer id = Integer.parseInt(line);
-						con.setId(id);
-						consultas.add(con);
-						String cuerpo = "";
-						line = sc.nextLine();
-						while(sc.hasNextLine()){
-							cuerpo +=line+" ";
-							if(line.contains("#")){
-								break;
-							}
-							line = sc.nextLine();
-						}
-						if(!sc.hasNextLine() && cuerpo.equals("") && !line.equals("")){
-							cuerpo+=line;
-						}
-						con.setQuery(cuerpo);
-					
-				}
-				sc.close();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		try {
+			Scanner sc = new Scanner(origen);
+			Consulta con = null;
+			String line = "";
 
-		
+			while (sc.hasNextLine()) {
+				line = sc.nextLine();
+				con = new Consulta();
+				Integer id = Integer.parseInt(line);
+				con.setId(id);
+				consultas.add(con);
+				String cuerpo = "";
+				line = sc.nextLine();
+				while(sc.hasNextLine()){
+					cuerpo +=line+" ";
+					if(line.contains("#")){
+						break;
+					}
+					line = sc.nextLine();
+				}
+				if(!sc.hasNextLine() && cuerpo.equals("") && !line.equals("")){
+					cuerpo+=line;
+				}
+				con.setQuery(cuerpo);
+
+			}
+			sc.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -219,7 +222,7 @@ public class Consulta {
 	public String getFullId() {
 		return fullId;
 	}
-	
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -264,5 +267,5 @@ public class Consulta {
 			return false;
 		return true;
 	}
-	
+
 }

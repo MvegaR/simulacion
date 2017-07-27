@@ -1,7 +1,8 @@
 package analisis;
 /**
- * Atributos: (Integer) IDConsulta, (Double) precision, (Integer) DocumentosRelevantes, (Integer) PIn.
  * 
+ * Clase diseñada para almacenar la precisión de una determinada consulta,
+ * cantidad de documentos relevantes de la consulta, valor p@ utilizado.
  * @author Marcos
  *
  */
@@ -127,8 +128,8 @@ public class Precision {
 			return false;
 		return true;
 	}
-	
-	
-	
+
+
+
 
 }

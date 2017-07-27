@@ -9,12 +9,10 @@ import java.util.TreeSet;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.internal.runners.JUnit38ClassRunner;
 
 import documentosConsultas.Consulta;
 import documentosConsultas.Documento;
 import documentosConsultas.Relevancia;
-import junit.framework.JUnit4TestAdapter;
 import analisis.*;
 
 public class Tests {
@@ -25,7 +23,7 @@ public class Tests {
 	private ArrayList<Relevancia> rels;
 	private SortedSet<String> setDePalabras;
 	private String fsp = System.getProperty("file.separator").toString();
-	
+
 	/*
 	 * Prueba unitaria de lectura de archivo de documentos, 
 	 * se espera lectura de id=1, titulo=”Titulo test” y cuerpo=”Cuerpo Test”
@@ -101,8 +99,8 @@ public class Tests {
 	}
 
 
-	
-	
+
+
 	/*
 	 * Método para la Inicialización de variables para las pruebas unitarias.
 	 */
@@ -161,7 +159,7 @@ public class Tests {
 	 */
 
 	@Test
-	public void testFuncionalidadBasica() { //bien
+	public void testPrecisionCorrecta() { //bien
 		Matrices matriz = new Matrices(setDePalabras, documentos, consultas, rels);
 		ArrayList<Precision> precisiones = new ArrayList<>();
 

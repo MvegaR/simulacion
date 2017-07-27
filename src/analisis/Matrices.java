@@ -5,8 +5,6 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.SortedSet;
 
 
@@ -93,22 +91,8 @@ public class Matrices {
 		this.consultas = consultas;
 		this.relevancias = relevancias;
 	}
-	/**
-	 * Obtiene un documento dado su id
-	 * @param idDocumento id del documento a buscar
-	 * @param listaDocumentos lista con todos los documentos
-	 * @return Documento buscado
-	 */
 
-	private Documento getDocumento(Integer idDocumento, ArrayList<Documento> listaDocumentos){
-		for(Documento d: listaDocumentos){
-			if(d.getId().equals(idDocumento)){
-				return d;
-			}
-		}
-		return null;
-	}
-	
+
 	/**
 	 * Obtiene la precisión de cada documento para la consulta q con un p@ entregado por parametro
 	 * @param q Consulta a calcular precisión
@@ -138,7 +122,8 @@ public class Matrices {
 		similitudes.sort(new Comparator<Similitud>() { //Ordenando por *valor* mayor primero
 			@Override
 			public int compare(Similitud o1, Similitud o2) { 
-				return o2.getValor().compareTo(o1.getValor()); //orden natural inverso de Double (mayor primero y no menor)
+				return o2.getValor().compareTo(o1.getValor()); 
+				//orden natural inverso de Double (mayor primero y no menor)
 			}
 		});
 		Double precision = 0.0;
@@ -153,7 +138,8 @@ public class Matrices {
 				precision += (contadorDocumentosRelevantes *1.0) / (contadorTotalDocumentos*1.0);
 			}
 			//*
-			System.out.println("\tQ"+q.getId()+" Documento: " + String.format("%4d", similitudes.get(i).getIdDocumento()) 
+			System.out.println("\tQ"+q.getId()+" Documento: " + 
+					String.format("%4d", similitudes.get(i).getIdDocumento()) 
 			+ " Similitud: "+ String.format("%19.16f",   similitudes.get(i).getValor()) 
 			+ " Relevante: " +isRelevante(q.getId(), similitudes.get(i).getIdDocumento()));
 			//*/
@@ -163,7 +149,8 @@ public class Matrices {
 			if(isRelevante(q.getId(), similitudes.get(i).getIdDocumento())){
 				r = 1;
 			}
-			System.out.print(q.getId()+"\t" + similitudes.get(i).getIdDocumento() + "\t" +  similitudes.get(i).getValor() + "\t" + r +"\t");
+			System.out.print(q.getId()+"\t" + similitudes.get(i).getIdDocumento() + "\t" +  
+			similitudes.get(i).getValor() + "\t" + r +"\t");
 			HashSet<String> palabrasRelevantesSinRepetir = new HashSet<>();
 			HashSet<String> palabrasTotalSinRepetir = new HashSet<>();
 			for(String palabra: getDocumento(similitudes.get(i).getIdDocumento(), documentos).getPalabrasValidas()){
@@ -172,20 +159,24 @@ public class Matrices {
 			System.out.print("\t"+ palabrasTotalSinRepetir.size());
 			if(r == 1){ //imprimir palabras relevantes presentes en el documento y consulta
 				for(String palabra: q.getPalabrasValidas()){
-					if(getDocumento(similitudes.get(i).getIdDocumento(), documentos).getPalabrasValidas().contains(palabra)){
+					if(getDocumento(similitudes.get(i).getIdDocumento(), 
+					documentos).getPalabrasValidas().contains(palabra)){
 						palabrasRelevantesSinRepetir.add(palabra);
 					}
 				}
 				for(String palabra: palabrasRelevantesSinRepetir){
-					if(getDocumento(similitudes.get(i).getIdDocumento(), documentos).getPalabrasValidas().contains(palabra)){
+					if(getDocumento(similitudes.get(i).getIdDocumento(), 
+					documentos).getPalabrasValidas().contains(palabra)){
 						System.out.print("\t"+palabra);
 					}
 				}
-				
+
 			}
-			
+
 			System.out.println();
-			//System.out.println(q.getPalabrasValidas().size() +" - "+ getDocumento(similitudes.get(i).getIdDocumento(), documentos).getPalabrasValidas().size());
+			//System.out.println(q.getPalabrasValidas().size() +" - "+ 
+			 * getDocumento(similitudes.get(i).getIdDocumento(), documentos).getPalabrasValidas().size());
+			 */
 			//*/
 		}
 		if(contadorTotalDocumentos != 0){
@@ -204,54 +195,7 @@ public class Matrices {
 	}
 
 
-	/**
-	 * Obtiene la precision de cada documento por cada consulta y lo imprime por pantalla.
-	 */
 
-	public void obtenerPrecision(){
-
-		//ArrayList<Double> precisiones = new ArrayList<>();
-		this.obtenerFrecuencias(); //se guardan en matrizFrecuencias
-		System.out.println("Matriz de frecuencias calculada");
-		this.obtenerFrecuenciasInversas(); // se guardan en matrizFrecuencaisInversa
-		System.out.println("Matriz de frecuencias inversas calculadas");
-		for(Consulta q: consultas){
-			System.out.println("Consulta: q"+q.getId());
-			ArrayList<Similitud> similitudes = calculoSimilitud(q); //uso de la clase local Similitud
-			similitudes.sort(new Comparator<Similitud>() { //Ordenando por *valor* mayor primero
-				@Override
-				public int compare(Similitud o1, Similitud o2) { 
-					return o2.getValor().compareTo(o1.getValor()); //orden natural inverso de Double (mayor primero y no menor)
-				}
-			});
-			Double precision = 0.0;
-			Integer contadorDocumentosRelevantes = 0;
-			Integer contadorTotalDocumentos = 0;
-			Integer mostrarPrimeros = 30;
-			System.out.println("Inicio muestrario de "+ mostrarPrimeros +" documentos.");
-			for(Similitud s: similitudes){
-				contadorTotalDocumentos++;
-				if(isRelevante(q.getId(), s.getIdDocumento())){
-					contadorDocumentosRelevantes++;
-					precision += (contadorDocumentosRelevantes * 1.0) / (contadorTotalDocumentos*1.0);
-				}else{
-					precision += (contadorDocumentosRelevantes *1.0) / (contadorTotalDocumentos*1.0);
-				}
-
-				if(mostrarPrimeros > 0){
-					System.out.println("\tQ"+q.getId()+" Documento: " + String.format("%4d", s.getIdDocumento()) 
-					+ " Similitud: "+ String.format("%19.16f",  s.getValor()) + " Relevante: " 
-							+isRelevante(q.getId(), s.getIdDocumento()));
-					mostrarPrimeros--;
-				}
-			}
-			precision /= contadorTotalDocumentos;
-			System.out.println("\t\tPrecisión consulta Q"+q.getId()
-			+" es: "+ String.format("%.10f", precision)
-			+" Docs Relevantes: "+contadorDocumentosRelevantes+"\n");
-		}
-
-	}
 
 	/**
 	 * Determina si existe relevancia de entre consulta y documento, 
@@ -273,10 +217,14 @@ public class Matrices {
 
 
 	/**
-	 * Método que rellena la matriz con las frecuencias de las palabras (set de palabras), de cada documento.
-	 * Por cada documento <b>d</b> de la lista de documentos (excluyendo documentos sin cuerpo o sin palabras), 
-	 * se crea una <b>lista</b> y se agrega a la lista de listas <b>matrizFrecuencias</b> (atributo de <b>this</b>)
-	 * por cada palabra se agrega a <b>lista</b> la frencuencia de la palabra <b>p</b> en el documento <b>d</b>
+	 * Método que rellena la matriz con las frecuencias de las 
+	 * palabras (set de palabras), de cada documento.
+	 * Por cada documento <b>d</b> de la lista de documentos 
+	 * (excluyendo documentos sin cuerpo o sin palabras), 
+	 * se crea una <b>lista</b> y se agrega a la lista de listas 
+	 * <b>matrizFrecuencias</b> (atributo de <b>this</b>)
+	 * por cada palabra se agrega a <b>lista</b> la frencuencia de 
+	 * la palabra <b>p</b> en el documento <b>d</b>
 	 * 
 	 */
 	public void obtenerFrecuencias(){
@@ -294,12 +242,17 @@ public class Matrices {
 		}
 	}
 	/**
-	 * Método que rellena la matriz con las frecuencias inversa de las palabras (set de palabras), de cada documento.
-	 * Por cada documento, con palabras válidas (documentos sin cuerpo no aceptados),
-	 * se crea una <b>lista</b> de double que se almacena en una lista de listas (arraylist, es un arreglo, no lista enlazada),
-	 * la <b>lista</b> se rellena inicialmente con el id del documento, a continuación con los valores del cálculo de distancia
-	 * por cada palabra <b>s</b> se calcula log10(totalDocumentos/totalDocumentosQueTieneLaPalabra<b>S</b>
-	 * si en la matriz de frecuencias tiene el valor de cero no se realiza cálculo se se agrega un 0 a la lista.
+	 * Método que rellena la matriz con las frecuencias inversa de las palabras 
+	 * (set de palabras), de cada documento. 
+	 * Por cada documento, con palabras válidas,
+	 * se crea una <b>lista</b> de double que se almacena en una lista de listas 
+	 * (arraylist, es un arreglo, no lista enlazada),
+	 * la <b>lista</b> se rellena inicialmente con el id del documento, a continuación con 
+	 * los valores del cálculo de distancia
+	 * por cada palabra <b>s</b> se calcula:
+	 * log10(totalDocumentos/totalDocumentosQueTieneLaPalabra<b>S</b>
+	 * si en la matriz de frecuencias tiene el valor de cero no se realiza 
+	 * cálculo se se agrega un 0 a la lista.
 	 */
 	public void obtenerFrecuenciasInversas(){
 		// log(totalDocumeºntos/cantidadOcurrenciasEnTodosLosDocumentos)
@@ -363,10 +316,10 @@ public class Matrices {
 				sumatoria3 += list.get(contador+1) *list.get(contador+1);
 				contador++;
 			}
-			
+
 			vectorSimilitud.add(new Similitud(sumatoria/ Math.sqrt(sumatoria2*sumatoria3), list.get(0).intValue())); 
 			//list.get(0) tiene el id del documento
-			
+
 		}
 		return vectorSimilitud;
 	}
@@ -449,11 +402,11 @@ public class Matrices {
 					escritor.write(consultas.get(r.getQueryID()-1).getId()+" "+r.getDocID()+"\n");
 				}
 				escritor.close();
-				
+
 			}else{
 				System.err.println("Error al crear fichero");
 			}
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

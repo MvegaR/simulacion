@@ -1,6 +1,7 @@
 package documentosConsultas;
 /**
- * Clase de referencias no utilizada en el proyecto, corresponde a las referencias de los documentos, nececitaba una estructura de datos abstracta nueva.
+ * Clase de referencias no utilizada en el proyecto, corresponde a las referencias de los documentos, 
+ * nececitaba una estructura de datos abstracta nueva.
  * Descripción en ingles:
  * 4 : "bibliographic coupling" - if document id Y appears in the bibliographic
  *   coupling subvector for document X with a weight of w, it means X
@@ -14,19 +15,19 @@ package documentosConsultas;
  *  of documents that cite X.
  *  
  *   @author Marcos
-**/
+ **/
 public class Referencia {
 
 	private Integer x;
 	private Integer tipo;
 	private Integer y;
-	
+
 	public Referencia(Integer x, Integer tipo, Integer y){
 		this.x = x;
 		this.y = y;
 		this.tipo = tipo;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Referencia [x=" + x + ", tipo=" + tipo + ", y=" + y + "]";
