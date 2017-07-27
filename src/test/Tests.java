@@ -107,10 +107,14 @@ public class Tests {
 	@Before
 	public void iniVars(){
 		//Ejemplo descrito en el proyecto, se elimino tíldes por problemas con el juego de caracteres del proyecto.
-		Documento doc1 = new Documento(1, "", "Las piramides de Egipto se hallan en: El Cairo Egipto.", "", null, null, null, "", null);
-		Documento doc2 = new Documento(2, "", "La Torre de Tokio se localiza en: Tokio, Japon.", "", null, null, null, "", null);
-		Documento doc3 = new Documento(3, "", "Las piramides mayas se hallan en: Latinoamerica.", "", null, null, null, "", null);
-		Documento doc4 = new Documento(4, "", "La Torre Eiffel se localiza en: Paris.", "", null, null, null, "", null);
+		Documento doc1 = new Documento(1, "", 
+				"Las piramides de Egipto se hallan en: El Cairo Egipto.", "", null, null, null, "", null);
+		Documento doc2 = new Documento(2, "", 
+				"La Torre de Tokio se localiza en: Tokio, Japon.", "", null, null, null, "", null);
+		Documento doc3 = new Documento(3, "", 
+				"Las piramides mayas se hallan en: Latinoamerica.", "", null, null, null, "", null);
+		Documento doc4 = new Documento(4, "", 
+				"La Torre Eiffel se localiza en: Paris.", "", null, null, null, "", null);
 
 		Consulta con1 = new Consulta(1, "Donde se localiza la Torre Eiffel?", null, "");
 
@@ -243,8 +247,6 @@ public class Tests {
 
 		System.out.println("Fin "+"Test Consulta nula");
 	}
-
-
 
 
 }
