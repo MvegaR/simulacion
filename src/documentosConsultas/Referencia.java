@@ -1,7 +1,7 @@
 package documentosConsultas;
 /**
  * Clase de referencias no utilizada en el proyecto, corresponde a las referencias de los documentos, 
- * nececitaba una estructura de datos abstracta nueva.
+ * nacesitaba una estructura de datos abstracta nueva.
  * Descripción en ingles:
  * 4 : "bibliographic coupling" - if document id Y appears in the bibliographic
  *   coupling subvector for document X with a weight of w, it means X

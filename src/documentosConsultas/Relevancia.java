@@ -23,7 +23,7 @@ public class Relevancia {
 		this.docID = 0;
 	}
 	/**
-	 * Contructor inicializador de atributos
+	 * Constructor inicializador de atributos
 	 * @param queryID Identificador de la consulta
 	 * @param docID Identificador del documento relevante para la consulta
 	 */

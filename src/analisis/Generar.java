@@ -97,10 +97,10 @@ public class Generar {
 	}
 
 	/**
-	 * Método que realiza la ejecución del algoritmo para obtener matriz frecuenica, 
+	 * Método que realiza la ejecución del algoritmo para obtener matriz frecuencia, 
 	 * matriz frecuencia inversa, similitud y precisión.
 	 * @param documentosFiles Lista de Archivo con los documentos, si es null,
-	 *  el siguiente parametro no puede serlo.
+	 *  el siguiente parámetro no puede serlo.
 	 * @param documentosFile Archivo con los documentos
 	 * @param consultasFile Archivo con las consultas
 	 * @param relevanciasFile Archivo con la relevancia de los documentos por consulta

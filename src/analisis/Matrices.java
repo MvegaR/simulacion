@@ -13,7 +13,7 @@ import documentosConsultas.Documento;
 import documentosConsultas.Relevancia;
 
 /**
- * Incluye los métodos para calcular las matrizes de frecuencia y frecuencia inversa
+ * Incluye los métodos para calcular las matrices de frecuencia y frecuencia inversa
  *  @author Marcos
  */
 
@@ -70,7 +70,7 @@ public class Matrices {
 	//fin atributos
 
 	/**
-	 * Contructor, inicializador de variables
+	 * Constructor, inicializador de variables
 	 * @param palabras Conjunto (SortedSet) de palabras, por definición sin 
 	 * repetición (por hashcode() de String no equals()) y orden natural (alfabetico)
 	 * @param documentos Colección de documentos 
@@ -94,7 +94,7 @@ public class Matrices {
 
 
 	/**
-	 * Obtiene la precisión de cada documento para la consulta q con un p@ entregado por parametro
+	 * Obtiene la precisión de cada documento para la consulta q con un p@ entregado por parámetro
 	 * @param q Consulta a calcular precisión
 	 * @param p Valor de p@
 	 * @param precisiones Lista para almazenar las precisiones y utilizarlas con su respectivos idDocumentos y p@
@@ -277,7 +277,7 @@ public class Matrices {
 		}
 	}
 	/**
-	 * Método que realiza el cálculo de similitud de la consulta entregada por parametro
+	 * Método que realiza el cálculo de similitud de la consulta entregada por parámetro
 	 * Se crea el <b>vectorQ</b> de la consulta <b>q</b> y una 
 	 * lista <b>vectorSimilitud</b> para retornar (de la clase local similitud)
 	 * por cada palabra <b>s</b> si la consulta <b>q</b> contiene la palabra <b>s</b> se calcula 
@@ -325,7 +325,7 @@ public class Matrices {
 	}
 
 	/**
-	 * Método que entrega la cantidad de documentos que tiene la palabra entregada por parametro
+	 * Método que entrega la cantidad de documentos que tiene la palabra entregada por parámetro
 	 * @param palabra String a buscar en los documentos
 	 * @return Retorna la cantidad calculadora
 	 */
@@ -391,7 +391,7 @@ public class Matrices {
 	/**
 	 * Método para crear un archivo de relevancia ID - Documento, 
 	 * para el caso de que los id del archivo de relevancias original 
-	 * este considerando pociciones de un arreglo en vez del ID
+	 * este considerando posiciones de un arreglo en vez del ID
 	 */
 	public void fixFileRel(){
 		try {

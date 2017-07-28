@@ -54,7 +54,7 @@ public class Documento {
 	}
 
 	/**
-	 * Contructor, inicializador de atributos
+	 * Constructor, inicializador de atributos
 	 * @param id Identificador documento
 	 * @param titulo Título del documento
 	 * @param cuerpo Cuerpo del documento
@@ -234,7 +234,7 @@ public class Documento {
 		this.tags = tags;
 	}
 	/**
-	 * Entrega la lista de palabras válidas presentes en el documento, luego del filtrados de palabras comunes.
+	 * Entrega la lista de palabras válidas presentes en el documento, luego del filtrado de palabras comunes.
 	 * @return Lista de palabras válidas
 	 */
 	public LinkedList<String> getPalabrasValidas() {
@@ -271,7 +271,7 @@ public class Documento {
 	}
 	/**
 	 * Obtiene los documentos desde un archivo de texto y rellena 
-	 * una lista entregada por parametro de documentos generados.
+	 * una lista entregada por parámetro de documentos generados.
 	 * @param origen Archivo de texto con los documentos
 	 * @param documentos Lista de documentos a rellenar
 	 */
@@ -412,7 +412,7 @@ public class Documento {
 
 	/**
 	 * Solo para BD LISA: Obtiene los documentos desde un archivo de texto 
-	 * y rellena una lista entregada por parametro de documentos generados.
+	 * y rellena una lista entregada por parámetro de documentos generados.
 	 * @param origenes Archivo de texto con los documentos
 	 * @param documentos Lista de documentos a rellenar
 	 */

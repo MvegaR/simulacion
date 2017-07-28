@@ -25,7 +25,7 @@ public class Consulta {
 	/** Palabras válidas presentes en la consulta en una lista enlazada */
 	private LinkedList<String> palabrasValidas;
 	/**
-	 * Contructor consulta, inicialización de variables.
+	 * Constructor consulta, inicialización de variables.
 	 */
 	public Consulta() {
 		this.id = 0;
@@ -43,7 +43,7 @@ public class Consulta {
 	}
 
 	/**
-	 * Contructor de consulta
+	 * Constructor de consulta
 	 * @param id Identificador consulta
 	 * @param query Cuerpo consulta
 	 * @param autores Lista de autores de la consulta
@@ -83,7 +83,7 @@ public class Consulta {
 
 	/**
 	 * Realiza la lectura de archivo de consultas y los inserta en una lista
-	 * @param origen Archivo de texto con querys, no nula.
+	 * @param origen Archivo de texto con queres, no nula.
 	 * @param consultas Colección de consultas a rellenar, no nula.
 	 */
 
@@ -168,8 +168,8 @@ public class Consulta {
 	}
 
 	/**
-	 * ONLY LISA DB: Realiza la lectura de archivo de consultas y los inserta en una lista
-	 * @param origen Archivo de texto con querys, no nula.
+	 * Solo para LISA DB: Realiza la lectura de archivo de consultas y los inserta en una lista
+	 * @param origen Archivo de texto con queries, no nula.
 	 * @param consultas Colección de consultas a rellenar, no nula.
 	 */
 
@@ -244,7 +244,7 @@ public class Consulta {
 		return id;
 	}
 	/**
-	 * Retorna la colección de palabras válidas, se nececita generar con el método generar 
+	 * Retorna la colección de palabras válidas, se nacesita usar con el método generar 
 	 * @return Lista de palabras válidas
 	 */
 	public LinkedList<String> getPalabrasValidas() {
