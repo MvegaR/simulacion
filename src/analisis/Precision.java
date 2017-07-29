@@ -1,27 +1,26 @@
-package analisis;
+锘縫ackage analisis;
 /**
  * 
- * Clase dise馻da para almacenar la precisi髇 de una determinada consulta,
+ * Clase dise帽ada para almacenar la precisi贸n de una determinada consulta,
  * cantidad de documentos relevantes de la consulta, valor p@ utilizado.
  * @author Marcos
  *
  */
-
 public class Precision {
 	/** Identificador de la consulta */
 	Integer idConsulta;
-	/** Precisi髇 calculada de la consulta */
+	/** Precisi贸n calculada de la consulta */
 	Double precision;
 	/** Cantidad de documentos relevantes para la consulta */
 	Integer documentosRelevantes;
-	/** N鷐ero de documentos m醲imos a desplegar y a incluir en el c醠culo de precisi髇 */
+	/** N煤mero de documentos m谩ximos a desplegar y a incluir en el c谩lculo de precisi贸n */
 	Integer pIn;
 	/**
 	 * Constructor clase Precision
 	 * @param idConsulta Identificador de la consulta
 	 * @param precision precision de la consulta
 	 * @param documentosRelevantes cantidad de documentos relevantes en la consulta
-	 * @param pIn N鷐ero de documentos m醲imos a desplegar y a incluir en el c醠culo de precisi髇 
+	 * @param pIn N煤mero de documentos m谩ximos a desplegar y a incluir en el c谩lculo de precisi贸n 
 	 */
 	public Precision(Integer idConsulta, Double precision, Integer documentosRelevantes, Integer pIn) {
 		this.idConsulta = idConsulta;
@@ -44,14 +43,14 @@ public class Precision {
 		this.idConsulta = idConsulta;
 	}
 	/**
-	 * Entrega la precisi髇
-	 * @return Precisi髇, valor Real.
+	 * Entrega la precisi贸n
+	 * @return Precisi贸n, valor Real.
 	 */
 	public Double getPrecision() {
 		return precision;
 	}
 	/**
-	 * Cambia el valor de la precisi髇
+	 * Cambia el valor de la precisi贸n
 	 * @param precision nuevo valor
 	 */
 	public void setPrecision(Double precision) {
@@ -85,7 +84,6 @@ public class Precision {
 	public void setpIn(Integer pIn) {
 		this.pIn = pIn;
 	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -96,7 +94,6 @@ public class Precision {
 		result = prime * result + ((precision == null) ? 0 : precision.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -128,8 +125,4 @@ public class Precision {
 			return false;
 		return true;
 	}
-
-
-
-
 }

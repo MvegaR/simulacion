@@ -1,32 +1,25 @@
-package test;
-
+Ôªøpackage test;
 import static org.junit.Assert.*;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.SortedSet;
 import java.util.TreeSet;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import documentosConsultas.Consulta;
 import documentosConsultas.Documento;
 import documentosConsultas.Relevancia;
 import analisis.*;
-
 public class Tests {
-
 	private ArrayList<Documento> documentos;
 	private ArrayList<Consulta> consultas;
 	private ArrayList<String> pComunes;
 	private ArrayList<Relevancia> rels;
 	private SortedSet<String> setDePalabras;
 	private String fsp = System.getProperty("file.separator").toString();
-
 	/*
 	 * Prueba unitaria de lectura de archivo de documentos, 
-	 * se espera lectura de id=1, titulo=îTitulo testî y cuerpo=îCuerpo Testî
+	 * se espera lectura de id=1, titulo=‚ÄùTitulo test‚Äù y cuerpo=‚ÄùCuerpo Test‚Äù
 	 */
 	@Test
 	public void testLecturaDocumento(){
@@ -36,11 +29,10 @@ public class Tests {
 		assertTrue(docs.get(0).getId().equals(1));
 		assertTrue(docs.get(0).getTitulo().equals("Titulo Test"));
 		assertTrue(docs.get(0).getCuerpo().equals("Cuerpo Test"));
-
 	}
 	/*
-	 * Prueba unitaria de lectura de archivo de documentos vacÌo, 
-	 * se espera que la colecciÛn tenga tamaÒo 0
+	 * Prueba unitaria de lectura de archivo de documentos vac√≠o, 
+	 * se espera que la colecci√≥n tenga tama√±o 0
 	 */
 	@Test
 	public void testLecturaDocumentoVacio(){
@@ -51,7 +43,7 @@ public class Tests {
 	}
 	/*
 	 * Prueba unitaria de lectura de lectura de archivo de consultas, 
-	 * se espera de id=1, cuerpo=îTest consultaî
+	 * se espera de id=1, cuerpo=‚ÄùTest consulta‚Äù
 	 */
 	@Test
 	public void testLecturaConsulta(){
@@ -62,8 +54,8 @@ public class Tests {
 		assertTrue(cons.get(0).getQuery().equals("Test consulta"));
 	}
 	/*
-	 * Prueba unitaria de lectura de archivo de consultas vacÌo, 
-	 * se espera que la colecciÛn tenga tamaÒo 0.
+	 * Prueba unitaria de lectura de archivo de consultas vac√≠o, 
+	 * se espera que la colecci√≥n tenga tama√±o 0.
 	 */
 	@Test
 	public void testLecturaConsultaVacia(){
@@ -72,11 +64,10 @@ public class Tests {
 		Consulta.generarConsultas(conTest, cons);
 		assertTrue(cons.size() == 0);
 	}
-
 	/*
 	 * Prueba unitaria de lectura de archivo de relevancias, 
 	 * se espera un queryId de 3 y un DocID de 30 para el primer elemento 
-	 * de la colecciÛn.
+	 * de la colecci√≥n.
 	 */
 	@Test
 	public void testLecturaRelevancia(){
@@ -85,10 +76,9 @@ public class Tests {
 		Relevancia.getRelevancia(relTest, rls, 1);
 		assertTrue(rls.get(0).getQueryID().equals(3) && rls.get(0).getDocID().equals(30));
 	}
-
 	/*
-	 * Prueba unitaria de lectura de archivo de relevancias vacÌo, 
-	 * se espera la colecciÛn tenga tamaÒo 0
+	 * Prueba unitaria de lectura de archivo de relevancias vac√≠o, 
+	 * se espera la colecci√≥n tenga tama√±o 0
 	 */
 	@Test
 	public void testLecturaRelevanciaVacia(){
@@ -97,16 +87,12 @@ public class Tests {
 		Relevancia.getRelevancia(relTest, rls, 1);
 		assertTrue(rls.size() == 0);
 	}
-
-
-
-
 	/*
-	 * MÈtodo para la InicializaciÛn de variables para las pruebas unitarias.
+	 * M√©todo para la Inicializaci√≥n de variables para las pruebas unitarias.
 	 */
 	@Before
 	public void iniVars(){
-		//Ejemplo descrito en el proyecto, se elimino tÌldes por problemas con el juego de caracteres del proyecto.
+		//Ejemplo descrito en el proyecto, se elimino t√≠ldes por problemas con el juego de caracteres del proyecto.
 		Documento doc1 = new Documento(1, "", 
 				"Las piramides de Egipto se hallan en: El Cairo Egipto.", "", null, null, null, "", null);
 		Documento doc2 = new Documento(2, "", 
@@ -115,13 +101,9 @@ public class Tests {
 				"Las piramides mayas se hallan en: Latinoamerica.", "", null, null, null, "", null);
 		Documento doc4 = new Documento(4, "", 
 				"La Torre Eiffel se localiza en: Paris.", "", null, null, null, "", null);
-
 		Consulta con1 = new Consulta(1, "Donde se localiza la Torre Eiffel?", null, "");
-
 		rels = new ArrayList<>();
-
 		rels.add(new Relevancia(1, 4));
-
 		pComunes = new ArrayList<>();
 		pComunes.add("las");
 		pComunes.add("de");
@@ -141,9 +123,7 @@ public class Tests {
 		documentos.add(doc4);
 		consultas = new ArrayList<>();
 		consultas.add(con1);
-
 		System.out.println(con1.getPalabrasValidas());
-
 		setDePalabras = new TreeSet<String>();
 		for(Documento d: documentos){
 			//System.out.println("Documento "+ d.getId()+" tiene: "+ d.getPalabrasValidas().size() + " palabras Validas");
@@ -151,102 +131,83 @@ public class Tests {
 				setDePalabras.add(s);
 			}
 		}
-
-
 	}
-
 	/*
-	 * Prueba unitaria de mÛdulo de c·lculo procesando 
+	 * Prueba unitaria de m√≥dulo de c√°lculo procesando 
 	 * un ejemplo realizado de forma manual documentado 
-	 * como ejemplo en el informe en el capÌtulo uno, 
+	 * como ejemplo en el informe en el cap√≠tulo uno, 
 	 * se espera el valor 0.52 (ignorar siguientes decimales).
 	 */
-
 	@Test
 	public void testPrecisionCorrecta() { //bien
 		Matrices matriz = new Matrices(setDePalabras, documentos, consultas, rels);
 		ArrayList<Precision> precisiones = new ArrayList<>();
-
 		//matriz.obtenerPrecision();
-		System.out.println("Inicio "+"Test funcionalidad b·sica");
+		System.out.println("Inicio "+"Test funcionalidad b√°sica");
 		matriz.obtenerPrecision(consultas.get(0), 4, precisiones);
 		assertTrue(precisiones.get(0).getPrecision()-0.52 <= 0.009); //comparacion de solo dos decimales
-
-		System.out.println("Fin "+"Test funcionalidad b·sica");
+		System.out.println("Fin "+"Test funcionalidad b√°sica");
 	}
-
 	/*
-	 * Prueba de unitaria al mÛdulo de c·lculo 
+	 * Prueba de unitaria al m√≥dulo de c√°lculo 
 	 * en el caso de que no existan documentos, 
-	 * se espera un valor de 0 en la precisiÛn
+	 * se espera un valor de 0 en la precisi√≥n
 	 */
 	@Test
 	public void testSinDocumentos() {
 		documentos.clear();
 		Matrices matriz = new Matrices(setDePalabras, documentos, consultas, rels);
 		ArrayList<Precision> precisiones = new ArrayList<>();
-
 		//matriz.obtenerPrecision();
 		System.out.println("Inicio "+"Test sin documentos");
 		matriz.obtenerPrecision(consultas.get(0), 4, precisiones);
 		assertTrue(precisiones.get(0).getPrecision() == 0.0f); 
-
 		System.out.println("Fin "+"Test sin documentos");
 	}
 	/*
-	 * Prueba de unitaria al mÛdulo de c·lculo en el caso que no existan palabras, 
-	 * se espera un valor de 0 en la precisiÛn
+	 * Prueba de unitaria al m√≥dulo de c√°lculo en el caso que no existan palabras, 
+	 * se espera un valor de 0 en la precisi√≥n
 	 */
 	@Test
 	public void testSinPalabras() {
 		setDePalabras.clear();
 		Matrices matriz = new Matrices(setDePalabras, documentos, consultas, rels);
 		ArrayList<Precision> precisiones = new ArrayList<>();
-
 		//matriz.obtenerPrecision();
 		System.out.println("Inicio "+"Test sin palabras");
 		matriz.obtenerPrecision(consultas.get(0), 4, precisiones);
 		System.out.println(precisiones.get(0).getPrecision());
 		assertTrue(precisiones.get(0).getPrecision().equals(0.0) );
-
 		System.out.println("Fin "+"Test sin palabras");
 	}
 	/*
-	 * Prueba de unitaria al mÛdulo de c·lculo en el caso de que exista un documento 
-	 * no inicializado, se espera que contin˙e normalmente al controlar 
-	 * la situaciÛn y que entregue el resultado 0.52.
+	 * Prueba de unitaria al m√≥dulo de c√°lculo en el caso de que exista un documento 
+	 * no inicializado, se espera que contin√∫e normalmente al controlar 
+	 * la situaci√≥n y que entregue el resultado 0.52.
 	 */
 	@Test
 	public void testDocumentoNulo() { //Puntero nulo
 		documentos.add(null);
 		Matrices matriz = new Matrices(setDePalabras, documentos, consultas, rels);
 		ArrayList<Precision> precisiones = new ArrayList<>();
-
 		//matriz.obtenerPrecision();
 		System.out.println("Inicio "+"Test documento nulo");
 		matriz.obtenerPrecision(consultas.get(0), 4, precisiones);
-
 		assertTrue(precisiones.get(0).getPrecision()-0.52 <= 0.009); //comparacion de solo dos decimales
-
-
 		System.out.println("Fin "+"Test Documento nulo");
 	}
 	/*
-	 * Prueba de unitaria al mÛdulo de c·lculo en caso de que exista una consulta no inicializada, 
-	 * se espera que contin˙e normalmente al controlar la situaciÛn y que entregue el resultado 0.52.
+	 * Prueba de unitaria al m√≥dulo de c√°lculo en caso de que exista una consulta no inicializada, 
+	 * se espera que contin√∫e normalmente al controlar la situaci√≥n y que entregue el resultado 0.52.
 	 */
 	@Test
 	public void testConsultaNula() { //Puntero nulo
 		Matrices matriz = new Matrices(setDePalabras, documentos, consultas, rels);
 		ArrayList<Precision> precisiones = new ArrayList<>();
-
 		//matriz.obtenerPrecision();
 		System.out.println("Inicio "+"Test Consulta nula");
 		matriz.obtenerPrecision(null, 4, precisiones);
 		assertTrue(precisiones.get(0).getPrecision()-0.52 <= 0.009); //comparacion de solo dos decimales
-
 		System.out.println("Fin "+"Test Consulta nula");
 	}
-
-
 }

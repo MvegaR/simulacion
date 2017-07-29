@@ -1,5 +1,4 @@
-package documentosConsultas;
-
+Ôªøpackage documentosConsultas;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -7,25 +6,24 @@ import java.util.LinkedList;
 import java.util.Scanner;
 /**
  * Clase de consultas, con identificador, query (cuerpo consulta),
- * autores, identificador detallado, palabras v·lidas (no comunes)
+ * autores, identificador detallado, palabras v√°lidas (no comunes)
  *
  * @author Marcos
  */
 public class Consulta {
-
 	/** Identificador de la consulta */
 	private Integer id; //I.
 	/** Texto de la consulta */
 	private String query; //.W
-	/** Autores de la consulta, en el proyecto no se utilizÛ pero se encuentra presente en el archivo */
+	/** Autores de la consulta, en el proyecto no se utiliz√≥ pero se encuentra presente en el archivo */
 	private ArrayList<String> autores; //.A ?
-	/** Identificador m·s detallado de la consulta, no se utilizÛ 
+	/** Identificador m√°s detallado de la consulta, no se utiliz√≥ 
 	 * en el proyecto pero se encuentra presente en el archivo */
 	private String fullId; //.N ?
-	/** Palabras v·lidas presentes en la consulta en una lista enlazada */
+	/** Palabras v√°lidas presentes en la consulta en una lista enlazada */
 	private LinkedList<String> palabrasValidas;
 	/**
-	 * Constructor consulta, inicializaciÛn de variables.
+	 * Constructor consulta, inicializaci√≥n de variables.
 	 */
 	public Consulta() {
 		this.id = 0;
@@ -41,7 +39,6 @@ public class Consulta {
 	public String toString() {
 		return "Consulta [id=" + id + ", query=" + query + ", autores=" + autores + ", fullId=" + fullId + "]";
 	}
-
 	/**
 	 * Constructor de consulta
 	 * @param id Identificador consulta
@@ -49,21 +46,17 @@ public class Consulta {
 	 * @param autores Lista de autores de la consulta
 	 * @param fullId Identificador largo de la consulta
 	 */
-
 	public Consulta(Integer id, String query, ArrayList<String> autores, String fullId) {
 		this.id = id;
 		this.query = query;
 		this.autores = autores;
 		this.fullId = fullId;
 		this.palabrasValidas = new LinkedList<>();
-
-
 	}
-
 	/**
 	 * Para generar contenido de la lista this.palabrasComunes, se quitan todas las palabras
-	 *  comunes y se deja en una lista enlazada todas las palabras en minisculas.
-	 * Se asume que todas palabras no v·lidas (comunes) se encuentran en minusculas.
+	 *  comunes y se deja en una lista enlazada todas las palabras en min√∫sculas.
+	 * Se asume que todas palabras no v√°lidas (comunes) se encuentran en min√∫sculas.
 	 * @param palabrasComunes Lista de palabras comunes para no agregar a la lista de this.palabrasValidas
 	 */
 	public void generarSetPalabras(ArrayList<String> palabrasComunes){
@@ -77,24 +70,19 @@ public class Consulta {
 					this.palabrasValidas.add(s.toLowerCase());
 				}
 			}
-
 		}
 	}
-
 	/**
 	 * Realiza la lectura de archivo de consultas y los inserta en una lista
-	 * @param origen Archivo de texto con queres, no nula.
-	 * @param consultas ColecciÛn de consultas a rellenar, no nula.
+	 * @param origen Archivo de texto con consultas, no nula.
+	 * @param consultas Colecci√≥n de consultas a rellenar, no nula.
 	 */
-
 	public static void generarConsultas(File origen, ArrayList<Consulta> consultas){
-
 		try {
 			Scanner sc = new Scanner(origen);
 			Consulta con = null;
 			String line = "";
 			Boolean bloqueo = false; //variable para controlar el caso de que exista una etiqueta sin contenido
-
 			while (sc.hasNextLine()) {
 				if(!bloqueo){
 					line = sc.nextLine();
@@ -102,7 +90,6 @@ public class Consulta {
 				}else{
 					//System.out.println(line);
 				}
-
 				if(con != null && line.contains(".A") && line.substring(0, 1).equals(".")){
 					ArrayList<String> autores = new ArrayList<String>();
 					line = sc.nextLine();
@@ -115,8 +102,6 @@ public class Consulta {
 					bloqueo = false;
 					con.setAutores(autores);
 				}
-
-
 				if(con != null && line.contains(".W")  && line.substring(0, 1).equals(".")){
 					String cuerpo = "";
 					line = sc.nextLine();
@@ -132,11 +117,6 @@ public class Consulta {
 						con.setQuery(cuerpo);
 					}
 				}
-
-
-
-
-
 				if(line.contains(".I") && line.substring(0, 1).equals(".")){
 					con = new Consulta();
 					Integer id = Integer.parseInt(line.substring(3, line.length()));
@@ -144,7 +124,6 @@ public class Consulta {
 					consultas.add(con);
 					bloqueo = false;
 				}
-
 				if(line.contains(".N") && line.substring(0, 1).equals(".")){
 					line = sc.nextLine();
 					if(!line.substring(0, 1).equals(".") && !line.equals("None")){
@@ -154,32 +133,23 @@ public class Consulta {
 						bloqueo = true;
 					}
 				}
-
-
 			}
 			sc.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-
-
 	}
-
 	/**
 	 * Solo para LISA DB: Realiza la lectura de archivo de consultas y los inserta en una lista
-	 * @param origen Archivo de texto con queries, no nula.
-	 * @param consultas ColecciÛn de consultas a rellenar, no nula.
+	 * @param origen Archivo de texto con consultas, no nula.
+	 * @param consultas Colecci√≥n de consultas a rellenar, no nula.
 	 */
-
 	public static void generarConsultasLisa(File origen, ArrayList<Consulta> consultas){
-
 		try {
 			Scanner sc = new Scanner(origen);
 			Consulta con = null;
 			String line = "";
-
 			while (sc.hasNextLine()) {
 				line = sc.nextLine();
 				con = new Consulta();
@@ -199,58 +169,80 @@ public class Consulta {
 					cuerpo+=line;
 				}
 				con.setQuery(cuerpo);
-
 			}
 			sc.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-
 	}
-
+	/**
+	 * Obtiene el ID de la consulta
+	 * @return Identificador de la consulta
+	 */
 	public Integer getId() {
 		return id;
 	}
+	/**
+	 * Obtiene el texto de la consulta
+	 * @return Cadena de texto, cuerpo de la consulta
+	 */
 	public String getQuery() {
 		return query;
 	}
+	/**
+	 * Obtiene la lista de autores
+	 * @return Arreglo de String de autores
+	 */
 	public ArrayList<String> getAutores() {
 		return autores;
 	}
+	/**
+	 * Obtiene el identificador largo de la consulta
+	 * @return Cadena de texto identifiacador de la consulta
+	 */
 	public String getFullId() {
 		return fullId;
 	}
-
+	/**
+	 * Cambia el ID de la consulta
+	 * @param id Nuevo ID
+	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
+	/**
+	 * Cambia el texto de la consulta
+	 * @param query Nuevo texto
+	 */
 	public void setQuery(String query) {
 		this.query = query;
 	}
-
+	/**
+	 * Cambia la lista de autores
+	 * @param autores Nueva lista
+	 */
 	public void setAutores(ArrayList<String> autores) {
 		this.autores = autores;
 	}
-
+	/**
+	 * Cambia el identificador largo de la consulta
+	 * @param fullId Nuevo identificador largo
+	 */
 	public void setFullId(String fullId) {
 		this.fullId = fullId;
 	}
-
 	@Override
 	public int hashCode() {
 		return id;
 	}
 	/**
-	 * Retorna la colecciÛn de palabras v·lidas, se nacesita usar con el mÈtodo generar 
-	 * @return Lista de palabras v·lidas
+	 * Retorna la colecci√≥n de palabras v√°lidas, se necesita usar con el m√©todo generar 
+	 * @return Lista de palabras v√°lidas
 	 */
 	public LinkedList<String> getPalabrasValidas() {
 		return palabrasValidas;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -267,5 +259,4 @@ public class Consulta {
 			return false;
 		return true;
 	}
-
 }

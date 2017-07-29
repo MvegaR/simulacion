@@ -1,5 +1,4 @@
-package analisis;
-
+Ôªøpackage analisis;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -7,43 +6,32 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.SortedSet;
 import java.util.TreeSet;
-
 import documentosConsultas.Consulta;
 import documentosConsultas.Documento;
 import documentosConsultas.Relevancia;
-
 /**
- * Clase principal con mÈtodo main, y algoritmo para la ejecuciÛn 
- * de cada mÛdulo del proyecto paso a paso.
- * Incluye mÈtodo para la lectura del fichero de palabras comunes
+ * Clase principal con m√©todo main, y algoritmo para la ejecuci√≥n 
+ * de cada m√≥dulo del proyecto paso a paso.
+ * Incluye m√©todo para la lectura del fichero de palabras comunes
  * @author Marcos
  */
-
 public class Generar {
-
 	/**
-	 * MÈtodo main
+	 * M√©todo main
 	 * @param args Sin uso.
 	 */
-
 	public static void main(String[] args) {
-
 		String fsp = System.getProperty("file.separator").toString();
-
 		//palabras comunes
-
 		File palabrasComunesFile = new File("files"+fsp+"cacm"+fsp+"common_words");
-
 		//Archivos BD CACM
 		//*/
 		File documentosFileCACM = new File("files"+fsp+"cacm"+fsp+"cacm.all");
 		File consultasFileCACM = new File("files"+fsp+"cacm"+fsp+"query.text");
 		File relevanciasFileCACM = new File("files"+fsp+"cacm"+fsp+"qrels.text");
-
 		getPrecisiones(null,documentosFileCACM, 
 				consultasFileCACM, relevanciasFileCACM, palabrasComunesFile, "CACM");
 		//*/
-
 		//Archivos BD MED
 		//*/
 		File documentosFileMED = new File("files"+fsp+"med"+fsp+"MED.ALL");
@@ -53,7 +41,6 @@ public class Generar {
 				consultasFileMED, relevanciasFileMED, palabrasComunesFile, "MED");
 		//*/
 		// Archivos BD CRAN
-
 		//*/
 		File documentosFileCRAN = new File("files"+fsp+"cran"+fsp+"cran.all.1400");
 		File consultasFileCRAN = new File("files"+fsp+"cran"+fsp+"cran.qry");
@@ -61,18 +48,14 @@ public class Generar {
 		getPrecisiones(null, documentosFileCRAN, 
 				consultasFileCRAN, relevanciasFileCRAN, palabrasComunesFile, "CRAN");
 		//*/
-
 		// Archivos DB CISI
 		//*/
 		File documentosFileCISI = new File("files"+fsp+"cisi"+fsp+"CISI.all");
 		File consultasFileCISI = new File("files"+fsp+"cisi"+fsp+"CISI.qry");
 		File relevanciasFileCISI = new File("files"+fsp+"cisi"+fsp+"CISI.rel");
-
 		getPrecisiones(null, documentosFileCISI, 
 				consultasFileCISI, relevanciasFileCISI, palabrasComunesFile, "CISI");
 		//*/
-
-
 		//Archivos BD LISA
 		//*/
 		ArrayList<File> documentosFilesLisa = new ArrayList<>();
@@ -89,18 +72,12 @@ public class Generar {
 		getPrecisiones(documentosFilesLisa, null, 
 				ConsultasFileLISA, RelevanciasFileLisa, palabrasComunesFile, "LISA");
 		//*/
-
-
-
-
-
 	}
-
 	/**
-	 * MÈtodo que realiza la ejecuciÛn del algoritmo para obtener matriz frecuencia, 
-	 * matriz frecuencia inversa, similitud y precisiÛn.
+	 * M√©todo que realiza la ejecuci√≥n del algoritmo para obtener matriz frecuencia, 
+	 * matriz frecuencia inversa, similitud y precisi√≥n.
 	 * @param documentosFiles Lista de Archivo con los documentos, si es null,
-	 *  el siguiente par·metro no puede serlo.
+	 *  el siguiente par√°metro no puede serlo.
 	 * @param documentosFile Archivo con los documentos
 	 * @param consultasFile Archivo con las consultas
 	 * @param relevanciasFile Archivo con la relevancia de los documentos por consulta
@@ -108,7 +85,6 @@ public class Generar {
 	 * @param nombreDB Cadena de texto con el nombre de la base de datos.
 	 * @return Lista de precisiones para ser utilizada para posibles procesos siguientes
 	 */
-
 	public static ArrayList<Precision> getPrecisiones(ArrayList<File> documentosFiles,
 			File documentosFile, File consultasFile, File relevanciasFile, 
 			File palabrasComunesFile, String nombreDB){
@@ -116,8 +92,6 @@ public class Generar {
 		ArrayList<Consulta> consultas = new ArrayList<>();
 		ArrayList<String> palabrasComunes = new ArrayList<>();
 		ArrayList<Relevancia> relevancias = new ArrayList<>();
-
-
 		if(nombreDB.equals("LISA")){
 			Documento.generarDocumentosLisa(documentosFiles, documentos);
 			Consulta.generarConsultasLisa(consultasFile, consultas);
@@ -125,8 +99,6 @@ public class Generar {
 			Documento.generarDocumentos(documentosFile, documentos);
 			Consulta.generarConsultas(consultasFile, consultas);
 		}
-
-
 		if(nombreDB.equals("MED")){
 			Relevancia.getRelevancia(relevanciasFile, relevancias, 2);
 		}else if(nombreDB.equals("LISA")){
@@ -134,21 +106,16 @@ public class Generar {
 		}else{
 			Relevancia.getRelevancia(relevanciasFile, relevancias, 1);
 		}
-
 		Generar.getPalabrasComunes(palabrasComunesFile, palabrasComunes);
-
 		for(Documento d: documentos){
 			d.generarSetPalabras(palabrasComunes);
 		}
 		for(Consulta c: consultas){
 			c.generarSetPalabras(palabrasComunes);
 		}
-
-
 		System.out.println("Documentos: "+documentos.size());
 		System.out.println("Consultas: "+consultas.size());
 		System.out.println("PalabrasComunes: "+palabrasComunes.size());
-
 		SortedSet<String> setDePalabras = new TreeSet<String>();
 		for(Documento d: documentos){
 			//System.out.println("Documento "+ d.getId()+" tiene: "+ d.getPalabrasValidas().size() + " palabras Validas");
@@ -157,37 +124,28 @@ public class Generar {
 			}
 		}
 		System.out.println("Palabras Totales sin repetir: " + setDePalabras.size());
-
 		Matrices matriz = new Matrices(setDePalabras, documentos, consultas, relevancias);
 		/*FIX REL FILE CRAN
-
 		if(nombreDB.equals("CRAN")){
 			matriz.fixFileRel();
 			System.exit(0);
 		}
 		//*/
 		ArrayList<Precision> precisiones = new ArrayList<>();
-
 		//matriz.obtenerPrecision();
 		System.out.println("Inicio "+nombreDB);
 		for(Consulta q: consultas){
 			matriz.obtenerPrecision(q, 30, precisiones);
 		}
 		System.out.println("Fin "+nombreDB);
-
-
 		return precisiones;
-
 	}
-
 	/**
-	 * MÈtodo que obtiene la lista de palabras comunes, como pronombres personales, conectores etc
+	 * M√©todo que obtiene la lista de palabras comunes, como pronombres personales, conectores etc
 	 * @param file Archivo con las palabras
 	 * @param palabras lista de palabras a rellenar con las palabras del archivo
 	 */
-
 	public static void getPalabrasComunes(File file, ArrayList<String> palabras){
-
 		try {
 			Scanner sc = new Scanner(file);
 			while(sc.hasNextLine()){
@@ -201,8 +159,5 @@ public class Generar {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-
 	}	
-
 }

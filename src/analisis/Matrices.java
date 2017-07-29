@@ -1,24 +1,18 @@
 package analisis;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.SortedSet;
-
-
 import documentosConsultas.Consulta;
 import documentosConsultas.Documento;
 import documentosConsultas.Relevancia;
-
 /**
  * Incluye los métodos para calcular las matrices de frecuencia y frecuencia inversa
  *  @author Marcos
  */
-
 public class Matrices {
-
 	/**
 	 * Clase local que relaciona un documento con un determinado 
 	 * valor de similitud calculado, para poder ordenar de mayor 
@@ -50,12 +44,9 @@ public class Matrices {
 		public Integer getIdDocumento() {
 			return idDocumento;
 		}
-
 	}//Fin clase Similitud.
-
-
 	//inicio atributos de this
-	/** Conjunto de palabras sin repetir, minusculas, ordenadas por alfabeto */
+	/** Conjunto de palabras sin repetir, minúsculas, ordenadas por alfabeto */
 	private SortedSet<String> palabras; //
 	/** Lista de lista de Integer, matriz de frecuencias */
 	private ArrayList<ArrayList<Integer>> matrizFrecuncias;
@@ -68,7 +59,6 @@ public class Matrices {
 	/** Lista de relevancias */
 	private ArrayList<Relevancia> relevancias;
 	//fin atributos
-
 	/**
 	 * Constructor, inicializador de variables
 	 * @param palabras Conjunto (SortedSet) de palabras, por definición sin 
@@ -81,7 +71,6 @@ public class Matrices {
 	 * (ArrayList, arreglo tamaño adaptativo, no lista enlazada)
 	 * 
 	 */
-
 	public Matrices(SortedSet<String> palabras, ArrayList<Documento> documentos, 
 			ArrayList<Consulta> consultas, ArrayList<Relevancia> relevancias) {
 		this.palabras = palabras;
@@ -91,8 +80,6 @@ public class Matrices {
 		this.consultas = consultas;
 		this.relevancias = relevancias;
 	}
-
-
 	/**
 	 * Obtiene la precisión de cada documento para la consulta q con un p@ entregado por parámetro
 	 * @param q Consulta a calcular precisión
@@ -100,7 +87,6 @@ public class Matrices {
 	 * @param precisiones Lista para almazenar las precisiones y utilizarlas con su respectivos idDocumentos y p@
 	 * @exception NullPointerException - ArrayList precisiones no puede ser nulo.
 	 */
-
 	public void obtenerPrecision(Consulta q, int p, ArrayList<Precision> precisiones){
 		if(precisiones == null){
 			throw new NullPointerException("ArrayList Precisiones no puede se nulo");
@@ -170,9 +156,7 @@ public class Matrices {
 						System.out.print("\t"+palabra);
 					}
 				}
-
 			}
-
 			System.out.println();
 			//System.out.println(q.getPalabrasValidas().size() +" - "+ 
 			 * getDocumento(similitudes.get(i).getIdDocumento(), documentos).getPalabrasValidas().size());
@@ -193,10 +177,6 @@ public class Matrices {
 		System.out.println("\t\t\t\t"+precision);
 		System.out.println();
 	}
-
-
-
-
 	/**
 	 * Determina si existe relevancia de entre consulta y documento, 
 	 * segun la lista de relevancias creada con el archivo de relevancias
@@ -204,7 +184,6 @@ public class Matrices {
 	 * @param idDocumento Identificador del documento
 	 * @return <b>true</b> or <b>false</b>
 	 */
-
 	private Boolean isRelevante(Integer idConsulta, Integer idDocumento){
 		for(Relevancia r: relevancias){
 			if(r.getQueryID().equals(idConsulta) && r.getDocID().equals(idDocumento)){
@@ -213,9 +192,6 @@ public class Matrices {
 		}
 		return false;
 	}
-
-
-
 	/**
 	 * Método que rellena la matriz con las frecuencias de las 
 	 * palabras (set de palabras), de cada documento.
@@ -223,7 +199,7 @@ public class Matrices {
 	 * (excluyendo documentos sin cuerpo o sin palabras), 
 	 * se crea una <b>lista</b> y se agrega a la lista de listas 
 	 * <b>matrizFrecuencias</b> (atributo de <b>this</b>)
-	 * por cada palabra se agrega a <b>lista</b> la frencuencia de 
+	 * por cada palabra se agrega a <b>lista</b> la frecuencia de 
 	 * la palabra <b>p</b> en el documento <b>d</b>
 	 * 
 	 */
@@ -287,7 +263,6 @@ public class Matrices {
 	 * @return Lista de similitudes de cada documento 
 	 */
 	public ArrayList<Similitud> calculoSimilitud(Consulta q){
-
 		ArrayList<Double> vectorQ = new ArrayList<>();
 		ArrayList<Similitud> vectorSimilitud = new ArrayList<>();
 		for(String s: palabras){
@@ -316,20 +291,16 @@ public class Matrices {
 				sumatoria3 += list.get(contador+1) *list.get(contador+1);
 				contador++;
 			}
-
 			vectorSimilitud.add(new Similitud(sumatoria/ Math.sqrt(sumatoria2*sumatoria3), list.get(0).intValue())); 
 			//list.get(0) tiene el id del documento
-
 		}
 		return vectorSimilitud;
 	}
-
 	/**
 	 * Método que entrega la cantidad de documentos que tiene la palabra entregada por parámetro
 	 * @param palabra String a buscar en los documentos
 	 * @return Retorna la cantidad calculadora
 	 */
-
 	public Integer totalDocumentos(String palabra){
 		Integer posPalabrasEnSet = -1;
 		for(String s: palabras){
@@ -346,13 +317,10 @@ public class Matrices {
 		}
 		return contador;
 	}
-
 	/**
 	 * Método para imprimir matriz de frecuencias por pantalla
 	 */
-
 	public void imprimirMatrizFrecuencias(){
-
 		Thread hilo = new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -362,18 +330,14 @@ public class Matrices {
 					}
 					System.out.println();
 				}
-
 			}
 		});
 		hilo.start();
-
-
 	}
 	/**
 	 * Método para imprimir matriz de frecuencia inversa por pantalla
 	 */
 	public void imprimirMatrizFrecuenciasInversas(){
-
 		Thread hilo = new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -383,7 +347,6 @@ public class Matrices {
 					}
 					System.out.println();
 				}
-
 			}
 		});
 		hilo.start();
@@ -402,15 +365,11 @@ public class Matrices {
 					escritor.write(consultas.get(r.getQueryID()-1).getId()+" "+r.getDocID()+"\n");
 				}
 				escritor.close();
-
 			}else{
 				System.err.println("Error al crear fichero");
 			}
-
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 	}
-
 }
-
