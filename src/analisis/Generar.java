@@ -23,25 +23,27 @@ public class Generar {
 	public static void main(String[] args) {
 		String fsp = System.getProperty("file.separator").toString();
 		//palabras comunes
-		File palabrasComunesFile = new File("files"+fsp+"cacm"+fsp+"common_words");
+
 		//Archivos BD CACM
-		//*/
+		/*/
 		File documentosFileCACM = new File("files"+fsp+"cacm"+fsp+"cacm.all");
 		File consultasFileCACM = new File("files"+fsp+"cacm"+fsp+"query.text");
 		File relevanciasFileCACM = new File("files"+fsp+"cacm"+fsp+"qrels.text");
+		File palabrasComunesFileCACM = new File("files"+fsp+"cacm"+fsp+"common_words");
 		getPrecisiones(null,documentosFileCACM, 
-				consultasFileCACM, relevanciasFileCACM, palabrasComunesFile, "CACM");
+				consultasFileCACM, relevanciasFileCACM, palabrasComunesFileCACM, "CACM");
 		//*/
 		//Archivos BD MED
 		//*/
 		File documentosFileMED = new File("files"+fsp+"med"+fsp+"MED.ALL");
 		File consultasFileMED = new File("files"+fsp+"med"+fsp+"MED.QRY");
 		File relevanciasFileMED = new File("files"+fsp+"med"+fsp+"MED.REL");
+
 		getPrecisiones(null,documentosFileMED, 
-				consultasFileMED, relevanciasFileMED, palabrasComunesFile, "MED");
+				consultasFileMED, relevanciasFileMED, null, "MED");
 		//*/
 		// Archivos BD CRAN
-		//*/
+		/*/
 		File documentosFileCRAN = new File("files"+fsp+"cran"+fsp+"cran.all.1400");
 		File consultasFileCRAN = new File("files"+fsp+"cran"+fsp+"cran.qry");
 		File relevanciasFileCRAN = new File("files"+fsp+"cran"+fsp+"cranFix.rel");
@@ -49,7 +51,7 @@ public class Generar {
 				consultasFileCRAN, relevanciasFileCRAN, palabrasComunesFile, "CRAN");
 		//*/
 		// Archivos DB CISI
-		//*/
+		/*/
 		File documentosFileCISI = new File("files"+fsp+"cisi"+fsp+"CISI.all");
 		File consultasFileCISI = new File("files"+fsp+"cisi"+fsp+"CISI.qry");
 		File relevanciasFileCISI = new File("files"+fsp+"cisi"+fsp+"CISI.rel");
@@ -57,7 +59,7 @@ public class Generar {
 				consultasFileCISI, relevanciasFileCISI, palabrasComunesFile, "CISI");
 		//*/
 		//Archivos BD LISA
-		//*/
+		/*/
 		ArrayList<File> documentosFilesLisa = new ArrayList<>();
 		documentosFilesLisa.add(new File("files"+fsp+"lisa"+fsp+"LISA0.501"));
 		documentosFilesLisa.add(new File("files"+fsp+"lisa"+fsp+"LISA1.501"));
@@ -113,6 +115,15 @@ public class Generar {
 		for(Consulta c: consultas){
 			c.generarSetPalabras(palabrasComunes);
 		}
+		/*
+		ArrayList<Documento> documentosFil = new ArrayList<>();
+		for(Documento d: documentos){
+			if(d.getPalabrasValidas().size() > 20){
+				documentosFil.add(d);
+			}
+		}
+		documentos = documentosFil;
+		//*/
 		System.out.println("Documentos: "+documentos.size());
 		System.out.println("Consultas: "+consultas.size());
 		System.out.println("PalabrasComunes: "+palabrasComunes.size());
@@ -138,6 +149,9 @@ public class Generar {
 			matriz.obtenerPrecision(q, 30, precisiones);
 		}
 		System.out.println("Fin "+nombreDB);
+		System.out.println("Tamanio");
+
+
 		return precisiones;
 	}
 	/**
@@ -146,18 +160,20 @@ public class Generar {
 	 * @param palabras lista de palabras a rellenar con las palabras del archivo
 	 */
 	public static void getPalabrasComunes(File file, ArrayList<String> palabras){
-		try {
-			Scanner sc = new Scanner(file);
-			while(sc.hasNextLine()){
-				String line = sc.nextLine();
-				if(!palabras.contains(line)){
-					palabras.add(line);
+		if(file != null){
+			try {
+				Scanner sc = new Scanner(file);
+				while(sc.hasNextLine()){
+					String line = sc.nextLine();
+					if(!palabras.contains(line)){
+						palabras.add(line);
+					}
 				}
+				sc.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			sc.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}	
 }

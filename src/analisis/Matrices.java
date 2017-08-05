@@ -4,6 +4,8 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.SortedSet;
 import documentosConsultas.Consulta;
 import documentosConsultas.Documento;
@@ -123,13 +125,13 @@ public class Matrices {
 			}else{
 				precision += (contadorDocumentosRelevantes *1.0) / (contadorTotalDocumentos*1.0);
 			}
-			//*
+			/*
 			System.out.println("\tQ"+q.getId()+" Documento: " + 
 					String.format("%4d", similitudes.get(i).getIdDocumento()) 
 			+ " Similitud: "+ String.format("%19.16f",   similitudes.get(i).getValor()) 
 			+ " Relevante: " +isRelevante(q.getId(), similitudes.get(i).getIdDocumento()));
 			//*/
-			/*
+			//* 
 			//codigo para imprimir con formato para copiar a archivo excel.
 			int r = 0;
 			if(isRelevante(q.getId(), similitudes.get(i).getIdDocumento())){
@@ -143,7 +145,7 @@ public class Matrices {
 				palabrasTotalSinRepetir.add(palabra);
 			}
 			System.out.print("\t"+ palabrasTotalSinRepetir.size());
-			if(r == 1){ //imprimir palabras relevantes presentes en el documento y consulta
+			if(true){ //imprimir palabras relevantes presentes en el documento y consulta
 				for(String palabra: q.getPalabrasValidas()){
 					if(getDocumento(similitudes.get(i).getIdDocumento(), 
 					documentos).getPalabrasValidas().contains(palabra)){
@@ -153,14 +155,15 @@ public class Matrices {
 				for(String palabra: palabrasRelevantesSinRepetir){
 					if(getDocumento(similitudes.get(i).getIdDocumento(), 
 					documentos).getPalabrasValidas().contains(palabra)){
-						System.out.print("\t"+palabra);
+						System.out.print("\t"+palabra); //!!!!!!!!!!!!!!!!
+						//System.out.print("\t"+palabra+"\t" + count(getDocumento(similitudes.get(i).getIdDocumento(), documentos).getPalabrasValidas(), palabra) ); //!!!!!!!!!!!!!!!!
+
 					}
 				}
 			}
 			System.out.println();
-			//System.out.println(q.getPalabrasValidas().size() +" - "+ 
-			 * getDocumento(similitudes.get(i).getIdDocumento(), documentos).getPalabrasValidas().size());
-			 */
+			//System.out.println(q.getPalabrasValidas().size() +" - "+ getDocumento(similitudes.get(i).getIdDocumento(), documentos).getPalabrasValidas().size());
+			 
 			//*/
 		}
 		if(contadorTotalDocumentos != 0){
@@ -177,6 +180,34 @@ public class Matrices {
 		System.out.println("\t\t\t\t"+precision);
 		System.out.println();
 	}
+	
+	private int count(LinkedList<String> lista, String elemento){
+		int c = 0;
+		for(String eli: lista){
+			if(eli.equals(elemento)){
+				c++;
+			}
+		}
+		return c;
+	}
+	
+	/**
+	 * Obtiene un documento dado su id
+	 * @param idDocumento id del documento a buscar
+	 * @param listaDocumentos lista con todos los documentos
+	 * @return Documento buscado
+	 */
+
+	private Documento getDocumento(Integer idDocumento, ArrayList<Documento> listaDocumentos){
+		for(Documento d: listaDocumentos){
+			if(d.getId().equals(idDocumento)){
+				return d;
+			}
+		}
+		return null;
+	}
+	
+	
 	/**
 	 * Determina si existe relevancia de entre consulta y documento, 
 	 * segun la lista de relevancias creada con el archivo de relevancias
@@ -244,7 +275,7 @@ public class Matrices {
 					contador++;
 					if(matrizFrecuncias.get(matrizFrecunciasInversas.size()-1).get(contador) != 0){ 
 						//no contador-1 porque tiene el id al inicio
-						lista.add(Math.log10(matrizFrecuncias.size()*1.0/ totalDocumentos(s)*1.0));
+						lista.add(Math.log10( (matrizFrecuncias.size()*1.0)/( totalDocumentos(s)*1.0)));
 					}else{
 						lista.add(0.0);
 					}
@@ -268,7 +299,7 @@ public class Matrices {
 		for(String s: palabras){
 			if(q.getPalabrasValidas().contains(s)){
 				try {
-					vectorQ.add(Math.log10(matrizFrecuncias.size()/totalDocumentos(s)));
+					vectorQ.add(Math.log10((matrizFrecuncias.size() * 1.0)/(totalDocumentos(s)*1.0)));
 				} catch (Exception e) {
 					vectorQ.add(0.0);
 				}
@@ -291,7 +322,7 @@ public class Matrices {
 				sumatoria3 += list.get(contador+1) *list.get(contador+1);
 				contador++;
 			}
-			vectorSimilitud.add(new Similitud(sumatoria/ Math.sqrt(sumatoria2*sumatoria3), list.get(0).intValue())); 
+			vectorSimilitud.add(new Similitud(sumatoria / Math.sqrt(sumatoria2*sumatoria3), list.get(0).intValue())); 
 			//list.get(0) tiene el id del documento
 		}
 		return vectorSimilitud;
