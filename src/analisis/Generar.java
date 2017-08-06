@@ -104,10 +104,10 @@ public class Generar {
 		File documentosFileTIME = new File("files"+fsp+"time"+fsp+"TIME.ALL");
 		File consultasFileTIME= new File("files"+fsp+"time"+fsp+"TIME.QUE");
 		File relevanciasFileTIME = new File("files"+fsp+"time"+fsp+"TIME.REL");
-		File palabrasComunesFileTIME = new File("files"+fsp+"time"+fsp+"TIME.STP");
+		//File palabrasComunesFileTIME = new File("files"+fsp+"time"+fsp+"TIME.STP");//No es buena
 	
 		getPrecisiones(null,documentosFileTIME, 
-				consultasFileTIME, relevanciasFileTIME, palabrasComunesFileTIME, "TIME");
+				consultasFileTIME, relevanciasFileTIME, palabrasComunesFile, "TIME");
 		//*/
 		
 		

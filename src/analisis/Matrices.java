@@ -316,7 +316,7 @@ public class Matrices {
 			Double sumatoria3 = 0.0;
 			Integer contador = 0;
 			for(Double d: vectorQ){ //vectorQ es menos largo en una unidad que list actual
-				//*/
+				/*/
 				if(d == 0.0){
 					contador++;
 					continue;
