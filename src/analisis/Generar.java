@@ -107,7 +107,7 @@ public class Generar {
 		File palabrasComunesFileTIME = new File("files"+fsp+"time"+fsp+"TIME.STP");
 	
 		getPrecisiones(null,documentosFileTIME, 
-				consultasFileTIME, relevanciasFileTIME, palabrasComunesFile, "TIME");
+				consultasFileTIME, relevanciasFileTIME, palabrasComunesFileTIME, "TIME");
 		//*/
 		
 		
