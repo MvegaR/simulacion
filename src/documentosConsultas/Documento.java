@@ -354,11 +354,21 @@ public class Documento {
 					documentos.add(doc);
 					bloqueo = false;
 				}else if(line.contains(".T") && line.substring(0, 1).equals(".")){
+					String title = sc.nextLine();
+					title = ""+title;
 					line = sc.nextLine();
+					while(sc.hasNextLine() && !line.substring(0, 1).equals(".")){
+
+						title+=line;
+						line = sc.nextLine();
+					}
 					if(!line.substring(0, 1).equals(".") && !line.equals("None")){
-						doc.setTitulo(line);
+						doc.setTitulo(title);
 						bloqueo = false;
 					}else{
+						if(doc != null && doc.getTitulo().equals("") && !title.equals("")){
+							doc.setTitulo(title);
+						}
 						bloqueo = true;
 					}
 				}else if(line.contains(".B")  && line.substring(0, 1).equals(".")){
@@ -422,6 +432,53 @@ public class Documento {
 				}
 				sc.close();
 			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Solo para BD Time: Obtiene los documentos desde un archivo de texto 
+	 * y rellena una lista entregada por parámetro de documentos generados.
+	 * @param origenes Archivo de texto con los documentos
+	 * @param documentos Lista de documentos a rellenar
+	 */
+	public static void generarDocumentosTime(File origen, ArrayList<Documento> documentos){
+		try {
+			Scanner sc = new Scanner(origen);
+			String line = "";
+			String cuerpo = null;
+			Documento doc = null;
+			while(sc.hasNextLine()){
+				line = sc.nextLine();
+				if(line.contains("*STOP")){
+					if(cuerpo != null && doc != null){
+						doc.setCuerpo(cuerpo);
+						cuerpo = null;
+						documentos.add(doc);
+					}
+
+					break;
+				}
+				if(line.contains("*TEXT")){
+					if(cuerpo != null && doc != null){
+						doc.setCuerpo(cuerpo);
+						cuerpo = null;
+						documentos.add(doc);
+					}
+					String id[] = line.split("[ ]+");
+
+					doc = new Documento();
+					doc.setId(Integer.parseInt(id[1]));
+				}else{
+					if(cuerpo == null){
+						cuerpo = "";
+					}
+					cuerpo += line;
+				}
+			}
+			sc.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

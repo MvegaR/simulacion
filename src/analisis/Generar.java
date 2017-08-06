@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.SortedSet;
 import java.util.TreeSet;
+
+import javax.annotation.Generated;
+
 import documentosConsultas.Consulta;
 import documentosConsultas.Documento;
 import documentosConsultas.Relevancia;
@@ -22,25 +25,25 @@ public class Generar {
 	 */
 	public static void main(String[] args) {
 		String fsp = System.getProperty("file.separator").toString();
-		//palabras comunes
-
+		//palabras comunes (se uso en todas ya que mejora la precisión, pero es de cran)
+		File palabrasComunesFile = new File("files"+fsp+"cacm"+fsp+"common_words");
 		//Archivos BD CACM
 		/*/
 		File documentosFileCACM = new File("files"+fsp+"cacm"+fsp+"cacm.all");
 		File consultasFileCACM = new File("files"+fsp+"cacm"+fsp+"query.text");
 		File relevanciasFileCACM = new File("files"+fsp+"cacm"+fsp+"qrels.text");
-		File palabrasComunesFileCACM = new File("files"+fsp+"cacm"+fsp+"common_words");
+		
 		getPrecisiones(null,documentosFileCACM, 
-				consultasFileCACM, relevanciasFileCACM, palabrasComunesFileCACM, "CACM");
+				consultasFileCACM, relevanciasFileCACM, palabrasComunesFile, "CACM");
 		//*/
 		//Archivos BD MED
-		//*/
+		/*/
 		File documentosFileMED = new File("files"+fsp+"med"+fsp+"MED.ALL");
 		File consultasFileMED = new File("files"+fsp+"med"+fsp+"MED.QRY");
 		File relevanciasFileMED = new File("files"+fsp+"med"+fsp+"MED.REL");
 
 		getPrecisiones(null,documentosFileMED, 
-				consultasFileMED, relevanciasFileMED, null, "MED");
+				consultasFileMED, relevanciasFileMED, palabrasComunesFile, "MED");
 		//*/
 		// Archivos BD CRAN
 		/*/
@@ -74,6 +77,40 @@ public class Generar {
 		getPrecisiones(documentosFilesLisa, null, 
 				ConsultasFileLISA, RelevanciasFileLisa, palabrasComunesFile, "LISA");
 		//*/
+		//Encontradas en internet
+		//Archivos BD ADI
+		/*/
+		File documentosFileADI = new File("files"+fsp+"adi"+fsp+"ADI.ALL");
+		File consultasFileADI = new File("files"+fsp+"adi"+fsp+"ADI.QRY");
+		File relevanciasFileADI = new File("files"+fsp+"adi"+fsp+"ADI.REL");
+
+		getPrecisiones(null,documentosFileADI, 
+				consultasFileADI, relevanciasFileADI, palabrasComunesFile, "ADI");
+		//*/
+		
+		//Archivos BD NPL (No usar, muy grande)
+		/*/
+		File documentosFileNPL = new File("files"+fsp+"npl"+fsp+"doc-text");
+		File consultasFileNPL= new File("files"+fsp+"npl"+fsp+"query-text");
+		File relevanciasFileNPL = new File("files"+fsp+"npl"+fsp+"rlv-ass");
+
+		getPrecisiones(null,documentosFileNPL, 
+				consultasFileNPL, relevanciasFileNPL, palabrasComunesFile, "NPL");
+		//*/
+		
+		
+		//Archivos BD TIME
+		//*/
+		File documentosFileTIME = new File("files"+fsp+"time"+fsp+"TIME.ALL");
+		File consultasFileTIME= new File("files"+fsp+"time"+fsp+"TIME.QUE");
+		File relevanciasFileTIME = new File("files"+fsp+"time"+fsp+"TIME.REL");
+		File palabrasComunesFileTIME = new File("files"+fsp+"time"+fsp+"TIME.STP");
+	
+		getPrecisiones(null,documentosFileTIME, 
+				consultasFileTIME, relevanciasFileTIME, palabrasComunesFile, "TIME");
+		//*/
+		
+		
 	}
 	/**
 	 * Método que realiza la ejecución del algoritmo para obtener matriz frecuencia, 
@@ -97,6 +134,9 @@ public class Generar {
 		if(nombreDB.equals("LISA")){
 			Documento.generarDocumentosLisa(documentosFiles, documentos);
 			Consulta.generarConsultasLisa(consultasFile, consultas);
+		}else if(nombreDB.equals("TIME")){
+			Documento.generarDocumentosTime(documentosFile, documentos);
+			Consulta.generarConsultasTime(consultasFile, consultas);
 		}else{
 			Documento.generarDocumentos(documentosFile, documentos);
 			Consulta.generarConsultas(consultasFile, consultas);
@@ -105,6 +145,10 @@ public class Generar {
 			Relevancia.getRelevancia(relevanciasFile, relevancias, 2);
 		}else if(nombreDB.equals("LISA")){
 			Relevancia.getRelevanciaLisa(relevanciasFile, relevancias);
+		}else if(nombreDB.equals("NPL")){
+			Relevancia.getRelevanciaNPL(relevanciasFile, relevancias);
+		}else if(nombreDB.equals("TIME")){
+			Relevancia.getRelevanciaTime(relevanciasFile, relevancias);
 		}else{
 			Relevancia.getRelevancia(relevanciasFile, relevancias, 1);
 		}
@@ -149,9 +193,15 @@ public class Generar {
 			matriz.obtenerPrecision(q, 30, precisiones);
 		}
 		System.out.println("Fin "+nombreDB);
-		System.out.println("Tamanio");
-
-
+		
+/*
+		System.out.println(consultas.get(0).getId());
+		System.out.println(consultas.get(0).getQuery());
+		System.out.println(consultas.get(0).getPalabrasValidas());
+		System.out.println(Matrices.getDocumento(334, documentos).getId());
+		System.out.println(Matrices.getDocumento(334, documentos).getCuerpo());
+		System.out.println(Matrices.getDocumento(334, documentos).getPalabrasValidas());
+		*/
 		return precisiones;
 	}
 	/**

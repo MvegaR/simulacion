@@ -26,7 +26,10 @@ public class Tests {
 		File docTest = new File("files"+fsp+"test"+fsp+"testDocumento.txt");
 		ArrayList<Documento> docs = new ArrayList<>();
 		Documento.generarDocumentos(docTest, docs);
+		
+		
 		assertTrue(docs.get(0).getId().equals(1));
+		System.out.println("Titulo:" +docs.get(0).getTitulo() );
 		assertTrue(docs.get(0).getTitulo().equals("Titulo Test"));
 		assertTrue(docs.get(0).getCuerpo().equals("Cuerpo Test"));
 	}

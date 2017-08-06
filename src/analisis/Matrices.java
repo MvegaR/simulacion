@@ -198,7 +198,7 @@ public class Matrices {
 	 * @return Documento buscado
 	 */
 
-	private Documento getDocumento(Integer idDocumento, ArrayList<Documento> listaDocumentos){
+	public static Documento getDocumento(Integer idDocumento, ArrayList<Documento> listaDocumentos){
 		for(Documento d: listaDocumentos){
 			if(d.getId().equals(idDocumento)){
 				return d;
@@ -316,13 +316,27 @@ public class Matrices {
 			Double sumatoria3 = 0.0;
 			Integer contador = 0;
 			for(Double d: vectorQ){ //vectorQ es menos largo en una unidad que list actual
+				//*/
+				if(d == 0.0){
+					contador++;
+					continue;
+				}
+				//*/
 				sumatoria += d*list.get(contador+1); 
 				// +1 porque matrizFrecunciasInversas tiene el id del documento en primer lugar
 				sumatoria2 += d*d;
 				sumatoria3 += list.get(contador+1) *list.get(contador+1);
+				
+				/*
+				if(d == 0.0){
+					System.out.println("d: "+d+", d*d: "+d*d+", sum3: "+ list.get(contador+1) *list.get(contador+1) );
+					//contador++;
+					//continue;
+				}
+				//*/
 				contador++;
 			}
-			vectorSimilitud.add(new Similitud(sumatoria / Math.sqrt(sumatoria2*sumatoria3), list.get(0).intValue())); 
+			vectorSimilitud.add(new Similitud( sumatoria / (Math.sqrt(sumatoria2) * Math.sqrt(sumatoria3)) , list.get(0).intValue())); 
 			//list.get(0) tiene el id del documento
 		}
 		return vectorSimilitud;

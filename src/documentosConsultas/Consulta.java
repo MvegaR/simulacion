@@ -176,6 +176,55 @@ public class Consulta {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Solo para BD Time: Obtiene las consultas desde un archivo de texto 
+	 * y rellena una lista entregada por parámetro de consultas generadas.
+	 * @param origenes Archivo de texto con las consultas
+	 * @param consultas Lista de consultas a rellenar
+	 */
+	public static void generarConsultasTime(File origen, ArrayList<Consulta> consultas){
+		try {
+			Scanner sc = new Scanner(origen);
+			String line = "";
+			String cuerpo = null;
+			Consulta con = null;
+			while(sc.hasNextLine()){
+				line = sc.nextLine();
+				if(line.contains("*STOP")){
+					if(cuerpo != null && con != null){
+						con.setQuery(cuerpo);
+						cuerpo = null;
+						consultas.add(con);
+					}
+					
+					break;
+				}
+				if(line.contains("*FIND")){
+					if(cuerpo != null && con != null){
+						con.setQuery(cuerpo);
+						cuerpo = null;
+						consultas.add(con);
+					}
+					String[] id = line.split("[ ]+");
+					System.out.println(id[1]);
+					con = new Consulta();
+					con.setId(Integer.parseInt(id[1]));
+				}else{
+					if(cuerpo == null){
+						cuerpo = "";
+					}
+					cuerpo += line;
+				}
+			}
+			sc.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
 	/**
 	 * Obtiene el ID de la consulta
 	 * @return Identificador de la consulta
