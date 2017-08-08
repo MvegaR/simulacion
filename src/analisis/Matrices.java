@@ -115,6 +115,7 @@ public class Matrices {
 			}
 		});
 		Double precision = 0.0;
+		Double recall = 0.0;
 		Integer contadorDocumentosRelevantes = 0;
 		Integer contadorTotalDocumentos = 0;
 		for(int i = 0; i < p && i < similitudes.size(); i++){
@@ -122,8 +123,10 @@ public class Matrices {
 			if(isRelevante(q.getId(), similitudes.get(i).getIdDocumento())){
 				contadorDocumentosRelevantes++;
 				precision += (contadorDocumentosRelevantes * 1.0) / (contadorTotalDocumentos*1.0);
+				recall += (contadorDocumentosRelevantes * 1.0) / totalRelevantes(q);
 			}else{
 				precision += (contadorDocumentosRelevantes *1.0) / (contadorTotalDocumentos*1.0);
+				recall += (contadorDocumentosRelevantes * 1.0) / totalRelevantes(q);
 			}
 			/*
 			System.out.println("\tQ"+q.getId()+" Documento: " + 
@@ -137,8 +140,13 @@ public class Matrices {
 			if(isRelevante(q.getId(), similitudes.get(i).getIdDocumento())){
 				r = 1;
 			}
+			Double relevanciaAcumulada = (double)contadorDocumentosRelevantes/(double)contadorTotalDocumentos;
+			Double recallAcumulada = (double)contadorDocumentosRelevantes/totalRelevantes(q);
+			if(recallAcumulada.isNaN()){
+				recallAcumulada = 0.0;
+			}
 			System.out.print(q.getId()+"\t" + similitudes.get(i).getIdDocumento() + "\t" +  
-			similitudes.get(i).getValor() + "\t" + r +"\t");
+			similitudes.get(i).getValor() + "\t" + r +"\t"+ relevanciaAcumulada+"\t"+ recallAcumulada);
 			HashSet<String> palabrasRelevantesSinRepetir = new HashSet<>();
 			HashSet<String> palabrasTotalSinRepetir = new HashSet<>();
 			for(String palabra: getDocumento(similitudes.get(i).getIdDocumento(), documentos).getPalabrasValidas()){
@@ -168,17 +176,32 @@ public class Matrices {
 		}
 		if(contadorTotalDocumentos != 0){
 			precision /= contadorTotalDocumentos;
+			recall /= contadorTotalDocumentos;
+			
 		}
-		if(precision.isNaN() || palabras.isEmpty()){
+		if(precision.isNaN() || palabras.isEmpty() || recall.isNaN()){
 			precision = 0.0;
+			recall = 0.0;
 		}
 		precisiones.add(new Precision(q.getId(), precision, contadorDocumentosRelevantes, p));
 		/*
 		System.out.println("\t\tPrecisión consulta Q"+q.getId()+"p@"+p+" es: "
 		+ String.format("%.10f", precision)+" Docs Relevantes: "+contadorDocumentosRelevantes+"\n");
 		//*/
-		System.out.println("\t\t\t\t"+precision);
+		System.out.println("Precisión promedio"+"\t\t\t\t"+precision);
+		System.out.println("Recall promedio"+"\t\t\t\t\t"+recall);
 		System.out.println();
+	}
+	
+	
+	private Double totalRelevantes(Consulta q){
+		Integer count = 0;
+		for(Relevancia r: relevancias){
+			if(r.getQueryID().equals(q.getId())){
+				count++;
+			}
+		}
+		return count.doubleValue();
 	}
 	
 	private int count(LinkedList<String> lista, String elemento){
@@ -255,7 +278,7 @@ public class Matrices {
 	 * se crea una <b>lista</b> de double que se almacena en una lista de listas 
 	 * (arraylist, es un arreglo, no lista enlazada),
 	 * la <b>lista</b> se rellena inicialmente con el id del documento, a continuación con 
-	 * los valores del cálculo de distancia
+	 * los valores del cálculo de frecuencia inversa
 	 * por cada palabra <b>s</b> se calcula:
 	 * log10(totalDocumentos/totalDocumentosQueTieneLaPalabra<b>S</b>
 	 * si en la matriz de frecuencias tiene el valor de cero no se realiza 
@@ -265,17 +288,22 @@ public class Matrices {
 		// log(totalDocumeºntos/cantidadOcurrenciasEnTodosLosDocumentos)
 		matrizFrecunciasInversas.clear();
 		for(Documento d: documentos){
-			if(d != null) System.out.println("Frecuencia inversa documento: "+d.getId());
-			if(d != null && !d.getPalabrasValidas().isEmpty()){//quitando documentos sin cuerpo
+			if(d != null && !d.getPalabrasValidas().isEmpty()){//quitando documentos sin cuerpo ni título
+				System.out.println("Frecuencia inversa documento: "+d.getId());
 				ArrayList<Double> lista = new ArrayList<>();
 				matrizFrecunciasInversas.add(lista);
 				lista.add(d.getId()*1.0);  //agregando id documento al inicio de cada lista (como double)
 				Integer contador = 0;
 				for(String s: palabras){
 					contador++;
+					//   frecuencias   .         documento                    . palabra  
 					if(matrizFrecuncias.get(matrizFrecunciasInversas.size()-1).get(contador) != 0){ 
 						//no contador-1 porque tiene el id al inicio
-						lista.add(Math.log10( (matrizFrecuncias.size()*1.0)/( totalDocumentos(s)*1.0)));
+						Integer totaldoc = totalDocumentos(s);
+						if(totaldoc != 0)
+							lista.add(Math.log10( (matrizFrecuncias.size()*1.0)/( totaldoc*1.0)));
+						else
+							lista.add(0.0);
 					}else{
 						lista.add(0.0);
 					}
@@ -316,27 +344,17 @@ public class Matrices {
 			Double sumatoria3 = 0.0;
 			Integer contador = 0;
 			for(Double d: vectorQ){ //vectorQ es menos largo en una unidad que list actual
-				/*/
-				if(d == 0.0){
-					contador++;
-					continue;
-				}
-				//*/
+
 				sumatoria += d*list.get(contador+1); 
 				// +1 porque matrizFrecunciasInversas tiene el id del documento en primer lugar
 				sumatoria2 += d*d;
 				sumatoria3 += list.get(contador+1) *list.get(contador+1);
-				
-				/*
-				if(d == 0.0){
-					System.out.println("d: "+d+", d*d: "+d*d+", sum3: "+ list.get(contador+1) *list.get(contador+1) );
-					//contador++;
-					//continue;
-				}
-				//*/
+
 				contador++;
 			}
-			vectorSimilitud.add(new Similitud( sumatoria / (Math.sqrt(sumatoria2) * Math.sqrt(sumatoria3)) , list.get(0).intValue())); 
+	
+			vectorSimilitud.add(new Similitud( sumatoria / (Math.sqrt(sumatoria2 * sumatoria3)) , list.get(0).intValue())); 
+			//vectorSimilitud.add(new Similitud( sumatoria /(sumatoria2 + sumatoria3 - sumatoria) , list.get(0).intValue())); 
 			//list.get(0) tiene el id del documento
 		}
 		return vectorSimilitud;
@@ -355,9 +373,11 @@ public class Matrices {
 			}
 		}
 		Integer contador = 0;
-		for(ArrayList<Integer> frecuencia: matrizFrecuncias){
-			if(frecuencia.get(posPalabrasEnSet+1) > 0){ //+1 porque la primera pos es el id del documento
-				contador++;
+		if(posPalabrasEnSet != -1){
+			for(ArrayList<Integer> frecuencia: matrizFrecuncias){
+				if(frecuencia.get(posPalabrasEnSet+1) > 0){ //+1 porque la primera pos es el id del documento
+					contador++;
+				}
 			}
 		}
 		return contador;
