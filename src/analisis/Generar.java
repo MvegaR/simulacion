@@ -178,6 +178,11 @@ public class Generar {
 				setDePalabras.add(s);
 			}
 		}
+		/*for(Consulta c: consultas){
+			for(String s: c.getPalabrasValidas()){
+				setDePalabras.add(s);
+			}
+		}*/
 		System.out.println("Palabras Totales sin repetir: " + setDePalabras.size());
 		Matrices matriz = new Matrices(setDePalabras, documentos, consultas, relevancias);
 		/*FIX REL FILE CRAN
