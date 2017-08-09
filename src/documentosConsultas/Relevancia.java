@@ -172,12 +172,12 @@ public class Relevancia {
 	}
 	
 	/**
-	 * Solo para LISA TIME: Obtiene desde un archivo la información de relevancia 
+	 * Solo para TIME y ISWC2015: Obtiene desde un archivo la información de relevancia 
 	 * de una consulta y un documento, rellenandolo en una lista con esa información
 	 * @param file Archivo con la relevancia en formato: qid did did did ...                                          
 	 * @param relevancias Listado de Relevancias a rellenar
 	 */
-	public static void getRelevanciaTime(File file, ArrayList<Relevancia> relevancias){
+	public static void getRelevanciaTIMEyISWC2015(File file, ArrayList<Relevancia> relevancias){
 		try {
 			Scanner sc = new Scanner(file);
 			while(sc.hasNextLine()){

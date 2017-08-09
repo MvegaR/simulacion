@@ -1,0 +1,105 @@
+.I 1
+.W
+Fabrication of music instruments
+.I 2
+.W
+famous German poetry
+.I 3
+.W
+Romanticism
+.I 4
+.W
+University of Edinburgh research
+.I 6
+.W
+bridge construction
+.I 7
+.W
+Walk of Fame stars
+.I 8
+.W
+Scientists who worked on the atomic bomb
+.I 9
+.W
+Invention of the Internet
+.I 10
+.W
+early telecommunication methods
+.I 12
+.W
+Who explored the South Pole
+.I 13
+.W
+famous members of the Royal Navy
+.I 14
+.W
+Nobel Prize winning inventions
+.I 16
+.W
+South America
+.I 17
+.W
+Edward Teller and Marie Curie
+.I 18
+.W
+Computing Language for the programming of Artificial Intelligence
+.I 19
+.W
+William Hearst movie
+.I 22
+.W
+How did Captain James Cook become an explorer
+.I 23
+.W
+How did Grace Hopper get famous
+.I 24
+.W
+Computers in Astronomy
+.I 25
+.W
+WWII aircraft
+.I 26
+.W
+Literary critics on Thomas Moore
+.I 27
+.W
+Nazis confiscate or destroy art and literature
+.I 28
+.W
+Modern Age in English Literature
+.I 29
+.W
+modern Physiology
+.I 32
+.W
+Roman Empire
+.I 34
+.W
+Scientists who have contributed to photosynthesis
+.I 36
+.W
+Aviation pioneers' publications
+.I 37
+.W
+Gutenberg Bible
+.I 38
+.W
+Religious beliefs of scientists and explorers
+.I 40
+.W
+Carl Friedrich Gauss influence on colleagues
+.I 41
+.W
+Personalities from Hannover
+.I 42
+.W
+Skinner's experiments with the operant conditioning chamber
+.I 44
+.W
+Napoleon's Russian Campaign
+.I 45
+.W
+Friends and enemies of Napoleon Bonaparte
+.I 46
+.W
+First woman who won a Nobel Prize

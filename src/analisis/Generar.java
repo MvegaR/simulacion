@@ -100,7 +100,7 @@ public class Generar {
 		
 		
 		//Archivos BD TIME
-		//*/
+		/*/
 		File documentosFileTIME = new File("files"+fsp+"time"+fsp+"TIME.ALL");
 		File consultasFileTIME= new File("files"+fsp+"time"+fsp+"TIME.QUE");
 		File relevanciasFileTIME = new File("files"+fsp+"time"+fsp+"TIME.REL");
@@ -108,6 +108,16 @@ public class Generar {
 	
 		getPrecisiones(null,documentosFileTIME, 
 				consultasFileTIME, relevanciasFileTIME, palabrasComunesFile, "TIME");
+		//*/
+		
+		//Archivos BD ISWC2015
+		//*/
+		File documentosFileISWC2015 = new File("files"+fsp+"iswc2015"+fsp+"docs.txt");
+		File consultasFileISWC2015= new File("files"+fsp+"iswc2015"+fsp+"qrys.txt");
+		File relevanciasFileISWC2015 = new File("files"+fsp+"iswc2015"+fsp+"rel.txt");
+	
+		getPrecisiones(null,documentosFileISWC2015, 
+				consultasFileISWC2015, relevanciasFileISWC2015, palabrasComunesFile, "ISWC2015");
 		//*/
 		
 		
@@ -147,8 +157,8 @@ public class Generar {
 			Relevancia.getRelevanciaLisa(relevanciasFile, relevancias);
 		}else if(nombreDB.equals("NPL")){
 			Relevancia.getRelevanciaNPL(relevanciasFile, relevancias);
-		}else if(nombreDB.equals("TIME")){
-			Relevancia.getRelevanciaTime(relevanciasFile, relevancias);
+		}else if(nombreDB.equals("TIME")  || nombreDB.equals("ISWC2015")){
+			Relevancia.getRelevanciaTIMEyISWC2015(relevanciasFile, relevancias);
 		}else{
 			Relevancia.getRelevancia(relevanciasFile, relevancias, 1);
 		}
@@ -168,9 +178,10 @@ public class Generar {
 		}
 		documentos = documentosFil;
 		//*/
-		System.out.println("Documentos: "+documentos.size());
-		System.out.println("Consultas: "+consultas.size());
-		System.out.println("PalabrasComunes: "+palabrasComunes.size());
+		System.out.println(nombreDB);
+		System.out.println("Documentos:\t"+documentos.size());
+		System.out.println("Consultas:\t"+consultas.size());
+		System.out.println("Palabras Comunes:\t"+palabrasComunes.size());
 		SortedSet<String> setDePalabras = new TreeSet<String>();
 		for(Documento d: documentos){
 			//System.out.println("Documento "+ d.getId()+" tiene: "+ d.getPalabrasValidas().size() + " palabras Validas");
@@ -183,7 +194,7 @@ public class Generar {
 				setDePalabras.add(s);
 			}
 		}*/
-		System.out.println("Palabras Totales sin repetir: " + setDePalabras.size());
+		System.out.println("Palabras Totales sin repetir no comunes:\t" + setDePalabras.size());
 		Matrices matriz = new Matrices(setDePalabras, documentos, consultas, relevancias);
 		/*FIX REL FILE CRAN
 		if(nombreDB.equals("CRAN")){
@@ -193,7 +204,6 @@ public class Generar {
 		//*/
 		ArrayList<Precision> precisiones = new ArrayList<>();
 		//matriz.obtenerPrecision();
-		System.out.println("Inicio "+nombreDB);
 		for(Consulta q: consultas){
 			matriz.obtenerPrecision(q, 30, precisiones);
 		}
