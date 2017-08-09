@@ -124,7 +124,7 @@ public class Matrices {
 		Integer contadorDocumentosRelevantes = 0;
 		Integer contadorTotalDocumentos = 0;
 		for(int i = 0; i < p && i < similitudes.size(); i++){
-			
+
 			contadorTotalDocumentos++;
 			if(isRelevante(q.getId(), similitudes.get(i).getIdDocumento())){
 				contadorDocumentosRelevantes++;
@@ -152,42 +152,48 @@ public class Matrices {
 				recallAcumulada = 0.0;
 			}
 			System.out.print(q.getId()+"\t" + similitudes.get(i).getIdDocumento() + "\t" +  
-			similitudes.get(i).getValor() + "\t" + r +"\t"+ relevanciaAcumulada+"\t"+ recallAcumulada);
+					similitudes.get(i).getValor() + "\t" + r +"\t"+ relevanciaAcumulada+"\t"+ recallAcumulada);
 			HashSet<String> palabrasRelevantesSinRepetir = new HashSet<>();
 			HashSet<String> palabrasTotalSinRepetir = new HashSet<>();
 			for(String palabra: getDocumento(similitudes.get(i).getIdDocumento(), documentos).getPalabrasValidas()){
 				palabrasTotalSinRepetir.add(palabra);
 			}
+			//Guardando resultado en memoria para el documento de esta consulta
+			ResultadoDoc resultadoDocumento = new ResultadoDoc(q.getId(), similitudes.get(i).getIdDocumento(), 
+					similitudes.get(i).valor, isRelevante(q.getId(), similitudes.get(i).getIdDocumento()), 
+					relevanciaAcumulada, recallAcumulada, 0);
+			resultadoConsulta.getResultadosDocumentos().add(resultadoDocumento);
+			//fin guardar
 			System.out.print("\t"+ palabrasTotalSinRepetir.size());
-			if(true){ //imprimir palabras relevantes presentes en el documento y consulta
-				for(String palabra: q.getPalabrasValidas()){
-					if(getDocumento(similitudes.get(i).getIdDocumento(), 
-					documentos).getPalabrasValidas().contains(palabra)){
-						palabrasRelevantesSinRepetir.add(palabra);
-					}
-				}
-				for(String palabra: palabrasRelevantesSinRepetir){
-					if(getDocumento(similitudes.get(i).getIdDocumento(), 
-					documentos).getPalabrasValidas().contains(palabra)){
-						System.out.print("\t"+palabra); //!!!!!!!!!!!!!!!!
-						//System.out.print("\t"+palabra+"\t" + count(getDocumento(similitudes.get(i).getIdDocumento(), documentos).getPalabrasValidas(), palabra) ); //!!!!!!!!!!!!!!!!
-
-					}
+			//imprimir palabras relevantes presentes en el documento y consulta
+			for(String palabra: q.getPalabrasValidas()){
+				if(getDocumento(similitudes.get(i).getIdDocumento(), 
+						documentos).getPalabrasValidas().contains(palabra)){
+					palabrasRelevantesSinRepetir.add(palabra);
 				}
 			}
+			for(String palabra: palabrasRelevantesSinRepetir){
+				if(getDocumento(similitudes.get(i).getIdDocumento(), 
+						documentos).getPalabrasValidas().contains(palabra)){
+					System.out.print("\t"+palabra);
+					resultadoDocumento.getWords().add(palabra);
+					//System.out.print("\t"+palabra+"\t" + count(getDocumento(similitudes.get(i).getIdDocumento(), documentos).getPalabrasValidas(), palabra) ); //!!!!!!!!!!!!!!!!
+
+				}
+			}
+			resultadoDocumento.settWords(getDocumento(similitudes.get(i).getIdDocumento(), 
+						documentos).getPalabrasValidas().size());
+
 			System.out.println();
 			//System.out.println(q.getPalabrasValidas().size() +" - "+ getDocumento(similitudes.get(i).getIdDocumento(), documentos).getPalabrasValidas().size());
-			 
+
 			//*/
-			//Guardando resultado en memoria para el documento de esta consulta
-			resultadoConsulta.getResultadosDocumentos().add(new ResultadoDoc(q.getId(), similitudes.get(i).getIdDocumento(), 
-					similitudes.get(i).valor, isRelevante(q.getId(), similitudes.get(i).getIdDocumento()), 
-					relevanciaAcumulada, 0.0, recallAcumulada));
+
 		}
 		if(contadorTotalDocumentos != 0){
 			precision /= contadorTotalDocumentos;
 			recall /= contadorTotalDocumentos;
-			
+
 		}
 		if(precision.isNaN() || palabras.isEmpty() || recall.isNaN()){
 			precision = 0.0;
@@ -207,10 +213,10 @@ public class Matrices {
 		System.out.println("Recall promedio"+"\t\t\t\t\t"+recall);
 		System.out.println("Total relevantes"+"\t\t\t\t\t"+totalRelevantes(q));
 		System.out.println();
-		
+
 	}
-	
-	
+
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -314,7 +320,7 @@ public class Matrices {
 		}
 		return count.doubleValue();
 	}
-	
+
 	@SuppressWarnings("unused")
 	private int count(LinkedList<String> lista, String elemento){
 		int c = 0;
@@ -325,7 +331,7 @@ public class Matrices {
 		}
 		return c;
 	}
-	
+
 	/**
 	 * Obtiene un documento dado su id
 	 * @param idDocumento id del documento a buscar
@@ -341,8 +347,8 @@ public class Matrices {
 		}
 		return null;
 	}
-	
-	
+
+
 	/**
 	 * Determina si existe relevancia de entre consulta y documento, 
 	 * segun la lista de relevancias creada con el archivo de relevancias
@@ -464,7 +470,7 @@ public class Matrices {
 
 				contador++;
 			}
-	
+
 			vectorSimilitud.add(new Similitud( sumatoria / (Math.sqrt(sumatoria2 * sumatoria3)) , list.get(0).intValue())); 
 			//vectorSimilitud.add(new Similitud( sumatoria /(sumatoria2 + sumatoria3 - sumatoria) , list.get(0).intValue())); 
 			//list.get(0) tiene el id del documento
@@ -498,35 +504,23 @@ public class Matrices {
 	 * Método para imprimir matriz de frecuencias por pantalla
 	 */
 	public void imprimirMatrizFrecuencias(){
-		Thread hilo = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				for(ArrayList<Integer> l: matrizFrecuncias ){
-					for(Integer s: l){
-						System.out.print(s+"\t");
-					}
-					System.out.println();
-				}
+		for(ArrayList<Integer> l: matrizFrecuncias ){
+			for(Integer s: l){
+				System.out.print(s+"\t");
 			}
-		});
-		hilo.start();
+			System.out.println();
+		}
 	}
 	/**
 	 * Método para imprimir matriz de frecuencia inversa por pantalla
 	 */
 	public void imprimirMatrizFrecuenciasInversas(){
-		Thread hilo = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				for(ArrayList<Double> l: matrizFrecunciasInversas ){
-					for(Double s: l){
-						System.out.print(s+"\t");
-					}
-					System.out.println();
-				}
+		for(ArrayList<Double> l: matrizFrecunciasInversas ){
+			for(Double s: l){
+				System.out.print(s+"\t");
 			}
-		});
-		hilo.start();
+			System.out.println();
+		}
 	}
 	/**
 	 * Método para crear un archivo de relevancia ID - Documento, 

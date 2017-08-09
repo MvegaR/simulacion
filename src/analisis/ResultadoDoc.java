@@ -16,7 +16,7 @@ public class ResultadoDoc {
 	private Boolean isRel;
 	private Double precision;
 	private Double recall;
-	private Double tWords;
+	private Integer tWords;
 	private ArrayList<String> words;
 	/**
 	 * Constructor de la clase.
@@ -30,7 +30,7 @@ public class ResultadoDoc {
 	 *
 	 */
 	public ResultadoDoc(Integer idQuery, Integer idDoc, Double disCos, Boolean isRel, Double precision,
-			Double recall, Double tWords) {
+			Double recall, Integer tWords) {
 		super();
 		this.idQuery = idQuery;
 		this.idDoc = idDoc;
@@ -157,13 +157,13 @@ public class ResultadoDoc {
 	/**
 	 * @return the tWords
 	 */
-	public Double gettWords() {
+	public Integer gettWords() {
 		return tWords;
 	}
 	/**
 	 * @param tWords the tWords to set
 	 */
-	public void settWords(Double tWords) {
+	public void settWords(Integer tWords) {
 		this.tWords = tWords;
 	}
 	/**
