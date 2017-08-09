@@ -7,7 +7,6 @@ import java.util.Scanner;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import javax.annotation.Generated;
 
 import documentosConsultas.Consulta;
 import documentosConsultas.Documento;

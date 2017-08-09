@@ -17,6 +17,7 @@ public class Tests {
 	private ArrayList<Relevancia> rels;
 	private SortedSet<String> setDePalabras;
 	private String fsp = System.getProperty("file.separator").toString();
+	private ResultadoDataSet resultadosDataset;
 	/*
 	 * Prueba unitaria de lectura de archivo de documentos, 
 	 * se espera lectura de id=1, titulo=”Titulo test” y cuerpo=”Cuerpo Test”
@@ -134,6 +135,8 @@ public class Tests {
 				setDePalabras.add(s);
 			}
 		}
+		this.resultadosDataset = new ResultadoDataSet("test", 1, 4, 6, 11);
+		
 	}
 	/*
 	 * Prueba unitaria de módulo de cálculo procesando 
@@ -143,7 +146,7 @@ public class Tests {
 	 */
 	@Test
 	public void testPrecisionCorrecta() { //bien
-		Matrices matriz = new Matrices(setDePalabras, documentos, consultas, rels);
+		Matrices matriz = new Matrices(setDePalabras, documentos, consultas, rels, resultadosDataset.getResultadosConsultas());
 		ArrayList<Precision> precisiones = new ArrayList<>();
 		//matriz.obtenerPrecision();
 		System.out.println("Inicio "+"Test funcionalidad básica");
@@ -159,7 +162,7 @@ public class Tests {
 	@Test
 	public void testSinDocumentos() {
 		documentos.clear();
-		Matrices matriz = new Matrices(setDePalabras, documentos, consultas, rels);
+		Matrices matriz = new Matrices(setDePalabras, documentos, consultas, rels, resultadosDataset.getResultadosConsultas());
 		ArrayList<Precision> precisiones = new ArrayList<>();
 		//matriz.obtenerPrecision();
 		System.out.println("Inicio "+"Test sin documentos");
@@ -174,7 +177,7 @@ public class Tests {
 	@Test
 	public void testSinPalabras() {
 		setDePalabras.clear();
-		Matrices matriz = new Matrices(setDePalabras, documentos, consultas, rels);
+		Matrices matriz = new Matrices(setDePalabras, documentos, consultas, rels, resultadosDataset.getResultadosConsultas());
 		ArrayList<Precision> precisiones = new ArrayList<>();
 		//matriz.obtenerPrecision();
 		System.out.println("Inicio "+"Test sin palabras");
@@ -191,7 +194,7 @@ public class Tests {
 	@Test
 	public void testDocumentoNulo() { //Puntero nulo
 		documentos.add(null);
-		Matrices matriz = new Matrices(setDePalabras, documentos, consultas, rels);
+		Matrices matriz = new Matrices(setDePalabras, documentos, consultas, rels, resultadosDataset.getResultadosConsultas());
 		ArrayList<Precision> precisiones = new ArrayList<>();
 		//matriz.obtenerPrecision();
 		System.out.println("Inicio "+"Test documento nulo");
@@ -205,7 +208,7 @@ public class Tests {
 	 */
 	@Test
 	public void testConsultaNula() { //Puntero nulo
-		Matrices matriz = new Matrices(setDePalabras, documentos, consultas, rels);
+		Matrices matriz = new Matrices(setDePalabras, documentos, consultas, rels, resultadosDataset.getResultadosConsultas());
 		ArrayList<Precision> precisiones = new ArrayList<>();
 		//matriz.obtenerPrecision();
 		System.out.println("Inicio "+"Test Consulta nula");

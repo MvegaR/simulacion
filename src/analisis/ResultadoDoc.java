@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @author Marcos
  *
  */
-public class ResultadoDocumento {
+public class ResultadoDoc {
 
 	private Integer idQuery;
 	private Integer idDoc;
@@ -29,7 +29,7 @@ public class ResultadoDocumento {
 	 * @param tWords total de palabras presentes en la consulta y documento
 	 *
 	 */
-	public ResultadoDocumento(Integer idQuery, Integer idDoc, Double disCos, Boolean isRel, Double precision,
+	public ResultadoDoc(Integer idQuery, Integer idDoc, Double disCos, Boolean isRel, Double precision,
 			Double recall, Double tWords) {
 		super();
 		this.idQuery = idQuery;
@@ -69,7 +69,7 @@ public class ResultadoDocumento {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ResultadoDocumento other = (ResultadoDocumento) obj;
+		ResultadoDoc other = (ResultadoDoc) obj;
 		if (idDoc == null) {
 			if (other.idDoc != null)
 				return false;

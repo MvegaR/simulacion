@@ -100,6 +100,7 @@ public class Matrices {
 		if(q == null){
 			q = new Consulta();
 		}
+		ResultadoQuery resultadoConsulta = new ResultadoQuery(p, q.getId(), 0.0, 0.0, 0,0);
 		//ArrayList<Double> precisiones = new ArrayList<>();
 		if(matrizFrecuncias.size() == 0){
 			this.obtenerFrecuencias(); //se guardan en matrizFrecuencias
@@ -123,6 +124,7 @@ public class Matrices {
 		Integer contadorDocumentosRelevantes = 0;
 		Integer contadorTotalDocumentos = 0;
 		for(int i = 0; i < p && i < similitudes.size(); i++){
+			
 			contadorTotalDocumentos++;
 			if(isRelevante(q.getId(), similitudes.get(i).getIdDocumento())){
 				contadorDocumentosRelevantes++;
@@ -177,6 +179,10 @@ public class Matrices {
 			//System.out.println(q.getPalabrasValidas().size() +" - "+ getDocumento(similitudes.get(i).getIdDocumento(), documentos).getPalabrasValidas().size());
 			 
 			//*/
+			//Guardando resultado en memoria para el documento de esta consulta
+			resultadoConsulta.getResultadosDocumentos().add(new ResultadoDoc(q.getId(), similitudes.get(i).getIdDocumento(), 
+					similitudes.get(i).valor, isRelevante(q.getId(), similitudes.get(i).getIdDocumento()), 
+					relevanciaAcumulada, 0.0, recallAcumulada));
 		}
 		if(contadorTotalDocumentos != 0){
 			precision /= contadorTotalDocumentos;
@@ -188,6 +194,11 @@ public class Matrices {
 			recall = 0.0;
 		}
 		precisiones.add(new Precision(q.getId(), precision, contadorDocumentosRelevantes, p));
+		//Guardando información en memoria la información de la consulta
+		resultadoConsulta.setPrecisionPromedio(precision);
+		resultadoConsulta.setRecallPromedio(recall);
+		resultadoConsulta.setTotalDocRelevantesTotales(totalRelevantes(q).intValue());
+		resultadoConsulta.setTotalDocReleventesDesplegados(contadorDocumentosRelevantes);
 		/*
 		System.out.println("\t\tPrecisión consulta Q"+q.getId()+"p@"+p+" es: "
 		+ String.format("%.10f", precision)+" Docs Relevantes: "+contadorDocumentosRelevantes+"\n");
@@ -196,6 +207,7 @@ public class Matrices {
 		System.out.println("Recall promedio"+"\t\t\t\t\t"+recall);
 		System.out.println("Total relevantes"+"\t\t\t\t\t"+totalRelevantes(q));
 		System.out.println();
+		
 	}
 	
 	
@@ -303,6 +315,7 @@ public class Matrices {
 		return count.doubleValue();
 	}
 	
+	@SuppressWarnings("unused")
 	private int count(LinkedList<String> lista, String elemento){
 		int c = 0;
 		for(String eli: lista){

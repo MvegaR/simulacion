@@ -13,7 +13,7 @@ public class ResultadoQuery {
 	
 	private Integer pIn;
 	private Integer idQuery;
-	private ArrayList<ResultadoDocumento> resultadosDocumentos;
+	private ArrayList<ResultadoDoc> resultadosDocumentos;
 	private Double precisionPromedio;
 	private Double recallPromedio;
 	private Integer totalDocRelevantesTotales;
@@ -25,18 +25,21 @@ public class ResultadoQuery {
 	 * @param idQuery Identificador de la consulta
 	 * @param precisionPromedio Precisión promedio resultante
 	 * @param recallPromedio Sensibilidad promedio resultante
-	 * @param totalDocRelevantesTotales Total de documentos relevantes desplegados.
+	 * @param totalDocRelevantesTotales Total de documentos relevantes para esta consulta existentes.
+	 * @param totalDocumentosRelevantesDesplegados Total de documentos relevantes que se mostraron en los resultados
 	 */
 	
 	public ResultadoQuery(Integer pIn, Integer idQuery,
-			Double precisionPromedio, Double recallPromedio, Integer totalDocRelevantesTotales) {
+			Double precisionPromedio, Double recallPromedio, Integer totalDocRelevantesTotales, 
+			Integer totalDocumentosRelevantesDesplegados) {
 		super();
 		this.pIn = pIn;
 		this.idQuery = idQuery;
-		this.resultadosDocumentos = new ArrayList<ResultadoDocumento>();
+		this.resultadosDocumentos = new ArrayList<ResultadoDoc>();
 		this.precisionPromedio = precisionPromedio;
 		this.recallPromedio = recallPromedio;
 		this.totalDocRelevantesTotales = totalDocRelevantesTotales;
+		this.totalDocReleventesDesplegados = totalDocumentosRelevantesDesplegados;
 	}
 
 	/* (non-Javadoc)
@@ -158,13 +161,13 @@ public class ResultadoQuery {
 	/**
 	 * @return the resultadosDocumentos
 	 */
-	public ArrayList<ResultadoDocumento> getResultadosDocumentos() {
+	public ArrayList<ResultadoDoc> getResultadosDocumentos() {
 		return resultadosDocumentos;
 	}
 	/**
 	 * @param resultadosDocumentos the resultadosDocumentos to set
 	 */
-	public void setResultadosDocumentos(ArrayList<ResultadoDocumento> resultadosDocumentos) {
+	public void setResultadosDocumentos(ArrayList<ResultadoDoc> resultadosDocumentos) {
 		this.resultadosDocumentos = resultadosDocumentos;
 	}
 	/**
