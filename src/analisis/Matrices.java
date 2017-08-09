@@ -60,6 +60,8 @@ public class Matrices {
 	private ArrayList<Consulta> consultas;
 	/** Lista de relevancias */
 	private ArrayList<Relevancia> relevancias;
+	/**Lista de resultados de cada cosulta */
+	private ArrayList<ResultadoQuery> resultadosConsultas;
 	//fin atributos
 	/**
 	 * Constructor, inicializador de variables
@@ -71,16 +73,18 @@ public class Matrices {
 	 * (ArrayList, arreglo tamaño adaptativo, no lista enlazada)
 	 * @param relevancias Colección de relevancia 
 	 * (ArrayList, arreglo tamaño adaptativo, no lista enlazada)
-	 * 
+	 * @param resultadosConsultas Lista de resultados de cada consulta
 	 */
 	public Matrices(SortedSet<String> palabras, ArrayList<Documento> documentos, 
-			ArrayList<Consulta> consultas, ArrayList<Relevancia> relevancias) {
+			ArrayList<Consulta> consultas, ArrayList<Relevancia> relevancias, 
+			ArrayList<ResultadoQuery> resultadosConsultas) {
 		this.palabras = palabras;
 		this.matrizFrecuncias = new ArrayList<>();
 		this.matrizFrecunciasInversas = new ArrayList<>();
 		this.documentos = documentos;
 		this.consultas = consultas;
 		this.relevancias = relevancias;
+		this.resultadosConsultas = resultadosConsultas;
 	}
 	/**
 	 * Obtiene la precisión de cada documento para la consulta q con un p@ entregado por parámetro
@@ -190,10 +194,105 @@ public class Matrices {
 		//*/
 		System.out.println("Precisión promedio"+"\t\t\t\t"+precision);
 		System.out.println("Recall promedio"+"\t\t\t\t\t"+recall);
+		System.out.println("Total relevantes"+"\t\t\t\t\t"+totalRelevantes(q));
 		System.out.println();
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Matrices [palabras=" + palabras + ", matrizFrecuncias=" + matrizFrecuncias
+				+ ", matrizFrecunciasInversas=" + matrizFrecunciasInversas + ", documentos=" + documentos
+				+ ", consultas=" + consultas + ", relevancias=" + relevancias + ", resultadosConsultas="
+				+ resultadosConsultas + "]";
+	}
+	/**
+	 * @return the palabras
+	 */
+	public SortedSet<String> getPalabras() {
+		return palabras;
+	}
+	/**
+	 * @param palabras the palabras to set
+	 */
+	public void setPalabras(SortedSet<String> palabras) {
+		this.palabras = palabras;
+	}
+	/**
+	 * @return the matrizFrecuncias
+	 */
+	public ArrayList<ArrayList<Integer>> getMatrizFrecuncias() {
+		return matrizFrecuncias;
+	}
+	/**
+	 * @param matrizFrecuncias the matrizFrecuncias to set
+	 */
+	public void setMatrizFrecuncias(ArrayList<ArrayList<Integer>> matrizFrecuncias) {
+		this.matrizFrecuncias = matrizFrecuncias;
+	}
+	/**
+	 * @return the matrizFrecunciasInversas
+	 */
+	public ArrayList<ArrayList<Double>> getMatrizFrecunciasInversas() {
+		return matrizFrecunciasInversas;
+	}
+	/**
+	 * @param matrizFrecunciasInversas the matrizFrecunciasInversas to set
+	 */
+	public void setMatrizFrecunciasInversas(ArrayList<ArrayList<Double>> matrizFrecunciasInversas) {
+		this.matrizFrecunciasInversas = matrizFrecunciasInversas;
+	}
+	/**
+	 * @return the documentos
+	 */
+	public ArrayList<Documento> getDocumentos() {
+		return documentos;
+	}
+	/**
+	 * @param documentos the documentos to set
+	 */
+	public void setDocumentos(ArrayList<Documento> documentos) {
+		this.documentos = documentos;
+	}
+	/**
+	 * @return the consultas
+	 */
+	public ArrayList<Consulta> getConsultas() {
+		return consultas;
+	}
+	/**
+	 * @param consultas the consultas to set
+	 */
+	public void setConsultas(ArrayList<Consulta> consultas) {
+		this.consultas = consultas;
+	}
+	/**
+	 * @return the relevancias
+	 */
+	public ArrayList<Relevancia> getRelevancias() {
+		return relevancias;
+	}
+	/**
+	 * @param relevancias the relevancias to set
+	 */
+	public void setRelevancias(ArrayList<Relevancia> relevancias) {
+		this.relevancias = relevancias;
+	}
+	/**
+	 * @return the resultadosConsultas
+	 */
+	public ArrayList<ResultadoQuery> getResultadosConsultas() {
+		return resultadosConsultas;
+	}
+	/**
+	 * @param resultadosConsultas the resultadosConsultas to set
+	 */
+	public void setResultadosConsultas(ArrayList<ResultadoQuery> resultadosConsultas) {
+		this.resultadosConsultas = resultadosConsultas;
+	}
 	private Double totalRelevantes(Consulta q){
 		Integer count = 0;
 		for(Relevancia r: relevancias){
