@@ -1,4 +1,4 @@
-package documentosConsultas;
+package modelo;
 /**
  * Clase de referencias no utilizada en el proyecto, corresponde a las referencias de los documentos, 
  * nacesitaba una estructura de datos abstracta nueva.

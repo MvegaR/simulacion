@@ -1,4 +1,4 @@
-﻿package test;
+﻿package Test;
 import static org.junit.Assert.*;
 import java.io.File;
 import java.util.ArrayList;
@@ -6,10 +6,13 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import org.junit.Before;
 import org.junit.Test;
-import documentosConsultas.Consulta;
-import documentosConsultas.Documento;
-import documentosConsultas.Relevancia;
-import analisis.*;
+
+import controlador.*;
+import modelo.Consulta;
+import modelo.Documento;
+import modelo.Precision;
+import modelo.Relevancia;
+import modelo.ResultadoDataSet;
 public class Tests {
 	private ArrayList<Documento> documentos;
 	private ArrayList<Consulta> consultas;

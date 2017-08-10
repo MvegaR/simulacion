@@ -1,4 +1,4 @@
-﻿package analisis;
+﻿package controlador;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -7,10 +7,11 @@ import java.util.Scanner;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-
-import documentosConsultas.Consulta;
-import documentosConsultas.Documento;
-import documentosConsultas.Relevancia;
+import modelo.Consulta;
+import modelo.Documento;
+import modelo.Precision;
+import modelo.Relevancia;
+import modelo.ResultadoDataSet;
 /**
  * Clase principal con método main, y algoritmo para la ejecución 
  * de cada módulo del proyecto paso a paso.

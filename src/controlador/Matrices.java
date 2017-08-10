@@ -1,4 +1,4 @@
-package analisis;
+package controlador;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -7,9 +7,13 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.SortedSet;
-import documentosConsultas.Consulta;
-import documentosConsultas.Documento;
-import documentosConsultas.Relevancia;
+
+import modelo.Consulta;
+import modelo.Documento;
+import modelo.Precision;
+import modelo.Relevancia;
+import modelo.ResultadoDoc;
+import modelo.ResultadoQuery;
 /**
  * Incluye los métodos para calcular las matrices de frecuencia y frecuencia inversa
  *  @author Marcos

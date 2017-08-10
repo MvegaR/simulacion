@@ -1,4 +1,4 @@
-package analisis;
+package modelo;
 
 import java.util.ArrayList;
 /**
