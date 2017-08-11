@@ -219,7 +219,9 @@ public class Generar {
 		}
 		resultadosDataSet.add(dataSet); //guardando en la lista
 		GetEquation generadorEcuacion = new GetEquation(200, dataSet);
-		generadorEcuacion.generarEquation();
+		
+		Simulador simu = new Simulador(dataSet, generadorEcuacion.generarEquation());
+		simu.imprimirParaExcelComparacion();
 		
 		System.out.println("Fin "+nombreDB);
 		
