@@ -218,6 +218,9 @@ public class Generar {
 			matriz.obtenerPrecision(q, 30, precisiones);
 		}
 		resultadosDataSet.add(dataSet); //guardando en la lista
+		GetEquationByDataSet generadorEcuacion = new GetEquationByDataSet(20, dataSet);
+		generadorEcuacion.generarEquation();
+		
 		System.out.println("Fin "+nombreDB);
 		
 		
