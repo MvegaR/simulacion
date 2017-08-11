@@ -94,13 +94,15 @@ public class Simulador {
 	
 	private Boolean isRelSim(Double sim, Double tol){
 		Boolean isRel = false;
+		Integer con = 0;
 		for(ProbabilisticInterval p: getEquation().getIntervalos()){
-			if(p.getMin().compareTo(sim) >= 0 && p.getMax().compareTo(sim) < 0){
-				if(getEquation().getProbabilidades().get(getEquation().getIntervalos().indexOf(p)).compareTo(tol) >= 0 ){
+			if(p.getMin().compareTo(sim) <= 0 && p.getMax().compareTo(sim) > 0){
+				if(getEquation().getProbabilidades().get(con).compareTo(tol) >= 0 ){
 					isRel = true;
 					return isRel;
 				}
 			}
+			con++;
 		}
 		return isRel;
 	}
