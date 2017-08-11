@@ -13,6 +13,8 @@ public class DistributionEquationByDataSet {
 		super();
 		this.cantidadIntervalos = cantidadIntervalos;
 		this.dataSet = dataSet;
+		this.intervalos = new ArrayList<>();
+		this.probabilidades = new ArrayList<>();
 	}
 	
 	
