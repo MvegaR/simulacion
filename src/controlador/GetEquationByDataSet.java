@@ -46,7 +46,6 @@ public class GetEquationByDataSet {
 			*/
 			Integer contadorDeDoc = 0;
 			Integer contadorDeDocRelevantes = 0;
-			 System.out.println(( equation.getDataSet().getResultadosConsultas()));
 			for(ResultadoQuery resQ: equation.getDataSet().getResultadosConsultas()){
 				for(ResultadoDoc resD: resQ.getResultadosDocumentos()){
 					if(resD.getDisCos().compareTo(inte.getMin()) >= 0 
@@ -54,13 +53,12 @@ public class GetEquationByDataSet {
 						contadorDeDoc++;
 						if(resD.getIsRel()){
 							contadorDeDocRelevantes++;
-							System.out.println(resD.getIdQuery() +"es relevante con" + resD.getIdDoc());
 						}
 					}
 				}
 			}
 			if(contadorDeDocRelevantes!= 0.0){
-				equation.getProbabilidades().add( (contadorDeDoc * 1.0)/(contadorDeDocRelevantes * 1.0));
+				equation.getProbabilidades().add( (contadorDeDocRelevantes * 1.0)/(contadorDeDoc * 1.0));
 			}else{
 				equation.getProbabilidades().add(0.0);
 			}
