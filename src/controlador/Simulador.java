@@ -12,6 +12,7 @@ public class Simulador {
 	private ResultadoDataSet dataSetOriginal;
 	private ResultadoDataSet dataSetSimulado;
 	private DistributionEquation equation;
+	private Double tolerancia;
 	
 	/**
 	 * @param dataSetOriginal Información del data set original {@link ResultadoDataSet}
@@ -30,6 +31,7 @@ public class Simulador {
 	 */
 	
 	public ResultadoDataSet simular(Double tolerancia){
+		this.tolerancia = tolerancia;
 		dataSetSimulado = new ResultadoDataSet(dataSetOriginal.getSetName(), dataSetOriginal.getTotalConsultas(), 
 				dataSetOriginal.getTotalConsultas(), dataSetOriginal.getTotalPalabrasComunes(), 
 				dataSetOriginal.getTotalpalabrasValidasNoComunes() );
@@ -75,8 +77,10 @@ public class Simulador {
 			}
 			Integer totalDesplegadosOriginales = getDataSetOriginal().getResultadosConsultas().get(i).getTotalDocReleventesDesplegados();
 			Integer totalDesplegadosSimulados = getDataSetSimulado().getResultadosConsultas().get(i).getTotalDocReleventesDesplegados();
-			System.out.println("Total desplegados originales:" + totalDesplegadosOriginales);
-			System.out.println("Total desplegados simulados"+ totalDesplegadosSimulados);
+			System.out.println("Total desplegados originales"+"\t" + totalDesplegadosOriginales);
+			System.out.println("Total desplegados simulados"+"\t"+ totalDesplegadosSimulados);
+			System.out.println("Tolerancia utilizada"+"\t"+tolerancia);
+			System.out.println("");
 			System.out.println("");
 		}
 	}

@@ -221,6 +221,7 @@ public class Generar {
 		GetEquation generadorEcuacion = new GetEquation(200, dataSet);
 		
 		Simulador simu = new Simulador(dataSet, generadorEcuacion.generarEquation());
+		simu.simular(0.75);
 		simu.imprimirParaExcelComparacion();
 		
 		System.out.println("Fin "+nombreDB);
