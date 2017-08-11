@@ -12,6 +12,7 @@ import modelo.Consulta;
 import modelo.Documento;
 import modelo.Precision;
 import modelo.Relevancia;
+import modelo.ResultadoDataSet;
 import modelo.ResultadoDoc;
 import modelo.ResultadoQuery;
 /**
@@ -97,7 +98,7 @@ public class Matrices {
 	 * @param precisiones Lista para almazenar las precisiones y utilizarlas con su respectivos idDocumentos y p@
 	 * @exception NullPointerException - ArrayList precisiones no puede ser nulo.
 	 */
-	public void obtenerPrecision(Consulta q, int p, ArrayList<Precision> precisiones){
+	public void obtenerPrecision(Consulta q, int p, ArrayList<Precision> precisiones, ResultadoDataSet dataSet){
 		if(precisiones == null){
 			throw new NullPointerException("ArrayList Precisiones no puede se nulo");
 		}
@@ -166,6 +167,7 @@ public class Matrices {
 			ResultadoDoc resultadoDocumento = new ResultadoDoc(q.getId(), similitudes.get(i).getIdDocumento(), 
 					similitudes.get(i).valor, isRelevante(q.getId(), similitudes.get(i).getIdDocumento()), 
 					relevanciaAcumulada, recallAcumulada, 0);
+			
 			resultadoConsulta.getResultadosDocumentos().add(resultadoDocumento);
 			//fin guardar
 			System.out.print("\t"+ palabrasTotalSinRepetir.size());
@@ -209,6 +211,7 @@ public class Matrices {
 		resultadoConsulta.setRecallPromedio(recall);
 		resultadoConsulta.setTotalDocRelevantesTotales(totalRelevantes(q).intValue());
 		resultadoConsulta.setTotalDocReleventesDesplegados(contadorDocumentosRelevantes);
+		dataSet.getResultadosConsultas().add(resultadoConsulta);
 		/*
 		System.out.println("\t\tPrecisión consulta Q"+q.getId()+"p@"+p+" es: "
 		+ String.format("%.10f", precision)+" Docs Relevantes: "+contadorDocumentosRelevantes+"\n");
@@ -217,6 +220,7 @@ public class Matrices {
 		System.out.println("Recall promedio"+"\t\t\t\t\t"+recall);
 		System.out.println("Total relevantes"+"\t\t\t\t\t"+totalRelevantes(q));
 		System.out.println();
+		
 
 	}
 

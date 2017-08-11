@@ -46,6 +46,7 @@ public class GetEquationByDataSet {
 			*/
 			Integer contadorDeDoc = 0;
 			Integer contadorDeDocRelevantes = 0;
+			 System.out.println(( equation.getDataSet().getResultadosConsultas()));
 			for(ResultadoQuery resQ: equation.getDataSet().getResultadosConsultas()){
 				for(ResultadoDoc resD: resQ.getResultadosDocumentos()){
 					if(resD.getDisCos().compareTo(inte.getMin()) >= 0 
@@ -53,14 +54,9 @@ public class GetEquationByDataSet {
 						contadorDeDoc++;
 						if(resD.getIsRel()){
 							contadorDeDocRelevantes++;
-						}
-					}else if(inte.getMax().equals(1.0) && resD.getDisCos().equals(0.0)){
-						contadorDeDoc++;
-						if(resD.getIsRel()){
-							contadorDeDocRelevantes++;
+							System.out.println(resD.getIdQuery() +"es relevante con" + resD.getIdDoc());
 						}
 					}
-					
 				}
 			}
 			if(contadorDeDocRelevantes!= 0.0){
@@ -68,7 +64,7 @@ public class GetEquationByDataSet {
 			}else{
 				equation.getProbabilidades().add(0.0);
 			}
-			System.out.println("Prob"+"min="+ inte.getMin()+" y max ="+ inte.getMax() +" es:"+equation.getProbabilidades().get(equation.getProbabilidades().size()-1).toString());
+			System.out.println("Prob int "+"min="+ inte.getMin()+" y max ="+ inte.getMax() +" es:"+equation.getProbabilidades().get(equation.getProbabilidades().size()-1).toString());
 			
 			//reniciar contadores:
 			contadorDeDoc = 0;

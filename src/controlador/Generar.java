@@ -44,7 +44,7 @@ public class Generar {
 				consultasFileCACM, relevanciasFileCACM, palabrasComunesFile, "CACM");
 		//*/
 		//Archivos BD MED
-		/*/
+		//*/
 		File documentosFileMED = new File("files"+fsp+"med"+fsp+"MED.ALL");
 		File consultasFileMED = new File("files"+fsp+"med"+fsp+"MED.QRY");
 		File relevanciasFileMED = new File("files"+fsp+"med"+fsp+"MED.REL");
@@ -53,7 +53,7 @@ public class Generar {
 				consultasFileMED, relevanciasFileMED, palabrasComunesFile, "MED");
 		//*/
 		// Archivos BD CRAN
-		//*/
+		/*/
 		File documentosFileCRAN = new File("files"+fsp+"cran"+fsp+"cran.all.1400");
 		File consultasFileCRAN = new File("files"+fsp+"cran"+fsp+"cran.qry");
 		File relevanciasFileCRAN = new File("files"+fsp+"cran"+fsp+"cranFix.rel");
@@ -215,7 +215,7 @@ public class Generar {
 		ArrayList<Precision> precisiones = new ArrayList<>();
 		//matriz.obtenerPrecision();
 		for(Consulta q: consultas){
-			matriz.obtenerPrecision(q, 30, precisiones);
+			matriz.obtenerPrecision(q, 30, precisiones, dataSet);
 		}
 		resultadosDataSet.add(dataSet); //guardando en la lista
 		GetEquationByDataSet generadorEcuacion = new GetEquationByDataSet(20, dataSet);
