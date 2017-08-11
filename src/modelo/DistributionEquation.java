@@ -2,14 +2,14 @@ package modelo;
 
 import java.util.ArrayList;
 
-public class DistributionEquationByDataSet {
+public class DistributionEquation {
 	
 	private ArrayList<ProbabilisticInterval> intervalos;
 	private ArrayList<Double> probabilidades;
 	private Integer cantidadIntervalos;
 	private ResultadoDataSet dataSet;
 	
-	public DistributionEquationByDataSet(Integer cantidadIntervalos, ResultadoDataSet dataSet) {
+	public DistributionEquation(Integer cantidadIntervalos, ResultadoDataSet dataSet) {
 		super();
 		this.cantidadIntervalos = cantidadIntervalos;
 		this.dataSet = dataSet;
@@ -95,9 +95,9 @@ public class DistributionEquationByDataSet {
 			return true;
 		if (obj == null)
 			return false;
-		if (!(obj instanceof DistributionEquationByDataSet))
+		if (!(obj instanceof DistributionEquation))
 			return false;
-		DistributionEquationByDataSet other = (DistributionEquationByDataSet) obj;
+		DistributionEquation other = (DistributionEquation) obj;
 		if (cantidadIntervalos == null) {
 			if (other.cantidadIntervalos != null)
 				return false;

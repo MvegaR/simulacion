@@ -1,27 +1,27 @@
 package controlador;
 
-import modelo.DistributionEquationByDataSet;
+import modelo.DistributionEquation;
 import modelo.ProbabilisticInterval;
 import modelo.ResultadoDataSet;
 import modelo.ResultadoDoc;
 import modelo.ResultadoQuery;
 
-public class GetEquationByDataSet {
+public class GetEquation {
 
 
-	private DistributionEquationByDataSet equation;
+	private DistributionEquation equation;
 	
 	
-	public GetEquationByDataSet(Integer cantidadIntervalos, ResultadoDataSet dataSet){
+	public GetEquation(Integer cantidadIntervalos, ResultadoDataSet dataSet){
 		if(cantidadIntervalos == null || cantidadIntervalos <= 0){
-			System.out.println("Cantidad intervalos invalido, se usará 20 por defecto");
-			cantidadIntervalos = 20;
+			System.out.println("Cantidad intervalos invalido, se usará 100 por defecto");
+			cantidadIntervalos = 100;
 		}
-		equation = new DistributionEquationByDataSet(cantidadIntervalos, dataSet);
+		equation = new DistributionEquation(cantidadIntervalos, dataSet);
 		
 	}
 	
-	public DistributionEquationByDataSet generarEquation(){
+	public DistributionEquation generarEquation(){
 		
 		generarIntervalos();
 		generarProbabilidades();
@@ -39,6 +39,8 @@ public class GetEquationByDataSet {
 	}
 	
 	private void generarProbabilidades(){
+		
+		Boolean altamenteRelevane = false;
 		for(ProbabilisticInterval inte: equation.getIntervalos()){
 			/*
 			  buscar por cada consulta la cantidad de documentos que tienen similitud
@@ -59,10 +61,17 @@ public class GetEquationByDataSet {
 			}
 			if(contadorDeDocRelevantes!= 0.0){
 				equation.getProbabilidades().add( (contadorDeDocRelevantes * 1.0)/(contadorDeDoc * 1.0));
+				if((contadorDeDocRelevantes * 1.0)/(contadorDeDoc * 1.0) >= 1.0){ 
+					//mayor por que es double, se tiene que considerar el "epsilon de máquina".
+					altamenteRelevane = true;
+				}
+			}else if(altamenteRelevane){
+				equation.getProbabilidades().add(1.0);
 			}else{
 				equation.getProbabilidades().add(0.0);
 			}
-			System.out.println("Prob int "+"min="+ inte.getMin()+" y max ="+ inte.getMax() +" es:"+equation.getProbabilidades().get(equation.getProbabilidades().size()-1).toString());
+			System.out.println("F(x) para "+inte.getMin().floatValue()+" <= X < "+ inte.getMax().floatValue() +" es: "
+			+equation.getProbabilidades().get(equation.getProbabilidades().size()-1).toString());
 			
 			//reniciar contadores:
 			contadorDeDoc = 0;
@@ -75,14 +84,14 @@ public class GetEquationByDataSet {
 	/**
 	 * @return the equation
 	 */
-	public DistributionEquationByDataSet getEquation() {
+	public DistributionEquation getEquation() {
 		return equation;
 	}
 
 	/**
 	 * @param equation the equation to set
 	 */
-	public void setEquation(DistributionEquationByDataSet equation) {
+	public void setEquation(DistributionEquation equation) {
 		this.equation = equation;
 	}
 		
