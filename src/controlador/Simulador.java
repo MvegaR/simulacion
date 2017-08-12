@@ -63,6 +63,7 @@ public class Simulador {
 	
 	public void imprimirParaExcelComparacion(){
 		for(Integer i = 0; i < getDataSetOriginal().getResultadosConsultas().size(); i++){
+			Integer totalRelevantesRealesSimulados = 0;
 			for(Integer k = 0; 
 					k < getDataSetOriginal().getResultadosConsultas().get(i).getResultadosDocumentos().size(); k++){
 				ResultadoDoc resD = getDataSetOriginal().getResultadosConsultas().get(i).getResultadosDocumentos().get(k);
@@ -74,11 +75,15 @@ public class Simulador {
 				Boolean relReal = resD.getIsRel();
 				Boolean relSimu = resSimD.getIsRel();
 				System.out.println(igual+"\t"+idQ+"\t"+idDoc+"\t"+disCos+"\t"+relReal+"\t"+relSimu);
+				if(resD.getIsRel() && resSimD.getIsRel()){
+					totalRelevantesRealesSimulados++;
+				}
 			}
 			Integer totalDesplegadosOriginales = getDataSetOriginal().getResultadosConsultas().get(i).getTotalDocReleventesDesplegados();
 			Integer totalDesplegadosSimulados = getDataSetSimulado().getResultadosConsultas().get(i).getTotalDocReleventesDesplegados();
 			System.out.println("Total desplegados originales"+"\t" + totalDesplegadosOriginales);
 			System.out.println("Total desplegados simulados"+"\t"+ totalDesplegadosSimulados);
+			System.out.println("Total relevantes originales y simulados\t"+totalRelevantesRealesSimulados);
 			System.out.println("Tolerancia utilizada"+"\t"+tolerancia);
 			System.out.println("");
 			System.out.println("");
