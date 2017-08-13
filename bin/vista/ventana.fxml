@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<BorderPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.VentanaController">
+   <opaqueInsets>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </opaqueInsets>
+   <top>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(to bottom, #f7fbfc 0%,#d9edf2 40%,#add9e4 100%);;" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" prefHeight="96.0" prefWidth="770.0" text="&quot;OBTENCIÓN DE UNA FUNCIÓN DE DISTRIBUCIÓN PROBABILÍSTICA GLOBAL PARA SIMULAR JUICIOS DE USUARIO&quot;" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Times New Roman" size="26.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </HBox>
+   </top>
+   <center>
+      <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+            <SplitPane dividerPositions="0.5" prefHeight="200.0" prefWidth="200.0">
+               <items>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <TreeView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
+                  <BorderPane prefHeight="598.0" prefWidth="341.0">
+                     <center>
+                        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
+               </items>
+            </SplitPane>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <center>
+                  <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="C1" />
+                      <TableColumn prefWidth="75.0" text="C2" />
+                    </columns>
+                  </TableView>
+               </center>
+            </BorderPane>
+        </items>
+      </SplitPane>
+   </center>
+</BorderPane>
