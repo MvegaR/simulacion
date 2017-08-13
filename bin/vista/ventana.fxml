@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -14,6 +15,11 @@
    <top>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(to bottom, #f7fbfc 0%,#d9edf2 40%,#add9e4 100%);;" BorderPane.alignment="CENTER">
          <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/logo.png" />
+               </image>
+            </ImageView>
             <Label alignment="CENTER" prefHeight="96.0" prefWidth="770.0" text="&quot;OBTENCIÓN DE UNA FUNCIÓN DE DISTRIBUCIÓN PROBABILÍSTICA GLOBAL PARA SIMULAR JUICIOS DE USUARIO&quot;" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="Times New Roman" size="26.0" />
@@ -35,19 +41,15 @@
                <items>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <TreeView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                        <TreeView fx:id="tree" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
-                  <BorderPane prefHeight="598.0" prefWidth="341.0">
-                     <center>
-                        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
-                     </center>
-                  </BorderPane>
+                  <BorderPane fx:id="panelContenido" prefHeight="598.0" prefWidth="341.0" />
                </items>
             </SplitPane>
             <BorderPane prefHeight="200.0" prefWidth="200.0">
                <center>
-                  <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                  <TableView fx:id="tablaDatos" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <columns>
                       <TableColumn prefWidth="75.0" text="C1" />
                       <TableColumn prefWidth="75.0" text="C2" />
