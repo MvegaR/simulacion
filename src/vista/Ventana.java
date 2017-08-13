@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 public class Ventana extends Application {
 
-	private final String[] dataSets = {"CACM", "MED", "CRAN", "CISI", "LISA", "ADI", "TIME", "ISWC2015"};
+	
 
 	public static void main(String[] args) {
 		

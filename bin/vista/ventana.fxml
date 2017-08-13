@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
@@ -13,38 +14,157 @@
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </opaqueInsets>
    <top>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(to bottom, #f7fbfc 0%,#d9edf2 40%,#add9e4 100%);;" BorderPane.alignment="CENTER">
+      <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(to bottom, #f7fbfc 0%,#d9edf2 40%,#add9e4 100%);;">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="96.0" fitWidth="206.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/logo.png" />
                </image>
+               <HBox.margin>
+                  <Insets left="10.0" right="25.0" top="5.0" />
+               </HBox.margin>
             </ImageView>
-            <Label alignment="CENTER" prefHeight="96.0" prefWidth="770.0" text="&quot;OBTENCIÓN DE UNA FUNCIÓN DE DISTRIBUCIÓN PROBABILÍSTICA GLOBAL PARA SIMULAR JUICIOS DE USUARIO&quot;" textAlignment="CENTER" wrapText="true">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="81.0" prefWidth="932.0" text="&quot;OBTENCIÓN DE UNA FUNCIÓN DE DISTRIBUCIÓN PROBABILÍSTICA GLOBAL PARA SIMULAR JUICIOS DE USUARIO&quot;" textAlignment="CENTER" wrapText="true">
                <font>
-                  <Font name="Times New Roman" size="26.0" />
+                  <Font name="Times New Roman" size="20.0" />
                </font>
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="40.0" right="10.0" top="10.0" />
+               </HBox.margin>
             </Label>
          </children>
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
       </HBox>
    </top>
    <center>
-      <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <SplitPane dividerPositions="0.8347245409015025" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
-            <SplitPane dividerPositions="0.5" prefHeight="200.0" prefWidth="200.0">
+            <SplitPane dividerPositions="0.31895687061183553" prefHeight="200.0" prefWidth="200.0">
                <items>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <TreeView fx:id="tree" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                        <TreeView fx:id="tree" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding></TreeView>
                      </center>
                   </BorderPane>
-                  <BorderPane fx:id="panelContenido" prefHeight="598.0" prefWidth="341.0" />
+                  <BorderPane fx:id="panelContenido" prefHeight="598.0" prefWidth="341.0">
+                     <center>
+                        <BorderPane fx:id="resumenDataSet" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <top>
+                              <VBox prefHeight="307.0" prefWidth="676.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <GridPane prefHeight="274.0" prefWidth="676.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label fx:id="labelDataSetName" text="DataSetName">
+                                             <font>
+                                                <Font name="Times New Roman Bold" size="32.0" />
+                                             </font>
+                                             <GridPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </GridPane.margin>
+                                          </Label>
+                                          <Label alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="333.0" text="Cantidad de documentos" GridPane.rowIndex="2">
+                                             <font>
+                                                <Font name="Times New Roman" size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="114.0" prefHeight="23.0" prefWidth="333.0" text="Cantidad de consultas" GridPane.rowIndex="3">
+                                             <font>
+                                                <Font name="Times New Roman" size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="160.0" prefHeight="23.0" prefWidth="333.0" text="Palabras totales comunes" GridPane.rowIndex="4">
+                                             <font>
+                                                <Font name="Times New Roman" size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="205.0" prefHeight="23.0" prefWidth="333.0" text="Palabras totales sin repetir no comunes" GridPane.rowIndex="5">
+                                             <font>
+                                                <Font name="Times New Roman" size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="labelCantidadDocumentos" alignment="CENTER" layoutX="10.0" layoutY="114.0" prefHeight="23.0" prefWidth="333.0" text="0000" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                             <font>
+                                                <Font name="Times New Roman" size="20.0" />
+                                             </font>
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                          </Label>
+                                          <Label fx:id="labelCantidadConsultas" alignment="CENTER" layoutX="348.0" layoutY="114.0" prefHeight="23.0" prefWidth="333.0" text="0000" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                             <font>
+                                                <Font name="Times New Roman" size="20.0" />
+                                             </font>
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                          </Label>
+                                          <Label fx:id="labelPalabrasTotalesComunes" alignment="CENTER" layoutX="348.0" layoutY="160.0" prefHeight="23.0" prefWidth="333.0" text="0000" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                             <font>
+                                                <Font name="Times New Roman" size="20.0" />
+                                             </font>
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                          </Label>
+                                          <Label fx:id="labelPalabrasTotalesNoComunes" alignment="CENTER" layoutX="348.0" layoutY="205.0" prefHeight="23.0" prefWidth="333.0" text="0000" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                             <font>
+                                                <Font name="Times New Roman" size="20.0" />
+                                             </font>
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                          </Label>
+                                          <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                             <children>
+                                                <ProgressBar prefHeight="27.0" prefWidth="201.0">
+                                                   <HBox.margin>
+                                                      <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+                                                   </HBox.margin>
+                                                   <effect>
+                                                      <BoxBlur />
+                                                   </effect>
+                                                </ProgressBar>
+                                                <Button mnemonicParsing="false" text="Leer Data Set">
+                                                   <HBox.margin>
+                                                      <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+                                                   </HBox.margin>
+                                                </Button>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                              </VBox>
+                           </top>
+                           <center>
+                              <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+                           </center>
+                        </BorderPane>
+                     </center>
+                  </BorderPane>
                </items>
             </SplitPane>
             <BorderPane prefHeight="200.0" prefWidth="200.0">
@@ -54,6 +174,9 @@
                       <TableColumn prefWidth="75.0" text="C1" />
                       <TableColumn prefWidth="75.0" text="C2" />
                     </columns>
+                     <BorderPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </BorderPane.margin>
                   </TableView>
                </center>
             </BorderPane>
