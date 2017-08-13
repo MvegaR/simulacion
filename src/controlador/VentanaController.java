@@ -1,14 +1,19 @@
 package controlador;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TreeView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import modelo.ResultadoDataSet;
 
 
 
@@ -24,11 +29,17 @@ public class VentanaController implements Initializable{
 	@FXML
 	private Label dataSetName;
 	
+	private final Node rootIcon = new ImageView(new Image(getClass().getResourceAsStream("dbicon.png")));
+	
+	private HashMap<String, ResultadoDataSet> mapDataSets;
+
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
 		
-		System.out.println("Test!!!!!!!!!");
+		
+		
+		
 
 		
 	}
