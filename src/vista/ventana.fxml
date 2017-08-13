@@ -44,16 +44,48 @@
       </HBox>
    </top>
    <center>
-      <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <SplitPane dividerPositions="0.8347245409015025" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
-            <SplitPane dividerPositions="0.5" prefHeight="200.0" prefWidth="200.0">
+            <SplitPane dividerPositions="0.31895687061183553" prefHeight="200.0" prefWidth="200.0">
                <items>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
                         <TreeView fx:id="tree" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
-                  <BorderPane fx:id="panelContenido" prefHeight="598.0" prefWidth="341.0" />
+                  <BorderPane fx:id="panelContenido" prefHeight="598.0" prefWidth="341.0">
+                     <center>
+                        <BorderPane fx:id="resumenDataSet" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <top>
+                              <VBox prefHeight="182.0" prefWidth="676.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <GridPane prefHeight="125.0" prefWidth="676.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label fx:id="labelDataSetName" text="DataSetName">
+                                             <font>
+                                                <Font name="Times New Roman Bold" size="32.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                              </VBox>
+                           </top>
+                           <center>
+                              <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+                           </center>
+                        </BorderPane>
+                     </center>
+                  </BorderPane>
                </items>
             </SplitPane>
             <BorderPane prefHeight="200.0" prefWidth="200.0">
