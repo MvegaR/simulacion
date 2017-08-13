@@ -15,6 +15,30 @@ public class ResultadoDataSet {
 
 	private String setName;
 	private ArrayList<ResultadoQuery> resultadosConsultas;
+	private Integer totalConsultas;
+	private Integer totalDocumentos;
+	private Integer totalPalabrasComunes;
+	private Integer totalpalabrasValidasNoComunes;
+	
+	/**
+	 * Constructor de la clase
+	 * @param setName Nombre de la base de datos
+	 * @param totalConsultas Total de consultas de la base de datos
+	 * @param totalDocumentos Total de documentos de la base de datos
+	 * @param totalPalabrasComunes Palabras comunes para no considerar
+	 * @param totalpalabrasValidasNoComunes Total de palabras únicas no comunes
+	 */
+	public ResultadoDataSet(String setName, Integer totalConsultas, Integer totalDocumentos,
+			Integer totalPalabrasComunes, Integer totalpalabrasValidasNoComunes) {
+		super();
+		this.setName = setName;
+		this.resultadosConsultas = new ArrayList<>();
+		this.totalConsultas = totalConsultas;
+		this.totalDocumentos = totalDocumentos;
+		this.totalPalabrasComunes = totalPalabrasComunes;
+		this.totalpalabrasValidasNoComunes = totalpalabrasValidasNoComunes;
+	}
+	
 	/**
 	 * @return the setName
 	 */
@@ -96,29 +120,6 @@ public class ResultadoDataSet {
 	 * @param totalpalabrasValidasNoComunes the totalpalabrasValidasNoComunes to set
 	 */
 	public void setTotalpalabrasValidasNoComunes(Integer totalpalabrasValidasNoComunes) {
-		this.totalpalabrasValidasNoComunes = totalpalabrasValidasNoComunes;
-	}
-
-	private Integer totalConsultas;
-	private Integer totalDocumentos;
-	private Integer totalPalabrasComunes;
-	private Integer totalpalabrasValidasNoComunes;
-	/**
-	 * Constructor de la clase
-	 * @param setName Nombre de la base de datos
-	 * @param totalConsultas Total de consultas de la base de datos
-	 * @param totalDocumentos Total de documentos de la base de datos
-	 * @param totalPalabrasComunes Palabras comunes para no considerar
-	 * @param totalpalabrasValidasNoComunes Total de palabras únicas no comunes
-	 */
-	public ResultadoDataSet(String setName, Integer totalConsultas, Integer totalDocumentos,
-			Integer totalPalabrasComunes, Integer totalpalabrasValidasNoComunes) {
-		super();
-		this.setName = setName;
-		this.resultadosConsultas = new ArrayList<>();
-		this.totalConsultas = totalConsultas;
-		this.totalDocumentos = totalDocumentos;
-		this.totalPalabrasComunes = totalPalabrasComunes;
 		this.totalpalabrasValidasNoComunes = totalpalabrasValidasNoComunes;
 	}
 

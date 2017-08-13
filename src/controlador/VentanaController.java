@@ -4,11 +4,14 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -29,19 +32,37 @@ public class VentanaController implements Initializable{
 	@FXML
 	private Label dataSetName;
 	
-	private final Node rootIcon = new ImageView(new Image(getClass().getResourceAsStream("dbicon.png")));
-	
 	private HashMap<String, ResultadoDataSet> mapDataSets;
 
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
+		  TreeItem<String> rootItem = new TreeItem<String> ("DataSets", null);
+		  for(String s: dataSets){
+			  TreeItem<String> itemDataSet = new TreeItem<String>(s, null);
+			  rootItem.getChildren().add(itemDataSet);
+		  }
+		  tree.getSelectionModel().selectedItemProperty().addListener(e->updateData());
+		  tree.setRoot(rootItem);
 		
-		
-		
+	}
+	
+	/**
+	 * Método de control principal para la ventana, usado en el evento de selección de ítem en el árbol
+	 * o cualquier situación de actualización de datos de la ventana
+	 * Diferencia entre selección de una base de datos para desplegar su resumen
+	 * y la selección de una consulta para desplegar el detalle
+	 */
+	
+	private void updateData() {
+		System.out.println("Change");
+		TreeItem<String> selectItem =  tree.getSelectionModel().getSelectedItem();
+		TreeItem<String> padre = tree.getSelectionModel().getSelectedItem().getParent();
+		if(padre != null && !selectItem.equals("DataSets")){
+			System.out.println("Seleccionado data set " + selectItem.getValue());
+		}
 
-		
 	}
 	
 	/**
