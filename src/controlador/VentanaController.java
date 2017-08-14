@@ -40,7 +40,7 @@ import modelo.ResultadoDataSet;
 
 
 public class VentanaController implements Initializable{
-	
+
 	private final String[] dataSets = {"CACM", "MED", "CRAN", "CISI", "LISA", "ADI", "TIME", "ISWC2015"};
 	@FXML
 	private TreeView<String> tree;
@@ -88,46 +88,46 @@ public class VentanaController implements Initializable{
 	private ToggleButton toogleButtonVerResultadoS;
 	@FXML
 	private Label labelRelAcertadas;
-	
+
 	private HashMap<String, ResultadoDataSet> mapDataSets = new HashMap<>();
 	private HashMap<String, Simulador> mapSimulador = new HashMap<>();
 	private HashMap<String, GetEquation> mapGetEquation = new HashMap<>();
-	
+
 	private HashMap<String, ArrayList<Documento>> mapDocumentos = new HashMap<>();
 	private HashMap<String, ArrayList<Consulta>> mapConsultas = new HashMap<>();
 	private HashMap<String, ArrayList<String>> mapPalabrasComunes = new HashMap<>();
 	private HashMap<String, ArrayList<Relevancia>> mapRelevancias = new HashMap<>();
 	private HashMap<String, SortedSet<String>> MapSetDePalabras = new HashMap<>();
-	
 
-	
+
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
-		  TreeItem<String> rootItem = new TreeItem<String> ("DataSets", null);
-		  for(String s: dataSets){
-			  TreeItem<String> itemDataSet = new TreeItem<String>(s, null);
-			  rootItem.getChildren().add(itemDataSet);
-		  }
-		  tree.getSelectionModel().selectedItemProperty().addListener(e->updateData());
-		  tree.setRoot(rootItem);
-		  
-		  getButtonLeerDataSet().setOnAction(e -> leerDataSet());
-		  getButtonProcesar().setOnAction(e -> procesarDataSet());
-		 
-		
+
+		TreeItem<String> rootItem = new TreeItem<String> ("DataSets", null);
+		for(String s: dataSets){
+			TreeItem<String> itemDataSet = new TreeItem<String>(s, null);
+			rootItem.getChildren().add(itemDataSet);
+		}
+		tree.getSelectionModel().selectedItemProperty().addListener(e->updateData());
+		tree.setRoot(rootItem);
+
+		getButtonLeerDataSet().setOnAction(e -> leerDataSet());
+		getButtonProcesar().setOnAction(e ->procesarDataSet());
+
+
 	}
-	
+
 	/**
 	 * Método de control principal para la ventana, usado en el evento de selección de ítem en el árbol
 	 * o cualquier situación de actualización de datos de la ventana
 	 * Diferencia entre selección de una base de datos para desplegar su resumen
 	 * y la selección de una consulta para desplegar el detalle
 	 */
-	
+
 	private void updateData() {
 		System.out.println("Tree update");
-	
+
 		TreeItem<String> selectItem =  tree.getSelectionModel().getSelectedItem();
 		TreeItem<String> padre = tree.getSelectionModel().getSelectedItem().getParent();
 		//Al seleccionar un dataset en el arbol:
@@ -145,7 +145,7 @@ public class VentanaController implements Initializable{
 				getLabelPalabrasTotalesComunes().setText("0000");
 				getLabelPalabrasTotalesNoComunes().setText("0000");
 				getCargaLecturaDataSet().setProgress(0);
-				
+
 			}else{
 				getSpinnerPin().setDisable(false);
 				getButtonProcesar().setDisable(false);
@@ -156,9 +156,9 @@ public class VentanaController implements Initializable{
 				getCargaLecturaDataSet().setProgress(1);
 			}
 			//mapDataSet
-			
+
 			//mapEquation
-			
+
 			//mapSimulation
 		}else if(padre == null){ //raiz
 			getLabelDataSetName().setText(selectItem.getValue());
@@ -192,16 +192,16 @@ public class VentanaController implements Initializable{
 		getButtonGenerarF().setDisable(true);
 		getButtonVerFuncion().setDisable(true);
 	}
-	
 
-	
-	
+
+
+
 	private void procesarDataSet(){
-		Thread hilo = new Thread(new Runnable() {
-			
+
+
+		Thread hilo = new Thread(){
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
 				String nombreDB = getLabelDataSetName().getText();
 				ResultadoDataSet dataSet = new ResultadoDataSet(nombreDB, mapConsultas.get(nombreDB).size(), 
 						mapDocumentos.get(nombreDB).size(), 
@@ -213,37 +213,44 @@ public class VentanaController implements Initializable{
 				ArrayList<Precision> precisiones = new ArrayList<>();
 				//matriz.obtenerPrecision();
 				Double con = 0.0;
+				getCargaProcesarConsultas().setProgress( 0  );
 				for(Consulta q: mapConsultas.get(nombreDB)){
-					getCargaProcesarConsultas().setProgress( (con++)/(mapConsultas.get(nombreDB).size()) );
-				
+					getCargaProcesarConsultas().setProgress( (con++)/(mapConsultas.get(nombreDB).size())  );
+
 					String value = getSpinnerPin().getValue() + "";
-					
+
 					matriz.obtenerPrecision(q, Integer.parseInt(value), precisiones, dataSet);
 				}
+				getCargaProcesarConsultas().setProgress(1.0);
 				if(mapDataSets.containsKey(nombreDB)){
 					mapDataSets.remove(mapDataSets.get(nombreDB));
 					mapDataSets.put(nombreDB, dataSet);
 				}else{
 					mapDataSets.put(nombreDB, dataSet);
 				}
+				
 			}
-		});
+		};
+
 		hilo.start();
-		
-		
 	}
-	
+
+
+
+
+
+
 	private void leerDataSet(){
 		String fsp = System.getProperty("file.separator").toString();
 		//palabras comunes (se uso en todas ya que mejora la precisión, pero es de cran)
 		File palabrasComunesFile = new File("files"+fsp+"cacm"+fsp+"common_words");
-		
+
 		ArrayList<File> documentosFiles = null;
 		File documentosFile = null; 
 		File consultasFile = null; 
 		File relevanciasFile = null;
 		String nombreDB = getLabelDataSetName().getText();
-	
+
 		if(getLabelDataSetName().getText().equals("CACM")){
 			documentosFile = new File("files"+fsp+"cacm"+fsp+"cacm.all");
 			consultasFile= new File("files"+fsp+"cacm"+fsp+"query.text");
@@ -257,12 +264,12 @@ public class VentanaController implements Initializable{
 			documentosFile= new File("files"+fsp+"cran"+fsp+"cran.all.1400");
 			consultasFile= new File("files"+fsp+"cran"+fsp+"cran.qry");
 			relevanciasFile= new File("files"+fsp+"cran"+fsp+"cranFix.rel");
-			
+
 		}else if(getLabelDataSetName().getText().equals("CISI")){
 			documentosFile= new File("files"+fsp+"cisi"+fsp+"CISI.all");
 			consultasFile= new File("files"+fsp+"cisi"+fsp+"CISI.qry");
 			relevanciasFile= new File("files"+fsp+"cisi"+fsp+"CISI.rel");
-			
+
 		}else if(getLabelDataSetName().getText().equals("LISA")){
 			documentosFiles= new ArrayList<>();
 			documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA0.501"));
@@ -275,7 +282,7 @@ public class VentanaController implements Initializable{
 			documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA5.850"));
 			consultasFile= new File("files"+fsp+"lisa"+fsp+"LISA.QUE");
 			relevanciasFile= new File("files"+fsp+"lisa"+fsp+"LISA.REL");
-			
+
 		}else if(getLabelDataSetName().getText().equals("ADI")){
 			documentosFile= new File("files"+fsp+"adi"+fsp+"ADI.ALL");
 			consultasFile= new File("files"+fsp+"adi"+fsp+"ADI.QRY");
@@ -285,7 +292,7 @@ public class VentanaController implements Initializable{
 			documentosFile= new File("files"+fsp+"time"+fsp+"TIME.ALL");
 			consultasFile= new File("files"+fsp+"time"+fsp+"TIME.QUE");
 			relevanciasFile= new File("files"+fsp+"time"+fsp+"TIME.REL");
-			
+
 		}else if(getLabelDataSetName().getText().equals("ISWC2015")){
 			documentosFile= new File("files"+fsp+"iswc2015"+fsp+"docs.txt");
 			consultasFile= new File("files"+fsp+"iswc2015"+fsp+"qrys.txt");
@@ -299,7 +306,7 @@ public class VentanaController implements Initializable{
 		ArrayList<String> palabrasComunes = new ArrayList<>();
 		ArrayList<Relevancia> relevancias = new ArrayList<>();
 		SortedSet<String> setDePalabras = new TreeSet<String>();
-		
+
 		if(nombreDB.equals("LISA")){
 			Documento.generarDocumentosLisa(documentosFiles, documentos);
 			Consulta.generarConsultasLisa(consultasFile, consultas);
@@ -328,20 +335,20 @@ public class VentanaController implements Initializable{
 		for(Consulta c: consultas){
 			c.generarSetPalabras(palabrasComunes);
 		}
-		
-		
+
+
 		for(Documento d: documentos){
 			//System.out.println("Documento "+ d.getId()+" tiene: "+ d.getPalabrasValidas().size() + " palabras Validas");
 			for(String s: d.getPalabrasValidas()){
 				setDePalabras.add(s);
 			}
 		}
-		
+
 		getLabelCantidadConsultas().setText(""+consultas.size());
 		getLabelCantidadDocumentos().setText(""+documentos.size());
 		getLabelPalabrasTotalesComunes().setText(""+palabrasComunes.size());
 		getLabelPalabrasTotalesNoComunes().setText(""+setDePalabras.size());
-		
+
 		if(mapConsultas.containsKey(nombreDB)){
 			mapConsultas.get(nombreDB).clear();
 			mapConsultas.get(nombreDB).addAll(consultas);
@@ -372,13 +379,13 @@ public class VentanaController implements Initializable{
 		}else{
 			mapRelevancias.put(nombreDB, relevancias);
 		}
-		
+
 		getCargaLecturaDataSet().setProgress(1);
 		getSpinnerPin().setDisable(false);
 		getButtonProcesar().setDisable(false);
-		
+
 	}
-	
+
 	/**
 	 * @return the tree
 	 */
@@ -833,11 +840,11 @@ public class VentanaController implements Initializable{
 	public void setMapSetDePalabras(HashMap<String, SortedSet<String>> mapSetDePalabras) {
 		MapSetDePalabras = mapSetDePalabras;
 	}
-	
-	
 
-	
-	
+
+
+
+
 
 
 }

@@ -41,6 +41,14 @@ public class GetEquation {
 	private void generarProbabilidades(){
 		
 		Boolean altamenteRelevane = false;
+		Double maxSim = 0.0;
+		for(ResultadoQuery q: equation.getDataSet().getResultadosConsultas()){
+			for(ResultadoDoc d: q.getResultadosDocumentos()){
+				if(d.getDisCos() > maxSim){
+					maxSim = d.getDisCos();
+				}
+			}
+		}
 		for(ProbabilisticInterval inte: equation.getIntervalos()){
 			/*
 			  buscar por cada consulta la cantidad de documentos que tienen similitud
@@ -65,7 +73,7 @@ public class GetEquation {
 					//mayor por que es double, se tiene que considerar el "epsilon de máquina".
 					altamenteRelevane = true;
 				}
-			}else if(altamenteRelevane){
+			}else if(altamenteRelevane || inte.getMin() > maxSim){
 				equation.getProbabilidades().add(1.0);
 			}else{
 				equation.getProbabilidades().add(0.0);
