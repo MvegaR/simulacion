@@ -123,14 +123,26 @@ public class VentanaController implements Initializable{
 		if(padre != null && !selectItem.getValue().equals("DataSets")){
 			System.out.println("Seleccionado data set " + selectItem.getValue());
 			getLabelDataSetName().setText(selectItem.getValue());
-			if(!mapConsultas.containsKey("selectItem.getValue()".toString())){
+			//mapConsultas,mapDocumentos,mapPalabrascomunes, mapSetdePalabras se trabajan en conjunto
+			if(!mapConsultas.containsKey(selectItem.getValue().toString())){
 				disableDataSetControl();
 				disableFunctionControl();
 				disableSimularControl(); 
 				getButtonLeerDataSet().setDisable(false);
+				getLabelCantidadConsultas().setText("0000");
+				getLabelCantidadDocumentos().setText("0000");
+				getLabelPalabrasTotalesComunes().setText("0000");
+				getLabelPalabrasTotalesNoComunes().setText("0000");
+				getCargaLecturaDataSet().setProgress(0);
 				
 			}else{
-				
+				getSpinnerPin().setDisable(false);
+				getButtonProcesar().setDisable(false);
+				getLabelCantidadConsultas().setText(""+mapConsultas.get(selectItem.getValue()).size());
+				getLabelCantidadDocumentos().setText(""+mapDocumentos.get(selectItem.getValue()).size());
+				getLabelPalabrasTotalesComunes().setText(""+mapPalabrasComunes.get(selectItem.getValue()).size());
+				getLabelPalabrasTotalesNoComunes().setText(""+MapSetDePalabras.get(selectItem.getValue()).size());
+				getCargaLecturaDataSet().setProgress(1);
 			}
 		}else if(padre == null){ //raiz
 			getLabelDataSetName().setText(selectItem.getValue());
