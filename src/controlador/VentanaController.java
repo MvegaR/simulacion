@@ -109,19 +109,47 @@ public class VentanaController implements Initializable{
 			System.out.println("Seleccionado data set " + selectItem.getValue());
 			getLabelDataSetName().setText(selectItem.getValue());
 			if(!mapDataSets.containsKey("selectItem.getValue()".toString())){
-				getSpinnerPin().setDisable(true);
-				getButtonProcesar().setDisable(true);
-				getSliderIntervalos().setDisable(true);
-				getSliderSensibilidad().setDisable(true);
-				getButtonProcesar().setDisable(true);
-				getButtonGenerarF().setDisable(true);
-				getButtonVerFuncion().setDisable(true);
-				getButtonSimular().setDisable(true);
-				getToobleButtonVerResultadoS().setDisable(true);
+				disableDataSetControl();
+				disableFunctionControl();
+				disableSimularControl(); 
+				getButtonLeerDataSet().setDisable(false);
 				
 			}
+		}else if(padre == null){ //raiz
+			getLabelDataSetName().setText(selectItem.getValue());
+			disableDataSetControl();
+			disableFunctionControl();
+			disableSimularControl(); 
 		}
 
+	}
+	/*
+	 * Desactiva los botones y otros controles de la sección de simular
+	 */
+	private void disableSimularControl(){
+		getSliderSensibilidad().setDisable(true);
+		getButtonSimular().setDisable(true);
+		getToobleButtonVerResultadoS().setDisable(true);
+	}
+	/*
+	 * Desactiva los botones y otros controles de la sección del dataSet
+	 */
+	private void disableDataSetControl(){
+		getButtonLeerDataSet().setDisable(true);
+		getSpinnerPin().setDisable(true);
+		getButtonProcesar().setDisable(true);
+	}
+	/*
+	 * Desactiva los botones y otros controles de la sección de la función
+	 */
+	private void disableFunctionControl(){
+		getSliderIntervalos().setDisable(true);
+		getButtonGenerarF().setDisable(true);
+		getButtonVerFuncion().setDisable(true);
+	}
+	
+	private void leerDataSet(){
+		
 	}
 	
 	/**
