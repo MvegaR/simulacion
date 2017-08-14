@@ -5,10 +5,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.effect.BoxBlur?>
 <?import javafx.scene.image.Image?>
@@ -77,8 +79,8 @@
                                  <children>
                                     <GridPane prefHeight="212.0" prefWidth="676.0" style="">
                                       <columnConstraints>
-                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="100.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="100.0" prefWidth="100.0" />
                                       </columnConstraints>
                                       <rowConstraints>
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -183,7 +185,7 @@
                                           </Label>
                                          
   
-                                          <Spinner fx:id="spinnerNumberPin" editable="false" initialValue="30" max="100" min="1">
+                                          <Spinner fx:id="spinnerPin" editable="false" initialValue="30" max="100" min="1" prefHeight="25.0" prefWidth="110.0">
                                              <HBox.margin>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                              </HBox.margin></Spinner>
@@ -196,7 +198,7 @@
                                     </HBox>
                                     <HBox prefHeight="53.0" prefWidth="676.0">
                                        <children>
-                                          <ProgressBar fx:id="cargaProcesarConsultas" prefHeight="27.0" prefWidth="1200.0" progress="0.0">
+                                          <ProgressBar fx:id="cargaProcesarConsultas" prefHeight="27.0" prefWidth="3000.0" progress="0.0">
                                              <effect>
                                                 <BoxBlur />
                                              </effect>
@@ -210,40 +212,68 @@
                               <VBox prefHeight="365.0" prefWidth="676.0" BorderPane.alignment="CENTER">
                                  <children>
                                     <Separator prefWidth="200.0" />
-                                    <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                    <BorderPane prefHeight="303.0" prefWidth="676.0">
                                        <center>
-                                          <GridPane prefHeight="229.0" prefWidth="676.0" BorderPane.alignment="CENTER">
+                                          <GridPane prefHeight="242.0" prefWidth="676.0" BorderPane.alignment="CENTER">
                                             <columnConstraints>
-                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="290.0" minWidth="10.0" prefWidth="282.0" />
-                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="290.0" minWidth="10.0" prefWidth="282.0" />
-                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="220.0" minWidth="10.0" prefWidth="113.0" />
-                                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="326.0" minWidth="10.0" prefWidth="281.0" />
-                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="326.0" minWidth="10.0" prefWidth="281.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="345.0" minWidth="10.0" percentWidth="100.0" prefWidth="332.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="339.0" minWidth="10.0" percentWidth="100.0" prefWidth="339.0" />
                                             </columnConstraints>
                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                              <children>
-                                                <Label fx:id="labelDataSetName1" text="Función">
+                                                <Label fx:id="labelDataSetName11" alignment="CENTER" layoutX="15.0" layoutY="21.0" text="Simulación" GridPane.columnIndex="1">
                                                    <font>
                                                       <Font name="Times New Roman Bold" size="26.0" />
                                                    </font>
+                                                </Label>
+                                                <Slider fx:id="sliderIntervalos" blockIncrement="1.0" majorTickUnit="10.0" max="1000.0" min="10.0" minorTickCount="1" prefHeight="38.0" prefWidth="272.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="100.0" GridPane.rowIndex="2">
                                                    <GridPane.margin>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                    </GridPane.margin>
-                                                </Label>
-                                                <Label fx:id="labelDataSetName11" alignment="CENTER" layoutX="15.0" layoutY="21.0" text="Simulación" GridPane.columnIndex="3">
+                                                </Slider>
+                                                <Label fx:id="labelDataSetName111" alignment="CENTER" layoutX="366.0" layoutY="21.0" text="Función">
                                                    <font>
                                                       <Font name="Times New Roman Bold" size="26.0" />
                                                    </font>
                                                 </Label>
-                                                <Separator orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="2" />
-                                                <Separator orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                                <Separator orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                                <Separator orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="333.0" text="Cantidad de intervalos de la función" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="Times New Roman" size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <Button fx:id="buttonGenerarF" mnemonicParsing="false" text="Generar función con 100 intervalos" GridPane.rowIndex="3" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="333.0" text="Sensibilidad de la simulación" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="Times New Roman" size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <Slider fx:id="sliderSensibilidad" blockIncrement="1.0" layoutX="15.0" layoutY="91.0" majorTickUnit="1.0" min="1.0" minorTickCount="1" prefHeight="38.0" prefWidth="272.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="50.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <Button fx:id="buttonVerFuncion" mnemonicParsing="false" text="Ver función de distribución probabística global generada" GridPane.rowIndex="5" />
+                                                <ProgressBar fx:id="cargaF" prefHeight="27.0" prefWidth="328.0" progress="0.0" GridPane.rowIndex="4">
+                                                   <effect>
+                                                      <BoxBlur />
+                                                   </effect>
+                                                </ProgressBar>
+                                                <ProgressBar fx:id="cargaS" layoutX="15.0" layoutY="147.0" prefHeight="27.0" prefWidth="328.0" progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                   <effect>
+                                                      <BoxBlur />
+                                                   </effect>
+                                                </ProgressBar>
+                                                <Button fx:id="buttonSimular" layoutX="79.0" layoutY="115.0" mnemonicParsing="false" text="Simular con sensibilidad 50" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                <ToggleButton fx:id="toogleButtonVerResultadoS" mnemonicParsing="false" text="Ver resultados simualación por consulta" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                                <Label fx:id="labelRelAcertadas" alignment="CENTER" contentDisplay="CENTER" layoutX="351.0" layoutY="65.0" prefHeight="23.0" prefWidth="333.0" text="Relevancias acertadas en simulación: " GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                                   <font>
+                                                      <Font name="Times New Roman" size="20.0" />
+                                                   </font>
+                                                </Label>
                                              </children>
                                           </GridPane>
                                        </center>

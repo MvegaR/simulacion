@@ -16,6 +16,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory;
 import javafx.scene.control.TableView;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
@@ -35,7 +36,7 @@ public class VentanaController implements Initializable{
 	@FXML
 	private TableView<String> tablaDatos;
 	@FXML
-	private Label dataSetName;
+	private Label labelDataSetName;
 	@FXML
 	private ProgressBar cargaLecturaDataSet;
 	@FXML
@@ -69,11 +70,13 @@ public class VentanaController implements Initializable{
 	@FXML
 	private ProgressBar cargaS;
 	@FXML
-	private Button buttonVerResultadoS;
+	private ToggleButton toogleButtonVerResultadoS;
 	@FXML
 	private Label labelRelAcertadas;
 	
-	private HashMap<String, ResultadoDataSet> mapDataSets;
+	private HashMap<String, ResultadoDataSet> mapDataSets = new HashMap<>();;
+	private HashMap<String, Simulador> mapSimulador = new HashMap<>();;
+	private HashMap<String, GetEquation> mapGetEquation = new HashMap<>();;
 	
 
 	
@@ -101,8 +104,22 @@ public class VentanaController implements Initializable{
 		System.out.println("Tree update");
 		TreeItem<String> selectItem =  tree.getSelectionModel().getSelectedItem();
 		TreeItem<String> padre = tree.getSelectionModel().getSelectedItem().getParent();
-		if(padre != null && !selectItem.equals("DataSets")){
+		//Al seleccionar un dataset en el arbol:
+		if(padre != null && !selectItem.getValue().equals("DataSets")){
 			System.out.println("Seleccionado data set " + selectItem.getValue());
+			getLabelDataSetName().setText(selectItem.getValue());
+			if(!mapDataSets.containsKey("selectItem.getValue()".toString())){
+				getSpinnerPin().setDisable(true);
+				getButtonProcesar().setDisable(true);
+				getSliderIntervalos().setDisable(true);
+				getSliderSensibilidad().setDisable(true);
+				getButtonProcesar().setDisable(true);
+				getButtonGenerarF().setDisable(true);
+				getButtonVerFuncion().setDisable(true);
+				getButtonSimular().setDisable(true);
+				getToobleButtonVerResultadoS().setDisable(true);
+				
+			}
 		}
 
 	}
@@ -150,17 +167,17 @@ public class VentanaController implements Initializable{
 	}
 
 	/**
-	 * @return the dataSetName
+	 * @return the labelDataSetName
 	 */
-	public Label getDataSetName() {
-		return dataSetName;
+	public Label getLabelDataSetName() {
+		return labelDataSetName;
 	}
 
 	/**
 	 * @param dataSetName the dataSetName to set
 	 */
-	public void setDataSetName(Label dataSetName) {
-		this.dataSetName = dataSetName;
+	public void setLabelDataSetName(Label labelDataSetName) {
+		this.labelDataSetName = labelDataSetName;
 	}
 
 	/**
@@ -397,15 +414,15 @@ public class VentanaController implements Initializable{
 	/**
 	 * @return the buttonVerResultadoS
 	 */
-	public Button getButtonVerResultadoS() {
-		return buttonVerResultadoS;
+	public ToggleButton getToobleButtonVerResultadoS() {
+		return toogleButtonVerResultadoS;
 	}
 
 	/**
 	 * @param buttonVerResultadoS the buttonVerResultadoS to set
 	 */
-	public void setButtonVerResultadoS(Button buttonVerResultadoS) {
-		this.buttonVerResultadoS = buttonVerResultadoS;
+	public void setToobleButtonVerResultadoS(ToggleButton toogleButtonVerResultadoS) {
+		this.toogleButtonVerResultadoS = toogleButtonVerResultadoS;
 	}
 
 	/**
