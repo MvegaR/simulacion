@@ -98,7 +98,7 @@ public class Matrices {
 	 * @param precisiones Lista para almazenar las precisiones y utilizarlas con su respectivos idDocumentos y p@
 	 * @exception NullPointerException - ArrayList precisiones no puede ser nulo.
 	 */
-	public void obtenerPrecision(Consulta q, int p, ArrayList<Precision> precisiones, ResultadoDataSet dataSet){
+	public void obtenerPrecision(Consulta q, Integer p, ArrayList<Precision> precisiones, ResultadoDataSet dataSet){
 		if(precisiones == null){
 			throw new NullPointerException("ArrayList Precisiones no puede se nulo");
 		}

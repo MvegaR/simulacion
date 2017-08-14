@@ -196,22 +196,13 @@ public class Generar {
 				setDePalabras.add(s);
 			}
 		}
-		/*for(Consulta c: consultas){
-			for(String s: c.getPalabrasValidas()){
-				setDePalabras.add(s);
-			}
-		}*/
+
 		System.out.println("Palabras Totales sin repetir no comunes:\t" + setDePalabras.size());
 		ResultadoDataSet dataSet = new ResultadoDataSet(nombreDB, consultas.size(), documentos.size(), 
 				palabrasComunes.size(),  setDePalabras.size());
 
 		Matrices matriz = new Matrices(setDePalabras, documentos, consultas, relevancias, dataSet.getResultadosConsultas());
-		/*FIX REL FILE CRAN
-		if(nombreDB.equals("CRAN")){
-			matriz.fixFileRel();
-			System.exit(0);
-		}
-		//*/
+
 		ArrayList<Precision> precisiones = new ArrayList<>();
 		//matriz.obtenerPrecision();
 		for(Consulta q: consultas){

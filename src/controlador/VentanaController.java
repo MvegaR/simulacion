@@ -8,6 +8,10 @@ import java.util.ResourceBundle;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import javax.xml.bind.ParseConversionEvent;
+
+import org.omg.CORBA.portable.ValueFactory;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -26,8 +30,10 @@ import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.util.StringConverter;
 import modelo.Consulta;
 import modelo.Documento;
+import modelo.Precision;
 import modelo.Relevancia;
 import modelo.ResultadoDataSet;
 
@@ -48,6 +54,8 @@ public class VentanaController implements Initializable{
 	private ProgressBar cargaLecturaDataSet;
 	@FXML
 	private Button buttonLeerDataSet;
+	@FXML
+	private ProgressBar cargaProcesarConsultas;
 	@FXML
 	private Label labelCantidadDocumentos;
 	@FXML
@@ -105,6 +113,8 @@ public class VentanaController implements Initializable{
 		  tree.setRoot(rootItem);
 		  
 		  getButtonLeerDataSet().setOnAction(e -> leerDataSet());
+		  getButtonProcesar().setOnAction(e -> procesarDataSet());
+		 
 		
 	}
 	
@@ -117,6 +127,7 @@ public class VentanaController implements Initializable{
 	
 	private void updateData() {
 		System.out.println("Tree update");
+	
 		TreeItem<String> selectItem =  tree.getSelectionModel().getSelectedItem();
 		TreeItem<String> padre = tree.getSelectionModel().getSelectedItem().getParent();
 		//Al seleccionar un dataset en el arbol:
@@ -144,6 +155,11 @@ public class VentanaController implements Initializable{
 				getLabelPalabrasTotalesNoComunes().setText(""+MapSetDePalabras.get(selectItem.getValue()).size());
 				getCargaLecturaDataSet().setProgress(1);
 			}
+			//mapDataSet
+			
+			//mapEquation
+			
+			//mapSimulation
 		}else if(padre == null){ //raiz
 			getLabelDataSetName().setText(selectItem.getValue());
 			disableDataSetControl();
@@ -175,6 +191,46 @@ public class VentanaController implements Initializable{
 		getSliderIntervalos().setDisable(true);
 		getButtonGenerarF().setDisable(true);
 		getButtonVerFuncion().setDisable(true);
+	}
+	
+
+	
+	
+	private void procesarDataSet(){
+		Thread hilo = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				String nombreDB = getLabelDataSetName().getText();
+				ResultadoDataSet dataSet = new ResultadoDataSet(nombreDB, mapConsultas.get(nombreDB).size(), 
+						mapDocumentos.get(nombreDB).size(), 
+						mapPalabrasComunes.get(nombreDB).size(),  MapSetDePalabras.get(nombreDB).size());
+
+				Matrices matriz = new Matrices(MapSetDePalabras.get(nombreDB), mapDocumentos.get(nombreDB), 
+						mapConsultas.get(nombreDB), mapRelevancias.get(nombreDB), dataSet.getResultadosConsultas());
+
+				ArrayList<Precision> precisiones = new ArrayList<>();
+				//matriz.obtenerPrecision();
+				Double con = 0.0;
+				for(Consulta q: mapConsultas.get(nombreDB)){
+					getCargaProcesarConsultas().setProgress( (con++)/(mapConsultas.get(nombreDB).size()) );
+				
+					String value = getSpinnerPin().getValue() + "";
+					
+					matriz.obtenerPrecision(q, Integer.parseInt(value), precisiones, dataSet);
+				}
+				if(mapDataSets.containsKey(nombreDB)){
+					mapDataSets.remove(mapDataSets.get(nombreDB));
+					mapDataSets.put(nombreDB, dataSet);
+				}else{
+					mapDataSets.put(nombreDB, dataSet);
+				}
+			}
+		});
+		hilo.start();
+		
+		
 	}
 	
 	private void leerDataSet(){
@@ -309,6 +365,12 @@ public class VentanaController implements Initializable{
 			MapSetDePalabras.get(nombreDB).addAll(setDePalabras);
 		}else{
 			MapSetDePalabras.put(nombreDB, setDePalabras);
+		}
+		if(mapRelevancias.containsKey(nombreDB)){
+			mapRelevancias.get(nombreDB).clear();
+			mapRelevancias.get(nombreDB).addAll(relevancias);
+		}else{
+			mapRelevancias.put(nombreDB, relevancias);
 		}
 		
 		getCargaLecturaDataSet().setProgress(1);
@@ -645,6 +707,134 @@ public class VentanaController implements Initializable{
 	public void setMapDataSets(HashMap<String, ResultadoDataSet> mapDataSets) {
 		this.mapDataSets = mapDataSets;
 	}
+
+	/**
+	 * @return the cargaProcesarConsultas
+	 */
+	public ProgressBar getCargaProcesarConsultas() {
+		return cargaProcesarConsultas;
+	}
+
+	/**
+	 * @param cargaProcesarConsultas the cargaProcesarConsultas to set
+	 */
+	public void setCargaProcesarConsultas(ProgressBar cargaProcesarConsultas) {
+		this.cargaProcesarConsultas = cargaProcesarConsultas;
+	}
+
+	/**
+	 * @return the toogleButtonVerResultadoS
+	 */
+	public ToggleButton getToogleButtonVerResultadoS() {
+		return toogleButtonVerResultadoS;
+	}
+
+	/**
+	 * @param toogleButtonVerResultadoS the toogleButtonVerResultadoS to set
+	 */
+	public void setToogleButtonVerResultadoS(ToggleButton toogleButtonVerResultadoS) {
+		this.toogleButtonVerResultadoS = toogleButtonVerResultadoS;
+	}
+
+	/**
+	 * @return the mapSimulador
+	 */
+	public HashMap<String, Simulador> getMapSimulador() {
+		return mapSimulador;
+	}
+
+	/**
+	 * @param mapSimulador the mapSimulador to set
+	 */
+	public void setMapSimulador(HashMap<String, Simulador> mapSimulador) {
+		this.mapSimulador = mapSimulador;
+	}
+
+	/**
+	 * @return the mapGetEquation
+	 */
+	public HashMap<String, GetEquation> getMapGetEquation() {
+		return mapGetEquation;
+	}
+
+	/**
+	 * @param mapGetEquation the mapGetEquation to set
+	 */
+	public void setMapGetEquation(HashMap<String, GetEquation> mapGetEquation) {
+		this.mapGetEquation = mapGetEquation;
+	}
+
+	/**
+	 * @return the mapDocumentos
+	 */
+	public HashMap<String, ArrayList<Documento>> getMapDocumentos() {
+		return mapDocumentos;
+	}
+
+	/**
+	 * @param mapDocumentos the mapDocumentos to set
+	 */
+	public void setMapDocumentos(HashMap<String, ArrayList<Documento>> mapDocumentos) {
+		this.mapDocumentos = mapDocumentos;
+	}
+
+	/**
+	 * @return the mapConsultas
+	 */
+	public HashMap<String, ArrayList<Consulta>> getMapConsultas() {
+		return mapConsultas;
+	}
+
+	/**
+	 * @param mapConsultas the mapConsultas to set
+	 */
+	public void setMapConsultas(HashMap<String, ArrayList<Consulta>> mapConsultas) {
+		this.mapConsultas = mapConsultas;
+	}
+
+	/**
+	 * @return the mapPalabrasComunes
+	 */
+	public HashMap<String, ArrayList<String>> getMapPalabrasComunes() {
+		return mapPalabrasComunes;
+	}
+
+	/**
+	 * @param mapPalabrasComunes the mapPalabrasComunes to set
+	 */
+	public void setMapPalabrasComunes(HashMap<String, ArrayList<String>> mapPalabrasComunes) {
+		this.mapPalabrasComunes = mapPalabrasComunes;
+	}
+
+	/**
+	 * @return the mapRelevancias
+	 */
+	public HashMap<String, ArrayList<Relevancia>> getMapRelevancias() {
+		return mapRelevancias;
+	}
+
+	/**
+	 * @param mapRelevancias the mapRelevancias to set
+	 */
+	public void setMapRelevancias(HashMap<String, ArrayList<Relevancia>> mapRelevancias) {
+		this.mapRelevancias = mapRelevancias;
+	}
+
+	/**
+	 * @return the mapSetDePalabras
+	 */
+	public HashMap<String, SortedSet<String>> getMapSetDePalabras() {
+		return MapSetDePalabras;
+	}
+
+	/**
+	 * @param mapSetDePalabras the mapSetDePalabras to set
+	 */
+	public void setMapSetDePalabras(HashMap<String, SortedSet<String>> mapSetDePalabras) {
+		MapSetDePalabras = mapSetDePalabras;
+	}
+	
+	
 
 	
 	
