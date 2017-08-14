@@ -1,8 +1,12 @@
 package controlador;
 
+import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -22,6 +26,9 @@ import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import modelo.Consulta;
+import modelo.Documento;
+import modelo.Relevancia;
 import modelo.ResultadoDataSet;
 
 
@@ -74,9 +81,15 @@ public class VentanaController implements Initializable{
 	@FXML
 	private Label labelRelAcertadas;
 	
-	private HashMap<String, ResultadoDataSet> mapDataSets = new HashMap<>();;
-	private HashMap<String, Simulador> mapSimulador = new HashMap<>();;
-	private HashMap<String, GetEquation> mapGetEquation = new HashMap<>();;
+	private HashMap<String, ResultadoDataSet> mapDataSets = new HashMap<>();
+	private HashMap<String, Simulador> mapSimulador = new HashMap<>();
+	private HashMap<String, GetEquation> mapGetEquation = new HashMap<>();
+	
+	private HashMap<String, ArrayList<Documento>> mapDocumentos = new HashMap<>();
+	private HashMap<String, ArrayList<Consulta>> mapConsultas = new HashMap<>();
+	private HashMap<String, ArrayList<String>> mapPalabrasComunes = new HashMap<>();
+	private HashMap<String, ArrayList<Relevancia>> mapRelevancias = new HashMap<>();
+	private HashMap<String, SortedSet<String>> MapSetDePalabras = new HashMap<>();
 	
 
 	
@@ -90,6 +103,8 @@ public class VentanaController implements Initializable{
 		  }
 		  tree.getSelectionModel().selectedItemProperty().addListener(e->updateData());
 		  tree.setRoot(rootItem);
+		  
+		  getButtonLeerDataSet().setOnAction(e -> leerDataSet());
 		
 	}
 	
@@ -149,6 +164,117 @@ public class VentanaController implements Initializable{
 	}
 	
 	private void leerDataSet(){
+		String fsp = System.getProperty("file.separator").toString();
+		//palabras comunes (se uso en todas ya que mejora la precisión, pero es de cran)
+		File palabrasComunesFile = new File("files"+fsp+"cacm"+fsp+"common_words");
+		
+		ArrayList<File> documentosFiles = null;
+		File documentosFile = null; 
+		File consultasFile = null; 
+		File relevanciasFile = null;
+		String nombreDB = getLabelDataSetName().getText();
+	
+		if(getLabelDataSetName().getText().equals("CACM")){
+			documentosFile = new File("files"+fsp+"cacm"+fsp+"cacm.all");
+			consultasFile= new File("files"+fsp+"cacm"+fsp+"query.text");
+			relevanciasFile = new File("files"+fsp+"cacm"+fsp+"qrels.text");
+		}else if(getLabelDataSetName().getText().equals("MED")){
+			documentosFile= new File("files"+fsp+"med"+fsp+"MED.ALL");
+			consultasFile= new File("files"+fsp+"med"+fsp+"MED.QRY");
+			relevanciasFile= new File("files"+fsp+"med"+fsp+"MED.REL");
+
+		}else if(getLabelDataSetName().getText().equals("CRAN")){
+			documentosFile= new File("files"+fsp+"cran"+fsp+"cran.all.1400");
+			consultasFile= new File("files"+fsp+"cran"+fsp+"cran.qry");
+			relevanciasFile= new File("files"+fsp+"cran"+fsp+"cranFix.rel");
+			
+		}else if(getLabelDataSetName().getText().equals("CISI")){
+			documentosFile= new File("files"+fsp+"cisi"+fsp+"CISI.all");
+			consultasFile= new File("files"+fsp+"cisi"+fsp+"CISI.qry");
+			relevanciasFile= new File("files"+fsp+"cisi"+fsp+"CISI.rel");
+			
+		}else if(getLabelDataSetName().getText().equals("LISA")){
+			documentosFiles= new ArrayList<>();
+			documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA0.501"));
+			documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA1.501"));
+			documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA2.501"));
+			documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA3.501"));
+			documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA4.501"));
+			documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA5.501"));
+			documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA5.627"));
+			documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA5.850"));
+			consultasFile= new File("files"+fsp+"lisa"+fsp+"LISA.QUE");
+			relevanciasFile= new File("files"+fsp+"lisa"+fsp+"LISA.REL");
+			
+		}else if(getLabelDataSetName().getText().equals("ADI")){
+			documentosFile= new File("files"+fsp+"adi"+fsp+"ADI.ALL");
+			consultasFile= new File("files"+fsp+"adi"+fsp+"ADI.QRY");
+			relevanciasFile= new File("files"+fsp+"adi"+fsp+"ADI.REL");
+
+		}else if(getLabelDataSetName().getText().equals("TIME")){
+			documentosFile= new File("files"+fsp+"time"+fsp+"TIME.ALL");
+			consultasFile= new File("files"+fsp+"time"+fsp+"TIME.QUE");
+			relevanciasFile= new File("files"+fsp+"time"+fsp+"TIME.REL");
+			
+		}else if(getLabelDataSetName().getText().equals("ISWC2015")){
+			documentosFile= new File("files"+fsp+"iswc2015"+fsp+"docs.txt");
+			consultasFile= new File("files"+fsp+"iswc2015"+fsp+"qrys.txt");
+			relevanciasFile= new File("files"+fsp+"iswc2015"+fsp+"rel.txt");
+		}else{
+			return;
+		}
+		getCargaLecturaDataSet().setProgress(ProgressBar.INDETERMINATE_PROGRESS);
+		ArrayList<Documento> documentos = new ArrayList<>();
+		ArrayList<Consulta> consultas = new ArrayList<>();
+		ArrayList<String> palabrasComunes = new ArrayList<>();
+		ArrayList<Relevancia> relevancias = new ArrayList<>();
+		SortedSet<String> setDePalabras = new TreeSet<String>();
+		
+		if(nombreDB.equals("LISA")){
+			Documento.generarDocumentosLisa(documentosFiles, documentos);
+			Consulta.generarConsultasLisa(consultasFile, consultas);
+		}else if(nombreDB.equals("TIME")){
+			Documento.generarDocumentosTime(documentosFile, documentos);
+			Consulta.generarConsultasTime(consultasFile, consultas);
+		}else{
+			Documento.generarDocumentos(documentosFile, documentos);
+			Consulta.generarConsultas(consultasFile, consultas);
+		}
+		if(nombreDB.equals("MED")){
+			Relevancia.getRelevancia(relevanciasFile, relevancias, 2);
+		}else if(nombreDB.equals("LISA")){
+			Relevancia.getRelevanciaLisa(relevanciasFile, relevancias);
+		}else if(nombreDB.equals("NPL")){
+			Relevancia.getRelevanciaNPL(relevanciasFile, relevancias);
+		}else if(nombreDB.equals("TIME")  || nombreDB.equals("ISWC2015")){
+			Relevancia.getRelevanciaTIMEyISWC2015(relevanciasFile, relevancias);
+		}else{
+			Relevancia.getRelevancia(relevanciasFile, relevancias, 1);
+		}
+		Generar.getPalabrasComunes(palabrasComunesFile, palabrasComunes);
+		for(Documento d: documentos){
+			d.generarSetPalabras(palabrasComunes);
+		}
+		for(Consulta c: consultas){
+			c.generarSetPalabras(palabrasComunes);
+		}
+		
+		
+		for(Documento d: documentos){
+			//System.out.println("Documento "+ d.getId()+" tiene: "+ d.getPalabrasValidas().size() + " palabras Validas");
+			for(String s: d.getPalabrasValidas()){
+				setDePalabras.add(s);
+			}
+		}
+		
+		getLabelCantidadConsultas().setText(""+consultas.size());
+		getLabelCantidadDocumentos().setText(""+documentos.size());
+		getLabelPalabrasTotalesComunes().setText(""+palabrasComunes.size());
+		getLabelPalabrasTotalesNoComunes().setText(""+setDePalabras.size());
+		
+		getCargaLecturaDataSet().setProgress(1);
+		getSpinnerPin().setDisable(false);
+		getButtonProcesar().setDisable(false);
 		
 	}
 	
