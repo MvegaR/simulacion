@@ -185,7 +185,7 @@
                                           </Label>
                                          
   
-                                          <Spinner fx:id="spinnerNumberPin" editable="false" initialValue="30" max="100" min="1" prefHeight="25.0" prefWidth="110.0">
+                                          <Spinner fx:id="spinnerPin" editable="false" initialValue="30" max="100" min="1" prefHeight="25.0" prefWidth="110.0">
                                              <HBox.margin>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                              </HBox.margin></Spinner>
@@ -234,7 +234,7 @@
                                                       <Font name="Times New Roman Bold" size="26.0" />
                                                    </font>
                                                 </Label>
-                                                <Slider blockIncrement="1.0" majorTickUnit="10.0" max="1000.0" min="10.0" minorTickCount="1" prefHeight="38.0" prefWidth="272.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="100.0" GridPane.rowIndex="2">
+                                                <Slider fx:id="sliderIntervalos" blockIncrement="1.0" majorTickUnit="10.0" max="1000.0" min="10.0" minorTickCount="1" prefHeight="38.0" prefWidth="272.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="100.0" GridPane.rowIndex="2">
                                                    <GridPane.margin>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                    </GridPane.margin>
@@ -249,27 +249,27 @@
                                                       <Font name="Times New Roman" size="20.0" />
                                                    </font>
                                                 </Label>
-                                                <Button mnemonicParsing="false" text="Generar función con 100 intervalos" GridPane.rowIndex="3" />
+                                                <Button fx:id="buttonGenerarF" mnemonicParsing="false" text="Generar función con 100 intervalos" GridPane.rowIndex="3" />
                                                 <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="333.0" text="Sensibilidad de la simulación" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                                    <font>
                                                       <Font name="Times New Roman" size="20.0" />
                                                    </font>
                                                 </Label>
-                                                <Slider blockIncrement="1.0" layoutX="15.0" layoutY="91.0" majorTickUnit="1.0" min="1.0" minorTickCount="1" prefHeight="38.0" prefWidth="272.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="50.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                <Button mnemonicParsing="false" text="Ver función de distribución probabística global generada" GridPane.rowIndex="5" />
-                                                <ProgressBar fx:id="cargaLecturaDataSet1" prefHeight="27.0" prefWidth="328.0" progress="0.0" GridPane.rowIndex="4">
+                                                <Slider fx:id="sliderSensibilidad" blockIncrement="1.0" layoutX="15.0" layoutY="91.0" majorTickUnit="1.0" min="1.0" minorTickCount="1" prefHeight="38.0" prefWidth="272.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="50.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <Button fx:id="buttonVerFuncion" mnemonicParsing="false" text="Ver función de distribución probabística global generada" GridPane.rowIndex="5" />
+                                                <ProgressBar fx:id="cargaF" prefHeight="27.0" prefWidth="328.0" progress="0.0" GridPane.rowIndex="4">
                                                    <effect>
                                                       <BoxBlur />
                                                    </effect>
                                                 </ProgressBar>
-                                                <ProgressBar fx:id="cargaLecturaDataSet11" layoutX="15.0" layoutY="147.0" prefHeight="27.0" prefWidth="328.0" progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                <ProgressBar fx:id="cargaS" layoutX="15.0" layoutY="147.0" prefHeight="27.0" prefWidth="328.0" progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                                    <effect>
                                                       <BoxBlur />
                                                    </effect>
                                                 </ProgressBar>
-                                                <Button layoutX="79.0" layoutY="115.0" mnemonicParsing="false" text="Simular con sensibilidad 50" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                <ToggleButton mnemonicParsing="false" text="Ver resultados simualación por consulta" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="351.0" layoutY="65.0" prefHeight="23.0" prefWidth="333.0" text="Relevancias acertadas en simulación: " GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                                <Button fx:id="buttonSimular" layoutX="79.0" layoutY="115.0" mnemonicParsing="false" text="Simular con sensibilidad 50" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                <ToggleButton fx:id="buttonVerResultadoS" mnemonicParsing="false" text="Ver resultados simualación por consulta" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                                <Label fx:id="labelRelAcertadas" alignment="CENTER" contentDisplay="CENTER" layoutX="351.0" layoutY="65.0" prefHeight="23.0" prefWidth="333.0" text="Relevancias acertadas en simulación: " GridPane.columnIndex="1" GridPane.rowIndex="6">
                                                    <font>
                                                       <Font name="Times New Roman" size="20.0" />
                                                    </font>
