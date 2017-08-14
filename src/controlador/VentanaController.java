@@ -123,11 +123,13 @@ public class VentanaController implements Initializable{
 		if(padre != null && !selectItem.getValue().equals("DataSets")){
 			System.out.println("Seleccionado data set " + selectItem.getValue());
 			getLabelDataSetName().setText(selectItem.getValue());
-			if(!mapDataSets.containsKey("selectItem.getValue()".toString())){
+			if(!mapConsultas.containsKey("selectItem.getValue()".toString())){
 				disableDataSetControl();
 				disableFunctionControl();
 				disableSimularControl(); 
 				getButtonLeerDataSet().setDisable(false);
+				
+			}else{
 				
 			}
 		}else if(padre == null){ //raiz
@@ -271,6 +273,31 @@ public class VentanaController implements Initializable{
 		getLabelCantidadDocumentos().setText(""+documentos.size());
 		getLabelPalabrasTotalesComunes().setText(""+palabrasComunes.size());
 		getLabelPalabrasTotalesNoComunes().setText(""+setDePalabras.size());
+		
+		if(mapConsultas.containsKey(nombreDB)){
+			mapConsultas.get(nombreDB).clear();
+			mapConsultas.get(nombreDB).addAll(consultas);
+		}else{
+			mapConsultas.put(nombreDB, consultas);
+		}
+		if(mapDocumentos.containsKey(nombreDB)){
+			mapDocumentos.get(nombreDB).clear();
+			mapDocumentos.get(nombreDB).addAll(documentos);
+		}else{
+			mapDocumentos.put(nombreDB, documentos);
+		}
+		if(mapPalabrasComunes.containsKey(nombreDB)){
+			mapPalabrasComunes.get(nombreDB).clear();
+			mapPalabrasComunes.get(nombreDB).addAll(palabrasComunes);
+		}else{
+			mapPalabrasComunes.put(nombreDB, palabrasComunes);
+		}
+		if(MapSetDePalabras.containsKey(nombreDB)){
+			MapSetDePalabras.get(nombreDB).clear();
+			MapSetDePalabras.get(nombreDB).addAll(setDePalabras);
+		}else{
+			MapSetDePalabras.put(nombreDB, setDePalabras);
+		}
 		
 		getCargaLecturaDataSet().setProgress(1);
 		getSpinnerPin().setDisable(false);
