@@ -10,6 +10,7 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.effect.BoxBlur?>
 <?import javafx.scene.image.Image?>
@@ -211,9 +212,9 @@
                               <VBox prefHeight="365.0" prefWidth="676.0" BorderPane.alignment="CENTER">
                                  <children>
                                     <Separator prefWidth="200.0" />
-                                    <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                    <BorderPane prefHeight="303.0" prefWidth="676.0">
                                        <center>
-                                          <GridPane prefHeight="229.0" prefWidth="676.0" BorderPane.alignment="CENTER">
+                                          <GridPane prefHeight="242.0" prefWidth="676.0" BorderPane.alignment="CENTER">
                                             <columnConstraints>
                                                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="345.0" minWidth="10.0" percentWidth="100.0" prefWidth="332.0" />
                                                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="339.0" minWidth="10.0" percentWidth="100.0" prefWidth="339.0" />
@@ -224,6 +225,7 @@
                                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                              <children>
@@ -266,6 +268,7 @@
                                                    </effect>
                                                 </ProgressBar>
                                                 <Button layoutX="79.0" layoutY="115.0" mnemonicParsing="false" text="Simular con sensibilidad 50" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                <ToggleButton mnemonicParsing="false" text="Ver resultados simualación por consulta" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                                              </children>
                                           </GridPane>
                                        </center>
