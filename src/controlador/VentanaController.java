@@ -9,7 +9,9 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -31,6 +33,11 @@ public class VentanaController implements Initializable{
 	private TableView<String> tablaDatos;
 	@FXML
 	private Label dataSetName;
+	@FXML
+	private ProgressBar cargaLecturaDataSet;
+	@FXML
+	private Button buttonLeerDataSet;
+	
 	
 	private HashMap<String, ResultadoDataSet> mapDataSets;
 
@@ -56,7 +63,7 @@ public class VentanaController implements Initializable{
 	 */
 	
 	private void updateData() {
-		System.out.println("Change");
+		System.out.println("Tree update");
 		TreeItem<String> selectItem =  tree.getSelectionModel().getSelectedItem();
 		TreeItem<String> padre = tree.getSelectionModel().getSelectedItem().getParent();
 		if(padre != null && !selectItem.equals("DataSets")){
