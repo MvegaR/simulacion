@@ -12,6 +12,7 @@ import javax.xml.bind.ParseConversionEvent;
 
 import org.omg.CORBA.portable.ValueFactory;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -113,7 +114,10 @@ public class VentanaController implements Initializable{
 		tree.setRoot(rootItem);
 
 		getButtonLeerDataSet().setOnAction(e -> leerDataSet());
-		getButtonProcesar().setOnAction(e ->procesarDataSet());
+		getButtonProcesar().setOnAction(e ->{
+
+			procesarDataSet();
+		});
 
 
 	}
@@ -131,11 +135,12 @@ public class VentanaController implements Initializable{
 		TreeItem<String> selectItem =  tree.getSelectionModel().getSelectedItem();
 		TreeItem<String> padre = tree.getSelectionModel().getSelectedItem().getParent();
 		//Al seleccionar un dataset en el arbol:
+
 		if(padre != null && !selectItem.getValue().equals("DataSets")){
 			System.out.println("Seleccionado data set " + selectItem.getValue());
 			getLabelDataSetName().setText(selectItem.getValue());
 			//mapConsultas,mapDocumentos,mapPalabrascomunes, mapSetdePalabras se trabajan en conjunto
-			if(!mapConsultas.containsKey(selectItem.getValue().toString())){
+			if(!getMapConsultas().containsKey(selectItem.getValue().toString())){
 				disableDataSetControl();
 				disableFunctionControl();
 				disableSimularControl(); 
@@ -145,16 +150,42 @@ public class VentanaController implements Initializable{
 				getLabelPalabrasTotalesComunes().setText("0000");
 				getLabelPalabrasTotalesNoComunes().setText("0000");
 				getCargaLecturaDataSet().setProgress(0);
-
+				getCargaProcesarConsultas().setProgress(0.0);
 			}else{
+				
 				getSpinnerPin().setDisable(false);
 				getButtonProcesar().setDisable(false);
 				getLabelCantidadConsultas().setText(""+mapConsultas.get(selectItem.getValue()).size());
 				getLabelCantidadDocumentos().setText(""+mapDocumentos.get(selectItem.getValue()).size());
 				getLabelPalabrasTotalesComunes().setText(""+mapPalabrasComunes.get(selectItem.getValue()).size());
 				getLabelPalabrasTotalesNoComunes().setText(""+MapSetDePalabras.get(selectItem.getValue()).size());
-				getCargaLecturaDataSet().setProgress(1);
+				getCargaLecturaDataSet().setProgress(1.0);
+				//map dataset
+				if(!getMapDataSets().containsKey(selectItem.getValue().toString())){
+					getCargaProcesarConsultas().setProgress(0.0);
+					disableFunctionControl();
+					disableSimularControl();
+				}else{
+					getCargaProcesarConsultas().setProgress(1.0);
+					enableFunctionControl();
+					//map función
+					if(!getMapGetEquation().containsKey(selectItem.getValue().toString())){
+						disableSimularControl();
+						getButtonVerFuncion().setDisable(true);
+					}else{
+						getButtonVerFuncion().setDisable(false);
+						enableSimularControl();
+						if(!getMapSimulador().containsKey(selectItem.getValue().toString())){
+							getToogleButtonVerResultadoS().setDisable(true);
+						}else{
+							getToogleButtonVerResultadoS().setDisable(false);
+						}
+					}
+					
+				}
+				
 			}
+			
 			//mapDataSet
 
 			//mapEquation
@@ -177,6 +208,14 @@ public class VentanaController implements Initializable{
 		getToobleButtonVerResultadoS().setDisable(true);
 	}
 	/*
+	 * ACtiva los botones y otros controles de la sección de simular
+	 */
+	private void enableSimularControl(){
+		getSliderSensibilidad().setDisable(false);
+		getButtonSimular().setDisable(false);
+		getToobleButtonVerResultadoS().setDisable(false);
+	}
+	/*
 	 * Desactiva los botones y otros controles de la sección del dataSet
 	 */
 	private void disableDataSetControl(){
@@ -192,16 +231,25 @@ public class VentanaController implements Initializable{
 		getButtonGenerarF().setDisable(true);
 		getButtonVerFuncion().setDisable(true);
 	}
+	/*
+	 * Activa los botones y otros controles de la sección de la función
+	 */
+	private void enableFunctionControl(){
+		getSliderIntervalos().setDisable(false);
+		getButtonGenerarF().setDisable(false);
+		getButtonVerFuncion().setDisable(false);
+	}
 
 
 
 
 	private void procesarDataSet(){
 
+		Thread hiloProcesar = new Thread(new Runnable() {
 
-		Thread hilo = new Thread(){
 			@Override
 			public void run() {
+				getTree().setDisable(true);
 				String nombreDB = getLabelDataSetName().getText();
 				ResultadoDataSet dataSet = new ResultadoDataSet(nombreDB, mapConsultas.get(nombreDB).size(), 
 						mapDocumentos.get(nombreDB).size(), 
@@ -211,28 +259,36 @@ public class VentanaController implements Initializable{
 						mapConsultas.get(nombreDB), mapRelevancias.get(nombreDB), dataSet.getResultadosConsultas());
 
 				ArrayList<Precision> precisiones = new ArrayList<>();
-				//matriz.obtenerPrecision();
 				Double con = 0.0;
-				getCargaProcesarConsultas().setProgress( 0  );
+				matriz.obtenerFrecuencias(getCargaProcesarConsultas());
+				getCargaProcesarConsultas().setProgress(0.66);
+				matriz.obtenerFrecuenciasInversas(getCargaProcesarConsultas());
+
 				for(Consulta q: mapConsultas.get(nombreDB)){
-					getCargaProcesarConsultas().setProgress( (con++)/(mapConsultas.get(nombreDB).size())  );
+					getCargaProcesarConsultas().setProgress( 0.66 + ((con++)/(mapConsultas.get(nombreDB).size()) ) /3  );
 
 					String value = getSpinnerPin().getValue() + "";
 
 					matriz.obtenerPrecision(q, Integer.parseInt(value), precisiones, dataSet);
 				}
-				getCargaProcesarConsultas().setProgress(1.0);
 				if(mapDataSets.containsKey(nombreDB)){
 					mapDataSets.remove(mapDataSets.get(nombreDB));
 					mapDataSets.put(nombreDB, dataSet);
 				}else{
 					mapDataSets.put(nombreDB, dataSet);
 				}
-				
-			}
-		};
+				getCargaProcesarConsultas().setProgress(1.0);
+				getTree().setDisable(false);
+				enableFunctionControl();
+				getButtonVerFuncion().setDisable(true);
 
-		hilo.start();
+			}
+		});
+
+		hiloProcesar.start();
+
+
+
 	}
 
 
@@ -240,149 +296,177 @@ public class VentanaController implements Initializable{
 
 
 
+
+
 	private void leerDataSet(){
-		String fsp = System.getProperty("file.separator").toString();
-		//palabras comunes (se uso en todas ya que mejora la precisión, pero es de cran)
-		File palabrasComunesFile = new File("files"+fsp+"cacm"+fsp+"common_words");
+		Thread hiloLeer = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				getTree().setDisable(true);
+				String fsp = System.getProperty("file.separator").toString();
+				//palabras comunes (se uso en todas ya que mejora la precisión, pero es de cran)
+				File palabrasComunesFile = new File("files"+fsp+"cacm"+fsp+"common_words");
 
-		ArrayList<File> documentosFiles = null;
-		File documentosFile = null; 
-		File consultasFile = null; 
-		File relevanciasFile = null;
-		String nombreDB = getLabelDataSetName().getText();
+				ArrayList<File> documentosFiles = null;
+				File documentosFile = null; 
+				File consultasFile = null; 
+				File relevanciasFile = null;
+				String nombreDB = getLabelDataSetName().getText();
 
-		if(getLabelDataSetName().getText().equals("CACM")){
-			documentosFile = new File("files"+fsp+"cacm"+fsp+"cacm.all");
-			consultasFile= new File("files"+fsp+"cacm"+fsp+"query.text");
-			relevanciasFile = new File("files"+fsp+"cacm"+fsp+"qrels.text");
-		}else if(getLabelDataSetName().getText().equals("MED")){
-			documentosFile= new File("files"+fsp+"med"+fsp+"MED.ALL");
-			consultasFile= new File("files"+fsp+"med"+fsp+"MED.QRY");
-			relevanciasFile= new File("files"+fsp+"med"+fsp+"MED.REL");
+				if(getLabelDataSetName().getText().equals("CACM")){
+					documentosFile = new File("files"+fsp+"cacm"+fsp+"cacm.all");
+					consultasFile= new File("files"+fsp+"cacm"+fsp+"query.text");
+					relevanciasFile = new File("files"+fsp+"cacm"+fsp+"qrels.text");
+				}else if(getLabelDataSetName().getText().equals("MED")){
+					documentosFile= new File("files"+fsp+"med"+fsp+"MED.ALL");
+					consultasFile= new File("files"+fsp+"med"+fsp+"MED.QRY");
+					relevanciasFile= new File("files"+fsp+"med"+fsp+"MED.REL");
 
-		}else if(getLabelDataSetName().getText().equals("CRAN")){
-			documentosFile= new File("files"+fsp+"cran"+fsp+"cran.all.1400");
-			consultasFile= new File("files"+fsp+"cran"+fsp+"cran.qry");
-			relevanciasFile= new File("files"+fsp+"cran"+fsp+"cranFix.rel");
+				}else if(getLabelDataSetName().getText().equals("CRAN")){
+					documentosFile= new File("files"+fsp+"cran"+fsp+"cran.all.1400");
+					consultasFile= new File("files"+fsp+"cran"+fsp+"cran.qry");
+					relevanciasFile= new File("files"+fsp+"cran"+fsp+"cranFix.rel");
 
-		}else if(getLabelDataSetName().getText().equals("CISI")){
-			documentosFile= new File("files"+fsp+"cisi"+fsp+"CISI.all");
-			consultasFile= new File("files"+fsp+"cisi"+fsp+"CISI.qry");
-			relevanciasFile= new File("files"+fsp+"cisi"+fsp+"CISI.rel");
+				}else if(getLabelDataSetName().getText().equals("CISI")){
+					documentosFile= new File("files"+fsp+"cisi"+fsp+"CISI.all");
+					consultasFile= new File("files"+fsp+"cisi"+fsp+"CISI.qry");
+					relevanciasFile= new File("files"+fsp+"cisi"+fsp+"CISI.rel");
 
-		}else if(getLabelDataSetName().getText().equals("LISA")){
-			documentosFiles= new ArrayList<>();
-			documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA0.501"));
-			documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA1.501"));
-			documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA2.501"));
-			documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA3.501"));
-			documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA4.501"));
-			documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA5.501"));
-			documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA5.627"));
-			documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA5.850"));
-			consultasFile= new File("files"+fsp+"lisa"+fsp+"LISA.QUE");
-			relevanciasFile= new File("files"+fsp+"lisa"+fsp+"LISA.REL");
+				}else if(getLabelDataSetName().getText().equals("LISA")){
+					documentosFiles= new ArrayList<>();
+					documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA0.501"));
+					documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA1.501"));
+					documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA2.501"));
+					documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA3.501"));
+					documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA4.501"));
+					documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA5.501"));
+					documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA5.627"));
+					documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA5.850"));
+					consultasFile= new File("files"+fsp+"lisa"+fsp+"LISA.QUE");
+					relevanciasFile= new File("files"+fsp+"lisa"+fsp+"LISA.REL");
 
-		}else if(getLabelDataSetName().getText().equals("ADI")){
-			documentosFile= new File("files"+fsp+"adi"+fsp+"ADI.ALL");
-			consultasFile= new File("files"+fsp+"adi"+fsp+"ADI.QRY");
-			relevanciasFile= new File("files"+fsp+"adi"+fsp+"ADI.REL");
+				}else if(getLabelDataSetName().getText().equals("ADI")){
+					documentosFile= new File("files"+fsp+"adi"+fsp+"ADI.ALL");
+					consultasFile= new File("files"+fsp+"adi"+fsp+"ADI.QRY");
+					relevanciasFile= new File("files"+fsp+"adi"+fsp+"ADI.REL");
 
-		}else if(getLabelDataSetName().getText().equals("TIME")){
-			documentosFile= new File("files"+fsp+"time"+fsp+"TIME.ALL");
-			consultasFile= new File("files"+fsp+"time"+fsp+"TIME.QUE");
-			relevanciasFile= new File("files"+fsp+"time"+fsp+"TIME.REL");
+				}else if(getLabelDataSetName().getText().equals("TIME")){
+					documentosFile= new File("files"+fsp+"time"+fsp+"TIME.ALL");
+					consultasFile= new File("files"+fsp+"time"+fsp+"TIME.QUE");
+					relevanciasFile= new File("files"+fsp+"time"+fsp+"TIME.REL");
 
-		}else if(getLabelDataSetName().getText().equals("ISWC2015")){
-			documentosFile= new File("files"+fsp+"iswc2015"+fsp+"docs.txt");
-			consultasFile= new File("files"+fsp+"iswc2015"+fsp+"qrys.txt");
-			relevanciasFile= new File("files"+fsp+"iswc2015"+fsp+"rel.txt");
-		}else{
-			return;
-		}
-		getCargaLecturaDataSet().setProgress(ProgressBar.INDETERMINATE_PROGRESS);
-		ArrayList<Documento> documentos = new ArrayList<>();
-		ArrayList<Consulta> consultas = new ArrayList<>();
-		ArrayList<String> palabrasComunes = new ArrayList<>();
-		ArrayList<Relevancia> relevancias = new ArrayList<>();
-		SortedSet<String> setDePalabras = new TreeSet<String>();
+				}else if(getLabelDataSetName().getText().equals("ISWC2015")){
+					documentosFile= new File("files"+fsp+"iswc2015"+fsp+"docs.txt");
+					consultasFile= new File("files"+fsp+"iswc2015"+fsp+"qrys.txt");
+					relevanciasFile= new File("files"+fsp+"iswc2015"+fsp+"rel.txt");
+				}else{
+					return;
+				}
+				
+				getCargaLecturaDataSet().setProgress(0);
+			
+				ArrayList<Documento> documentos = new ArrayList<>();
+				ArrayList<Consulta> consultas = new ArrayList<>();
+				ArrayList<String> palabrasComunes = new ArrayList<>();
+				ArrayList<Relevancia> relevancias = new ArrayList<>();
+				SortedSet<String> setDePalabras = new TreeSet<String>();
 
-		if(nombreDB.equals("LISA")){
-			Documento.generarDocumentosLisa(documentosFiles, documentos);
-			Consulta.generarConsultasLisa(consultasFile, consultas);
-		}else if(nombreDB.equals("TIME")){
-			Documento.generarDocumentosTime(documentosFile, documentos);
-			Consulta.generarConsultasTime(consultasFile, consultas);
-		}else{
-			Documento.generarDocumentos(documentosFile, documentos);
-			Consulta.generarConsultas(consultasFile, consultas);
-		}
-		if(nombreDB.equals("MED")){
-			Relevancia.getRelevancia(relevanciasFile, relevancias, 2);
-		}else if(nombreDB.equals("LISA")){
-			Relevancia.getRelevanciaLisa(relevanciasFile, relevancias);
-		}else if(nombreDB.equals("NPL")){
-			Relevancia.getRelevanciaNPL(relevanciasFile, relevancias);
-		}else if(nombreDB.equals("TIME")  || nombreDB.equals("ISWC2015")){
-			Relevancia.getRelevanciaTIMEyISWC2015(relevanciasFile, relevancias);
-		}else{
-			Relevancia.getRelevancia(relevanciasFile, relevancias, 1);
-		}
-		Generar.getPalabrasComunes(palabrasComunesFile, palabrasComunes);
-		for(Documento d: documentos){
-			d.generarSetPalabras(palabrasComunes);
-		}
-		for(Consulta c: consultas){
-			c.generarSetPalabras(palabrasComunes);
-		}
+				if(nombreDB.equals("LISA")){
+					Documento.generarDocumentosLisa(documentosFiles, documentos);
+					getCargaLecturaDataSet().setProgress(0.25);
+					Consulta.generarConsultasLisa(consultasFile, consultas);
+					getCargaLecturaDataSet().setProgress(0.50);
+				}else if(nombreDB.equals("TIME")){
+					Documento.generarDocumentosTime(documentosFile, documentos);
+					getCargaLecturaDataSet().setProgress(0.25);
+					Consulta.generarConsultasTime(consultasFile, consultas);
+					getCargaLecturaDataSet().setProgress(0.50);
+				}else{
+					Documento.generarDocumentos(documentosFile, documentos);
+					getCargaLecturaDataSet().setProgress(0.25);
+					Consulta.generarConsultas(consultasFile, consultas);
+					getCargaLecturaDataSet().setProgress(0.50);
+				}
+				if(nombreDB.equals("MED")){
+					Relevancia.getRelevancia(relevanciasFile, relevancias, 2);
+				}else if(nombreDB.equals("LISA")){
+					Relevancia.getRelevanciaLisa(relevanciasFile, relevancias);
+				}else if(nombreDB.equals("NPL")){
+					Relevancia.getRelevanciaNPL(relevanciasFile, relevancias);
+				}else if(nombreDB.equals("TIME")  || nombreDB.equals("ISWC2015")){
+					Relevancia.getRelevanciaTIMEyISWC2015(relevanciasFile, relevancias);
+				}else{
+					Relevancia.getRelevancia(relevanciasFile, relevancias, 1);
+				}
+				getCargaLecturaDataSet().setProgress(0.75);
+				Generar.getPalabrasComunes(palabrasComunesFile, palabrasComunes);
+				for(Documento d: documentos){
+					d.generarSetPalabras(palabrasComunes);
+				}
+				for(Consulta c: consultas){
+					c.generarSetPalabras(palabrasComunes);
+				}
 
 
-		for(Documento d: documentos){
-			//System.out.println("Documento "+ d.getId()+" tiene: "+ d.getPalabrasValidas().size() + " palabras Validas");
-			for(String s: d.getPalabrasValidas()){
-				setDePalabras.add(s);
+				for(Documento d: documentos){
+					//System.out.println("Documento "+ d.getId()+" tiene: "+ d.getPalabrasValidas().size() + " palabras Validas");
+					for(String s: d.getPalabrasValidas()){
+						setDePalabras.add(s);
+					}
+				}
+				getCargaLecturaDataSet().setProgress(1.0);
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						getLabelCantidadConsultas().setText(""+consultas.size());
+						getLabelCantidadDocumentos().setText(""+documentos.size());
+						getLabelPalabrasTotalesComunes().setText(""+palabrasComunes.size());
+						getLabelPalabrasTotalesNoComunes().setText(""+setDePalabras.size());
+						
+					}
+				});
+
+				if(mapConsultas.containsKey(nombreDB)){
+					mapConsultas.get(nombreDB).clear();
+					mapConsultas.get(nombreDB).addAll(consultas);
+				}else{
+					mapConsultas.put(nombreDB, consultas);
+				}
+				if(mapDocumentos.containsKey(nombreDB)){
+					mapDocumentos.get(nombreDB).clear();
+					mapDocumentos.get(nombreDB).addAll(documentos);
+				}else{
+					mapDocumentos.put(nombreDB, documentos);
+				}
+				if(mapPalabrasComunes.containsKey(nombreDB)){
+					mapPalabrasComunes.get(nombreDB).clear();
+					mapPalabrasComunes.get(nombreDB).addAll(palabrasComunes);
+				}else{
+					mapPalabrasComunes.put(nombreDB, palabrasComunes);
+				}
+				if(MapSetDePalabras.containsKey(nombreDB)){
+					MapSetDePalabras.get(nombreDB).clear();
+					MapSetDePalabras.get(nombreDB).addAll(setDePalabras);
+				}else{
+					MapSetDePalabras.put(nombreDB, setDePalabras);
+				}
+				if(mapRelevancias.containsKey(nombreDB)){
+					mapRelevancias.get(nombreDB).clear();
+					mapRelevancias.get(nombreDB).addAll(relevancias);
+				}else{
+					mapRelevancias.put(nombreDB, relevancias);
+				}
+
+				getCargaLecturaDataSet().setProgress(1);
+				getSpinnerPin().setDisable(false);
+				getButtonProcesar().setDisable(false);
+				getTree().setDisable(false);
+				
 			}
-		}
-
-		getLabelCantidadConsultas().setText(""+consultas.size());
-		getLabelCantidadDocumentos().setText(""+documentos.size());
-		getLabelPalabrasTotalesComunes().setText(""+palabrasComunes.size());
-		getLabelPalabrasTotalesNoComunes().setText(""+setDePalabras.size());
-
-		if(mapConsultas.containsKey(nombreDB)){
-			mapConsultas.get(nombreDB).clear();
-			mapConsultas.get(nombreDB).addAll(consultas);
-		}else{
-			mapConsultas.put(nombreDB, consultas);
-		}
-		if(mapDocumentos.containsKey(nombreDB)){
-			mapDocumentos.get(nombreDB).clear();
-			mapDocumentos.get(nombreDB).addAll(documentos);
-		}else{
-			mapDocumentos.put(nombreDB, documentos);
-		}
-		if(mapPalabrasComunes.containsKey(nombreDB)){
-			mapPalabrasComunes.get(nombreDB).clear();
-			mapPalabrasComunes.get(nombreDB).addAll(palabrasComunes);
-		}else{
-			mapPalabrasComunes.put(nombreDB, palabrasComunes);
-		}
-		if(MapSetDePalabras.containsKey(nombreDB)){
-			MapSetDePalabras.get(nombreDB).clear();
-			MapSetDePalabras.get(nombreDB).addAll(setDePalabras);
-		}else{
-			MapSetDePalabras.put(nombreDB, setDePalabras);
-		}
-		if(mapRelevancias.containsKey(nombreDB)){
-			mapRelevancias.get(nombreDB).clear();
-			mapRelevancias.get(nombreDB).addAll(relevancias);
-		}else{
-			mapRelevancias.put(nombreDB, relevancias);
-		}
-
-		getCargaLecturaDataSet().setProgress(1);
-		getSpinnerPin().setDisable(false);
-		getButtonProcesar().setDisable(false);
+		});
+		hiloLeer.start();
+	
 
 	}
 

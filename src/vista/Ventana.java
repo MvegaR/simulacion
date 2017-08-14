@@ -6,6 +6,7 @@ import java.net.MalformedURLException;
 import javax.print.DocFlavor.URL;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,6 +25,7 @@ public class Ventana extends Application {
 	@Override
 	public void start(Stage windows) throws IOException {
 		windows.setTitle("");
+		
 	     try {
 	    	 Parent root = FXMLLoader.load(getClass().getResource("ventana.fxml"));
 	         Scene scene = new Scene(root);

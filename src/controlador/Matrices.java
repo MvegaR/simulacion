@@ -1,6 +1,7 @@
 package controlador;
 import java.io.File;
 import java.io.FileWriter;
+import java.nio.channels.SeekableByteChannel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -8,6 +9,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.SortedSet;
 
+import javafx.scene.control.ProgressBar;
 import modelo.Consulta;
 import modelo.Documento;
 import modelo.Precision;
@@ -384,10 +386,38 @@ public class Matrices {
 	 * 
 	 */
 	public void obtenerFrecuencias(){
-		//quitar documentos sin cuerpo
+		
 		matrizFrecuncias.clear();
 		for(Documento d: documentos){
 			if(d != null && !d.getPalabrasValidas().isEmpty()){ //quitando documentos no validos
+				ArrayList<Integer> lista = new ArrayList<>();
+				matrizFrecuncias.add(lista);
+				lista.add(d.getId()); //agregando id documento al inicio de cada lista
+				for(String p: palabras){
+					lista.add(Collections.frequency(d.getPalabrasValidas(), p));
+				}
+			}
+		}
+	}
+	/**
+	 * Método que rellena la matriz con las frecuencias de las 
+	 * palabras (set de palabras) con una barra opcional de carga
+	 * para la interfaz de usuario, de cada documento con una barra
+	 * de carga para la interfaz grafica (opcional).
+	 * Por cada documento <b>d</b> de la lista de documentos 
+	 * (excluyendo documentos sin cuerpo o sin palabras), 
+	 * se crea una <b>lista</b> y se agrega a la lista de listas 
+	 * <b>matrizFrecuencias</b> (atributo de <b>this</b>)
+	 * por cada palabra se agrega a <b>lista</b> la frecuencia de 
+	 * la palabra <b>p</b> en el documento <b>d</b>
+	 * @param bar {@link ProgressBar} Barra de carga JavaFX puede ser null
+	 */
+	public void obtenerFrecuencias(ProgressBar bar){
+		Double count = 0.0;
+		matrizFrecuncias.clear();
+		for(Documento d: documentos){
+			if(d != null && !d.getPalabrasValidas().isEmpty()){ //quitando documentos no validos
+				if(bar!=null) bar.setProgress( ((count++)/documentos.size())/3) ;
 				ArrayList<Integer> lista = new ArrayList<>();
 				matrizFrecuncias.add(lista);
 				lista.add(d.getId()); //agregando id documento al inicio de cada lista
@@ -414,6 +444,49 @@ public class Matrices {
 		// log(totalDocumeºntos/cantidadOcurrenciasEnTodosLosDocumentos)
 		matrizFrecunciasInversas.clear();
 		for(Documento d: documentos){
+			if(d != null && !d.getPalabrasValidas().isEmpty()){//quitando documentos sin cuerpo ni título
+				System.out.println("Frecuencia inversa documento: "+d.getId());
+				ArrayList<Double> lista = new ArrayList<>();
+				matrizFrecunciasInversas.add(lista);
+				lista.add(d.getId()*1.0);  //agregando id documento al inicio de cada lista (como double)
+				Integer contador = 0;
+				for(String s: palabras){
+					contador++;
+					//   frecuencias   .         documento                    . palabra  
+					if(matrizFrecuncias.get(matrizFrecunciasInversas.size()-1).get(contador) != 0){ 
+						//no contador-1 porque tiene el id al inicio
+						Integer totaldoc = totalDocumentos(s);
+						if(totaldoc != 0)
+							lista.add(Math.log10( (matrizFrecuncias.size()*1.0)/( totaldoc*1.0)));
+						else
+							lista.add(0.0);
+					}else{
+						lista.add(0.0);
+					}
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Método que rellena la matriz con las frecuencias inversa de las palabras 
+	 * (set de palabras), de cada documento. 
+	 * Por cada documento, con palabras válidas,
+	 * se crea una <b>lista</b> de double que se almacena en una lista de listas 
+	 * (arraylist, es un arreglo, no lista enlazada),
+	 * la <b>lista</b> se rellena inicialmente con el id del documento, a continuación con 
+	 * los valores del cálculo de frecuencia inversa
+	 * por cada palabra <b>s</b> se calcula:
+	 * log10(totalDocumentos/totalDocumentosQueTieneLaPalabra<b>S</b>
+	 * si en la matriz de frecuencias tiene el valor de cero no se realiza 
+	 * cálculo se se agrega un 0 a la lista.
+	 */
+	public void obtenerFrecuenciasInversas(ProgressBar bar){
+		// log(totalDocumeºntos/cantidadOcurrenciasEnTodosLosDocumentos)
+		Double count = 0.0;
+		matrizFrecunciasInversas.clear();
+		for(Documento d: documentos){
+			if(bar!=null){bar.setProgress(0.33+ (((count++))/documentos.size())/3);}
 			if(d != null && !d.getPalabrasValidas().isEmpty()){//quitando documentos sin cuerpo ni título
 				System.out.println("Frecuencia inversa documento: "+d.getId());
 				ArrayList<Double> lista = new ArrayList<>();
