@@ -10,14 +10,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="resumenDataSet" prefHeight="501.0" prefWidth="651.0" style="-fx-background-color: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%)" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.ResumenQueryController">
+<BorderPane fx:id="resumenDataSet" prefHeight="625.0" prefWidth="676.0" style="-fx-background-color: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%)" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.ResumenQueryController">
    <top>
-      <VBox prefHeight="462.0" prefWidth="651.0" style="-fx-background-color: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%)" BorderPane.alignment="CENTER">
+      <VBox prefHeight="277.0" prefWidth="651.0" BorderPane.alignment="CENTER">
          <children>
             <GridPane prefHeight="212.0" prefWidth="676.0" style="">
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="100.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="100.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="97.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="103.0" prefWidth="100.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -29,9 +29,9 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label fx:id="labelDataSetName" text="QueryID">
+                  <Label fx:id="labelDataSetName" prefHeight="37.0" prefWidth="330.0" text="QueryID">
                      <font>
-                        <Font name="Times New Roman Bold" size="32.0" />
+                        <Font name="Times New Roman Bold" size="27.0" />
                      </font>
                      <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

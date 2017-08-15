@@ -46,7 +46,6 @@ public class VentanaController implements Initializable{
 	private BorderPane panelContenido;
 	@FXML
 	private BorderPane resumenDataSet;
-	
 	@FXML
 	private TableView tablaDatos;
 	@FXML
@@ -126,13 +125,13 @@ public class VentanaController implements Initializable{
 		getButtonLeerDataSet().setOnAction(e -> leerDataSet());
 		getButtonProcesar().setOnAction(e -> procesarDataSet());
 		getSliderIntervalos().valueProperty().addListener(e ->
-			getButtonGenerarF().setText("Generar función con "+
-		(int)getSliderIntervalos().getValue()+" intervalos"));
-		
+		getButtonGenerarF().setText("Generar función con "+
+				(int)getSliderIntervalos().getValue()+" intervalos"));
+
 		getSliderSensibilidad().valueProperty().addListener(e ->
 		getButtonSimular().setText("Simular con sensibilidad "+(int)getSliderSensibilidad().getValue()));
-		
-		
+
+
 	}
 
 	/**
@@ -171,7 +170,7 @@ public class VentanaController implements Initializable{
 				getCargaLecturaDataSet().setProgress(0);
 				getCargaProcesarConsultas().setProgress(0.0);
 			}else{
-				
+
 				getSpinnerPin().setDisable(false);
 				getButtonProcesar().setDisable(false);
 				getLabelCantidadConsultas().setText(""+mapConsultas.get(selectItem.getValue()).size());
@@ -201,11 +200,11 @@ public class VentanaController implements Initializable{
 							getToogleButtonVerResultadoS().setDisable(false);
 						}
 					}
-					
+
 				}
-				
+
 			}
-			
+
 
 		}else if(padre == null){ //raiz
 			if(getPanelContenido().getChildren().contains(getResumenController().getResumenDataSet())){
@@ -218,81 +217,103 @@ public class VentanaController implements Initializable{
 			disableSimularControl(); 
 		}else if(padre != null && !padre.getValue().equals("DataSets")){
 			tablaConsulta(selectItem, padre.getValue());
-			cambiarCentroToResumenQuery();
-	
+			cambiarCentroToResumenQuery(selectItem, padre);
+
 		}
 	}
-
-	private void cambiarCentroToResumenQuery() {
+	/**
+	 * Metodo para actualizar los datos del resumen de una consulta
+	 * @param selectItem Contiene el id de la consulta (TreeItem)
+	 * @param padre Contine el nombre de del data set (TreeItem)
+	 */
+	private void cambiarCentroToResumenQuery(TreeItem<String> selectItem, TreeItem<String> padre) {
 		if(getResumenController() != null){
-			getResumenController().getLabelDataSetName().setText(getLabelDataSetName().getText());
+			ResultadoQuery rq = getResultadoQueryById(selectItem.getValue().split(".* ID: ")[1],padre.getValue());
+			getResumenController().getLabelDataSetName().setText(
+					getTree().getSelectionModel().getSelectedItem().getValue());
 			getResumenController().getTexto1().setText("Precisión promedio");
 			getResumenController().getTexto2().setText("Recall promedio");
 			getResumenController().getTexto3().setText("Total relevantes");
-			getResumenController().getTexto4().setText("");
+			getResumenController().getTexto4().setText("Total relevantes desplegados");
 			getResumenController().getTexto5().setText("");
+			
+			getResumenController().getValor1().setText(rq.getPrecisionPromedio().toString());
+			getResumenController().getValor2().setText(rq.getRecallPromedio().toString());
+			getResumenController().getValor3().setText(rq.getTotalDocRelevantesTotales().toString());
+			getResumenController().getValor4().setText(rq.getTotalDocReleventesDesplegados().toString());
+			getResumenController().getValor5().setText("");
 			getPanelContenido().getChildren().remove(getResumenDataSet());
 			getPanelContenido().setCenter(getResumenController().getResumenDataSet());
 		}
-		
-	}
 
-	/*
-	 * Metodo que crea la tabla de resultados de una consulta
+	}
+	/**
+	 * Entrega un resultado de consulta para obtener información del resumen
+	 * @param idQ ID de la consulta (string)
+	 * @param nombreDB Nombre del data set (string)
+	 * @return Resultado {@link ResultadoQuery}
+	 */
+
+	private ResultadoQuery getResultadoQueryById(String idQ, String nombreDB){
+		for(ResultadoQuery rq: mapDataSets.get(nombreDB).getResultadosConsultas()){
+			if(rq.getIdQuery().toString().equals(idQ.toString())){
+				return rq;
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Metodo que actualiza la tabla de datos con información detallada de una consulta
+	 * @param selectItem Contiene el id de la consulta (TreeItem)
+	 * @param padre Contine el nombre de del data set (TreeItem)
 	 */
 	@SuppressWarnings("unchecked")
 	private void tablaConsulta(TreeItem<String> selectItem, String nombreDB){
-		System.out.println("Seleccionado consulta "+ selectItem.getValue());
+		//System.out.println("Seleccionado consulta "+ selectItem.getValue());
 		String idConsultaSeleccionada = selectItem.getValue().split(".* ID: ")[1];
-		
-		
 		TableColumn<ResultadoDoc, Integer> idConsulta = new TableColumn("ID Consulta");
 		idConsulta.setCellValueFactory(new PropertyValueFactory<>("idQuery"));
-		
+
 		TableColumn<ResultadoDoc, Integer> idDocumento = new TableColumn("ID Documento");
 		idDocumento.setCellValueFactory(new PropertyValueFactory<>("idDoc"));
-		
+
 		TableColumn<ResultadoDoc, Double> similitud = new TableColumn("Similitud");
 		similitud.setCellValueFactory(new PropertyValueFactory<>("disCos"));
-		
+
 		TableColumn<ResultadoDoc, Boolean> isRel = new TableColumn("¿Es relevante?");
 		isRel.setCellValueFactory(new PropertyValueFactory<>("isRel"));
-		
+
 		TableColumn<ResultadoDoc, Double> precision = new TableColumn("Precisión");
 		precision.setCellValueFactory(new PropertyValueFactory<>("precision"));
-		
+
 		TableColumn<ResultadoDoc, Double> recall = new TableColumn("Recall");
 		recall.setCellValueFactory(new PropertyValueFactory<>("recall"));
-		
+
 		TableColumn<ResultadoDoc, Integer> totalPalabras = new TableColumn("Total palabras");
 		totalPalabras.setCellValueFactory(new PropertyValueFactory<>("tWords"));
-		
-		
+
 		getTablaDatos().getColumns().clear();
 		getTablaDatos().getColumns().addAll(idConsulta, idDocumento, similitud, isRel, precision, recall, totalPalabras);
 		getTablaDatos().setItems(getResultadoDocumentoConsulta(idConsultaSeleccionada, nombreDB));
-	
-		
-		
+
+
+
 	}
-	
+
 	private ObservableList<ResultadoDoc> getResultadoDocumentoConsulta(String idQ, String nombreDB){
-		System.out.println("idq "+idQ + " !!!!!!!!!!!!!!!!!");
-		System.out.println(nombreDB);
+
 		ObservableList<ResultadoDoc> lista = FXCollections.observableArrayList();
 		for(ResultadoQuery rq: mapDataSets.get(nombreDB).getResultadosConsultas()){
-			
 			if(rq.getIdQuery().toString().equals(idQ.toString())){
-				System.out.println(true);
 				for(ResultadoDoc rd: rq.getResultadosDocumentos()){
 					lista.add(rd);
-					System.out.println(rd);
 				}
 			}
 		}
 		return lista;
 	}
-	
+
 	/*
 	 * Desactiva los botones y otros controles de la sección de simular
 	 */
@@ -371,11 +392,11 @@ public class VentanaController implements Initializable{
 				}else{
 					mapDataSets.put(nombreDB, dataSet);
 				}
-				
+
 				ArrayList<TreeItem<String>> listaDeHijos = new ArrayList<>();
 				if(mapHijosConsultas.containsKey(nombreDB)){
-					 listaDeHijos = mapHijosConsultas.get(nombreDB);
-					 mapHijosConsultas.get(nombreDB).clear();
+					listaDeHijos = mapHijosConsultas.get(nombreDB);
+					mapHijosConsultas.get(nombreDB).clear();
 				}else{
 					mapHijosConsultas.put(nombreDB, listaDeHijos);
 				}
@@ -385,7 +406,7 @@ public class VentanaController implements Initializable{
 					listaDeHijos.add(itemQuery);
 				}
 				getCargaProcesarConsultas().setProgress(1.0);
-				
+
 				getTree().setDisable(false);
 				enableFunctionControl();
 				getButtonVerFuncion().setDisable(true);
@@ -408,7 +429,7 @@ public class VentanaController implements Initializable{
 
 	private void leerDataSet(){
 		Thread hiloLeer = new Thread(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				getTree().setDisable(true);
@@ -465,15 +486,15 @@ public class VentanaController implements Initializable{
 					relevanciasFile= new File("files"+fsp+"time"+fsp+"TIME.REL");
 
 				}else if(getLabelDataSetName().getText().equals("ISWC2015")){
-					documentosFile= new File("files"+fsp+"iswc2015"+fsp+"docs.txt");
+					documentosFile = new File("files"+fsp+"iswc2015"+fsp+"docs.txt");
 					consultasFile= new File("files"+fsp+"iswc2015"+fsp+"qrys.txt");
-					relevanciasFile= new File("files"+fsp+"iswc2015"+fsp+"rel.txt");
+					relevanciasFile = new File("files"+fsp+"iswc2015"+fsp+"rel.txt");
 				}else{
 					return;
 				}
 				
 				getCargaLecturaDataSet().setProgress(0);
-			
+
 				ArrayList<Documento> documentos = new ArrayList<>();
 				ArrayList<Consulta> consultas = new ArrayList<>();
 				ArrayList<String> palabrasComunes = new ArrayList<>();
@@ -531,7 +552,7 @@ public class VentanaController implements Initializable{
 						getLabelCantidadDocumentos().setText(""+documentos.size());
 						getLabelPalabrasTotalesComunes().setText(""+palabrasComunes.size());
 						getLabelPalabrasTotalesNoComunes().setText(""+setDePalabras.size());
-						
+
 					}
 				});
 
@@ -570,11 +591,11 @@ public class VentanaController implements Initializable{
 				getSpinnerPin().setDisable(false);
 				getButtonProcesar().setDisable(false);
 				getTree().setDisable(false);
-				
+
 			}
 		});
 		hiloLeer.start();
-	
+
 
 	}
 

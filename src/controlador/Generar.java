@@ -53,7 +53,7 @@ public class Generar {
 				consultasFileMED, relevanciasFileMED, palabrasComunesFile, "MED");
 		//*/
 		// Archivos BD CRAN
-		//*/
+		/*/
 		File documentosFileCRAN = new File("files"+fsp+"cran"+fsp+"cran.all.1400");
 		File consultasFileCRAN = new File("files"+fsp+"cran"+fsp+"cran.qry");
 		File relevanciasFileCRAN = new File("files"+fsp+"cran"+fsp+"cranFix.rel");
@@ -118,7 +118,7 @@ public class Generar {
 		//*/
 		
 		//Archivos BD ISWC2015
-		/*/
+		//*/
 		File documentosFileISWC2015 = new File("files"+fsp+"iswc2015"+fsp+"docs.txt");
 		File consultasFileISWC2015= new File("files"+fsp+"iswc2015"+fsp+"qrys.txt");
 		File relevanciasFileISWC2015 = new File("files"+fsp+"iswc2015"+fsp+"rel.txt");
@@ -148,6 +148,7 @@ public class Generar {
 		ArrayList<Consulta> consultas = new ArrayList<>();
 		ArrayList<String> palabrasComunes = new ArrayList<>();
 		ArrayList<Relevancia> relevancias = new ArrayList<>();
+		
 		if(nombreDB.equals("LISA")){
 			Documento.generarDocumentosLisa(documentosFiles, documentos);
 			Consulta.generarConsultasLisa(consultasFile, consultas);
