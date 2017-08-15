@@ -42,7 +42,7 @@ import modelo.ResultadoQuery;
 
 
 public class VentanaController implements Initializable{
-
+	/** Array con los nombres de las los data set utilizados en el proyecto */
 	private final String[] dataSets = {"CACM", "MED", "CRAN", "CISI", "LISA", "ADI", "TIME", "ISWC2015"};
 	@FXML
 	private TreeView<String> tree;
@@ -91,16 +91,24 @@ public class VentanaController implements Initializable{
 	@FXML
 	private Label labelRelAcertadas;
 
+	/** Map para acceder a un resultado de datos dado el nombre del dataSet */
 	private HashMap<String, ResultadoDataSet> mapDataSets = new HashMap<>();
+	/**  Map para acceder a un resultado de datos de la simulacion dado el nombre del dataSet*/
 	private HashMap<String, Simulador> mapSimulador = new HashMap<>();
+	/**  Map para acceder a un resultado de datos de la función dado el nombre del dataSet*/
 	private HashMap<String, GetEquation> mapGetEquation = new HashMap<>();
 
+	/**  Map para acceder a un resultado de documentos dado el nombre del dataSet*/
 	private HashMap<String, ArrayList<Documento>> mapDocumentos = new HashMap<>();
+	/**  Map para acceder a un resultado de consultas dado el nombre del dataSet*/
 	private HashMap<String, ArrayList<Consulta>> mapConsultas = new HashMap<>();
+	/**  Map para acceder a un resultado de palabras comunes dado el nombre del dataSet*/
 	private HashMap<String, ArrayList<String>> mapPalabrasComunes = new HashMap<>();
+	/**  Map para acceder a un resultado de relevancias dado el nombre del dataSet*/
 	private HashMap<String, ArrayList<Relevancia>> mapRelevancias = new HashMap<>();
+	/**  Map para acceder a un resultado de palabras válidas dado el nombre del dataSet*/
 	private HashMap<String, SortedSet<String>> MapSetDePalabras = new HashMap<>();
-	
+	/**  Map para recordar puntero de los ítems de consultas de una consulta para poder quitarlos si es necesario*/
 	private HashMap<String, ArrayList<TreeItem<String>>> mapHijosConsultas = new HashMap<>();
 
 
@@ -117,10 +125,15 @@ public class VentanaController implements Initializable{
 		tree.setRoot(rootItem);
 
 		getButtonLeerDataSet().setOnAction(e -> leerDataSet());
-		getButtonProcesar().setOnAction(e ->{
-
-			procesarDataSet();
-		});
+		getButtonProcesar().setOnAction(e -> procesarDataSet());
+		getSliderIntervalos().valueProperty().addListener(e ->
+			getButtonGenerarF().setText("Generar función con "+
+		(int)getSliderIntervalos().getValue()+" intervalos"));
+		
+		getSliderSensibilidad().valueProperty().addListener(e ->
+		getButtonSimular().setText("Simular con sensibilidad "+(int)getSliderSensibilidad().getValue()));
+		
+	
 
 
 	}
@@ -200,6 +213,9 @@ public class VentanaController implements Initializable{
 			disableSimularControl(); 
 		}else if(padre != null && !padre.getValue().equals("DataSets")){
 			System.out.println("Seleccionado consulta "+ selectItem.getValue());
+			String idConsultaSeleccionada = selectItem.getValue().split("[.]* ID: ")[0];
+				
+			
 		}
 
 	}
@@ -212,7 +228,7 @@ public class VentanaController implements Initializable{
 		getToobleButtonVerResultadoS().setDisable(true);
 	}
 	/*
-	 * ACtiva los botones y otros controles de la sección de simular
+	 * Activa los botones y otros controles de la sección de simular
 	 */
 	private void enableSimularControl(){
 		getSliderSensibilidad().setDisable(false);
