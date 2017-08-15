@@ -32,6 +32,7 @@ public class Ventana extends Application {
 	         Scene scene = new Scene(root);
 	         windows.setTitle("Proyecto título - Obtención de una función de distribución probabilísitica "
 	         		+ "global para simular jucios de usuario - Por: Marcos Vega - 2017");
+	         
 			 windows.setScene(scene);
 			 windows.show();
 		} catch (MalformedURLException e) {
