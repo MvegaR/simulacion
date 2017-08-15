@@ -28,6 +28,7 @@ public class Ventana extends Application {
 		
 	     try {
 	    	 Parent root = FXMLLoader.load(getClass().getResource("ventana.fxml"));
+	    	 
 	         Scene scene = new Scene(root);
 	         windows.setTitle("Proyecto título - Obtención de una función de distribución probabilísitica "
 	         		+ "global para simular jucios de usuario - Por: Marcos Vega - 2017");

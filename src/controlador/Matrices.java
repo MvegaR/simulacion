@@ -1,7 +1,6 @@
 package controlador;
 import java.io.File;
 import java.io.FileWriter;
-import java.nio.channels.SeekableByteChannel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;

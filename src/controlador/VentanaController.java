@@ -3,29 +3,15 @@ package controlador;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 import java.util.ResourceBundle;
 import java.util.SortedSet;
 import java.util.TreeSet;
-
-import javax.xml.bind.ParseConversionEvent;
-
-import org.omg.CORBA.portable.ValueFactory;
-
 import javafx.application.Platform;
-import javafx.beans.InvalidationListener;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -38,10 +24,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.util.StringConverter;
 import modelo.Consulta;
 import modelo.Documento;
 import modelo.Precision;
@@ -51,7 +34,7 @@ import modelo.ResultadoDoc;
 import modelo.ResultadoQuery;
 
 
-
+@SuppressWarnings("rawtypes")
 public class VentanaController implements Initializable{
 	/** Array con los nombres de las los data set utilizados en el proyecto */
 	private final String[] dataSets = {"CACM", "MED", "CRAN", "CISI", "LISA", "ADI", "TIME", "ISWC2015"};
@@ -59,6 +42,9 @@ public class VentanaController implements Initializable{
 	private TreeView<String> tree;
 	@FXML
 	private BorderPane panelContenido;
+	@FXML
+	private BorderPane resumenDataSet;
+	
 	@FXML
 	private TableView tablaDatos;
 	@FXML
@@ -144,9 +130,7 @@ public class VentanaController implements Initializable{
 		getSliderSensibilidad().valueProperty().addListener(e ->
 		getButtonSimular().setText("Simular con sensibilidad "+(int)getSliderSensibilidad().getValue()));
 		
-	
-
-
+		
 	}
 
 	/**
@@ -236,6 +220,7 @@ public class VentanaController implements Initializable{
 	/*
 	 * Metodo que crea la tabla de resultados de una consulta
 	 */
+	@SuppressWarnings("unchecked")
 	private void tablaConsulta(TreeItem<String> selectItem, String nombreDB){
 		System.out.println("Seleccionado consulta "+ selectItem.getValue());
 		String idConsultaSeleccionada = selectItem.getValue().split(".* ID: ")[1];
@@ -1028,10 +1013,32 @@ public class VentanaController implements Initializable{
 		MapSetDePalabras = mapSetDePalabras;
 	}
 
+	/**
+	 * @return the resumenDataSet
+	 */
+	public BorderPane getResumenDataSet() {
+		return resumenDataSet;
+	}
 
+	/**
+	 * @param resumenDataSet the resumenDataSet to set
+	 */
+	public void setResumenDataSet(BorderPane resumenDataSet) {
+		this.resumenDataSet = resumenDataSet;
+	}
 
+	/**
+	 * @return the mapHijosConsultas
+	 */
+	public HashMap<String, ArrayList<TreeItem<String>>> getMapHijosConsultas() {
+		return mapHijosConsultas;
+	}
 
-
-
+	/**
+	 * @param mapHijosConsultas the mapHijosConsultas to set
+	 */
+	public void setMapHijosConsultas(HashMap<String, ArrayList<TreeItem<String>>> mapHijosConsultas) {
+		this.mapHijosConsultas = mapHijosConsultas;
+	}
 
 }
