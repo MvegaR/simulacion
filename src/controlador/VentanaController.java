@@ -3,7 +3,11 @@ package controlador;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.ResourceBundle;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -13,8 +17,12 @@ import javax.xml.bind.ParseConversionEvent;
 import org.omg.CORBA.portable.ValueFactory;
 
 import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -24,10 +32,12 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -37,6 +47,7 @@ import modelo.Documento;
 import modelo.Precision;
 import modelo.Relevancia;
 import modelo.ResultadoDataSet;
+import modelo.ResultadoDoc;
 import modelo.ResultadoQuery;
 
 
@@ -49,7 +60,7 @@ public class VentanaController implements Initializable{
 	@FXML
 	private BorderPane panelContenido;
 	@FXML
-	private TableView<String> tablaDatos;
+	private TableView tablaDatos;
 	@FXML
 	private Label labelDataSetName;
 	@FXML
@@ -212,13 +223,71 @@ public class VentanaController implements Initializable{
 			disableFunctionControl();
 			disableSimularControl(); 
 		}else if(padre != null && !padre.getValue().equals("DataSets")){
-			System.out.println("Seleccionado consulta "+ selectItem.getValue());
-			String idConsultaSeleccionada = selectItem.getValue().split("[.]* ID: ")[0];
+			tablaConsulta(selectItem, padre.getValue());
 				
 			
 		}
 
 	}
+	
+
+
+	
+	/*
+	 * Metodo que crea la tabla de resultados de una consulta
+	 */
+	private void tablaConsulta(TreeItem<String> selectItem, String nombreDB){
+		System.out.println("Seleccionado consulta "+ selectItem.getValue());
+		String idConsultaSeleccionada = selectItem.getValue().split(".* ID: ")[1];
+		
+		
+		TableColumn<ResultadoDoc, Integer> idConsulta = new TableColumn("ID Consulta");
+		idConsulta.setCellValueFactory(new PropertyValueFactory<>("idQuery"));
+		
+		TableColumn<ResultadoDoc, Integer> idDocumento = new TableColumn("ID Documento");
+		idDocumento.setCellValueFactory(new PropertyValueFactory<>("idDoc"));
+		
+		TableColumn<ResultadoDoc, Double> similitud = new TableColumn("Similitud");
+		similitud.setCellValueFactory(new PropertyValueFactory<>("disCos"));
+		
+		TableColumn<ResultadoDoc, Boolean> isRel = new TableColumn("¿Es relevante?");
+		isRel.setCellValueFactory(new PropertyValueFactory<>("isRel"));
+		
+		TableColumn<ResultadoDoc, Double> precision = new TableColumn("Precisión");
+		precision.setCellValueFactory(new PropertyValueFactory<>("precision"));
+		
+		TableColumn<ResultadoDoc, Double> recall = new TableColumn("Recall");
+		recall.setCellValueFactory(new PropertyValueFactory<>("recall"));
+		
+		TableColumn<ResultadoDoc, Integer> totalPalabras = new TableColumn("Total palabras");
+		totalPalabras.setCellValueFactory(new PropertyValueFactory<>("tWords"));
+		
+		
+		getTablaDatos().getColumns().clear();
+		getTablaDatos().getColumns().addAll(idConsulta, idDocumento, similitud, isRel, precision, recall, totalPalabras);
+		getTablaDatos().setItems(getResultadoDocumentoConsulta(idConsultaSeleccionada, nombreDB));
+	
+		
+		
+	}
+	
+	private ObservableList<ResultadoDoc> getResultadoDocumentoConsulta(String idQ, String nombreDB){
+		System.out.println("idq "+idQ + " !!!!!!!!!!!!!!!!!");
+		System.out.println(nombreDB);
+		ObservableList<ResultadoDoc> lista = FXCollections.observableArrayList();
+		for(ResultadoQuery rq: mapDataSets.get(nombreDB).getResultadosConsultas()){
+			
+			if(rq.getIdQuery().toString().equals(idQ.toString())){
+				System.out.println(true);
+				for(ResultadoDoc rd: rq.getResultadosDocumentos()){
+					lista.add(rd);
+					System.out.println(rd);
+				}
+			}
+		}
+		return lista;
+	}
+	
 	/*
 	 * Desactiva los botones y otros controles de la sección de simular
 	 */
@@ -535,14 +604,14 @@ public class VentanaController implements Initializable{
 	/**
 	 * @return the tablaDatos
 	 */
-	public TableView<String> getTablaDatos() {
+	public TableView getTablaDatos() {
 		return tablaDatos;
 	}
 
 	/**
 	 * @param tablaDatos the tablaDatos to set
 	 */
-	public void setTablaDatos(TableView<String> tablaDatos) {
+	public void setTablaDatos(TableView tablaDatos) {
 		this.tablaDatos = tablaDatos;
 	}
 

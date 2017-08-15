@@ -189,7 +189,7 @@ public class Matrices {
 
 				}
 			}
-			resultadoDocumento.settWords(getDocumento(similitudes.get(i).getIdDocumento(), 
+			resultadoDocumento.setTWords(getDocumento(similitudes.get(i).getIdDocumento(), 
 						documentos).getPalabrasValidas().size());
 
 			System.out.println();

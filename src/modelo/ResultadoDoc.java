@@ -157,13 +157,13 @@ public class ResultadoDoc {
 	/**
 	 * @return the tWords
 	 */
-	public Integer gettWords() {
+	public Integer getTWords() {
 		return tWords;
 	}
 	/**
 	 * @param tWords the tWords to set
 	 */
-	public void settWords(Integer tWords) {
+	public void setTWords(Integer tWords) {
 		this.tWords = tWords;
 	}
 	/**
