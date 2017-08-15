@@ -37,6 +37,7 @@ import modelo.Documento;
 import modelo.Precision;
 import modelo.Relevancia;
 import modelo.ResultadoDataSet;
+import modelo.ResultadoQuery;
 
 
 
@@ -99,6 +100,8 @@ public class VentanaController implements Initializable{
 	private HashMap<String, ArrayList<String>> mapPalabrasComunes = new HashMap<>();
 	private HashMap<String, ArrayList<Relevancia>> mapRelevancias = new HashMap<>();
 	private HashMap<String, SortedSet<String>> MapSetDePalabras = new HashMap<>();
+	
+	private HashMap<String, ArrayList<TreeItem<String>>> mapHijosConsultas = new HashMap<>();
 
 
 
@@ -133,10 +136,12 @@ public class VentanaController implements Initializable{
 		System.out.println("Tree update");
 
 		TreeItem<String> selectItem =  tree.getSelectionModel().getSelectedItem();
-		TreeItem<String> padre = tree.getSelectionModel().getSelectedItem().getParent();
+		TreeItem<String> padre = null;
+		if(tree.getSelectionModel() != null && tree.getSelectionModel().getSelectedItem() != null){
+			padre = tree.getSelectionModel().getSelectedItem().getParent();
+		}
 		//Al seleccionar un dataset en el arbol:
-
-		if(padre != null && !selectItem.getValue().equals("DataSets")){
+		if(padre != null && padre.getValue().equals("DataSets")){
 			System.out.println("Seleccionado data set " + selectItem.getValue());
 			getLabelDataSetName().setText(selectItem.getValue());
 			//mapConsultas,mapDocumentos,mapPalabrascomunes, mapSetdePalabras se trabajan en conjunto
@@ -175,6 +180,7 @@ public class VentanaController implements Initializable{
 					}else{
 						getButtonVerFuncion().setDisable(false);
 						enableSimularControl();
+						//map simulación
 						if(!getMapSimulador().containsKey(selectItem.getValue().toString())){
 							getToogleButtonVerResultadoS().setDisable(true);
 						}else{
@@ -186,16 +192,14 @@ public class VentanaController implements Initializable{
 				
 			}
 			
-			//mapDataSet
 
-			//mapEquation
-
-			//mapSimulation
 		}else if(padre == null){ //raiz
-			getLabelDataSetName().setText(selectItem.getValue());
+			getLabelDataSetName().setText(tree.getRoot().getValue());
 			disableDataSetControl();
 			disableFunctionControl();
 			disableSimularControl(); 
+		}else if(padre != null && !padre.getValue().equals("DataSets")){
+			System.out.println("Seleccionado consulta "+ selectItem.getValue());
 		}
 
 	}
@@ -277,7 +281,21 @@ public class VentanaController implements Initializable{
 				}else{
 					mapDataSets.put(nombreDB, dataSet);
 				}
+				
+				ArrayList<TreeItem<String>> listaDeHijos = new ArrayList<>();
+				if(mapHijosConsultas.containsKey(nombreDB)){
+					 listaDeHijos = mapHijosConsultas.get(nombreDB);
+					 mapHijosConsultas.get(nombreDB).clear();
+				}else{
+					mapHijosConsultas.put(nombreDB, listaDeHijos);
+				}
+				for(ResultadoQuery rq: dataSet.getResultadosConsultas()){
+					TreeItem<String> itemQuery = new TreeItem<String>("Query "+nombreDB+" ID: "+rq.getIdQuery().toString());
+					tree.getSelectionModel().getSelectedItem().getChildren().add(itemQuery);
+					listaDeHijos.add(itemQuery);
+				}
 				getCargaProcesarConsultas().setProgress(1.0);
+				
 				getTree().setDisable(false);
 				enableFunctionControl();
 				getButtonVerFuncion().setDisable(true);
