@@ -23,7 +23,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.VentanaController">
+<BorderPane prefHeight="728.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.VentanaController">
    <opaqueInsets>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </opaqueInsets>
@@ -59,7 +59,7 @@
       </HBox>
    </top>
    <center>
-      <SplitPane dividerPositions="0.8347245409015025" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <SplitPane dividerPositions="0.8347245409015025" prefHeight="622.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
         <items>
             <SplitPane dividerPositions="0.31895687061183553" prefHeight="200.0" prefWidth="200.0">
                <items>

@@ -38,6 +38,8 @@ import modelo.ResultadoQuery;
 public class VentanaController implements Initializable{
 	/** Array con los nombres de las los data set utilizados en el proyecto */
 	private final String[] dataSets = {"CACM", "MED", "CRAN", "CISI", "LISA", "ADI", "TIME", "ISWC2015"};
+	/** Puntero al controlador del panel de resumen, para reemplazar el panel central cuando se necesite */
+	private ResumenQueryController resumenController;
 	@FXML
 	private TreeView<String> tree;
 	@FXML
@@ -151,6 +153,10 @@ public class VentanaController implements Initializable{
 		//Al seleccionar un dataset en el arbol:
 		if(padre != null && padre.getValue().equals("DataSets")){
 			System.out.println("Seleccionado data set " + selectItem.getValue());
+			if(getPanelContenido().getChildren().contains(getResumenController().getResumenDataSet())){
+				getPanelContenido().getChildren().remove(getResumenController().getResumenDataSet());
+				getPanelContenido().setCenter(getResumenDataSet());
+			}
 			getLabelDataSetName().setText(selectItem.getValue());
 			//mapConsultas,mapDocumentos,mapPalabrascomunes, mapSetdePalabras se trabajan en conjunto
 			if(!getMapConsultas().containsKey(selectItem.getValue().toString())){
@@ -202,21 +208,35 @@ public class VentanaController implements Initializable{
 			
 
 		}else if(padre == null){ //raiz
+			if(getPanelContenido().getChildren().contains(getResumenController().getResumenDataSet())){
+				getPanelContenido().getChildren().remove(getResumenController().getResumenDataSet());
+				getPanelContenido().setCenter(getResumenDataSet());
+			}
 			getLabelDataSetName().setText(tree.getRoot().getValue());
 			disableDataSetControl();
 			disableFunctionControl();
 			disableSimularControl(); 
 		}else if(padre != null && !padre.getValue().equals("DataSets")){
 			tablaConsulta(selectItem, padre.getValue());
-				
-			
+			cambiarCentroToResumenQuery();
+	
 		}
-
 	}
-	
 
+	private void cambiarCentroToResumenQuery() {
+		if(getResumenController() != null){
+			getResumenController().getLabelDataSetName().setText(getLabelDataSetName().getText());
+			getResumenController().getTexto1().setText("Precisión promedio");
+			getResumenController().getTexto2().setText("Recall promedio");
+			getResumenController().getTexto3().setText("Total relevantes");
+			getResumenController().getTexto4().setText("");
+			getResumenController().getTexto5().setText("");
+			getPanelContenido().getChildren().remove(getResumenDataSet());
+			getPanelContenido().setCenter(getResumenController().getResumenDataSet());
+		}
+		
+	}
 
-	
 	/*
 	 * Metodo que crea la tabla de resultados de una consulta
 	 */
@@ -1039,6 +1059,20 @@ public class VentanaController implements Initializable{
 	 */
 	public void setMapHijosConsultas(HashMap<String, ArrayList<TreeItem<String>>> mapHijosConsultas) {
 		this.mapHijosConsultas = mapHijosConsultas;
+	}
+
+	/**
+	 * @return the resumenController
+	 */
+	public ResumenQueryController getResumenController() {
+		return resumenController;
+	}
+
+	/**
+	 * @param resumenController the resumenController to set
+	 */
+	public void setResumenController(ResumenQueryController resumenController) {
+		this.resumenController = resumenController;
 	}
 
 }
