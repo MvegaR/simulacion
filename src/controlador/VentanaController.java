@@ -8,7 +8,6 @@ import java.util.ResourceBundle;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -27,6 +27,7 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+
 import modelo.Consulta;
 import modelo.DistributionEquation;
 import modelo.Documento;
@@ -103,7 +104,10 @@ public class VentanaController implements Initializable{
 
     @FXML
     private Label lavelRelRealValor;
-
+    
+    /*@FXML
+    private Button botonBuscar;
+*/
 	/** Map para acceder a un resultado de datos dado el nombre del dataSet */
 	private HashMap<String, ResultadoDataSet> mapDataSets = new HashMap<>();
 	/**  Map para acceder a un resultado de datos de la simulacion dado el nombre del dataSet*/
@@ -122,7 +126,10 @@ public class VentanaController implements Initializable{
 	private HashMap<String, SortedSet<String>> MapSetDePalabras = new HashMap<>();
 	/**  Map para recordar puntero de los ítems de consultas de una consulta para poder quitarlos si es necesario*/
 	private HashMap<String, ArrayList<TreeItem<String>>> mapHijosConsultas = new HashMap<>();
-
+	/** hilo de generar función */
+	private Thread hiloFuncion;
+	/** hilo de generar simulación */
+	private Thread hiloSimulacion;
 
 
 	@Override
@@ -146,12 +153,63 @@ public class VentanaController implements Initializable{
 
 		getSliderSensibilidad().valueProperty().addListener(e ->
 		getButtonSimular().setText("Simular con sensibilidad "+(int)getSliderSensibilidad().getValue()));
-		getButtonGenerarF().setOnAction(e -> generarFuncion());
+		getButtonGenerarF().setOnAction(e -> generarFuncion((int)getSliderIntervalos().getValue()));
 		getButtonVerFuncion().setOnAction(e -> tablaFuncion(getLabelDataSetName().getText()));
-		getButtonSimular().setOnAction(e -> generarSimulacion());
+		getButtonSimular().setOnAction(e -> generarSimulacion((double)getSliderSensibilidad().getValue()));
+		
 
 
 	}
+	
+	private void buscarMejor(){
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				//getBotonBuscar().setDisable(true);
+				Double max = 0.0;
+				for(int i = 1; i <= 100;){
+					for(int j = 1; j <= 10000;){
+						if(hiloFuncion!=null && hiloFuncion.getState()==Thread.State.TERMINATED 
+								&& hiloSimulacion != null && hiloSimulacion.getState()==Thread.State.TERMINATED){
+							Integer totalAcertado = getMapSimulador().get(getTree().getSelectionModel().getSelectedItem().getValue().toString()).getTotalGlobalAcertados();
+							Integer totalFallado= getMapSimulador().get(getTree().getSelectionModel().getSelectedItem().getValue().toString()).getTotalGlobalFallados();
+							Integer total = totalFallado+totalAcertado;
+							Integer totalAcertadoTrue = getMapSimulador().get(getTree().getSelectionModel().getSelectedItem().getValue().toString()).getTotalGlobalRealesYSimulados();
+							Integer totalFalladoTrue= getMapSimulador().get(getTree().getSelectionModel().getSelectedItem().getValue().toString()).getTotalRelevantesFallados();
+							Integer totalTrue = totalFalladoTrue+totalAcertadoTrue;
+							Double t1 = (double)totalAcertado/(double)total;
+							Double t2 = (double)totalAcertadoTrue/(double)totalTrue;
+							if(max.compareTo(t2) < 0){
+								getSliderIntervalos().valueProperty().set(j);
+								getSliderSensibilidad().valueProperty().set(i);
+								max = t2;
+							}
+							generarFuncion(j);
+							generarSimulacion((double)i);
+							i++;
+							j+=100;
+						}else{
+							
+							try {
+								Thread.sleep(100);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+						
+					}
+				}
+				
+			}
+		}).start();;
+
+	}
+	
+	/**
+	 * Método de evento de slider de intervalos
+	 */
 	
 	private void sliderIntervalos(){
 		getButtonGenerarF().setText("Generar función con "+(int)getSliderIntervalos().getValue()+" intervalos");
@@ -464,7 +522,9 @@ public class VentanaController implements Initializable{
 		String idConsultaSeleccionada = selectItem.getValue().split(".* ID: ")[1];
 		TableColumn<FormatoSimulacion, Boolean> igual = new TableColumn("¿Igual?");
 		igual.setCellValueFactory(new PropertyValueFactory<>("igual"));
-
+	
+	
+	
 		TableColumn<FormatoSimulacion, Integer> idDocumento = new TableColumn("ID Consulta");
 		idDocumento.setCellValueFactory(new PropertyValueFactory<>("idq"));
 
@@ -567,18 +627,18 @@ public class VentanaController implements Initializable{
 	 * Método de evento para la generación de la función desde la interfaz grafica
 	 */
 	
-	private void generarFuncion(){
-		Thread hiloFuncion = new Thread(new Runnable() {
+	private void generarFuncion(int intervalos){
+		hiloFuncion = new Thread(new Runnable() {
 			@Override
 			public void run() {
 				getButtonGenerarF().setDisable(true);
 				String nombreDB = getLabelDataSetName().getText();
 				if(!mapGetEquation.containsKey(nombreDB)){
 					mapGetEquation.put(nombreDB, 
-							new GetEquation((int)sliderIntervalos.getValue(), mapDataSets.get(nombreDB), getCargaF()).generarEquation());
+							new GetEquation(intervalos, mapDataSets.get(nombreDB), getCargaF()).generarEquation());
 				}else{
 					mapGetEquation.replace(nombreDB, mapGetEquation.get(nombreDB), 
-							new GetEquation((int)sliderIntervalos.getValue(), mapDataSets.get(nombreDB), getCargaF()).generarEquation());
+							new GetEquation(intervalos, mapDataSets.get(nombreDB), getCargaF()).generarEquation());
 				}
 				getButtonGenerarF().setDisable(false);
 				getButtonVerFuncion().setDisable(false);
@@ -593,14 +653,14 @@ public class VentanaController implements Initializable{
 	 * Método de evento para generar la simulación y sus resultados para mostrarlos en la tabla
 	 */
 	
-	private void generarSimulacion(){
-		Thread hiloSimulacion = new Thread(new Runnable() {
+	private void generarSimulacion(Double sensibilidad){
+		hiloSimulacion = new Thread(new Runnable() {
 			@Override
 			public void run() {
 				String name = getLabelDataSetName().getText();
 				Simulador simu = new Simulador(getMapDataSets().get(name), getMapGetEquation().get(name));
 				simu.setBar(getCargaS());
-				simu.simular((double)getSliderSensibilidad().getValue()/100.0);
+				simu.simular(sensibilidad/100.0);
 				
 				
 				if(!getMapSimulador().containsKey(getLabelDataSetName().getText())){
@@ -1464,5 +1524,19 @@ public class VentanaController implements Initializable{
 	public void setLavelRelRealValor(Label lavelRelRealValor) {
 		this.lavelRelRealValor = lavelRelRealValor;
 	}
+
+	/*
+	 * @return the botonBuscar
+	 */
+	/*public Button getBotonBuscar() {
+		return botonBuscar;
+	}*/
+
+	/*
+	 * @param botonBuscar the botonBuscar to set
+	 */
+	/*public void setBotonBuscar(Button botonBuscar) {
+		this.botonBuscar = botonBuscar;
+	}*/
 
 }
