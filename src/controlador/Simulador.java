@@ -23,8 +23,8 @@ public class Simulador {
 	private Integer totalGlobalAcertados;
 	private Integer totalRelevantesFallados;
 	private Integer totalGlobalRealesYSimulados;
-	private Integer TtotalRelevantesDesplegados;
-	private Integer TtotalRelevantesSimuladosDesplegados;
+	private Integer ttotalRelevantesDesplegados;
+	private Integer ttotalRelevantesSimuladosDesplegados;
 	
 	
 
@@ -42,8 +42,8 @@ public class Simulador {
 		this.totalGlobalAcertados = 0;
 		this.totalRelevantesFallados = 0;
 		this.totalGlobalRealesYSimulados = 0;
-		this.TtotalRelevantesDesplegados = 0;
-		this.TtotalRelevantesSimuladosDesplegados = 0;
+		this.ttotalRelevantesDesplegados = 0;
+		this.ttotalRelevantesSimuladosDesplegados = 0;
 	}
 	
 	/**
@@ -123,8 +123,8 @@ public class Simulador {
 			}
 			Integer totalDesplegadosOriginales = getDataSetOriginal().getResultadosConsultas().get(i).getTotalDocReleventesDesplegados();
 			Integer totalDesplegadosSimulados = getDataSetSimulado().getResultadosConsultas().get(i).getTotalDocReleventesDesplegados();
-			this.TtotalRelevantesDesplegados+=totalDesplegadosOriginales;
-			this.TtotalRelevantesSimuladosDesplegados+=totalRelevantesRealesSimulados;
+			this.ttotalRelevantesDesplegados+=totalDesplegadosOriginales;
+			this.ttotalRelevantesSimuladosDesplegados+=totalRelevantesRealesSimulados;
 			getResultadosResumen().add(new FormatoResumenSimulacion(totalDesplegadosOriginales, 
 					totalDesplegadosSimulados, totalRelevantesRealesSimulados, 
 					totalAcertados, totalFallados, tolerancia));
@@ -391,5 +391,33 @@ public class Simulador {
 	 */
 	public void setTotalGlobalRealesYSimulados(Integer totalGlobalRealesYSimulados) {
 		this.totalGlobalRealesYSimulados = totalGlobalRealesYSimulados;
+	}
+
+	/**
+	 * @return the ttotalRelevantesDesplegados
+	 */
+	public Integer getTtotalRelevantesDesplegados() {
+		return ttotalRelevantesDesplegados;
+	}
+
+	/**
+	 * @param ttotalRelevantesDesplegados the ttotalRelevantesDesplegados to set
+	 */
+	public void setTtotalRelevantesDesplegados(Integer ttotalRelevantesDesplegados) {
+		this.ttotalRelevantesDesplegados = ttotalRelevantesDesplegados;
+	}
+
+	/**
+	 * @return the ttotalRelevantesSimuladosDesplegados
+	 */
+	public Integer getTtotalRelevantesSimuladosDesplegados() {
+		return ttotalRelevantesSimuladosDesplegados;
+	}
+
+	/**
+	 * @param ttotalRelevantesSimuladosDesplegados the ttotalRelevantesSimuladosDesplegados to set
+	 */
+	public void setTtotalRelevantesSimuladosDesplegados(Integer ttotalRelevantesSimuladosDesplegados) {
+		this.ttotalRelevantesSimuladosDesplegados = ttotalRelevantesSimuladosDesplegados;
 	}
 }

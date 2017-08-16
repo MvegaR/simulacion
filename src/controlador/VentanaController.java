@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.SortedSet;
 import java.util.TreeSet;
+
+import controlador.Matrices.Similitud;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -246,6 +248,7 @@ public class VentanaController implements Initializable{
 		}else if(padre != null && !padre.getValue().equals("DataSets")){
 			if(getToogleButtonVerResultadoS().isSelected() && !getToogleButtonVerResultadoS().isDisable()){
 				tablaConsultaSimulada(selectItem, padre.getValue());
+				cambiarCentroToResumenQuerySimulada(selectItem, padre);
 			}else{
 				tablaConsulta(selectItem, padre.getValue());
 				cambiarCentroToResumenQuery(selectItem, padre);
@@ -270,14 +273,90 @@ public class VentanaController implements Initializable{
 			getResumenController().getTexto3().setText("Total relevantes");
 			getResumenController().getTexto4().setText("Total relevantes desplegados");
 			getResumenController().getTexto5().setText("");
+			getResumenController().getTexto6().setText("");
 			
 			getResumenController().getValor1().setText(rq.getPrecisionPromedio().toString());
 			getResumenController().getValor2().setText(rq.getRecallPromedio().toString());
 			getResumenController().getValor3().setText(rq.getTotalDocRelevantesTotales().toString());
 			getResumenController().getValor4().setText(rq.getTotalDocReleventesDesplegados().toString());
 			getResumenController().getValor5().setText("");
+			getResumenController().getValor6().setText("");
 			getPanelContenido().getChildren().remove(getResumenDataSet());
 			getPanelContenido().setCenter(getResumenController().getResumenDataSet());
+			
+			getResumenController().getLabelTituloSim().setText("");
+			getResumenController().getTexto11().setText("");
+			getResumenController().getTexto21().setText("");
+			getResumenController().getTexto31().setText("");
+			getResumenController().getTexto41().setText("");
+			getResumenController().getTexto51().setText("");
+			getResumenController().getTexto61().setText("");
+			
+			getResumenController().getValor11().setText("");
+			getResumenController().getValor21().setText("");
+			getResumenController().getValor31().setText("");
+			getResumenController().getValor41().setText("");
+			getResumenController().getValor51().setText("");
+			getResumenController().getValor61().setText("");
+		}
+
+	}
+	/**
+	 * Metodo para actualizar los datos del resumen de una consulta simulada
+	 * @param selectItem Contiene el id de la consulta (TreeItem)
+	 * @param padre Contine el nombre de del data set (TreeItem)
+	 */
+	private void cambiarCentroToResumenQuerySimulada(TreeItem<String> selectItem, TreeItem<String> padre) {
+		if(getResumenController() != null){
+			ResultadoQuery rq = getResultadoQueryById(selectItem.getValue().split(".* ID: ")[1],padre.getValue());
+			Integer index = 0;
+			for(ResultadoQuery rqt: mapDataSets.get(padre.getValue()).getResultadosConsultas()){
+				index++;
+				if(rqt.getIdQuery().toString().equals(selectItem.getValue().split(".* ID: ")[1].toString())){
+					break;
+				}
+			}
+			Simulador simulador = mapSimulador.get(padre.getValue());
+			
+			getLabelDataSetName().setText("Simulación " +getLabelDataSetName().getText());
+			getResumenController().getLabelDataSetName().setText(
+					getTree().getSelectionModel().getSelectedItem().getValue());
+			getResumenController().getTexto1().setText("Total desplegados originales");
+			getResumenController().getTexto2().setText("Total desplegados simulados");
+			getResumenController().getTexto3().setText("Total simulados y originales");
+			getResumenController().getTexto4().setText("Total acertados");
+			getResumenController().getTexto5().setText("Total fallados");
+			getResumenController().getTexto6().setText("Tolerancia");
+			
+			
+			getResumenController().getValor1().setText
+			(simulador.getResultadosResumen().get(index).getTotalDesplegadosOriginales().toString());
+			getResumenController().getValor2().setText
+			(simulador.getResultadosResumen().get(index).getTotalDesplegadosSimulados().toString());
+			getResumenController().getValor3().setText
+			(simulador.getResultadosResumen().get(index).getTotalSimuladosYOriginales().toString());
+			getResumenController().getValor4().setText
+			(simulador.getResultadosResumen().get(index).getTotalAcertados().toString());
+			getResumenController().getValor5().setText
+			(simulador.getResultadosResumen().get(index).getTotalFallados().toString());
+			getResumenController().getValor6().setText
+			(simulador.getResultadosResumen().get(index).getTolerancia().toString());
+			getPanelContenido().setCenter(getResumenController().getResumenDataSet());
+
+			getResumenController().getLabelTituloSim().setText("Resumen global simulación");
+			getResumenController().getTexto11().setText("Total fallados");
+			getResumenController().getTexto21().setText("Total acertados");
+			getResumenController().getTexto31().setText("Total relevantes fallados");
+			getResumenController().getTexto41().setText("Total relevantes acertados");
+			getResumenController().getTexto51().setText("Total relevantes \"true\" original");
+			getResumenController().getTexto61().setText("Total relevantes \"true\" simulado");
+			
+			getResumenController().getValor11().setText(simulador.getTotalGlobalFallados().toString());
+			getResumenController().getValor21().setText(simulador.getTotalGlobalAcertados().toString());
+			getResumenController().getValor31().setText(simulador.getTotalRelevantesFallados().toString());
+			getResumenController().getValor41().setText(simulador.getTotalGlobalRealesYSimulados().toString());
+			getResumenController().getValor51().setText(simulador.getTtotalRelevantesDesplegados().toString());
+			getResumenController().getValor61().setText(simulador.getTtotalRelevantesSimuladosDesplegados().toString());
 		}
 
 	}
