@@ -12,14 +12,15 @@
 
 <BorderPane fx:id="resumenDataSet" prefHeight="625.0" prefWidth="676.0" style="-fx-background-color: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%)" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.ResumenQueryController">
    <top>
-      <VBox prefHeight="277.0" prefWidth="651.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="600.0" prefWidth="676.0" BorderPane.alignment="CENTER">
          <children>
-            <GridPane prefHeight="212.0" prefWidth="676.0" style="">
+            <GridPane prefHeight="362.0" prefWidth="676.0" style="">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="97.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="103.0" prefWidth="100.0" />
                </columnConstraints>
                <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -103,6 +104,19 @@
                         <Insets />
                      </opaqueInsets>
                   </Label>
+                  <Label fx:id="texto6" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="221.0" prefHeight="23.0" prefWidth="333.0" text="texto6" GridPane.rowIndex="7">
+                     <font>
+                        <Font name="Times New Roman" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="valor6" alignment="CENTER" layoutX="338.0" layoutY="221.0" prefHeight="23.0" prefWidth="333.0" text="valor6" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                     <font>
+                        <Font name="Times New Roman" size="20.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Label>
                </children>
                <padding>
                   <Insets bottom="5.0" top="5.0" />
@@ -110,6 +124,114 @@
             </GridPane>
             <HBox prefHeight="46.0" prefWidth="676.0" />
             <HBox prefHeight="22.0" prefWidth="651.0" />
+            <GridPane layoutX="10.0" layoutY="10.0" prefHeight="362.0" prefWidth="676.0" style="">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="97.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="103.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label fx:id="labelTituloSim" prefHeight="37.0" prefWidth="330.0" text="QueryID">
+                     <font>
+                        <Font name="Times New Roman Bold" size="27.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label fx:id="texto11" alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="333.0" text="texto1" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Times New Roman" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="texto21" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="114.0" prefHeight="23.0" prefWidth="333.0" text="texto2" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Times New Roman" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="texto31" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="160.0" prefHeight="23.0" prefWidth="333.0" text="texto3" GridPane.rowIndex="4">
+                     <font>
+                        <Font name="Times New Roman" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="texto41" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="205.0" prefHeight="23.0" prefWidth="333.0" text="texto4" GridPane.rowIndex="5">
+                     <font>
+                        <Font name="Times New Roman" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="valor11" alignment="CENTER" layoutX="10.0" layoutY="114.0" prefHeight="23.0" prefWidth="333.0" text="valor1" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Times New Roman" size="20.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Label>
+                  <Label fx:id="valor21" alignment="CENTER" layoutX="348.0" layoutY="114.0" prefHeight="23.0" prefWidth="333.0" text="valor2" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Times New Roman" size="20.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Label>
+                  <Label fx:id="valor31" alignment="CENTER" layoutX="348.0" layoutY="160.0" prefHeight="23.0" prefWidth="333.0" text="valor3" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <font>
+                        <Font name="Times New Roman" size="20.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Label>
+                  <Label fx:id="valor41" alignment="CENTER" layoutX="348.0" layoutY="205.0" prefHeight="23.0" prefWidth="333.0" text="valor4" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <font>
+                        <Font name="Times New Roman" size="20.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Label>
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                  <Label fx:id="texto51" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="162.0" prefHeight="23.0" prefWidth="333.0" text="texto5" GridPane.rowIndex="6">
+                     <font>
+                        <Font name="Times New Roman" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="valor51" alignment="CENTER" layoutX="336.0" layoutY="162.0" prefHeight="23.0" prefWidth="333.0" text="valor5" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                     <font>
+                        <Font name="Times New Roman" size="20.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Label>
+                  <Label fx:id="texto61" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="221.0" prefHeight="23.0" prefWidth="333.0" text="texto6" GridPane.rowIndex="7">
+                     <font>
+                        <Font name="Times New Roman" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="valor61" alignment="CENTER" layoutX="338.0" layoutY="221.0" prefHeight="23.0" prefWidth="333.0" text="valor6" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                     <font>
+                        <Font name="Times New Roman" size="20.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" top="5.0" />
+               </padding>
+            </GridPane>
          </children>
       </VBox>
    </top>

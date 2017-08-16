@@ -281,8 +281,7 @@ public class VentanaController implements Initializable{
 			getResumenController().getValor4().setText(rq.getTotalDocReleventesDesplegados().toString());
 			getResumenController().getValor5().setText("");
 			getResumenController().getValor6().setText("");
-			getPanelContenido().getChildren().remove(getResumenDataSet());
-			getPanelContenido().setCenter(getResumenController().getResumenDataSet());
+		
 			
 			getResumenController().getLabelTituloSim().setText("");
 			getResumenController().getTexto11().setText("");
@@ -298,6 +297,8 @@ public class VentanaController implements Initializable{
 			getResumenController().getValor41().setText("");
 			getResumenController().getValor51().setText("");
 			getResumenController().getValor61().setText("");
+			getPanelContenido().getChildren().remove(getResumenDataSet());
+			getPanelContenido().setCenter(getResumenController().getResumenDataSet());
 		}
 
 	}
@@ -357,6 +358,9 @@ public class VentanaController implements Initializable{
 			getResumenController().getValor41().setText(simulador.getTotalGlobalRealesYSimulados().toString());
 			getResumenController().getValor51().setText(simulador.getTtotalRelevantesDesplegados().toString());
 			getResumenController().getValor61().setText(simulador.getTtotalRelevantesSimuladosDesplegados().toString());
+			getPanelContenido().getChildren().remove(getResumenDataSet());
+			getPanelContenido().setCenter(getResumenController().getResumenDataSet());
+		
 		}
 
 	}
