@@ -1,6 +1,7 @@
 package controlador;
 
 
+import javafx.scene.control.ProgressBar;
 import modelo.DistributionEquation;
 import modelo.ProbabilisticInterval;
 import modelo.ResultadoDataSet;
@@ -13,6 +14,7 @@ public class Simulador {
 	private ResultadoDataSet dataSetSimulado;
 	private DistributionEquation equation;
 	private Double tolerancia;
+	private ProgressBar bar;
 	
 	/**
 	 * @param dataSetOriginal Información del data set original {@link ResultadoDataSet}
@@ -35,6 +37,7 @@ public class Simulador {
 		dataSetSimulado = new ResultadoDataSet(dataSetOriginal.getSetName(), dataSetOriginal.getTotalConsultas(), 
 				dataSetOriginal.getTotalConsultas(), dataSetOriginal.getTotalPalabrasComunes(), 
 				dataSetOriginal.getTotalpalabrasValidasNoComunes() );
+		Integer count = 0;
 		for(ResultadoQuery resQ: dataSetOriginal.getResultadosConsultas()){
 			ResultadoQuery resSimQ = new ResultadoQuery(resQ.getpIn(), resQ.getIdQuery(), resQ.getPrecisionPromedio(), 
 					resQ.getRecallPromedio(), -1, 0); //falta documentos relevantes totales y desplegados
@@ -52,6 +55,10 @@ public class Simulador {
 			resSimQ.setTotalDocReleventesDesplegados(docRelDesplegados);
 			docRelDesplegados = 0;
 			dataSetSimulado.getResultadosConsultas().add(resSimQ);
+			count++;
+			if(getBar()!=null){
+				getBar().setProgress(count/(double)dataSetOriginal.getResultadosConsultas().size());
+			}
 		}
 		
 		return dataSetSimulado;
@@ -155,6 +162,34 @@ public class Simulador {
 	public void setEquation(DistributionEquation equation) {
 		this.equation = equation;
 	}
+	/**
+	 * @return the tolerancia
+	 */
+	public Double getTolerancia() {
+		return tolerancia;
+	}
+
+	/**
+	 * @param tolerancia the tolerancia to set
+	 */
+	public void setTolerancia(Double tolerancia) {
+		this.tolerancia = tolerancia;
+	}
+
+	/**
+	 * @return the bar
+	 */
+	public ProgressBar getBar() {
+		return bar;
+	}
+
+	/**
+	 * @param bar the bar to set
+	 */
+	public void setBar(ProgressBar bar) {
+		this.bar = bar;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

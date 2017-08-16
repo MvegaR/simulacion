@@ -26,8 +26,11 @@ import javafx.scene.control.TreeView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import modelo.Consulta;
+import modelo.DistributionEquation;
 import modelo.Documento;
+import modelo.FormatoEcuacion;
 import modelo.Precision;
+import modelo.ProbabilisticInterval;
 import modelo.Relevancia;
 import modelo.ResultadoDataSet;
 import modelo.ResultadoDoc;
@@ -94,8 +97,7 @@ public class VentanaController implements Initializable{
 	/**  Map para acceder a un resultado de datos de la simulacion dado el nombre del dataSet*/
 	private HashMap<String, Simulador> mapSimulador = new HashMap<>();
 	/**  Map para acceder a un resultado de datos de la función dado el nombre del dataSet*/
-	private HashMap<String, GetEquation> mapGetEquation = new HashMap<>();
-
+	private HashMap<String, DistributionEquation> mapGetEquation = new HashMap<>();
 	/**  Map para acceder a un resultado de documentos dado el nombre del dataSet*/
 	private HashMap<String, ArrayList<Documento>> mapDocumentos = new HashMap<>();
 	/**  Map para acceder a un resultado de consultas dado el nombre del dataSet*/
@@ -121,17 +123,31 @@ public class VentanaController implements Initializable{
 		}
 		tree.getSelectionModel().selectedItemProperty().addListener(e->updateData());
 		tree.setRoot(rootItem);
+		getButtonLeerDataSet().setDisable(true);
+		disableDataSetControl();
+		disableFunctionControl();
+		disableSimularControl();
 
 		getButtonLeerDataSet().setOnAction(e -> leerDataSet());
 		getButtonProcesar().setOnAction(e -> procesarDataSet());
-		getSliderIntervalos().valueProperty().addListener(e ->
-		getButtonGenerarF().setText("Generar función con "+
-				(int)getSliderIntervalos().getValue()+" intervalos"));
+		getSliderIntervalos().valueProperty().addListener(e ->sliderIntervalos());
 
 		getSliderSensibilidad().valueProperty().addListener(e ->
 		getButtonSimular().setText("Simular con sensibilidad "+(int)getSliderSensibilidad().getValue()));
+		getButtonGenerarF().setOnAction(e -> generarFuncion());
+		getButtonVerFuncion().setOnAction(e -> tablaFuncion(getLabelDataSetName().getText()));
+		getButtonSimular().setOnAction(e -> generarSimulacion());
 
 
+	}
+	
+	private void sliderIntervalos(){
+		getButtonGenerarF().setText("Generar función con "+(int)getSliderIntervalos().getValue()+" intervalos");
+		if((int)getSliderIntervalos().getValue() == 0){
+			getButtonGenerarF().setDisable(true);
+		}else{
+			buttonGenerarF.setDisable(false);
+		}
 	}
 
 	/**
@@ -169,6 +185,9 @@ public class VentanaController implements Initializable{
 				getLabelPalabrasTotalesNoComunes().setText("0000");
 				getCargaLecturaDataSet().setProgress(0);
 				getCargaProcesarConsultas().setProgress(0.0);
+				getCargaF().setProgress(0.0);
+				getCargaS().setProgress(0.0);
+				getToogleButtonVerResultadoS().setDisable(true);
 			}else{
 
 				getSpinnerPin().setDisable(false);
@@ -181,8 +200,12 @@ public class VentanaController implements Initializable{
 				//map dataset
 				if(!getMapDataSets().containsKey(selectItem.getValue().toString())){
 					getCargaProcesarConsultas().setProgress(0.0);
+					getCargaF().setProgress(0.0);
+					getCargaS().setProgress(0.0);
 					disableFunctionControl();
 					disableSimularControl();
+					getToogleButtonVerResultadoS().setDisable(true);
+					
 				}else{
 					getCargaProcesarConsultas().setProgress(1.0);
 					enableFunctionControl();
@@ -190,22 +213,26 @@ public class VentanaController implements Initializable{
 					if(!getMapGetEquation().containsKey(selectItem.getValue().toString())){
 						disableSimularControl();
 						getButtonVerFuncion().setDisable(true);
+						getCargaF().setProgress(0.0);
+						getCargaS().setProgress(0.0);
+						getToogleButtonVerResultadoS().setDisable(true);
 					}else{
 						getButtonVerFuncion().setDisable(false);
 						enableSimularControl();
+						getCargaF().setProgress(1.0);
 						//map simulación
 						if(!getMapSimulador().containsKey(selectItem.getValue().toString())){
 							getToogleButtonVerResultadoS().setDisable(true);
+							getToogleButtonVerResultadoS().setDisable(true);
 						}else{
 							getToogleButtonVerResultadoS().setDisable(false);
+							getCargaS().setProgress(1.0);
 						}
 					}
 
 				}
 
 			}
-
-
 		}else if(padre == null){ //raiz
 			if(getPanelContenido().getChildren().contains(getResumenController().getResumenDataSet())){
 				getPanelContenido().getChildren().remove(getResumenController().getResumenDataSet());
@@ -264,9 +291,9 @@ public class VentanaController implements Initializable{
 	}
 	
 	/**
-	 * Metodo que actualiza la tabla de datos con información detallada de una consulta
+	 * Método que actualiza la tabla de datos con información detallada de una consulta
 	 * @param selectItem Contiene el id de la consulta (TreeItem)
-	 * @param padre Contine el nombre de del data set (TreeItem)
+	 * @param padre Contiene el nombre de del data set (TreeItem)
 	 */
 	@SuppressWarnings("unchecked")
 	private void tablaConsulta(TreeItem<String> selectItem, String nombreDB){
@@ -297,10 +324,45 @@ public class VentanaController implements Initializable{
 		getTablaDatos().getColumns().addAll(idConsulta, idDocumento, similitud, isRel, precision, recall, totalPalabras);
 		getTablaDatos().setItems(getResultadoDocumentoConsulta(idConsultaSeleccionada, nombreDB));
 
+	}
+	
+	/**
+	 * Método que muestra la función en la tabla
+	 * 
+	 */
+	@SuppressWarnings("unchecked")
+	private void tablaFuncion(String nombreDB){
+		//System.out.println("Seleccionado consulta "+ selectItem.getValue());
+		TableColumn<FormatoEcuacion, Integer> numero = new TableColumn("#");
+		numero.setCellValueFactory(new PropertyValueFactory<>("numero"));
+		
+		TableColumn<FormatoEcuacion, Double> min = new TableColumn("X min");
+		min.setCellValueFactory(new PropertyValueFactory<>("min"));
+		TableColumn<FormatoEcuacion, Double> max = new TableColumn("X max");
+		max.setCellValueFactory(new PropertyValueFactory<>("max"));
+		TableColumn<FormatoEcuacion, Double> valor = new TableColumn("Valor");
+		valor.setCellValueFactory(new PropertyValueFactory<>("valor"));
 
+		getTablaDatos().getColumns().clear();
+		getTablaDatos().getColumns().addAll(numero, min, max, valor);
+		ObservableList<FormatoEcuacion> lista = FXCollections.observableArrayList();
+		for(ProbabilisticInterval inte: mapGetEquation.get(nombreDB).getIntervalos()){
+			Integer index = mapGetEquation.get(nombreDB).getIntervalos().indexOf(inte);
+			FormatoEcuacion forEcu = new FormatoEcuacion(index+1, 
+					inte.getMin(), inte.getMax(), mapGetEquation.get(nombreDB).getProbabilidades().get(index));
+			lista.add(forEcu);
+		}
+		
+		getTablaDatos().setItems(lista);
 
 	}
 
+	/**
+	 * Metodo que obtiene el resultado detallado de una consulta dado el id de la consulta y el nombre del data set
+	 * @param idQ Id de la consulta
+	 * @param nombreDB Nombre del data set
+	 * @return Resultado detallado de la consulta {@link ResultadoDoc}
+	 */
 	private ObservableList<ResultadoDoc> getResultadoDocumentoConsulta(String idQ, String nombreDB){
 
 		ObservableList<ResultadoDoc> lista = FXCollections.observableArrayList();
@@ -313,8 +375,57 @@ public class VentanaController implements Initializable{
 		}
 		return lista;
 	}
+	
+	/**
+	 * Método de evento para la generación de la función desde la interfaz grafica
+	 */
+	
+	private void generarFuncion(){
+		Thread hiloFuncion = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				getButtonGenerarF().setDisable(true);
+				String nombreDB = getLabelDataSetName().getText();
+				if(!mapGetEquation.containsKey(nombreDB)){
+					mapGetEquation.put(nombreDB, 
+							new GetEquation((int)sliderIntervalos.getValue(), mapDataSets.get(nombreDB), getCargaF()).generarEquation());
+				}else{
+					mapGetEquation.replace(nombreDB, mapGetEquation.get(nombreDB), 
+							new GetEquation((int)sliderIntervalos.getValue(), mapDataSets.get(nombreDB), getCargaF()).generarEquation());
+				}
+				getButtonGenerarF().setDisable(false);
+				getButtonVerFuncion().setDisable(false);
+				getSliderSensibilidad().setDisable(false);
+				getButtonSimular().setDisable(false);
+				
+			}
+		});
+		hiloFuncion.start();
+	}
+	
+	private void generarSimulacion(){
+		Thread hiloSimulacion = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				String name = getLabelDataSetName().getText();
+				Simulador simu = new Simulador(getMapDataSets().get(name), getMapGetEquation().get(name));
+				simu.setBar(getCargaS());
+				simu.simular(getSliderIntervalos().getValue()/100);
+				
+				if(!getMapSimulador().containsKey(getLabelDataSetName().getText())){
+					getMapSimulador().put(name, simu);
+				}else{
+					getMapSimulador().replace(name, getMapSimulador().get(name), simu);
+				}
+				getToobleButtonVerResultadoS().setDisable(false);
+				getCargaS().setProgress(1.0);
+				
+			}
+		});
+		hiloSimulacion.start();
+	}
 
-	/*
+	/**
 	 * Desactiva los botones y otros controles de la sección de simular
 	 */
 	private void disableSimularControl(){
@@ -322,7 +433,7 @@ public class VentanaController implements Initializable{
 		getButtonSimular().setDisable(true);
 		getToobleButtonVerResultadoS().setDisable(true);
 	}
-	/*
+	/**
 	 * Activa los botones y otros controles de la sección de simular
 	 */
 	private void enableSimularControl(){
@@ -330,7 +441,7 @@ public class VentanaController implements Initializable{
 		getButtonSimular().setDisable(false);
 		getToobleButtonVerResultadoS().setDisable(false);
 	}
-	/*
+	/**
 	 * Desactiva los botones y otros controles de la sección del dataSet
 	 */
 	private void disableDataSetControl(){
@@ -338,7 +449,7 @@ public class VentanaController implements Initializable{
 		getSpinnerPin().setDisable(true);
 		getButtonProcesar().setDisable(true);
 	}
-	/*
+	/**
 	 * Desactiva los botones y otros controles de la sección de la función
 	 */
 	private void disableFunctionControl(){
@@ -346,7 +457,7 @@ public class VentanaController implements Initializable{
 		getButtonGenerarF().setDisable(true);
 		getButtonVerFuncion().setDisable(true);
 	}
-	/*
+	/**
 	 * Activa los botones y otros controles de la sección de la función
 	 */
 	private void enableFunctionControl(){
@@ -356,7 +467,10 @@ public class VentanaController implements Initializable{
 	}
 
 
-
+/**
+ * Método que ejecuta el cálculo de matriz de frecuencia y frecuencia inversa 
+ * y carga los resultados de cada consulta del data set seleccionado
+ */
 
 	private void procesarDataSet(){
 
@@ -365,6 +479,8 @@ public class VentanaController implements Initializable{
 			@Override
 			public void run() {
 				getTree().setDisable(true);
+				getButtonProcesar().setDisable(true);
+				getButtonLeerDataSet().setDisable(true);
 				String nombreDB = getLabelDataSetName().getText();
 				ResultadoDataSet dataSet = new ResultadoDataSet(nombreDB, mapConsultas.get(nombreDB).size(), 
 						mapDocumentos.get(nombreDB).size(), 
@@ -410,6 +526,8 @@ public class VentanaController implements Initializable{
 				getTree().setDisable(false);
 				enableFunctionControl();
 				getButtonVerFuncion().setDisable(true);
+				getButtonProcesar().setDisable(false);
+				getButtonLeerDataSet().setDisable(false);
 
 			}
 		});
@@ -421,18 +539,16 @@ public class VentanaController implements Initializable{
 	}
 
 
-
-
-
-
-
-
+/**
+ * Método que realiza la lectura del data set seleccionado
+ */
 	private void leerDataSet(){
 		Thread hiloLeer = new Thread(new Runnable() {
 
 			@Override
 			public void run() {
 				getTree().setDisable(true);
+				getButtonLeerDataSet().setDisable(true);
 				String fsp = System.getProperty("file.separator").toString();
 				//palabras comunes (se uso en todas ya que mejora la precisión, pero es de cran)
 				File palabrasComunesFile = new File("files"+fsp+"cacm"+fsp+"common_words");
@@ -591,6 +707,7 @@ public class VentanaController implements Initializable{
 				getSpinnerPin().setDisable(false);
 				getButtonProcesar().setDisable(false);
 				getTree().setDisable(false);
+				getButtonLeerDataSet().setDisable(false);
 
 			}
 		});
@@ -973,14 +1090,14 @@ public class VentanaController implements Initializable{
 	/**
 	 * @return the mapGetEquation
 	 */
-	public HashMap<String, GetEquation> getMapGetEquation() {
+	public HashMap<String, DistributionEquation> getMapGetEquation() {
 		return mapGetEquation;
 	}
 
 	/**
 	 * @param mapGetEquation the mapGetEquation to set
 	 */
-	public void setMapGetEquation(HashMap<String, GetEquation> mapGetEquation) {
+	public void setMapGetEquation(HashMap<String, DistributionEquation> mapGetEquation) {
 		this.mapGetEquation = mapGetEquation;
 	}
 

@@ -1,5 +1,6 @@
 package controlador;
 
+import javafx.scene.control.ProgressBar;
 import modelo.DistributionEquation;
 import modelo.ProbabilisticInterval;
 import modelo.ResultadoDataSet;
@@ -10,7 +11,7 @@ public class GetEquation {
 
 
 	private DistributionEquation equation;
-	
+	private ProgressBar barraDeCarga = null;
 	
 	public GetEquation(Integer cantidadIntervalos, ResultadoDataSet dataSet){
 		if(cantidadIntervalos == null || cantidadIntervalos <= 0){
@@ -18,6 +19,15 @@ public class GetEquation {
 			cantidadIntervalos = 100;
 		}
 		equation = new DistributionEquation(cantidadIntervalos, dataSet);
+		
+	}
+	public GetEquation(Integer cantidadIntervalos, ResultadoDataSet dataSet, ProgressBar barraDeCarga){
+		if(cantidadIntervalos == null || cantidadIntervalos <= 0){
+			System.out.println("Cantidad intervalos invalido, se usará 100 por defecto");
+			cantidadIntervalos = 100;
+		}
+		equation = new DistributionEquation(cantidadIntervalos, dataSet);
+		this.barraDeCarga = barraDeCarga;
 		
 	}
 	
@@ -35,6 +45,12 @@ public class GetEquation {
 		//incluir primero, excluir último
 		for(Double i = 0.0; i < 1.0; i+= intervalo){
 			equation.getIntervalos().add(new ProbabilisticInterval(i, (i+intervalo)));
+			if(barraDeCarga != null){
+				barraDeCarga.setProgress(i/0.33);
+			}
+		}
+		if(barraDeCarga != null){
+			barraDeCarga.setProgress(0.33);
 		}
 	}
 	
@@ -54,6 +70,7 @@ public class GetEquation {
 			  buscar por cada consulta la cantidad de documentos que tienen similitud
 			  dentro del intervalo "inte", incluyendo el min y excluyendo el max
 			*/
+			int coun = 0;
 			Integer contadorDeDoc = 0;
 			Integer contadorDeDocRelevantes = 0;
 			for(ResultadoQuery resQ: equation.getDataSet().getResultadosConsultas()){
@@ -84,6 +101,14 @@ public class GetEquation {
 			//reniciar contadores:
 			contadorDeDoc = 0;
 			contadorDeDocRelevantes = 0;
+			//para la barra de carga
+			coun+=1;
+			if(barraDeCarga != null){
+				barraDeCarga.setProgress(0.33 + (coun/equation.getIntervalos().size())/0.66);
+			}
+		}
+		if(barraDeCarga != null){
+			barraDeCarga.setProgress(1.0);
 		}
 	}
 	
@@ -101,6 +126,13 @@ public class GetEquation {
 	 */
 	public void setEquation(DistributionEquation equation) {
 		this.equation = equation;
+	}
+	
+	public void setBarraDeCarga(ProgressBar barraDeCarga) {
+		this.barraDeCarga = barraDeCarga;
+	}
+	public ProgressBar getBarraDeCarga() {
+		return barraDeCarga;
 	}
 		
 	

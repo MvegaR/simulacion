@@ -210,6 +210,8 @@ public class Generar {
 			matriz.obtenerPrecision(q, 30, precisiones, dataSet);
 		}
 		resultadosDataSet.add(dataSet); //guardando en la lista
+		
+		
 		GetEquation generadorEcuacion = new GetEquation(1000, dataSet);
 		
 		Simulador simu = new Simulador(dataSet, generadorEcuacion.generarEquation());
