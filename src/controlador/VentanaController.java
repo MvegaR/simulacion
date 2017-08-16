@@ -200,6 +200,12 @@ public class VentanaController implements Initializable{
 				getCargaF().setProgress(0.0);
 				getCargaS().setProgress(0.0);
 				getToogleButtonVerResultadoS().setDisable(true);
+				getToogleButtonVerResultadoS().setDisable(true);
+				getToogleButtonVerResultadoS().setDisable(true);
+				getLabelRelAcertadas().setText("Relevancias acertadas en simulación");
+				getLabelRelAcertadasReal().setText("Relevancias (true) acertadas en simulación");
+				getLabelRelAcertadasValor().setText("??%" );
+				getLavelRelRealValor().setText("??%" );
 			}else{
 
 				getSpinnerPin().setDisable(false);
@@ -217,6 +223,12 @@ public class VentanaController implements Initializable{
 					disableFunctionControl();
 					disableSimularControl();
 					getToogleButtonVerResultadoS().setDisable(true);
+					getToogleButtonVerResultadoS().setDisable(true);
+					getToogleButtonVerResultadoS().setDisable(true);
+					getLabelRelAcertadas().setText("Relevancias acertadas en simulación");
+					getLabelRelAcertadasReal().setText("Relevancias (true) acertadas en simulación");
+					getLabelRelAcertadasValor().setText("??%" );
+					getLavelRelRealValor().setText("??%" );
 					
 				}else{
 					getCargaProcesarConsultas().setProgress(1.0);
@@ -237,15 +249,26 @@ public class VentanaController implements Initializable{
 							getToogleButtonVerResultadoS().setDisable(true);
 							getToogleButtonVerResultadoS().setDisable(true);
 							getLabelRelAcertadas().setText("Relevancias acertadas en simulación");
-							Integer totalAcertado = getMapSimulador().get(selectItem.getValue().toString()).getTotalGlobalAcertados();
-							Integer totalFallado= getMapSimulador().get(selectItem.getValue().toString()).getTotalGlobalFallados();
-							Integer total = totalFallado+totalAcertado;
-							getLabelRelAcertadasValor().setText( (totalAcertado*100)/(total.doubleValue())+"%" );
+							getLabelRelAcertadasReal().setText("Relevancias (true) acertadas en simulación");
+							getLabelRelAcertadasValor().setText("??%" );
+							getLavelRelRealValor().setText("??%" );
 							
 							
 						}else{
 							getToogleButtonVerResultadoS().setDisable(false);
 							getCargaS().setProgress(1.0);
+							getLabelRelAcertadas().setText("Relevancias acertadas en simulación");
+							Integer totalAcertado = getMapSimulador().get(selectItem.getValue().toString()).getTotalGlobalAcertados();
+							Integer totalFallado= getMapSimulador().get(selectItem.getValue().toString()).getTotalGlobalFallados();
+							Integer total = totalFallado+totalAcertado;
+							getLabelRelAcertadasValor().setText( (totalAcertado*100)/(total.doubleValue())+"%" );
+							getLabelRelAcertadasReal().setText("Relevancias (true) acertadas en simulación");
+							Integer totalAcertadoTrue = getMapSimulador().get(getTree().getSelectionModel().getSelectedItem().getValue().toString()).getTotalGlobalRealesYSimulados();
+							Integer totalFalladoTrue= getMapSimulador().get(getTree().getSelectionModel().getSelectedItem().getValue().toString()).getTotalRelevantesFallados();
+							Integer totalTrue = totalFalladoTrue+totalAcertadoTrue;
+							getLavelRelRealValor().setText( (totalAcertadoTrue*100)/(totalTrue.doubleValue())+"%" );
+							
+							
 						}
 					}
 
