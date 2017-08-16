@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import controlador.Matrices.Similitud;
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -94,6 +94,15 @@ public class VentanaController implements Initializable{
 	private ToggleButton toogleButtonVerResultadoS;
 	@FXML
 	private Label labelRelAcertadas;
+
+    @FXML
+    private Label labelRelAcertadasReal;
+
+    @FXML
+    private Label labelRelAcertadasValor;
+
+    @FXML
+    private Label lavelRelRealValor;
 
 	/** Map para acceder a un resultado de datos dado el nombre del dataSet */
 	private HashMap<String, ResultadoDataSet> mapDataSets = new HashMap<>();
@@ -227,6 +236,13 @@ public class VentanaController implements Initializable{
 						if(!getMapSimulador().containsKey(selectItem.getValue().toString())){
 							getToogleButtonVerResultadoS().setDisable(true);
 							getToogleButtonVerResultadoS().setDisable(true);
+							getLabelRelAcertadas().setText("Relevancias acertadas en simulación");
+							Integer totalAcertado = getMapSimulador().get(selectItem.getValue().toString()).getTotalGlobalAcertados();
+							Integer totalFallado= getMapSimulador().get(selectItem.getValue().toString()).getTotalGlobalFallados();
+							Integer total = totalFallado+totalAcertado;
+							getLabelRelAcertadasValor().setText( (totalAcertado*100)/(total.doubleValue())+"%" );
+							
+							
 						}else{
 							getToogleButtonVerResultadoS().setDisable(false);
 							getCargaS().setProgress(1.0);
@@ -309,7 +325,7 @@ public class VentanaController implements Initializable{
 	 */
 	private void cambiarCentroToResumenQuerySimulada(TreeItem<String> selectItem, TreeItem<String> padre) {
 		if(getResumenController() != null){
-			ResultadoQuery rq = getResultadoQueryById(selectItem.getValue().split(".* ID: ")[1],padre.getValue());
+			
 			Integer index = 0;
 			for(ResultadoQuery rqt: mapDataSets.get(padre.getValue()).getResultadosConsultas()){
 				index++;
@@ -319,9 +335,7 @@ public class VentanaController implements Initializable{
 			}
 			Simulador simulador = mapSimulador.get(padre.getValue());
 			
-			getLabelDataSetName().setText("Simulación " +getLabelDataSetName().getText());
-			getResumenController().getLabelDataSetName().setText(
-					getTree().getSelectionModel().getSelectedItem().getValue());
+			getResumenController().getLabelTituloSim().setText("Simulación " +getLabelDataSetName().getText());
 			getResumenController().getTexto1().setText("Total desplegados originales");
 			getResumenController().getTexto2().setText("Total desplegados simulados");
 			getResumenController().getTexto3().setText("Total simulados y originales");
@@ -437,16 +451,16 @@ public class VentanaController implements Initializable{
 		TableColumn<FormatoSimulacion, Double> sim = new TableColumn("Similitud");
 		sim.setCellValueFactory(new PropertyValueFactory<>("sim"));
 
-		TableColumn<FormatoSimulacion, Boolean> precision = new TableColumn("Precisión");
-		precision.setCellValueFactory(new PropertyValueFactory<>("userRelReal"));
+		TableColumn<FormatoSimulacion, Boolean> userRelReal = new TableColumn("Relevancia real");
+		userRelReal.setCellValueFactory(new PropertyValueFactory<>("userRelReal"));
 
-		TableColumn<FormatoSimulacion, Boolean> recall = new TableColumn("Recall");
-		recall.setCellValueFactory(new PropertyValueFactory<>("userRelSim"));
+		TableColumn<FormatoSimulacion, Boolean> userRelSim = new TableColumn("Relevancia simualda");
+		userRelSim.setCellValueFactory(new PropertyValueFactory<>("userRelSim"));
 
 	
 
 		getTablaDatos().getColumns().clear();
-		getTablaDatos().getColumns().addAll(igual, idDocumento, similitud, sim, precision, recall);
+		getTablaDatos().getColumns().addAll(igual, idDocumento, similitud, sim, userRelReal, userRelSim);
 		getTablaDatos().setItems(getResultadoDocumentoConsultaSimulada(idConsultaSeleccionada, nombreDB));
 
 	}
@@ -563,7 +577,8 @@ public class VentanaController implements Initializable{
 				String name = getLabelDataSetName().getText();
 				Simulador simu = new Simulador(getMapDataSets().get(name), getMapGetEquation().get(name));
 				simu.setBar(getCargaS());
-				simu.simular(getSliderIntervalos().getValue()/100);
+				simu.simular((double)getSliderSensibilidad().getValue()/100.0);
+				
 				
 				if(!getMapSimulador().containsKey(getLabelDataSetName().getText())){
 					getMapSimulador().put(name, simu);
@@ -573,7 +588,25 @@ public class VentanaController implements Initializable{
 				simu.generarResultados();
 				getToobleButtonVerResultadoS().setDisable(false);
 				getCargaS().setProgress(1.0);
-				
+
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						getLabelRelAcertadas().setText("Relevancias acertadas en simulación");
+						Integer totalAcertado = getMapSimulador().get(getTree().getSelectionModel().getSelectedItem().getValue().toString()).getTotalGlobalAcertados();
+						Integer totalFallado= getMapSimulador().get(getTree().getSelectionModel().getSelectedItem().getValue().toString()).getTotalGlobalFallados();
+						Integer total = totalFallado+totalAcertado;
+						getLabelRelAcertadasValor().setText( (totalAcertado*100)/(total.doubleValue())+"%" );
+						getLabelRelAcertadasReal().setText("Relevancias (true) acertadas en simulación");
+						Integer totalAcertadoTrue = getMapSimulador().get(getTree().getSelectionModel().getSelectedItem().getValue().toString()).getTotalGlobalRealesYSimulados();
+						Integer totalFalladoTrue= getMapSimulador().get(getTree().getSelectionModel().getSelectedItem().getValue().toString()).getTotalRelevantesFallados();
+						Integer totalTrue = totalFalladoTrue+totalAcertadoTrue;
+						getLavelRelRealValor().setText( (totalAcertadoTrue*100)/(totalTrue.doubleValue())+"%" );
+						
+	
+					}
+				});
+			
 			}
 		});
 		hiloSimulacion.start();
@@ -1365,6 +1398,48 @@ public class VentanaController implements Initializable{
 	 */
 	public void setResumenController(ResumenQueryController resumenController) {
 		this.resumenController = resumenController;
+	}
+
+	/**
+	 * @return the labelRelAcertadasReal
+	 */
+	public Label getLabelRelAcertadasReal() {
+		return labelRelAcertadasReal;
+	}
+
+	/**
+	 * @param labelRelAcertadasReal the labelRelAcertadasReal to set
+	 */
+	public void setLabelRelAcertadasReal(Label labelRelAcertadasReal) {
+		this.labelRelAcertadasReal = labelRelAcertadasReal;
+	}
+
+	/**
+	 * @return the labelRelAcertadasValor
+	 */
+	public Label getLabelRelAcertadasValor() {
+		return labelRelAcertadasValor;
+	}
+
+	/**
+	 * @param labelRelAcertadasValor the labelRelAcertadasValor to set
+	 */
+	public void setLabelRelAcertadasValor(Label labelRelAcertadasValor) {
+		this.labelRelAcertadasValor = labelRelAcertadasValor;
+	}
+
+	/**
+	 * @return the lavelRelRealValor
+	 */
+	public Label getLavelRelRealValor() {
+		return lavelRelRealValor;
+	}
+
+	/**
+	 * @param lavelRelRealValor the lavelRelRealValor to set
+	 */
+	public void setLavelRelRealValor(Label lavelRelRealValor) {
+		this.lavelRelRealValor = lavelRelRealValor;
 	}
 
 }

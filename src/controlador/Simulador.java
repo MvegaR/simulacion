@@ -25,8 +25,8 @@ public class Simulador {
 	private Integer totalGlobalRealesYSimulados;
 	private Integer ttotalRelevantesDesplegados;
 	private Integer ttotalRelevantesSimuladosDesplegados;
-	
-	
+
+
 
 	/**
 	 * @param dataSetOriginal Información del data set original {@link ResultadoDataSet}
@@ -45,15 +45,16 @@ public class Simulador {
 		this.ttotalRelevantesDesplegados = 0;
 		this.ttotalRelevantesSimuladosDesplegados = 0;
 	}
-	
+
 	/**
 	 * Método que realiza la simulación de relevancia
 	 * @param tolerancia Tolerencia mínima para considerar un documento como relevante
 	 * @return {@link ResultadoDataSet} Copia de resultados del dataset original con relevancias simuladas
 	 */
-	
+
 	public ResultadoDataSet simular(Double tolerancia){
 		this.tolerancia = tolerancia;
+		System.out.println(tolerancia);
 		dataSetSimulado = new ResultadoDataSet(dataSetOriginal.getSetName(), dataSetOriginal.getTotalConsultas(), 
 				dataSetOriginal.getTotalConsultas(), dataSetOriginal.getTotalPalabrasComunes(), 
 				dataSetOriginal.getTotalpalabrasValidasNoComunes() );
@@ -63,7 +64,7 @@ public class Simulador {
 					resQ.getRecallPromedio(), -1, 0); //falta documentos relevantes totales y desplegados
 			Integer docRelDesplegados = 0;
 			for(ResultadoDoc resD: resQ.getResultadosDocumentos()){
-				
+
 				ResultadoDoc resSimD = new ResultadoDoc(resD.getIdQuery(), resD.getIdDoc(), resD.getDisCos(), 
 						isRelSim(resD.getDisCos(), tolerancia), -1.0, -1.0, resD.getTWords()); 
 				//precision y recall dependen de los jucios reales, que no se tienen en una simualción
@@ -80,10 +81,10 @@ public class Simulador {
 				getBar().setProgress((count/(double)dataSetOriginal.getResultadosConsultas().size())/0.25);
 			}
 		}
-		
+
 		return dataSetSimulado;
 	}
-	
+
 
 	/**
 	 * Método para generar los datos para mostrarlos en tablas
@@ -120,20 +121,26 @@ public class Simulador {
 				if(!igual && resD.getIsRel()){
 					this.totalRelevantesFallados++;
 				}
+				if(resD.getIsRel()){
+					this.ttotalRelevantesDesplegados++;
+				}
+				if(resSimD.getIsRel()){
+					this.ttotalRelevantesSimuladosDesplegados++;
+				}
 			}
 			Integer totalDesplegadosOriginales = getDataSetOriginal().getResultadosConsultas().get(i).getTotalDocReleventesDesplegados();
 			Integer totalDesplegadosSimulados = getDataSetSimulado().getResultadosConsultas().get(i).getTotalDocReleventesDesplegados();
-			this.ttotalRelevantesDesplegados+=totalDesplegadosOriginales;
-			this.ttotalRelevantesSimuladosDesplegados+=totalRelevantesRealesSimulados;
+	
+			
 			getResultadosResumen().add(new FormatoResumenSimulacion(totalDesplegadosOriginales, 
 					totalDesplegadosSimulados, totalRelevantesRealesSimulados, 
 					totalAcertados, totalFallados, tolerancia));
 			getBar().setProgress(0.25+ (double)i/(double)getDataSetOriginal().getResultadosConsultas().size());
 		}
-		
-		
+
+
 	}
-	
+
 
 	/**
 	 * Método para Imprimir y comparar simulacion para copiar a un excel
@@ -161,7 +168,7 @@ public class Simulador {
 			Integer totalDesplegadosOriginales = getDataSetOriginal().getResultadosConsultas().get(i).getTotalDocReleventesDesplegados();
 			Integer totalDesplegadosSimulados = getDataSetSimulado().getResultadosConsultas().get(i).getTotalDocReleventesDesplegados();
 			System.out.println("Total desplegados originales"+"\t" + totalDesplegadosOriginales);
-		
+
 			System.out.println("Total desplegados simulados"+"\t"+ totalDesplegadosSimulados);
 			System.out.println("Total relevantes originales y simulados\t"+totalRelevantesRealesSimulados);
 			System.out.println("Tolerancia utilizada"+"\t"+tolerancia);
@@ -172,14 +179,14 @@ public class Simulador {
 		}
 		System.out.println(TtotalRelevantesSimuladosDesplegados*100/TtotalRelevantesDesplegados);
 	}
-	
+
 	/**
 	 * Determina la relevancia del documento para la similitud entregada
 	 * @param sim Distancia conseno o similitud
 	 * @param tol Tolerancia mínima para decir que es relevante
 	 * @return Si es o no relevante (Boolean)
 	 */
-	
+
 	private Boolean isRelSim(Double sim, Double tol){
 		Boolean isRel = false;
 		Integer con = 0;
@@ -194,7 +201,7 @@ public class Simulador {
 		}
 		return isRel;
 	}
-	
+
 
 	/**
 	 * @return the dataSetOriginal

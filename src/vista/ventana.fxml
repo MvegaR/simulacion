@@ -28,7 +28,7 @@
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </opaqueInsets>
    <top>
-      <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(to bottom, #f7fbfc 0%,#d9edf2 40%,#add9e4 100%)">
+      <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(to bottom, #f7fbfc 0%,#d9edf2 40%,#add9e4 100%)" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="96.0" fitWidth="206.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -38,7 +38,7 @@
                   <Insets left="10.0" right="25.0" top="5.0" />
                </HBox.margin>
             </ImageView>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="81.0" prefWidth="932.0" text="&quot;OBTENCIÓN DE UNA FUNCIÓN DE DISTRIBUCIÓN PROBABILÍSTICA GLOBAL PARA SIMULAR JUICIOS DE USUARIO&quot;" textAlignment="CENTER" wrapText="true">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="81.0" prefWidth="1012.0" text="&quot;OBTENCIÓN DE UNA FUNCIÓN DE DISTRIBUCIÓN PROBABILÍSTICA GLOBAL PARA SIMULAR JUICIOS DE USUARIO&quot;" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="Times New Roman" size="20.0" />
                </font>
@@ -271,6 +271,21 @@
                                                 <Button fx:id="buttonSimular" layoutX="79.0" layoutY="115.0" mnemonicParsing="false" text="Simular con sensibilidad 50 " GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                                 <ToggleButton fx:id="toogleButtonVerResultadoS" mnemonicParsing="false" text="Ver resultados simualación por consulta" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                                                 <Label fx:id="labelRelAcertadas" alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="333.0" text="Relevancias acertadas en simulación: " GridPane.rowIndex="6">
+                                                   <font>
+                                                      <Font name="Times New Roman" size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="labelRelAcertadasReal" alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="296.0" prefHeight="23.0" prefWidth="333.0" text="Relevancias &quot;true&quot; acertadas en simulación: " GridPane.rowIndex="7">
+                                                   <font>
+                                                      <Font name="Times New Roman" size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="labelRelAcertadasValor" alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="296.0" prefHeight="23.0" prefWidth="333.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                                   <font>
+                                                      <Font name="Times New Roman" size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="lavelRelRealValor" alignment="CENTER" contentDisplay="CENTER" layoutX="351.0" layoutY="296.0" prefHeight="23.0" prefWidth="333.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                                                    <font>
                                                       <Font name="Times New Roman" size="15.0" />
                                                    </font>
