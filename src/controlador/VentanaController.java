@@ -29,6 +29,7 @@ import modelo.Consulta;
 import modelo.DistributionEquation;
 import modelo.Documento;
 import modelo.FormatoEcuacion;
+import modelo.FormatoSimulacion;
 import modelo.Precision;
 import modelo.ProbabilisticInterval;
 import modelo.Relevancia;
@@ -243,8 +244,14 @@ public class VentanaController implements Initializable{
 			disableFunctionControl();
 			disableSimularControl(); 
 		}else if(padre != null && !padre.getValue().equals("DataSets")){
-			tablaConsulta(selectItem, padre.getValue());
-			cambiarCentroToResumenQuery(selectItem, padre);
+			if(getToogleButtonVerResultadoS().isSelected() && !getToogleButtonVerResultadoS().isDisable()){
+				tablaConsultaSimulada(selectItem, padre.getValue());
+			}else{
+				tablaConsulta(selectItem, padre.getValue());
+				cambiarCentroToResumenQuery(selectItem, padre);
+			}
+			
+		
 
 		}
 	}
@@ -327,6 +334,41 @@ public class VentanaController implements Initializable{
 	}
 	
 	/**
+	 * Método que actualiza la tabla de datos con información detallada de una consulta simulada
+	 * @param selectItem Contiene el id de la consulta (TreeItem)
+	 * @param padre Contiene el nombre de del data set (TreeItem)
+	 */
+	@SuppressWarnings("unchecked")
+	private void tablaConsultaSimulada(TreeItem<String> selectItem, String nombreDB){
+		//System.out.println("Seleccionado consulta "+ selectItem.getValue());
+		String idConsultaSeleccionada = selectItem.getValue().split(".* ID: ")[1];
+		TableColumn<FormatoSimulacion, Boolean> igual = new TableColumn("¿Igual?");
+		igual.setCellValueFactory(new PropertyValueFactory<>("igual"));
+
+		TableColumn<FormatoSimulacion, Integer> idDocumento = new TableColumn("ID Consulta");
+		idDocumento.setCellValueFactory(new PropertyValueFactory<>("idq"));
+
+		TableColumn<FormatoSimulacion, Integer> similitud = new TableColumn("ID Documento");
+		similitud.setCellValueFactory(new PropertyValueFactory<>("iddoc"));
+
+		TableColumn<FormatoSimulacion, Double> sim = new TableColumn("Similitud");
+		sim.setCellValueFactory(new PropertyValueFactory<>("sim"));
+
+		TableColumn<FormatoSimulacion, Boolean> precision = new TableColumn("Precisión");
+		precision.setCellValueFactory(new PropertyValueFactory<>("userRelReal"));
+
+		TableColumn<FormatoSimulacion, Boolean> recall = new TableColumn("Recall");
+		recall.setCellValueFactory(new PropertyValueFactory<>("userRelSim"));
+
+	
+
+		getTablaDatos().getColumns().clear();
+		getTablaDatos().getColumns().addAll(igual, idDocumento, similitud, sim, precision, recall);
+		getTablaDatos().setItems(getResultadoDocumentoConsultaSimulada(idConsultaSeleccionada, nombreDB));
+
+	}
+	
+	/**
 	 * Método que muestra la función en la tabla
 	 * 
 	 */
@@ -377,6 +419,31 @@ public class VentanaController implements Initializable{
 	}
 	
 	/**
+	 * Metodo que obtiene el resultado detallado de una consulta simulada
+	 * dado el id de la consulta y el nombre del data set
+	 * @param idQ Id de la consulta
+	 * @param nombreDB Nombre del data set
+	 * @return Resultado detallado de la consulta en una lista ver {@link ResultadoDoc}
+	 */
+	private ObservableList<FormatoSimulacion> getResultadoDocumentoConsultaSimulada(String idQ, String nombreDB){
+
+		ObservableList<FormatoSimulacion> lista = FXCollections.observableArrayList();
+		Integer index = 0;
+		for(ResultadoQuery rq: mapDataSets.get(nombreDB).getResultadosConsultas()){
+			index++;
+			if(rq.getIdQuery().toString().equals(idQ.toString())){
+				break;
+			}
+		}
+		for(FormatoSimulacion fs: getMapSimulador().get(nombreDB).getResultados().get(index)){
+			lista.add(fs);
+		}
+		
+		
+		return lista;
+	}
+	
+	/**
 	 * Método de evento para la generación de la función desde la interfaz grafica
 	 */
 	
@@ -402,6 +469,9 @@ public class VentanaController implements Initializable{
 		});
 		hiloFuncion.start();
 	}
+	/**
+	 * Método de evento para generar la simulación y sus resultados para mostrarlos en la tabla
+	 */
 	
 	private void generarSimulacion(){
 		Thread hiloSimulacion = new Thread(new Runnable() {
@@ -417,6 +487,7 @@ public class VentanaController implements Initializable{
 				}else{
 					getMapSimulador().replace(name, getMapSimulador().get(name), simu);
 				}
+				simu.generarResultados();
 				getToobleButtonVerResultadoS().setDisable(false);
 				getCargaS().setProgress(1.0);
 				

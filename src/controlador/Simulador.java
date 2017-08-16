@@ -1,8 +1,10 @@
 package controlador;
 
-
+import java.util.ArrayList;
 import javafx.scene.control.ProgressBar;
 import modelo.DistributionEquation;
+import modelo.FormatoResumenSimulacion;
+import modelo.FormatoSimulacion;
 import modelo.ProbabilisticInterval;
 import modelo.ResultadoDataSet;
 import modelo.ResultadoDoc;
@@ -15,7 +17,17 @@ public class Simulador {
 	private DistributionEquation equation;
 	private Double tolerancia;
 	private ProgressBar bar;
+	private ArrayList<ArrayList<FormatoSimulacion>> resultados;
+	private ArrayList<FormatoResumenSimulacion> resultadosResumen;
+	private Integer totalGlobalFallados;
+	private Integer totalGlobalAcertados;
+	private Integer totalRelevantesFallados;
+	private Integer totalGlobalRealesYSimulados;
+	private Integer TtotalRelevantesDesplegados;
+	private Integer TtotalRelevantesSimuladosDesplegados;
 	
+	
+
 	/**
 	 * @param dataSetOriginal Información del data set original {@link ResultadoDataSet}
 	 * @param equation Ecuación de distribución probabilistica global a utilizar en la simualación
@@ -24,6 +36,14 @@ public class Simulador {
 		super();
 		this.dataSetOriginal = dataSetOriginal;
 		this.equation = equation;
+		this.resultados = new ArrayList<>();
+		this.resultadosResumen = new ArrayList<>();
+		this.totalGlobalFallados = 0;
+		this.totalGlobalAcertados = 0;
+		this.totalRelevantesFallados = 0;
+		this.totalGlobalRealesYSimulados = 0;
+		this.TtotalRelevantesDesplegados = 0;
+		this.TtotalRelevantesSimuladosDesplegados = 0;
 	}
 	
 	/**
@@ -57,17 +77,67 @@ public class Simulador {
 			dataSetSimulado.getResultadosConsultas().add(resSimQ);
 			count++;
 			if(getBar()!=null){
-				getBar().setProgress(count/(double)dataSetOriginal.getResultadosConsultas().size());
+				getBar().setProgress((count/(double)dataSetOriginal.getResultadosConsultas().size())/0.25);
 			}
 		}
 		
 		return dataSetSimulado;
 	}
 	
+
+	/**
+	 * Método para generar los datos para mostrarlos en tablas
+	 */
+	public void generarResultados(){
+		for(Integer i = 0; i < getDataSetOriginal().getResultadosConsultas().size(); i++){
+			ArrayList<FormatoSimulacion> formatoSim = new ArrayList<>();
+			getResultados().add(formatoSim);
+			Integer totalRelevantesRealesSimulados = 0;
+			Integer totalFallados = 0;
+			Integer totalAcertados = 0;
+			for(Integer k = 0; 
+					k < getDataSetOriginal().getResultadosConsultas().get(i).getResultadosDocumentos().size(); k++){
+				ResultadoDoc resD = getDataSetOriginal().getResultadosConsultas().get(i).getResultadosDocumentos().get(k);
+				ResultadoDoc resSimD = getDataSetSimulado().getResultadosConsultas().get(i).getResultadosDocumentos().get(k);
+				Boolean igual = resD.getIsRel().equals(resSimD.getIsRel());
+				Integer idQ = resD.getIdQuery();
+				Integer idDoc = resD.getIdDoc();
+				Double disCos = resD.getDisCos();
+				Boolean relReal = resD.getIsRel();
+				Boolean relSimu = resSimD.getIsRel();
+				formatoSim.add(new FormatoSimulacion(igual, idQ, idDoc, disCos, relReal, relSimu));
+				if(resD.getIsRel() && resSimD.getIsRel()){
+					totalRelevantesRealesSimulados++;
+					totalGlobalRealesYSimulados++;
+				}
+				if(igual){
+					totalAcertados++;
+					this.totalGlobalAcertados++;
+				}else{
+					totalFallados++;
+					this.totalGlobalFallados++;
+				}
+				if(!igual && resD.getIsRel()){
+					this.totalRelevantesFallados++;
+				}
+			}
+			Integer totalDesplegadosOriginales = getDataSetOriginal().getResultadosConsultas().get(i).getTotalDocReleventesDesplegados();
+			Integer totalDesplegadosSimulados = getDataSetSimulado().getResultadosConsultas().get(i).getTotalDocReleventesDesplegados();
+			this.TtotalRelevantesDesplegados+=totalDesplegadosOriginales;
+			this.TtotalRelevantesSimuladosDesplegados+=totalRelevantesRealesSimulados;
+			getResultadosResumen().add(new FormatoResumenSimulacion(totalDesplegadosOriginales, 
+					totalDesplegadosSimulados, totalRelevantesRealesSimulados, 
+					totalAcertados, totalFallados, tolerancia));
+			getBar().setProgress(0.25+ (double)i/(double)getDataSetOriginal().getResultadosConsultas().size());
+		}
+		
+		
+	}
+	
+
 	/**
 	 * Método para Imprimir y comparar simulacion para copiar a un excel
 	 */
-	
 	public void imprimirParaExcelComparacion(){
 		Integer TtotalRelevantesDesplegados = 0;
 		Integer TtotalRelevantesSimuladosDesplegados = 0;
@@ -239,10 +309,87 @@ public class Simulador {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
-	
+
+	/**
+	 * @return the resultados
+	 */
+	public ArrayList<ArrayList<FormatoSimulacion>> getResultados() {
+		return resultados;
+	}
+
+	/**
+	 * @return the resultadosResumen
+	 */
+	public ArrayList<FormatoResumenSimulacion> getResultadosResumen() {
+		return resultadosResumen;
+	}
+
+	/**
+	 * @param resultadosResumen the resultadosResumen to set
+	 */
+	public void setResultadosResumen(ArrayList<FormatoResumenSimulacion> resultadosResumen) {
+		this.resultadosResumen = resultadosResumen;
+	}
+
+	/**
+	 * @param resultados the resultados to set
+	 */
+	public void setResultados(ArrayList<ArrayList<FormatoSimulacion>> resultados) {
+		this.resultados = resultados;
+	}
+
+	/**
+	 * @return the totalGlobalFallados
+	 */
+	public Integer getTotalGlobalFallados() {
+		return totalGlobalFallados;
+	}
+
+	/**
+	 * @param totalGlobalFallados the totalGlobalFallados to set
+	 */
+	public void setTotalGlobalFallados(Integer totalGlobalFallados) {
+		this.totalGlobalFallados = totalGlobalFallados;
+	}
+
+	/**
+	 * @return the totalGlobalAcertados
+	 */
+	public Integer getTotalGlobalAcertados() {
+		return totalGlobalAcertados;
+	}
+
+	/**
+	 * @param totalGlobalAcertados the totalGlobalAcertados to set
+	 */
+	public void setTotalGlobalAcertados(Integer totalGlobalAcertados) {
+		this.totalGlobalAcertados = totalGlobalAcertados;
+	}
+	/**
+	 * @return the totalRelevantesFallados
+	 */
+	public Integer getTotalRelevantesFallados() {
+		return totalRelevantesFallados;
+	}
+
+	/**
+	 * @param totalRelevantesFallados the totalRelevantesFallados to set
+	 */
+	public void setTotalRelevantesFallados(Integer totalRelevantesFallados) {
+		this.totalRelevantesFallados = totalRelevantesFallados;
+	}
+
+	/**
+	 * @return the totalGlobalRealesYSimulados
+	 */
+	public Integer getTotalGlobalRealesYSimulados() {
+		return totalGlobalRealesYSimulados;
+	}
+
+	/**
+	 * @param totalGlobalRealesYSimulados the totalGlobalRealesYSimulados to set
+	 */
+	public void setTotalGlobalRealesYSimulados(Integer totalGlobalRealesYSimulados) {
+		this.totalGlobalRealesYSimulados = totalGlobalRealesYSimulados;
+	}
 }

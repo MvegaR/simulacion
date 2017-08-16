@@ -212,9 +212,9 @@
                               <VBox prefHeight="365.0" prefWidth="676.0" BorderPane.alignment="CENTER">
                                  <children>
                                     <Separator prefWidth="200.0" />
-                                    <BorderPane prefHeight="303.0" prefWidth="676.0">
+                                    <BorderPane prefHeight="365.0" prefWidth="676.0">
                                        <center>
-                                          <GridPane prefHeight="242.0" prefWidth="676.0" BorderPane.alignment="CENTER">
+                                          <GridPane prefHeight="319.0" prefWidth="676.0" BorderPane.alignment="CENTER">
                                             <columnConstraints>
                                                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="345.0" minWidth="10.0" percentWidth="100.0" prefWidth="332.0" />
                                                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="339.0" minWidth="10.0" percentWidth="100.0" prefWidth="339.0" />
@@ -225,6 +225,7 @@
                                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
@@ -269,9 +270,9 @@
                                                 </ProgressBar>
                                                 <Button fx:id="buttonSimular" layoutX="79.0" layoutY="115.0" mnemonicParsing="false" text="Simular con sensibilidad 50 " GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                                 <ToggleButton fx:id="toogleButtonVerResultadoS" mnemonicParsing="false" text="Ver resultados simualación por consulta" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                                <Label fx:id="labelRelAcertadas" alignment="CENTER" contentDisplay="CENTER" layoutX="351.0" layoutY="65.0" prefHeight="23.0" prefWidth="333.0" text="Relevancias acertadas en simulación: " GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                                <Label fx:id="labelRelAcertadas" alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="333.0" text="Relevancias acertadas en simulación: " GridPane.rowIndex="6">
                                                    <font>
-                                                      <Font name="Times New Roman" size="20.0" />
+                                                      <Font name="Times New Roman" size="15.0" />
                                                    </font>
                                                 </Label>
                                              </children>
