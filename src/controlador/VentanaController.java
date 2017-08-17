@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.SortedSet;
 import java.util.TreeSet;
-
+import javafx.scene.control.TableCell;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,16 +18,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Spinner;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
-
 import modelo.Consulta;
 import modelo.DistributionEquation;
 import modelo.Documento;
@@ -39,6 +38,7 @@ import modelo.Relevancia;
 import modelo.ResultadoDataSet;
 import modelo.ResultadoDoc;
 import modelo.ResultadoQuery;
+
 
 
 @SuppressWarnings("rawtypes")
@@ -160,7 +160,7 @@ public class VentanaController implements Initializable{
 
 
 	}
-	
+	/*
 	private void buscarMejor(){
 		new Thread(new Runnable() {
 			
@@ -206,6 +206,7 @@ public class VentanaController implements Initializable{
 		}).start();;
 
 	}
+	*/
 	
 	/**
 	 * Método de evento de slider de intervalos
@@ -417,9 +418,9 @@ public class VentanaController implements Initializable{
 			Simulador simulador = mapSimulador.get(padre.getValue());
 			
 			getResumenController().getLabelTituloSim().setText("Simulación " +getLabelDataSetName().getText());
-			getResumenController().getTexto1().setText("Total desplegados originales");
-			getResumenController().getTexto2().setText("Total desplegados simulados");
-			getResumenController().getTexto3().setText("Total simulados y originales");
+			getResumenController().getTexto1().setText("Total relevantes desplegados originales");
+			getResumenController().getTexto2().setText("Total relevantes desplegados simulados");
+			getResumenController().getTexto3().setText("Total relevantes simulados y originales");
 			getResumenController().getTexto4().setText("Total acertados");
 			getResumenController().getTexto5().setText("Total fallados");
 			getResumenController().getTexto6().setText("Tolerancia");
@@ -520,9 +521,27 @@ public class VentanaController implements Initializable{
 	private void tablaConsultaSimulada(TreeItem<String> selectItem, String nombreDB){
 		//System.out.println("Seleccionado consulta "+ selectItem.getValue());
 		String idConsultaSeleccionada = selectItem.getValue().split(".* ID: ")[1];
-		TableColumn<FormatoSimulacion, Boolean> igual = new TableColumn("¿Igual?");
+		TableColumn<FormatoSimulacion, Boolean> igual = new TableColumn<FormatoSimulacion, Boolean>("¿Igual?");
 		igual.setCellValueFactory(new PropertyValueFactory<>("igual"));
-	
+		igual.setCellFactory(column -> {
+	        return new TableCell<FormatoSimulacion, Boolean>() {
+	            @Override
+	            protected void updateItem(Boolean item, boolean empty){
+	            	super.updateItem(item, empty); 
+	                if (item == null || empty) { 
+	                    setText(null);
+	                    setStyle("");
+	                } else {
+	                    setText(item.toString());
+	                    if (item.equals(true)) {
+	                        setStyle("-fx-background-color: RGB(179,255,179)");
+	                    } else {
+	                    	setStyle("-fx-background-color: RGB(225,179,179)"); 
+	                    }
+	                }
+	            }
+	        };
+	    });
 	
 	
 		TableColumn<FormatoSimulacion, Integer> idDocumento = new TableColumn("ID Consulta");
@@ -536,6 +555,23 @@ public class VentanaController implements Initializable{
 
 		TableColumn<FormatoSimulacion, Boolean> userRelReal = new TableColumn("Relevancia real");
 		userRelReal.setCellValueFactory(new PropertyValueFactory<>("userRelReal"));
+		userRelReal.setCellFactory(column -> {
+	        return new TableCell<FormatoSimulacion, Boolean>() {
+	            @Override
+	            protected void updateItem(Boolean item, boolean empty){
+	            	super.updateItem(item, empty); 
+	                if (item == null || empty) { 
+	                    setText(null);
+	                    setStyle("");
+	                } else {
+	                    setText(item.toString());
+	                    if (item.equals(true)) {
+	                        setStyle("-fx-background-color: RGB(255,255,0)");
+	                    }
+	                }
+	            }
+	        };
+	    });
 
 		TableColumn<FormatoSimulacion, Boolean> userRelSim = new TableColumn("Relevancia simualda");
 		userRelSim.setCellValueFactory(new PropertyValueFactory<>("userRelSim"));

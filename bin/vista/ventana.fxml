@@ -289,20 +289,7 @@
                                                       <Font name="Times New Roman" size="15.0" />
                                                    </font>
                                                 </Label>
-                                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                                   <children>
-                                                      <Button fx:id="buttonSimular" alignment="TOP_CENTER" mnemonicParsing="false" text="Simular con sensibilidad 50 ">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Button>
-                                                      <Button fx:id="botonBuscar" mnemonicParsing="false" text="Buscar Max" visible="false">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Button>
-                                                   </children>
-                                                </HBox>
+                                                <Button fx:id="buttonSimular" alignment="TOP_CENTER" mnemonicParsing="false" text="Simular con sensibilidad 50 " GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                              </children>
                                           </GridPane>
                                        </center>
