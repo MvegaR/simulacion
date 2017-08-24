@@ -12,6 +12,8 @@ import modelo.Documento;
 import modelo.Precision;
 import modelo.Relevancia;
 import modelo.ResultadoDataSet;
+import modelo.ResultadoDoc;
+import modelo.ResultadoQuery;
 /**
  * Clase principal con método main, y algoritmo para la ejecución 
  * de cada módulo del proyecto paso a paso.
@@ -22,14 +24,14 @@ public class Generar {
 	/**
 	 * Lista de resultados @see {@link ResultadoDataSet}
 	 */
-	
+
 	private static ArrayList<ResultadoDataSet> resultadosDataSet = new ArrayList<>();
-	
+
 	/**
 	 * Método main
 	 * @param args Sin uso.
 	 */
-	
+
 	public static void main(String[] args) {
 		String fsp = System.getProperty("file.separator").toString();
 		//palabras comunes (se uso en todas ya que mejora la precisión, pero es de cran)
@@ -39,7 +41,7 @@ public class Generar {
 		File documentosFileCACM = new File("files"+fsp+"cacm"+fsp+"cacm.all");
 		File consultasFileCACM = new File("files"+fsp+"cacm"+fsp+"query.text");
 		File relevanciasFileCACM = new File("files"+fsp+"cacm"+fsp+"qrels.text");
-		
+
 		getPrecisiones(null,documentosFileCACM, 
 				consultasFileCACM, relevanciasFileCACM, palabrasComunesFile, "CACM");
 		//*/
@@ -53,7 +55,7 @@ public class Generar {
 				consultasFileMED, relevanciasFileMED, palabrasComunesFile, "MED");
 		//*/
 		// Archivos BD CRAN
-		/*/
+		//*/
 		File documentosFileCRAN = new File("files"+fsp+"cran"+fsp+"cran.all.1400");
 		File consultasFileCRAN = new File("files"+fsp+"cran"+fsp+"cran.qry");
 		File relevanciasFileCRAN = new File("files"+fsp+"cran"+fsp+"cranFix.rel");
@@ -94,7 +96,7 @@ public class Generar {
 		getPrecisiones(null,documentosFileADI, 
 				consultasFileADI, relevanciasFileADI, palabrasComunesFile, "ADI");
 		//*/
-		
+
 		//Archivos BD NPL (No usar, muy grande)
 		/*/
 		File documentosFileNPL = new File("files"+fsp+"npl"+fsp+"doc-text");
@@ -104,30 +106,30 @@ public class Generar {
 		getPrecisiones(null,documentosFileNPL, 
 				consultasFileNPL, relevanciasFileNPL, palabrasComunesFile, "NPL");
 		//*/
-		
-		
+
+
 		//Archivos BD TIME
 		/*/
 		File documentosFileTIME = new File("files"+fsp+"time"+fsp+"TIME.ALL");
 		File consultasFileTIME= new File("files"+fsp+"time"+fsp+"TIME.QUE");
 		File relevanciasFileTIME = new File("files"+fsp+"time"+fsp+"TIME.REL");
 		//File palabrasComunesFileTIME = new File("files"+fsp+"time"+fsp+"TIME.STP");//No es buena
-	
+
 		getPrecisiones(null,documentosFileTIME, 
 				consultasFileTIME, relevanciasFileTIME, palabrasComunesFile, "TIME");
 		//*/
-		
+
 		//Archivos BD ISWC2015
-		//*/
+		/*/
 		File documentosFileISWC2015 = new File("files"+fsp+"iswc2015"+fsp+"docs.txt");
 		File consultasFileISWC2015= new File("files"+fsp+"iswc2015"+fsp+"qrys.txt");
 		File relevanciasFileISWC2015 = new File("files"+fsp+"iswc2015"+fsp+"rel.txt");
-	
+
 		getPrecisiones(null,documentosFileISWC2015, 
 				consultasFileISWC2015, relevanciasFileISWC2015, palabrasComunesFile, "ISWC2015");
 		//*/
-		
-		
+
+
 	}
 	/**
 	 * Método que realiza la ejecución del algoritmo para obtener matriz frecuencia, 
@@ -148,7 +150,7 @@ public class Generar {
 		ArrayList<Consulta> consultas = new ArrayList<>();
 		ArrayList<String> palabrasComunes = new ArrayList<>();
 		ArrayList<Relevancia> relevancias = new ArrayList<>();
-		
+
 		if(nombreDB.equals("LISA")){
 			Documento.generarDocumentosLisa(documentosFiles, documentos);
 			Consulta.generarConsultasLisa(consultasFile, consultas);
@@ -207,30 +209,62 @@ public class Generar {
 		ArrayList<Precision> precisiones = new ArrayList<>();
 		//matriz.obtenerPrecision();
 		for(Consulta q: consultas){
-			matriz.obtenerPrecision(q, 30, precisiones, dataSet);
+			matriz.obtenerPrecision(q, 10, precisiones, dataSet);
 		}
 		resultadosDataSet.add(dataSet); //guardando en la lista
-		
-		
+
+		eureqa(dataSet, 0.5, 10);
+
+		/*
 		GetEquation generadorEcuacion = new GetEquation(1000, dataSet);
-		
+
 		Simulador simu = new Simulador(dataSet, generadorEcuacion.generarEquation());
 		simu.simular(0.16);
 		simu.imprimirParaExcelComparacion();
-		
+		 */
+
 		System.out.println("Fin "+nombreDB);
-		
-		
-/*
+
+
+		/*
 		System.out.println(consultas.get(0).getId());
 		System.out.println(consultas.get(0).getQuery());
 		System.out.println(consultas.get(0).getPalabrasValidas());
 		System.out.println(Matrices.getDocumento(334, documentos).getId());
 		System.out.println(Matrices.getDocumento(334, documentos).getCuerpo());
 		System.out.println(Matrices.getDocumento(334, documentos).getPalabrasValidas());
-		*/
+		 */
 		return precisiones;
 	}
+
+	public static void eureqa(ResultadoDataSet dataSet, Double tol, Integer q){
+		Integer cantidadDeGrupos = dataSet.getTotalConsultas()/q;
+		Integer Pin = dataSet.getResultadosConsultas().get(0).getpIn();
+		for(Integer i = 0; i < cantidadDeGrupos; i++){
+			System.out.println("Grupo "+(i+1)+" de "+cantidadDeGrupos);
+			for(Integer d = 0; d < Pin; d++){
+				Integer contadorRelevantes = 0;
+				Integer contadorNoRelevantes = 0;
+				for(Integer qi = 0; qi < q && ( (qi+1) + ((i+1)*q) ) <= dataSet.getTotalConsultas(); qi++){
+					//((qi+1) + ((i+1)*q))-1)
+					if(dataSet.getResultadosConsultas().get(qi).getResultadosDocumentos().get(d).getIsRel()){
+						contadorRelevantes++;
+					}else{
+						contadorNoRelevantes++;
+					}
+				}
+				Double resultado = contadorRelevantes.doubleValue()/(contadorRelevantes+contadorNoRelevantes);
+				System.out.println(resultado+"\t"+ (tol <= resultado ? "1":"0"));
+				
+			}
+			System.out.println("Fin grupo "+(i+1));
+
+		}
+
+	}
+
+
+
 	/**
 	 * Método que obtiene la lista de palabras comunes, como pronombres personales, conectores etc
 	 * @param file Archivo con las palabras
