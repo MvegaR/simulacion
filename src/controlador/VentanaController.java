@@ -863,7 +863,7 @@ public class VentanaController implements Initializable{
 
 					String value = getSpinnerPin().getValue() + "";
 
-					matriz.obtenerPrecision(q, Integer.parseInt(value), precisiones, dataSet);
+					matriz.obtenerPrecision(q, Integer.parseInt(value), precisiones, dataSet, false);
 				}
 				if(mapDataSets.containsKey(nombreDB)){
 					mapDataSets.remove(mapDataSets.get(nombreDB));

@@ -209,7 +209,7 @@ public class Generar {
 		ArrayList<Precision> precisiones = new ArrayList<>();
 		//matriz.obtenerPrecision();
 		for(Consulta q: consultas){
-			matriz.obtenerPrecision(q, 10, precisiones, dataSet);
+			matriz.obtenerPrecision(q, 10, precisiones, dataSet,true);
 		}
 		resultadosDataSet.add(dataSet); //guardando en la lista
 

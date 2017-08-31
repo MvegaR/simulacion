@@ -153,7 +153,7 @@ public class Tests {
 		ArrayList<Precision> precisiones = new ArrayList<>();
 		//matriz.obtenerPrecision();
 		System.out.println("Inicio "+"Test funcionalidad básica");
-		matriz.obtenerPrecision(consultas.get(0), 4, precisiones, resultadosDataset);
+		matriz.obtenerPrecision(consultas.get(0), 4, precisiones, resultadosDataset,true);
 		assertTrue(precisiones.get(0).getPrecision()-0.52 <= 0.009); //comparacion de solo dos decimales
 		System.out.println("Fin "+"Test funcionalidad básica");
 	}
@@ -169,7 +169,7 @@ public class Tests {
 		ArrayList<Precision> precisiones = new ArrayList<>();
 		//matriz.obtenerPrecision();
 		System.out.println("Inicio "+"Test sin documentos");
-		matriz.obtenerPrecision(consultas.get(0), 4, precisiones, resultadosDataset );
+		matriz.obtenerPrecision(consultas.get(0), 4, precisiones, resultadosDataset, true);
 		assertTrue(precisiones.get(0).getPrecision() == 0.0f); 
 		System.out.println("Fin "+"Test sin documentos");
 	}
@@ -184,7 +184,7 @@ public class Tests {
 		ArrayList<Precision> precisiones = new ArrayList<>();
 		//matriz.obtenerPrecision();
 		System.out.println("Inicio "+"Test sin palabras");
-		matriz.obtenerPrecision(consultas.get(0), 4, precisiones, resultadosDataset );
+		matriz.obtenerPrecision(consultas.get(0), 4, precisiones, resultadosDataset, true );
 		System.out.println(precisiones.get(0).getPrecision());
 		assertTrue(precisiones.get(0).getPrecision().equals(0.0) );
 		System.out.println("Fin "+"Test sin palabras");
@@ -201,7 +201,7 @@ public class Tests {
 		ArrayList<Precision> precisiones = new ArrayList<>();
 		//matriz.obtenerPrecision();
 		System.out.println("Inicio "+"Test documento nulo");
-		matriz.obtenerPrecision(consultas.get(0), 4, precisiones, resultadosDataset );
+		matriz.obtenerPrecision(consultas.get(0), 4, precisiones, resultadosDataset, true);
 		assertTrue(precisiones.get(0).getPrecision()-0.52 <= 0.009); //comparacion de solo dos decimales
 		System.out.println("Fin "+"Test Documento nulo");
 	}
@@ -215,7 +215,7 @@ public class Tests {
 		ArrayList<Precision> precisiones = new ArrayList<>();
 		//matriz.obtenerPrecision();
 		System.out.println("Inicio "+"Test Consulta nula");
-		matriz.obtenerPrecision(null, 4, precisiones, resultadosDataset );
+		matriz.obtenerPrecision(null, 4, precisiones, resultadosDataset, true);
 		assertTrue(precisiones.get(0).getPrecision()-0.52 <= 0.009); //comparacion de solo dos decimales
 		System.out.println("Fin "+"Test Consulta nula");
 	}

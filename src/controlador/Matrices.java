@@ -97,9 +97,11 @@ public class Matrices {
 	 * @param q Consulta a calcular precisión
 	 * @param p Valor de p@
 	 * @param precisiones Lista para almazenar las precisiones y utilizarlas con su respectivos idDocumentos y p@
+	 * @param variable para activar o desactivar impresion por terminal
 	 * @exception NullPointerException - ArrayList precisiones no puede ser nulo.
 	 */
-	public void obtenerPrecision(Consulta q, Integer p, ArrayList<Precision> precisiones, ResultadoDataSet dataSet){
+	public void obtenerPrecision(Consulta q, Integer p, ArrayList<Precision> precisiones, ResultadoDataSet dataSet, 
+			Boolean output){
 		if(precisiones == null){
 			throw new NullPointerException("ArrayList Precisiones no puede se nulo");
 		}
@@ -110,7 +112,8 @@ public class Matrices {
 		//ArrayList<Double> precisiones = new ArrayList<>();
 		if(matrizFrecuncias.size() == 0){
 			this.obtenerFrecuencias(); //se guardan en matrizFrecuencias
-			System.out.println("Matriz de frecuencias calculada");
+			if(output)
+				System.out.println("Matriz de frecuencias calculada");
 		}
 		if(matrizFrecunciasInversas.size() == 0){
 			this.obtenerFrecuenciasInversas(); // se guardan en matrizFrecuencaisInversa
@@ -146,8 +149,7 @@ public class Matrices {
 			+ " Similitud: "+ String.format("%19.16f",   similitudes.get(i).getValor()) 
 			+ " Relevante: " +isRelevante(q.getId(), similitudes.get(i).getIdDocumento()));
 			//*/
-			//* 
-			//codigo para imprimir con formato para copiar a archivo excel.
+
 			int r = 0;
 			if(isRelevante(q.getId(), similitudes.get(i).getIdDocumento())){
 				r = 1;
@@ -157,8 +159,9 @@ public class Matrices {
 			if(recallAcumulada.isNaN()){
 				recallAcumulada = 0.0;
 			}
-			System.out.print(q.getId()+"\t" + similitudes.get(i).getIdDocumento() + "\t" +  
-					similitudes.get(i).getValor() + "\t" + r +"\t"+ relevanciaAcumulada+"\t"+ recallAcumulada);
+			if(output)
+				System.out.print(q.getId()+"\t" + similitudes.get(i).getIdDocumento() + "\t" +  
+						similitudes.get(i).getValor() + "\t" + r +"\t"+ relevanciaAcumulada+"\t"+ recallAcumulada);
 			HashSet<String> palabrasRelevantesSinRepetir = new HashSet<>();
 			HashSet<String> palabrasTotalSinRepetir = new HashSet<>();
 			for(String palabra: getDocumento(similitudes.get(i).getIdDocumento(), documentos).getPalabrasValidas()){
@@ -168,10 +171,11 @@ public class Matrices {
 			ResultadoDoc resultadoDocumento = new ResultadoDoc(q.getId(), similitudes.get(i).getIdDocumento(), 
 					similitudes.get(i).valor, isRelevante(q.getId(), similitudes.get(i).getIdDocumento()), 
 					relevanciaAcumulada, recallAcumulada, 0);
-			
+
 			resultadoConsulta.getResultadosDocumentos().add(resultadoDocumento);
 			//fin guardar
-			System.out.print("\t"+ palabrasTotalSinRepetir.size());
+			if(output)
+				System.out.print("\t"+ palabrasTotalSinRepetir.size());
 			//imprimir palabras relevantes presentes en el documento y consulta
 			for(String palabra: q.getPalabrasValidas()){
 				if(getDocumento(similitudes.get(i).getIdDocumento(), 
@@ -182,16 +186,17 @@ public class Matrices {
 			for(String palabra: palabrasRelevantesSinRepetir){
 				if(getDocumento(similitudes.get(i).getIdDocumento(), 
 						documentos).getPalabrasValidas().contains(palabra)){
-					System.out.print("\t"+palabra);
+					if(output)
+						System.out.print("\t"+palabra);
 					resultadoDocumento.getWords().add(palabra);
 					//System.out.print("\t"+palabra+"\t" + count(getDocumento(similitudes.get(i).getIdDocumento(), documentos).getPalabrasValidas(), palabra) ); //!!!!!!!!!!!!!!!!
 
 				}
 			}
 			resultadoDocumento.setTWords(getDocumento(similitudes.get(i).getIdDocumento(), 
-						documentos).getPalabrasValidas().size());
-
-			System.out.println();
+					documentos).getPalabrasValidas().size());
+			if(output)
+				System.out.println();
 			//System.out.println(q.getPalabrasValidas().size() +" - "+ getDocumento(similitudes.get(i).getIdDocumento(), documentos).getPalabrasValidas().size());
 
 			//*/
@@ -217,11 +222,13 @@ public class Matrices {
 		System.out.println("\t\tPrecisión consulta Q"+q.getId()+"p@"+p+" es: "
 		+ String.format("%.10f", precision)+" Docs Relevantes: "+contadorDocumentosRelevantes+"\n");
 		//*/
-		System.out.println("Precisión promedio"+"\t\t\t\t"+precision);
-		System.out.println("Recall promedio"+"\t\t\t\t\t"+recall);
-		System.out.println("Total relevantes"+"\t\t\t\t\t"+totalRelevantes(q));
-		System.out.println();
-		
+		if(output){
+			System.out.println("Precisión promedio"+"\t\t\t\t"+precision);
+			System.out.println("Recall promedio"+"\t\t\t\t\t"+recall);
+			System.out.println("Total relevantes"+"\t\t\t\t\t"+totalRelevantes(q));
+			System.out.println();
+		}
+
 
 	}
 
@@ -385,7 +392,7 @@ public class Matrices {
 	 * 
 	 */
 	public void obtenerFrecuencias(){
-		
+
 		matrizFrecuncias.clear();
 		for(Documento d: documentos){
 			if(d != null && !d.getPalabrasValidas().isEmpty()){ //quitando documentos no validos
@@ -466,7 +473,7 @@ public class Matrices {
 			}
 		}
 	}
-	
+
 	/**
 	 * Método que rellena la matriz con las frecuencias inversa de las palabras 
 	 * (set de palabras), de cada documento. 
@@ -487,7 +494,7 @@ public class Matrices {
 		for(Documento d: documentos){
 			if(bar!=null){bar.setProgress(0.33+ (((count++))/documentos.size())/3);}
 			if(d != null && !d.getPalabrasValidas().isEmpty()){//quitando documentos sin cuerpo ni título
-				System.out.println("Frecuencia inversa documento: "+d.getId());
+				
 				ArrayList<Double> lista = new ArrayList<>();
 				matrizFrecunciasInversas.add(lista);
 				lista.add(d.getId()*1.0);  //agregando id documento al inicio de cada lista (como double)
