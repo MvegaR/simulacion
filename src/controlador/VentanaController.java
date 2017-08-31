@@ -547,6 +547,8 @@ public class VentanaController implements Initializable{
 	                    setText(item.toString());
 	                    if (item.equals(true)) {
 	                        setStyle("-fx-background-color: RGB(179,255,179)");
+	                    }else{
+		                    setStyle("");
 	                    }
 	                }
 	            }
@@ -623,6 +625,8 @@ public class VentanaController implements Initializable{
 	                    setText(item.toString());
 	                    if (item.equals(true)) {
 	                        setStyle("-fx-background-color: RGB(255,255,0)");
+	                    }else{
+		                    setStyle("");
 	                    }
 	                }
 	            }
