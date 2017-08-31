@@ -163,6 +163,38 @@ public class VentanaController implements Initializable{
 		getButtonVerFuncion().setOnAction(e -> tablaFuncion(getLabelDataSetName().getText()));
 		getButtonSimular().setOnAction(e -> generarSimulacion((double)getSliderSensibilidad().getValue()));
 		
+		
+		ImageView icoFuncion = new ImageView(new Image(getClass().getResource("/FxIcon.png").toExternalForm()));
+		icoFuncion.setFitWidth(25);
+		icoFuncion.setFitHeight(25);
+		buttonGenerarF.setGraphic(icoFuncion);
+		
+		ImageView icoSim = new ImageView(new Image(getClass().getResource("/simulationIcon.png").toExternalForm()));
+		icoSim.setFitWidth(25);
+		icoSim.setFitHeight(25);
+		buttonSimular.setGraphic(icoSim);
+		
+		ImageView proceIcon = new ImageView(new Image(getClass().getResource("/procesarIcon.png").toExternalForm()));
+		proceIcon.setFitWidth(25);
+		proceIcon.setFitHeight(25);
+		getButtonProcesar().setGraphic(proceIcon);
+		
+		ImageView leerIcon = new ImageView(new Image(getClass().getResource("/leerIcon.png").toExternalForm()));
+		leerIcon.setFitWidth(25);
+		leerIcon.setFitHeight(25);
+		getButtonLeerDataSet().setGraphic(leerIcon);
+		
+		ImageView verEcuIcon = new ImageView(new Image(getClass().getResource("/verEcuIcon.png").toExternalForm()));
+		verEcuIcon.setFitWidth(25);
+		verEcuIcon.setFitHeight(25);
+		getButtonVerFuncion().setGraphic(verEcuIcon);
+		
+		
+		ImageView verSimuIcon = new ImageView(new Image(getClass().getResource("/verIcon.png").toExternalForm()));
+		verSimuIcon.setFitWidth(25);
+		verSimuIcon.setFitHeight(25);
+		getToobleButtonVerResultadoS().setGraphic(verSimuIcon);
+		
 
 
 	}
@@ -313,6 +345,7 @@ public class VentanaController implements Initializable{
 						if(!getMapSimulador().containsKey(selectItem.getValue().toString())){
 							getToogleButtonVerResultadoS().setDisable(true);
 							getToogleButtonVerResultadoS().setDisable(true);
+							getCargaS().setProgress(0);
 							getLabelRelAcertadas().setText("Relevancias acertadas en simulación");
 							getLabelRelAcertadasReal().setText("Relevancias (true) acertadas en simulación");
 							getLabelRelAcertadasValor().setText("??%" );
@@ -502,6 +535,23 @@ public class VentanaController implements Initializable{
 
 		TableColumn<ResultadoDoc, Boolean> isRel = new TableColumn("¿Es relevante?");
 		isRel.setCellValueFactory(new PropertyValueFactory<>("isRel"));
+		isRel.setCellFactory(column -> {
+	        return new TableCell<ResultadoDoc, Boolean>() {
+	            @Override
+	            protected void updateItem(Boolean item, boolean empty){
+	            	super.updateItem(item, empty); 
+	                if (item == null || empty) { 
+	                    setText(null);
+	                    setStyle("");
+	                } else {
+	                    setText(item.toString());
+	                    if (item.equals(true)) {
+	                        setStyle("-fx-background-color: RGB(179,255,179)");
+	                    }
+	                }
+	            }
+	        };
+	    });
 
 		TableColumn<ResultadoDoc, Double> precision = new TableColumn("Precisión");
 		precision.setCellValueFactory(new PropertyValueFactory<>("precision"));
@@ -793,6 +843,7 @@ public class VentanaController implements Initializable{
 				getTree().setDisable(true);
 				getButtonProcesar().setDisable(true);
 				getButtonLeerDataSet().setDisable(true);
+				getButtonGenerarF().setDisable(true);
 				String nombreDB = getLabelDataSetName().getText();
 				ResultadoDataSet dataSet = new ResultadoDataSet(nombreDB, mapConsultas.get(nombreDB).size(), 
 						mapDocumentos.get(nombreDB).size(), 
@@ -840,9 +891,23 @@ public class VentanaController implements Initializable{
 
 				getTree().setDisable(false);
 				enableFunctionControl();
-				getButtonVerFuncion().setDisable(true);
 				getButtonProcesar().setDisable(false);
 				getButtonLeerDataSet().setDisable(false);
+				
+				if(getMapGetEquation().containsKey(nombreDB)){
+					getButtonVerFuncion().setDisable(false);
+				}else{
+					getButtonVerFuncion().setDisable(true);
+					getCargaF().setProgress(0);
+				}
+				
+				if(getMapSimulador().containsKey(nombreDB)){
+					getToobleButtonVerResultadoS().setDisable(false);
+				}else{
+					getToobleButtonVerResultadoS().setDisable(true);
+					getCargaS().setProgress(0);
+				}
+				
 
 			}
 		});

@@ -33,7 +33,7 @@ public class MainVentana extends Application {
 			scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
 
 			windows.setScene(scene);
-			//windows.show(); 
+			windows.show(); 
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -50,9 +50,12 @@ public class MainVentana extends Application {
 			scene.getStylesheets().add(this.getClass().getResource("/style.css").toExternalForm());
 			windows.setTitle("Proyecto título - Obtención de una función de distribución probabilística "
 					+ "global para simular juicios de usuario - Por: Marcos Vega - 2017");
+			
 
 			windows.setScene(scene);
 			windows.show();
+			windows.setMaximized(true);
+		
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
