@@ -13,6 +13,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -26,6 +27,8 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import modelo.Consulta;
 import modelo.DistributionEquation;
@@ -137,7 +140,10 @@ public class VentanaController implements Initializable{
 
 		TreeItem<String> rootItem = new TreeItem<String> ("DataSets", null);
 		for(String s: dataSets){
-			TreeItem<String> itemDataSet = new TreeItem<String>(s, null);
+			ImageView ico = new ImageView(new Image(getClass().getResource("/dbicon.png").toExternalForm()));
+			ico.setFitWidth(20);
+			ico.setFitHeight(20);
+			TreeItem<String> itemDataSet = new TreeItem<String>(s, ico);
 			rootItem.getChildren().add(itemDataSet);
 		}
 		tree.getSelectionModel().selectedItemProperty().addListener(e->updateData());
@@ -230,7 +236,7 @@ public class VentanaController implements Initializable{
 
 	private void updateData() {
 		System.out.println("Tree update");
-
+		
 		TreeItem<String> selectItem =  tree.getSelectionModel().getSelectedItem();
 		TreeItem<String> padre = null;
 		if(tree.getSelectionModel() != null && tree.getSelectionModel().getSelectedItem() != null){
@@ -823,7 +829,10 @@ public class VentanaController implements Initializable{
 					mapHijosConsultas.put(nombreDB, listaDeHijos);
 				}
 				for(ResultadoQuery rq: dataSet.getResultadosConsultas()){
-					TreeItem<String> itemQuery = new TreeItem<String>("Query "+nombreDB+" ID: "+rq.getIdQuery().toString());
+					ImageView ico = new ImageView(new Image(getClass().getResource("/queryIcon.png").toExternalForm()));
+					ico.setFitWidth(20);
+					ico.setFitHeight(20);
+					TreeItem<String> itemQuery = new TreeItem<String>("Query "+nombreDB+" ID: "+rq.getIdQuery().toString(),ico);
 					tree.getSelectionModel().getSelectedItem().getChildren().add(itemQuery);
 					listaDeHijos.add(itemQuery);
 				}

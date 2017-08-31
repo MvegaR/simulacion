@@ -30,6 +30,7 @@ public class MainVentana extends Application {
 
 		
 			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
 
 			windows.setScene(scene);
 			//windows.show(); 
@@ -46,6 +47,7 @@ public class MainVentana extends Application {
 			ventanaController.setResumenController(resumenController);
 
 			Scene scene = new Scene(root);
+			scene.getStylesheets().add(this.getClass().getResource("/style.css").toExternalForm());
 			windows.setTitle("Proyecto título - Obtención de una función de distribución probabilística "
 					+ "global para simular juicios de usuario - Por: Marcos Vega - 2017");
 
