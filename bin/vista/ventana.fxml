@@ -42,9 +42,9 @@
                   </BorderPane>
                   <BorderPane id="fondo2" fx:id="panelContenido" prefHeight="598.0" prefWidth="341.0">
                      <center>
-                        <BorderPane fx:id="resumenDataSet" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                        <BorderPane id="frame1" fx:id="resumenDataSet" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <top>
-                              <VBox prefHeight="323.0" prefWidth="750.0" BorderPane.alignment="CENTER">
+                              <VBox id="frame2" prefHeight="323.0" prefWidth="750.0" BorderPane.alignment="CENTER">
                                  <children>
                                     <GridPane prefHeight="316.0" prefWidth="750.0" style="">
                                       <columnConstraints>
@@ -61,9 +61,9 @@
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                          <BorderPane id="title" prefHeight="200.0" prefWidth="200.0">
                                              <center>
-                                                <Label id="title" fx:id="labelDataSetName" alignment="CENTER" prefHeight="37.0" prefWidth="373.0" text="DataSetName" BorderPane.alignment="CENTER">
+                                                <Label fx:id="labelDataSetName" alignment="CENTER" prefHeight="37.0" prefWidth="373.0" text="DataSetName" BorderPane.alignment="CENTER">
                                                    <font>
                                                       <Font name="Times New Roman Bold" size="32.0" />
                                                    </font>
@@ -122,7 +122,7 @@
                                                 <Insets />
                                              </opaqueInsets>
                                           </Label>
-                                          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                          <BorderPane id="title" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                                              <center>
                                                 <ProgressBar id="bar" fx:id="cargaLecturaDataSet" prefHeight="27.0" prefWidth="201.0" progress="0.0" BorderPane.alignment="CENTER">
                                                    <effect>
@@ -194,7 +194,7 @@
                               <VBox prefHeight="365.0" prefWidth="676.0" BorderPane.alignment="CENTER">
                                  <children>
                                     <Separator prefWidth="200.0" />
-                                    <BorderPane prefHeight="472.0" prefWidth="750.0">
+                                    <BorderPane id="frame3" prefHeight="472.0" prefWidth="750.0">
                                        <center>
                                           <GridPane prefHeight="371.0" prefWidth="750.0" BorderPane.alignment="CENTER">
                                             <columnConstraints>
@@ -214,21 +214,11 @@
                                                 <RowConstraints maxHeight="81.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                              <children>
-                                                <Label fx:id="labelDataSetName11" alignment="CENTER" layoutX="15.0" layoutY="21.0" text="Simulación" GridPane.columnIndex="2">
-                                                   <font>
-                                                      <Font name="Times New Roman Bold" size="26.0" />
-                                                   </font>
-                                                </Label>
                                                 <Slider fx:id="sliderIntervalos" blockIncrement="100.0" majorTickUnit="1000.0" max="10000.0" minorTickCount="500" prefHeight="38.0" prefWidth="272.0" showTickLabels="true" showTickMarks="true" value="100.0" GridPane.rowIndex="2">
                                                    <GridPane.margin>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                    </GridPane.margin>
                                                 </Slider>
-                                                <Label fx:id="labelDataSetName111" alignment="CENTER" layoutX="366.0" layoutY="21.0" text="Función">
-                                                   <font>
-                                                      <Font name="Times New Roman Bold" size="26.0" />
-                                                   </font>
-                                                </Label>
                                                 <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="333.0" text="Cantidad de intervalos de la función" GridPane.rowIndex="1">
                                                    <font>
                                                       <Font name="Times New Roman" size="20.0" />
@@ -281,6 +271,24 @@
                                                 <Separator orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                                 <Separator orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                                                 <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                                <BorderPane id="title" prefHeight="200.0" prefWidth="200.0">
+                                                   <center>
+                                                      <Label fx:id="labelDataSetName111" alignment="CENTER" text="Función" BorderPane.alignment="CENTER">
+                                                         <font>
+                                                            <Font name="Times New Roman Bold" size="26.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </center>
+                                                </BorderPane>
+                                                <BorderPane id="title" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+                                                   <center>
+                                                      <Label fx:id="labelDataSetName11" alignment="CENTER" text="Simulación" BorderPane.alignment="CENTER">
+                                                         <font>
+                                                            <Font name="Times New Roman Bold" size="26.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </center>
+                                                </BorderPane>
                                              </children>
                                           </GridPane>
                                        </center>
