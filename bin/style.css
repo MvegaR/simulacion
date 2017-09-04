@@ -40,36 +40,31 @@
 }
 
 #fondo1{
--fx-background-image: url("img-noise-361x370.png");
--fx-background-color: linear-gradient(to bottom, #f7fbff 0%, #d9edff 40%,#add9ff 100%);
+-fx-background-color: linear-gradient(to top, rgba(73,155,234,0.2) 0%, rgba(0,150,200,0.9) 100%);
 }
 
 #fondo2{
-
+-fx-background-color:  linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 90%, rgba(237,237,237,1) 100%);
 }
 
 #title{
   
-  -fx-background-color: linear-gradient(to bottom, rgba(73,155,234,0.2) 0%, rgba(49,119,194,0.6) 100%);
+  -fx-background-color: linear-gradient(to top, rgba(73,155,234,0.2) 0%, rgba(0,150,200,0.7) 100%);
   
-  
-
- 
   
 }
 #frame1 {
-    -fx-background-color: #fff;
+    
      -fx-padding: 5;
 }
 
 #frame2 {
     
-    -fx-background-color: linear-gradient(to bottom, rgba(255,180,50,0) 40%, rgba(255,180,50,0.8) 100%);
+    -fx-background-color: linear-gradient(to bottom, rgba(255,180,50,0) 40%, rgba(255,180,50,0.7) 100%);
       -fx-border-radius: 20;
 }
 #frame3 {
-    -fx-background-color: linear-gradient(to bottom, rgba(255,180,50,0) 40%, rgba(255,180,50,0.8) 100%);
-      -fx-border-radius: 20;
+   
 }
 
 
