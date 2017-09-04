@@ -320,12 +320,12 @@
                   <Image url="@../../img/logo.png" />
                </image>
                <BorderPane.margin>
-                  <Insets bottom="10.0" left="10.0" top="10.0" />
+                  <Insets bottom="10.0" left="20.0" top="10.0" />
                </BorderPane.margin>
             </ImageView>
          </left>
          <center>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="128.0" prefWidth="986.0" text="&quot;OBTENCIÓN DE UNA FUNCIÓN DE DISTRIBUCIÓN PROBABILÍSTICA GLOBAL PARA SIMULAR JUICIOS DE USUARIO&quot;" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+            <Label id="tituloProyecto" alignment="CENTER" contentDisplay="CENTER" prefHeight="128.0" prefWidth="986.0" text="&quot;OBTENCIÓN DE UNA FUNCIÓN DE DISTRIBUCIÓN PROBABILÍSTICA GLOBAL PARA SIMULAR JUICIOS DE USUARIO&quot;" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
                <font>
                   <Font name="Times New Roman" size="26.0" />
                </font>

@@ -38,7 +38,10 @@
         derive(-fx-accent, 30%) 99%
     );
 }
-
+#tituloProyecto{
+         
+   
+}
 #fondo1{
 -fx-background-color: linear-gradient(to top, rgba(73,155,234,0.2) 0%, rgba(0,150,200,0.9) 100%);
 }
@@ -50,7 +53,6 @@
 #title{
   
   -fx-background-color: linear-gradient(to top, rgba(73,155,234,0.2) 0%, rgba(0,150,200,0.7) 100%);
-  
   
 }
 #frame1 {
