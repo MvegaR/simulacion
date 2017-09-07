@@ -99,18 +99,18 @@ public class VentanaController implements Initializable{
 	@FXML
 	private Label labelRelAcertadas;
 
-    @FXML
-    private Label labelRelAcertadasReal;
+	@FXML
+	private Label labelRelAcertadasReal;
 
-    @FXML
-    private Label labelRelAcertadasValor;
+	@FXML
+	private Label labelRelAcertadasValor;
 
-    @FXML
-    private Label lavelRelRealValor;
-    
-    /*@FXML
+	@FXML
+	private Label lavelRelRealValor;
+
+	/*@FXML
     private Button botonBuscar;
-*/
+	 */
 	/** Map para acceder a un resultado de datos dado el nombre del dataSet */
 	private HashMap<String, ResultadoDataSet> mapDataSets = new HashMap<>();
 	/**  Map para acceder a un resultado de datos de la simulacion dado el nombre del dataSet*/
@@ -162,46 +162,46 @@ public class VentanaController implements Initializable{
 		getButtonGenerarF().setOnAction(e -> generarFuncion((int)getSliderIntervalos().getValue()));
 		getButtonVerFuncion().setOnAction(e -> tablaFuncion(getLabelDataSetName().getText()));
 		getButtonSimular().setOnAction(e -> generarSimulacion((double)getSliderSensibilidad().getValue()));
-		
-		
+
+
 		ImageView icoFuncion = new ImageView(new Image(getClass().getResource("/FxIcon.png").toExternalForm()));
 		icoFuncion.setFitWidth(25);
 		icoFuncion.setFitHeight(25);
 		buttonGenerarF.setGraphic(icoFuncion);
-		
+
 		ImageView icoSim = new ImageView(new Image(getClass().getResource("/simulationIcon.png").toExternalForm()));
 		icoSim.setFitWidth(25);
 		icoSim.setFitHeight(25);
 		buttonSimular.setGraphic(icoSim);
-		
+
 		ImageView proceIcon = new ImageView(new Image(getClass().getResource("/procesarIcon.png").toExternalForm()));
 		proceIcon.setFitWidth(25);
 		proceIcon.setFitHeight(25);
 		getButtonProcesar().setGraphic(proceIcon);
-		
+
 		ImageView leerIcon = new ImageView(new Image(getClass().getResource("/leerIcon.png").toExternalForm()));
 		leerIcon.setFitWidth(25);
 		leerIcon.setFitHeight(25);
 		getButtonLeerDataSet().setGraphic(leerIcon);
-		
+
 		ImageView verEcuIcon = new ImageView(new Image(getClass().getResource("/verEcuIcon.png").toExternalForm()));
 		verEcuIcon.setFitWidth(25);
 		verEcuIcon.setFitHeight(25);
 		getButtonVerFuncion().setGraphic(verEcuIcon);
-		
-		
+
+
 		ImageView verSimuIcon = new ImageView(new Image(getClass().getResource("/verIcon.png").toExternalForm()));
 		verSimuIcon.setFitWidth(25);
 		verSimuIcon.setFitHeight(25);
 		getToobleButtonVerResultadoS().setGraphic(verSimuIcon);
-		
+
 
 
 	}
 	/*
 	private void buscarMejor(){
 		new Thread(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				//getBotonBuscar().setDisable(true);
@@ -228,7 +228,7 @@ public class VentanaController implements Initializable{
 							i++;
 							j+=100;
 						}else{
-							
+
 							try {
 								Thread.sleep(100);
 							} catch (InterruptedException e) {
@@ -236,20 +236,20 @@ public class VentanaController implements Initializable{
 								e.printStackTrace();
 							}
 						}
-						
+
 					}
 				}
-				
+
 			}
 		}).start();;
 
 	}
-	*/
-	
+	 */
+
 	/**
 	 * Método de evento de slider de intervalos
 	 */
-	
+
 	private void sliderIntervalos(){
 		getButtonGenerarF().setText("Generar función con "+(int)getSliderIntervalos().getValue()+" intervalos");
 		if((int)getSliderIntervalos().getValue() == 0){
@@ -268,7 +268,7 @@ public class VentanaController implements Initializable{
 
 	private void updateData() {
 		System.out.println("Tree update");
-		
+
 		TreeItem<String> selectItem =  tree.getSelectionModel().getSelectedItem();
 		TreeItem<String> padre = null;
 		if(tree.getSelectionModel() != null && tree.getSelectionModel().getSelectedItem() != null){
@@ -326,7 +326,7 @@ public class VentanaController implements Initializable{
 					getLabelRelAcertadasReal().setText("Relevancias (true) acertadas en simulación");
 					getLabelRelAcertadasValor().setText("??%" );
 					getLavelRelRealValor().setText("??%" );
-					
+
 				}else{
 					getCargaProcesarConsultas().setProgress(1.0);
 					enableFunctionControl();
@@ -350,8 +350,8 @@ public class VentanaController implements Initializable{
 							getLabelRelAcertadasReal().setText("Relevancias (true) acertadas en simulación");
 							getLabelRelAcertadasValor().setText("??%" );
 							getLavelRelRealValor().setText("??%" );
-							
-							
+
+
 						}else{
 							getToogleButtonVerResultadoS().setDisable(false);
 							getCargaS().setProgress(1.0);
@@ -365,8 +365,8 @@ public class VentanaController implements Initializable{
 							Integer totalFalladoTrue= getMapSimulador().get(getTree().getSelectionModel().getSelectedItem().getValue().toString()).getTotalRelevantesFallados();
 							Integer totalTrue = totalFalladoTrue+totalAcertadoTrue;
 							getLavelRelRealValor().setText( (totalAcertadoTrue*100)/(totalTrue.doubleValue())+"%" );
-							
-							
+
+
 						}
 					}
 
@@ -390,8 +390,8 @@ public class VentanaController implements Initializable{
 				tablaConsulta(selectItem, padre.getValue());
 				cambiarCentroToResumenQuery(selectItem, padre);
 			}
-			
-		
+
+
 
 		}
 	}
@@ -411,15 +411,15 @@ public class VentanaController implements Initializable{
 			getResumenController().getTexto4().setText("Total relevantes desplegados");
 			getResumenController().getTexto5().setText("");
 			getResumenController().getTexto6().setText("");
-			
+
 			getResumenController().getValor1().setText(rq.getPrecisionPromedio().toString());
 			getResumenController().getValor2().setText(rq.getRecallPromedio().toString());
 			getResumenController().getValor3().setText(rq.getTotalDocRelevantesTotales().toString());
 			getResumenController().getValor4().setText(rq.getTotalDocReleventesDesplegados().toString());
 			getResumenController().getValor5().setText("");
 			getResumenController().getValor6().setText("");
-		
-			
+
+
 			getResumenController().getLabelTituloSim().setText("");
 			getResumenController().getTexto11().setText("");
 			getResumenController().getTexto21().setText("");
@@ -427,7 +427,7 @@ public class VentanaController implements Initializable{
 			getResumenController().getTexto41().setText("");
 			getResumenController().getTexto51().setText("");
 			getResumenController().getTexto61().setText("");
-			
+
 			getResumenController().getValor11().setText("");
 			getResumenController().getValor21().setText("");
 			getResumenController().getValor31().setText("");
@@ -446,7 +446,7 @@ public class VentanaController implements Initializable{
 	 */
 	private void cambiarCentroToResumenQuerySimulada(TreeItem<String> selectItem, TreeItem<String> padre) {
 		if(getResumenController() != null){
-			
+
 			Integer index = 0;
 			for(ResultadoQuery rqt: mapDataSets.get(padre.getValue()).getResultadosConsultas()){
 				index++;
@@ -455,7 +455,7 @@ public class VentanaController implements Initializable{
 				}
 			}
 			Simulador simulador = mapSimulador.get(padre.getValue());
-			
+
 			getResumenController().getLabelTituloSim().setText("Simulación " +getLabelDataSetName().getText());
 			getResumenController().getTexto1().setText("Total relevantes desplegados originales");
 			getResumenController().getTexto2().setText("Total relevantes desplegados simulados");
@@ -463,8 +463,8 @@ public class VentanaController implements Initializable{
 			getResumenController().getTexto4().setText("Total acertados");
 			getResumenController().getTexto5().setText("Total fallados");
 			getResumenController().getTexto6().setText("Tolerancia");
-			
-			
+
+
 			getResumenController().getValor1().setText
 			(simulador.getResultadosResumen().get(index).getTotalDesplegadosOriginales().toString());
 			getResumenController().getValor2().setText
@@ -486,7 +486,7 @@ public class VentanaController implements Initializable{
 			getResumenController().getTexto41().setText("Total relevantes acertados");
 			getResumenController().getTexto51().setText("Total relevantes \"true\" original");
 			getResumenController().getTexto61().setText("Total relevantes \"true\" simulado");
-			
+
 			getResumenController().getValor11().setText(simulador.getTotalGlobalFallados().toString());
 			getResumenController().getValor21().setText(simulador.getTotalGlobalAcertados().toString());
 			getResumenController().getValor31().setText(simulador.getTotalRelevantesFallados().toString());
@@ -495,7 +495,7 @@ public class VentanaController implements Initializable{
 			getResumenController().getValor61().setText(simulador.getTtotalRelevantesSimuladosDesplegados().toString());
 			getPanelContenido().getChildren().remove(getResumenDataSet());
 			getPanelContenido().setCenter(getResumenController().getResumenDataSet());
-		
+
 		}
 
 	}
@@ -514,7 +514,7 @@ public class VentanaController implements Initializable{
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Método que actualiza la tabla de datos con información detallada de una consulta
 	 * @param selectItem Contiene el id de la consulta (TreeItem)
@@ -536,24 +536,24 @@ public class VentanaController implements Initializable{
 		TableColumn<ResultadoDoc, Boolean> isRel = new TableColumn("¿Es relevante?");
 		isRel.setCellValueFactory(new PropertyValueFactory<>("isRel"));
 		isRel.setCellFactory(column -> {
-	        return new TableCell<ResultadoDoc, Boolean>() {
-	            @Override
-	            protected void updateItem(Boolean item, boolean empty){
-	            	super.updateItem(item, empty); 
-	                if (item == null || empty) { 
-	                    setText(null);
-	                    setStyle("");
-	                } else {
-	                    setText(item.toString());
-	                    if (item.equals(true)) {
-	                        setStyle("-fx-background-color: RGB(179,255,179)");
-	                    }else{
-		                    setStyle("");
-	                    }
-	                }
-	            }
-	        };
-	    });
+			return new TableCell<ResultadoDoc, Boolean>() {
+				@Override
+				protected void updateItem(Boolean item, boolean empty){
+					super.updateItem(item, empty); 
+					if (item == null || empty) { 
+						setText(null);
+						setStyle("");
+					} else {
+						setText(item.toString());
+						if (item.equals(true)) {
+							setStyle("-fx-background-color: RGB(179,255,179)");
+						}else{
+							setStyle("");
+						}
+					}
+				}
+			};
+		});
 
 		TableColumn<ResultadoDoc, Double> precision = new TableColumn("Precisión");
 		precision.setCellValueFactory(new PropertyValueFactory<>("precision"));
@@ -569,7 +569,7 @@ public class VentanaController implements Initializable{
 		getTablaDatos().setItems(getResultadoDocumentoConsulta(idConsultaSeleccionada, nombreDB));
 
 	}
-	
+
 	/**
 	 * Método que actualiza la tabla de datos con información detallada de una consulta simulada
 	 * @param selectItem Contiene el id de la consulta (TreeItem)
@@ -582,26 +582,26 @@ public class VentanaController implements Initializable{
 		TableColumn<FormatoSimulacion, Boolean> igual = new TableColumn<FormatoSimulacion, Boolean>("¿Igual?");
 		igual.setCellValueFactory(new PropertyValueFactory<>("igual"));
 		igual.setCellFactory(column -> {
-	        return new TableCell<FormatoSimulacion, Boolean>() {
-	            @Override
-	            protected void updateItem(Boolean item, boolean empty){
-	            	super.updateItem(item, empty); 
-	                if (item == null || empty) { 
-	                    setText(null);
-	                    setStyle("");
-	                } else {
-	                    setText(item.toString());
-	                    if (item.equals(true)) {
-	                        setStyle("-fx-background-color: RGB(179,255,179)");
-	                    } else {
-	                    	setStyle("-fx-background-color: RGB(225,179,179)"); 
-	                    }
-	                }
-	            }
-	        };
-	    });
-	
-	
+			return new TableCell<FormatoSimulacion, Boolean>() {
+				@Override
+				protected void updateItem(Boolean item, boolean empty){
+					super.updateItem(item, empty); 
+					if (item == null || empty) { 
+						setText(null);
+						setStyle("");
+					} else {
+						setText(item.toString());
+						if (item.equals(true)) {
+							setStyle("-fx-background-color: RGB(179,255,179)");
+						} else {
+							setStyle("-fx-background-color: RGB(225,179,179)"); 
+						}
+					}
+				}
+			};
+		});
+
+
 		TableColumn<FormatoSimulacion, Integer> idDocumento = new TableColumn("ID Consulta");
 		idDocumento.setCellValueFactory(new PropertyValueFactory<>("idq"));
 
@@ -614,36 +614,36 @@ public class VentanaController implements Initializable{
 		TableColumn<FormatoSimulacion, Boolean> userRelReal = new TableColumn("Relevancia real");
 		userRelReal.setCellValueFactory(new PropertyValueFactory<>("userRelReal"));
 		userRelReal.setCellFactory(column -> {
-	        return new TableCell<FormatoSimulacion, Boolean>() {
-	            @Override
-	            protected void updateItem(Boolean item, boolean empty){
-	            	super.updateItem(item, empty); 
-	                if (item == null || empty) { 
-	                    setText(null);
-	                    setStyle("");
-	                } else {
-	                    setText(item.toString());
-	                    if (item.equals(true)) {
-	                        setStyle("-fx-background-color: RGB(255,255,0)");
-	                    }else{
-		                    setStyle("");
-	                    }
-	                }
-	            }
-	        };
-	    });
+			return new TableCell<FormatoSimulacion, Boolean>() {
+				@Override
+				protected void updateItem(Boolean item, boolean empty){
+					super.updateItem(item, empty); 
+					if (item == null || empty) { 
+						setText(null);
+						setStyle("");
+					} else {
+						setText(item.toString());
+						if (item.equals(true)) {
+							setStyle("-fx-background-color: RGB(255,255,0)");
+						}else{
+							setStyle("");
+						}
+					}
+				}
+			};
+		});
 
 		TableColumn<FormatoSimulacion, Boolean> userRelSim = new TableColumn("Relevancia simualda");
 		userRelSim.setCellValueFactory(new PropertyValueFactory<>("userRelSim"));
 
-	
+
 
 		getTablaDatos().getColumns().clear();
 		getTablaDatos().getColumns().addAll(igual, idDocumento, similitud, sim, userRelReal, userRelSim);
 		getTablaDatos().setItems(getResultadoDocumentoConsultaSimulada(idConsultaSeleccionada, nombreDB));
 
 	}
-	
+
 	/**
 	 * Método que muestra la función en la tabla
 	 * 
@@ -653,7 +653,7 @@ public class VentanaController implements Initializable{
 		//System.out.println("Seleccionado consulta "+ selectItem.getValue());
 		TableColumn<FormatoEcuacion, Integer> numero = new TableColumn("#");
 		numero.setCellValueFactory(new PropertyValueFactory<>("numero"));
-		
+
 		TableColumn<FormatoEcuacion, Double> min = new TableColumn("X min");
 		min.setCellValueFactory(new PropertyValueFactory<>("min"));
 		TableColumn<FormatoEcuacion, Double> max = new TableColumn("X max");
@@ -670,7 +670,7 @@ public class VentanaController implements Initializable{
 					inte.getMin(), inte.getMax(), mapGetEquation.get(nombreDB).getProbabilidades().get(index));
 			lista.add(forEcu);
 		}
-		
+
 		getTablaDatos().setItems(lista);
 
 	}
@@ -693,7 +693,7 @@ public class VentanaController implements Initializable{
 		}
 		return lista;
 	}
-	
+
 	/**
 	 * Metodo que obtiene el resultado detallado de una consulta simulada
 	 * dado el id de la consulta y el nombre del data set
@@ -714,15 +714,15 @@ public class VentanaController implements Initializable{
 		for(FormatoSimulacion fs: getMapSimulador().get(nombreDB).getResultados().get(index)){
 			lista.add(fs);
 		}
-		
-		
+
+
 		return lista;
 	}
-	
+
 	/**
 	 * Método de evento para la generación de la función desde la interfaz grafica
 	 */
-	
+
 	private void generarFuncion(int intervalos){
 		hiloFuncion = new Thread(new Runnable() {
 			@Override
@@ -740,7 +740,7 @@ public class VentanaController implements Initializable{
 				getButtonVerFuncion().setDisable(false);
 				getSliderSensibilidad().setDisable(false);
 				getButtonSimular().setDisable(false);
-				
+
 			}
 		});
 		hiloFuncion.start();
@@ -748,7 +748,7 @@ public class VentanaController implements Initializable{
 	/**
 	 * Método de evento para generar la simulación y sus resultados para mostrarlos en la tabla
 	 */
-	
+
 	private void generarSimulacion(Double sensibilidad){
 		hiloSimulacion = new Thread(new Runnable() {
 			@Override
@@ -757,8 +757,8 @@ public class VentanaController implements Initializable{
 				Simulador simu = new Simulador(getMapDataSets().get(name), getMapGetEquation().get(name));
 				simu.setBar(getCargaS());
 				simu.simular(sensibilidad/100.0);
-				
-				
+
+
 				if(!getMapSimulador().containsKey(getLabelDataSetName().getText())){
 					getMapSimulador().put(name, simu);
 				}else{
@@ -781,11 +781,11 @@ public class VentanaController implements Initializable{
 						Integer totalFalladoTrue= getMapSimulador().get(getTree().getSelectionModel().getSelectedItem().getValue().toString()).getTotalRelevantesFallados();
 						Integer totalTrue = totalFalladoTrue+totalAcertadoTrue;
 						getLavelRelRealValor().setText( (totalAcertadoTrue*100)/(totalTrue.doubleValue())+"%" );
-						
-	
+
+
 					}
 				});
-			
+
 			}
 		});
 		hiloSimulacion.start();
@@ -833,10 +833,10 @@ public class VentanaController implements Initializable{
 	}
 
 
-/**
- * Método que ejecuta el cálculo de matriz de frecuencia y frecuencia inversa 
- * y carga los resultados de cada consulta del data set seleccionado
- */
+	/**
+	 * Método que ejecuta el cálculo de matriz de frecuencia y frecuencia inversa 
+	 * y carga los resultados de cada consulta del data set seleccionado
+	 */
 
 	private void procesarDataSet(){
 
@@ -877,41 +877,40 @@ public class VentanaController implements Initializable{
 				}
 
 				ArrayList<TreeItem<String>> listaDeHijos = new ArrayList<>();
-				if(mapHijosConsultas.containsKey(nombreDB)){
-					listaDeHijos = mapHijosConsultas.get(nombreDB);
-					mapHijosConsultas.get(nombreDB).clear();
-				}else{
+				if(!mapHijosConsultas.containsKey(nombreDB)){
 					mapHijosConsultas.put(nombreDB, listaDeHijos);
+					for(ResultadoQuery rq: dataSet.getResultadosConsultas()){
+						ImageView ico = new ImageView(new Image(getClass().getResource("/queryIcon.png").toExternalForm()));
+						ico.setFitWidth(20);
+						ico.setFitHeight(20);
+						TreeItem<String> itemQuery = new TreeItem<String>("Query "+nombreDB+" ID: "+rq.getIdQuery().toString(),ico);
+						tree.getSelectionModel().getSelectedItem().getChildren().add(itemQuery);
+						listaDeHijos.add(itemQuery);
+					}
+
 				}
-				for(ResultadoQuery rq: dataSet.getResultadosConsultas()){
-					ImageView ico = new ImageView(new Image(getClass().getResource("/queryIcon.png").toExternalForm()));
-					ico.setFitWidth(20);
-					ico.setFitHeight(20);
-					TreeItem<String> itemQuery = new TreeItem<String>("Query "+nombreDB+" ID: "+rq.getIdQuery().toString(),ico);
-					tree.getSelectionModel().getSelectedItem().getChildren().add(itemQuery);
-					listaDeHijos.add(itemQuery);
-				}
+
 				getCargaProcesarConsultas().setProgress(1.0);
 
 				getTree().setDisable(false);
 				enableFunctionControl();
 				getButtonProcesar().setDisable(false);
 				getButtonLeerDataSet().setDisable(false);
-				
+
 				if(getMapGetEquation().containsKey(nombreDB)){
 					getButtonVerFuncion().setDisable(false);
 				}else{
 					getButtonVerFuncion().setDisable(true);
 					getCargaF().setProgress(0);
 				}
-				
+
 				if(getMapSimulador().containsKey(nombreDB)){
 					getToobleButtonVerResultadoS().setDisable(false);
 				}else{
 					getToobleButtonVerResultadoS().setDisable(true);
 					getCargaS().setProgress(0);
 				}
-				
+
 
 			}
 		});
@@ -923,9 +922,9 @@ public class VentanaController implements Initializable{
 	}
 
 
-/**
- * Método que realiza la lectura del data set seleccionado
- */
+	/**
+	 * Método que realiza la lectura del data set seleccionado
+	 */
 	private void leerDataSet(){
 		Thread hiloLeer = new Thread(new Runnable() {
 
@@ -992,7 +991,7 @@ public class VentanaController implements Initializable{
 				}else{
 					return;
 				}
-				
+
 				getCargaLecturaDataSet().setProgress(0);
 
 				ArrayList<Documento> documentos = new ArrayList<>();
