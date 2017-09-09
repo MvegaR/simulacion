@@ -162,6 +162,7 @@ public class VentanaController implements Initializable{
 		getButtonGenerarF().setOnAction(e -> generarFuncion((int)getSliderIntervalos().getValue()));
 		getButtonVerFuncion().setOnAction(e -> tablaFuncion(getLabelDataSetName().getText()));
 		getButtonSimular().setOnAction(e -> generarSimulacion((double)getSliderSensibilidad().getValue()));
+		getToogleButtonVerResultadoS().setOnAction( e -> cambiarIconoConsultasArbol());
 
 
 		ImageView icoFuncion = new ImageView(new Image(getClass().getResource("/FxIcon.png").toExternalForm()));
@@ -232,7 +233,7 @@ public class VentanaController implements Initializable{
 							try {
 								Thread.sleep(100);
 							} catch (InterruptedException e) {
-								// TODO Auto-generated catch block
+
 								e.printStackTrace();
 							}
 						}
@@ -384,9 +385,11 @@ public class VentanaController implements Initializable{
 			disableSimularControl(); 
 		}else if(padre != null && !padre.getValue().equals("DataSets")){
 			if(getToogleButtonVerResultadoS().isSelected() && !getToogleButtonVerResultadoS().isDisable()){
+				cambiarIconoConsultasArbol();
 				tablaConsultaSimulada(selectItem, padre.getValue());
 				cambiarCentroToResumenQuerySimulada(selectItem, padre);
 			}else{
+				cambiarIconoConsultasArbol();
 				tablaConsulta(selectItem, padre.getValue());
 				cambiarCentroToResumenQuery(selectItem, padre);
 			}
@@ -418,7 +421,7 @@ public class VentanaController implements Initializable{
 			getResumenController().getValor4().setText(rq.getTotalDocReleventesDesplegados().toString());
 			getResumenController().getValor5().setText("");
 			getResumenController().getValor6().setText("");
-
+			getResumenController().getTitulo2().setVisible(false);
 
 			getResumenController().getLabelTituloSim().setText("");
 			getResumenController().getTexto11().setText("");
@@ -456,6 +459,7 @@ public class VentanaController implements Initializable{
 			}
 			Simulador simulador = mapSimulador.get(padre.getValue());
 
+			getResumenController().getLabelDataSetName().setText(getTree().getSelectionModel().getSelectedItem().getValue());
 			getResumenController().getLabelTituloSim().setText("Simulación " +getLabelDataSetName().getText());
 			getResumenController().getTexto1().setText("Total relevantes desplegados originales");
 			getResumenController().getTexto2().setText("Total relevantes desplegados simulados");
@@ -478,6 +482,7 @@ public class VentanaController implements Initializable{
 			getResumenController().getValor6().setText
 			(simulador.getResultadosResumen().get(index).getTolerancia().toString());
 			getPanelContenido().setCenter(getResumenController().getResumenDataSet());
+			getResumenController().getTitulo2().setVisible(true);
 
 			getResumenController().getLabelTituloSim().setText("Resumen global simulación");
 			getResumenController().getTexto11().setText("Total fallados");
@@ -781,6 +786,7 @@ public class VentanaController implements Initializable{
 						Integer totalFalladoTrue= getMapSimulador().get(getTree().getSelectionModel().getSelectedItem().getValue().toString()).getTotalRelevantesFallados();
 						Integer totalTrue = totalFalladoTrue+totalAcertadoTrue;
 						getLavelRelRealValor().setText( (totalAcertadoTrue*100)/(totalTrue.doubleValue())+"%" );
+						cambiarIconoConsultasArbol();
 
 
 					}
@@ -1098,6 +1104,22 @@ public class VentanaController implements Initializable{
 
 
 	}
+	public void cambiarIconoConsultasArbol(){
+		for(String s: mapHijosConsultas.keySet()){
+			for(TreeItem<String> t: mapHijosConsultas.get(s)){
+				ImageView ico;
+				if(getToobleButtonVerResultadoS().isSelected() && mapSimulador.containsKey(s)){
+					ico = new ImageView(new Image(getClass().getResource("/simulationIcon.png").toExternalForm()));
+				}else{
+					ico = new ImageView(new Image(getClass().getResource("/queryIcon.png").toExternalForm()));
+				}
+				ico.setFitWidth(20);
+				ico.setFitHeight(20);
+				t.setGraphic(ico);
+			}
+		}
+	}
+
 
 	/**
 	 * @return the tree

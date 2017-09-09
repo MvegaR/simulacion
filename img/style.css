@@ -62,24 +62,24 @@
 
 #frame2 {
     
-    -fx-background-color: linear-gradient(to bottom, rgba(255,180,50,0) 40%, rgba(255,180,50,0.7) 100%);
-      -fx-border-radius: 20;
+    -fx-background-color: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 85%, rgba(255,188,107,1) 100%);
 }
 #frame3 {
    
 }
 
-
 .progress-bar > .bar {
     -fx-background-color: linear-gradient(
         from 0px .75em to .75em 0px,
         repeat,
-        -fx-accent 0%,
-        -fx-accent 49%,
-        derive(-fx-accent, 30%) 50%,
-        derive(-fx-accent, 30%) 99%
+        rgb(253, 151, 31) 0%,
+        rgb(253, 151, 31) 49%,
+        derive(rgb(253, 151, 31), 30%) 50%,
+        derive(rgb(253, 151, 31), 30%) 99%
     );
 }
+
+
 
 //Colores para las tablas de datos
 //fuente: http://acodigo.blogspot.cl/2015/11/estilos-css-para-tableview-javafx.html
