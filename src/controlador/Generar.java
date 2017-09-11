@@ -12,8 +12,7 @@ import modelo.Documento;
 import modelo.Precision;
 import modelo.Relevancia;
 import modelo.ResultadoDataSet;
-import modelo.ResultadoDoc;
-import modelo.ResultadoQuery;
+
 /**
  * Clase principal con método main, y algoritmo para la ejecución 
  * de cada módulo del proyecto paso a paso.
