@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.StackedBarChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -36,109 +39,14 @@
                         </BorderPane>
                         <BorderPane prefHeight="306.0" prefWidth="836.0">
                            <center>
-                              <GridPane prefHeight="195.0" prefWidth="656.0" style="" BorderPane.alignment="CENTER">
-                                 <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="97.0" prefWidth="100.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="103.0" prefWidth="100.0" />
-                                 </columnConstraints>
-                                 <rowConstraints>
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                 </rowConstraints>
-                                 <children>
-                                    <Label fx:id="texto1" alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="333.0" text="texto1" GridPane.rowIndex="2">
-                                       <font>
-                                          <Font name="Times New Roman" size="20.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="texto2" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="114.0" prefHeight="23.0" prefWidth="333.0" text="texto2" GridPane.rowIndex="3">
-                                       <font>
-                                          <Font name="Times New Roman" size="20.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="texto3" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="160.0" prefHeight="23.0" prefWidth="333.0" text="texto3" GridPane.rowIndex="4">
-                                       <font>
-                                          <Font name="Times New Roman" size="20.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="texto4" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="205.0" prefHeight="23.0" prefWidth="333.0" text="texto4" GridPane.rowIndex="5">
-                                       <font>
-                                          <Font name="Times New Roman" size="20.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="valor1" alignment="CENTER" layoutX="10.0" layoutY="114.0" prefHeight="23.0" prefWidth="333.0" text="valor1" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                       <font>
-                                          <Font name="Times New Roman" size="20.0" />
-                                       </font>
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                    </Label>
-                                    <Label fx:id="valor2" alignment="CENTER" layoutX="348.0" layoutY="114.0" prefHeight="23.0" prefWidth="333.0" text="valor2" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                       <font>
-                                          <Font name="Times New Roman" size="20.0" />
-                                       </font>
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                    </Label>
-                                    <Label fx:id="valor3" alignment="CENTER" layoutX="348.0" layoutY="160.0" prefHeight="23.0" prefWidth="333.0" text="valor3" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                                       <font>
-                                          <Font name="Times New Roman" size="20.0" />
-                                       </font>
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                    </Label>
-                                    <Label fx:id="valor4" alignment="CENTER" layoutX="348.0" layoutY="205.0" prefHeight="23.0" prefWidth="333.0" text="valor4" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                                       <font>
-                                          <Font name="Times New Roman" size="20.0" />
-                                       </font>
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                    </Label>
-                                    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" />
-                                    <Label fx:id="texto5" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="162.0" prefHeight="23.0" prefWidth="333.0" text="texto5" GridPane.rowIndex="6">
-                                       <font>
-                                          <Font name="Times New Roman" size="20.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="valor5" alignment="CENTER" layoutX="336.0" layoutY="162.0" prefHeight="23.0" prefWidth="333.0" text="valor5" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                                       <font>
-                                          <Font name="Times New Roman" size="20.0" />
-                                       </font>
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                    </Label>
-                                    <Label fx:id="texto6" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="221.0" prefHeight="23.0" prefWidth="333.0" text="texto6" GridPane.rowIndex="7">
-                                       <font>
-                                          <Font name="Times New Roman" size="20.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="valor6" alignment="CENTER" layoutX="338.0" layoutY="221.0" prefHeight="23.0" prefWidth="333.0" text="valor6" GridPane.columnIndex="1" GridPane.rowIndex="7">
-                                       <font>
-                                          <Font name="Times New Roman" size="20.0" />
-                                       </font>
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                    </Label>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="5.0" top="5.0" />
-                                 </padding>
-                                 <BorderPane.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </BorderPane.margin>
-                              </GridPane>
+                              <StackedBarChart title="TítuloGrafico" BorderPane.alignment="CENTER">
+                                <xAxis>
+                                  <CategoryAxis side="BOTTOM" />
+                                </xAxis>
+                                <yAxis>
+                                  <NumberAxis side="LEFT" />
+                                </yAxis>
+                              </StackedBarChart>
                            </center>
                         </BorderPane>
                         <HBox prefHeight="46.0" prefWidth="676.0" />

@@ -450,10 +450,11 @@ public class VentanaController implements Initializable{
 
 			Integer index = 0;
 			for(ResultadoQuery rqt: mapDataSets.get(padre.getValue()).getResultadosConsultas()){
-				index++;
+				
 				if(rqt.getIdQuery().toString().equals(selectItem.getValue().split(".* ID: ")[1].toString())){
 					break;
 				}
+				index++;
 			}
 			Simulador simulador = mapSimulador.get(padre.getValue());
 
@@ -709,10 +710,11 @@ public class VentanaController implements Initializable{
 		ObservableList<FormatoSimulacion> lista = FXCollections.observableArrayList();
 		Integer index = 0;
 		for(ResultadoQuery rq: mapDataSets.get(nombreDB).getResultadosConsultas()){
-			index++;
+			
 			if(rq.getIdQuery().toString().equals(idQ.toString())){
 				break;
 			}
+			index++;
 		}
 		for(FormatoSimulacion fs: getMapSimulador().get(nombreDB).getResultados().get(index)){
 			lista.add(fs);
