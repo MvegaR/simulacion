@@ -280,10 +280,10 @@
                                                             </Label>
                                                          </center>
                                                          <GridPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" />
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                          </GridPane.margin>
                                                          <padding>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" />
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                          </padding>
                                                       </BorderPane>
                                                       <BorderPane id="title" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
