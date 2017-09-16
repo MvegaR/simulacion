@@ -56,7 +56,6 @@ public class GetEquation {
 	
 	private void generarProbabilidades(){
 		
-		Boolean altamenteRelevane = false;
 		Double maxSim = 0.0;
 		for(ResultadoQuery q: equation.getDataSet().getResultadosConsultas()){
 			for(ResultadoDoc d: q.getResultadosDocumentos()){
@@ -86,14 +85,7 @@ public class GetEquation {
 			}
 			if(contadorDeDocRelevantes!= 0.0){
 				equation.getProbabilidades().add( (contadorDeDocRelevantes * 1.0)/(contadorDeDoc * 1.0));
-				if((contadorDeDocRelevantes * 1.0)/(contadorDeDoc * 1.0) >= 1.0){ 
-					//mayor por que es double, se tiene que considerar el "epsilon de máquina".
-					altamenteRelevane = true;
-				}
 			}
-			/*else if(altamenteRelevane || inte.getMin() > maxSim){
-				equation.getProbabilidades().add(1.0);
-			}*/
 			else{
 				equation.getProbabilidades().add(0.0);
 			}
