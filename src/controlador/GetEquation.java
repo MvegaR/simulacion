@@ -90,9 +90,11 @@ public class GetEquation {
 					//mayor por que es double, se tiene que considerar el "epsilon de máquina".
 					altamenteRelevane = true;
 				}
-			}else if(altamenteRelevane || inte.getMin() > maxSim){
+			}
+			/*else if(altamenteRelevane || inte.getMin() > maxSim){
 				equation.getProbabilidades().add(1.0);
-			}else{
+			}*/
+			else{
 				equation.getProbabilidades().add(0.0);
 			}
 			System.out.println("F(x) para "+inte.getMin().floatValue()+" <= X < "+ inte.getMax().floatValue() +" es: "
