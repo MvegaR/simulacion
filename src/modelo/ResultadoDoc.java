@@ -9,15 +9,23 @@ import java.util.ArrayList;
  *
  */
 public class ResultadoDoc {
-
+	/**ID consulta*/
 	private Integer idQuery;
+	/**ID documento*/
 	private Integer idDoc;
+	/**Distancia del coseno o similitud*/
 	private Double disCos;
+	/**Relevencia (jucio de usuario, puede ser null)*/
 	private Boolean isRel;
+	/**Precisión de la posición o raking del documento para la consulta*/
 	private Double precision;
+	/**Recall, documentosRelevantesDesplegados / documentosRelevantesTotales*/
 	private Double recall;
+	/**total de palabras presentes en la consulta y documento*/
 	private Integer tWords;
+	/**Lista de palabras presentes en la consulta y documento*/
 	private ArrayList<String> words;
+	/***/
 	/**
 	 * Constructor de la clase.
 	 * @param idQuery ID consulta
@@ -25,7 +33,7 @@ public class ResultadoDoc {
 	 * @param disCos Distancia del coseno o similitud
 	 * @param isRel Relevencia (jucio de usuario, puede ser null)
 	 * @param precision Precisión de la posición o raking del documento para la consulta
-	 * @param recall sensibilidad o recall, documentosRelevantesDesplegados / documentosRelevantesTotales
+	 * @param recall Sensibilidad o recall, documentosRelevantesDesplegados / documentosRelevantesTotales
 	 * @param tWords total de palabras presentes en la consulta y documento
 	 *
 	 */

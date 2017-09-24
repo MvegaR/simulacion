@@ -1,13 +1,26 @@
 package modelo;
 
 import java.util.ArrayList;
-
+/**
+ * Clase diseñada para representar a la función de distribución probabilística global
+ * @author Marcos
+ *
+ */
 public class DistributionEquation {
-	
+	/** Intervalos @see {@link ProbabilisticInterval} */
 	private ArrayList<ProbabilisticInterval> intervalos;
+	/** Lista de valores de probabilidad*/
 	private ArrayList<Double> probabilidades;
+	/** Cantidad de intervalos de la función */
 	private Integer cantidadIntervalos;
+	/** referencia del ranking original para trabajar */
 	private ResultadoDataSet dataSet;
+	
+	/**
+	 * Constructor de la clase
+	 * @param cantidadIntervalos Cantidad de intervalos
+	 * @param dataSet Data set a utilizar
+	 */
 	
 	public DistributionEquation(Integer cantidadIntervalos, ResultadoDataSet dataSet) {
 		super();

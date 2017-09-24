@@ -6,7 +6,11 @@ import modelo.ProbabilisticInterval;
 import modelo.ResultadoDataSet;
 import modelo.ResultadoDoc;
 import modelo.ResultadoQuery;
-
+/**
+ * Clase controladora que cumple la función de generar la función de distribución probabilistica global
+ * @author Marcos
+ *
+ */
 public class GetEquation {
 
 

@@ -1,53 +1,49 @@
 package modelo;
-
+/**
+ * Clase diseñada para representar un intervalo con un mínimo y un máximo 
+ * como estructura básica para la función de distribución de probabilidad 
+ * global a generar.
+ * @author Marcos
+ *
+ */
 public class ProbabilisticInterval {
-	
 	private Double min;
 	private Double max;
-	
+	/**
+	 * Contructor de la clase
+	 * @param min Valor mínimo del intervalo
+	 * @param max Valor máximo del intervalo
+	 */
 	public ProbabilisticInterval(Double min, Double max) {
 		super();
 		this.min = min;
 		this.max = max;
 		
 	}
-
-	
 	/**
 	 * @return the min
 	 */
 	public Double getMin() {
 		return min;
 	}
-
-
-
 	/**
 	 * @param min the min to set
 	 */
 	public void setMin(Double min) {
 		this.min = min;
 	}
-
-
-
 	/**
 	 * @return the max
 	 */
 	public Double getMax() {
 		return max;
 	}
-
-
-
 	/**
 	 * @param max the max to set
 	 */
 	public void setMax(Double max) {
 		this.max = max;
 	}
-
-
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
@@ -60,9 +56,6 @@ public class ProbabilisticInterval {
 		result = prime * result + ((min == null) ? 0 : min.hashCode());
 		return result;
 	}
-
-
-
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
@@ -88,14 +81,9 @@ public class ProbabilisticInterval {
 		return true;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "ProbabilisticInterval [min=" + min + ", max=" + max + "]";
 	}
-	
-	
-	
 
 }

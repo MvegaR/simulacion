@@ -14,8 +14,9 @@ import modelo.Relevancia;
 import modelo.ResultadoDataSet;
 
 /**
- * Clase principal con método main, y algoritmo para la ejecución 
- * de cada módulo del proyecto paso a paso.
+ * Clase principal con método main (usado en la primera iteración del proyecto, en la segunda iteración
+ * se usa un método main presente en otra clase que corresponde a la interfaz grafica), 
+ * y algoritmo para la ejecución de cada módulo del proyecto paso a paso.
  * Incluye método para la lectura del fichero de palabras comunes
  * @author Marcos
  */
@@ -27,7 +28,7 @@ public class Generar {
 	private static ArrayList<ResultadoDataSet> resultadosDataSet = new ArrayList<>();
 
 	/**
-	 * Método main
+	 * Método main (primera iteración, usado solo para depurar)
 	 * @param args Sin uso.
 	 */
 
@@ -36,7 +37,7 @@ public class Generar {
 		//palabras comunes (se uso en todas ya que mejora la precisión, pero es de cran)
 		File palabrasComunesFile = new File("files"+fsp+"cacm"+fsp+"common_words");
 		//Archivos BD CACM
-		/*/
+		//*/
 		File documentosFileCACM = new File("files"+fsp+"cacm"+fsp+"cacm.all");
 		File consultasFileCACM = new File("files"+fsp+"cacm"+fsp+"query.text");
 		File relevanciasFileCACM = new File("files"+fsp+"cacm"+fsp+"qrels.text");
@@ -45,7 +46,7 @@ public class Generar {
 				consultasFileCACM, relevanciasFileCACM, palabrasComunesFile, "CACM");
 		//*/
 		//Archivos BD MED
-		/*/
+		//*/
 		File documentosFileMED = new File("files"+fsp+"med"+fsp+"MED.ALL");
 		File consultasFileMED = new File("files"+fsp+"med"+fsp+"MED.QRY");
 		File relevanciasFileMED = new File("files"+fsp+"med"+fsp+"MED.REL");
@@ -62,7 +63,7 @@ public class Generar {
 				consultasFileCRAN, relevanciasFileCRAN, palabrasComunesFile, "CRAN");
 		//*/
 		// Archivos DB CISI
-		/*/
+		//*/
 		File documentosFileCISI = new File("files"+fsp+"cisi"+fsp+"CISI.all");
 		File consultasFileCISI = new File("files"+fsp+"cisi"+fsp+"CISI.qry");
 		File relevanciasFileCISI = new File("files"+fsp+"cisi"+fsp+"CISI.rel");
@@ -70,7 +71,7 @@ public class Generar {
 				consultasFileCISI, relevanciasFileCISI, palabrasComunesFile, "CISI");
 		//*/
 		//Archivos BD LISA
-		/*/
+		//*/
 		ArrayList<File> documentosFilesLisa = new ArrayList<>();
 		documentosFilesLisa.add(new File("files"+fsp+"lisa"+fsp+"LISA0.501"));
 		documentosFilesLisa.add(new File("files"+fsp+"lisa"+fsp+"LISA1.501"));
@@ -87,7 +88,7 @@ public class Generar {
 		//*/
 		//Encontradas en internet
 		//Archivos BD ADI
-		/*/
+		//*/
 		File documentosFileADI = new File("files"+fsp+"adi"+fsp+"ADI.ALL");
 		File consultasFileADI = new File("files"+fsp+"adi"+fsp+"ADI.QRY");
 		File relevanciasFileADI = new File("files"+fsp+"adi"+fsp+"ADI.REL");
@@ -108,7 +109,7 @@ public class Generar {
 
 
 		//Archivos BD TIME
-		/*/
+		//*/
 		File documentosFileTIME = new File("files"+fsp+"time"+fsp+"TIME.ALL");
 		File consultasFileTIME= new File("files"+fsp+"time"+fsp+"TIME.QUE");
 		File relevanciasFileTIME = new File("files"+fsp+"time"+fsp+"TIME.REL");
@@ -119,11 +120,11 @@ public class Generar {
 		//*/
 
 		//Archivos BD ISWC2015
+		//La más pequeña
 		/*/
 		File documentosFileISWC2015 = new File("files"+fsp+"iswc2015"+fsp+"docs.txt");
 		File consultasFileISWC2015= new File("files"+fsp+"iswc2015"+fsp+"qrys.txt");
 		File relevanciasFileISWC2015 = new File("files"+fsp+"iswc2015"+fsp+"rel.txt");
-
 		getPrecisiones(null,documentosFileISWC2015, 
 				consultasFileISWC2015, relevanciasFileISWC2015, palabrasComunesFile, "ISWC2015");
 		//*/

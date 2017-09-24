@@ -7,9 +7,13 @@ package modelo;
  */
 public class FormatoEcuacion {
 	
+	/** Número de intervalo*/
 	private Integer numero;
+	/** Valor mínimo del intervalo incluyente */
 	private Double min;
+	/** Valor máximo del intervalo excluyente */
 	private Double max;
+	/** Valor de la probabilidad del intervalo*/
 	private Double valor;
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
@@ -58,6 +62,13 @@ public class FormatoEcuacion {
 			return false;
 		return true;
 	}
+	/**
+	 * Constructor de la clase
+	 * @param numero Número del intervalo
+	 * @param min Valor mínimo incluyente
+	 * @param max Valor máximo excluyente
+	 * @param valor Valor de la probabilidad
+	 */
 	public FormatoEcuacion(Integer numero, Double min, Double max, Double valor) {
 		super();
 		this.numero = numero;

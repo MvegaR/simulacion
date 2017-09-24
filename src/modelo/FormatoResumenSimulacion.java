@@ -5,14 +5,28 @@ package modelo;
  *
  */
 public class FormatoResumenSimulacion {
-	
+	/** Total relevantes desplegados */
 	private Integer totalDesplegadosOriginales;
+	/** Total relevantes simulados */
 	private Integer totalDesplegadosSimulados;
+	/** Total relevantes originales y simulados */
 	private Integer totalSimuladosYOriginales;
+	/** Total acertados */
 	private Integer totalAcertados;
+	/** Total fallados*/
 	private Integer totalFallados;
+	/** Tolerancia utilizada */
 	private Double tolerancia;
 	
+	/**
+	 * 
+	 * @param totalDesplegadosOriginales Total relevantes desplegados en el ranking original
+	 * @param totalDesplegadosSimulados Total relevantes simulados
+	 * @param totalSimuladosYOriginales Total de relevantes originales y simulados
+	 * @param totalAcertados Total acertartados
+	 * @param totalFallados Total fallados
+	 * @param tolerancia Tolerancia utilizada en la simulación
+	 */
 	
 	public FormatoResumenSimulacion(Integer totalDesplegadosOriginales, Integer totalDesplegadosSimulados,
 			Integer totalSimuladosYOriginales, Integer totalAcertados, Integer totalFallados, Double tolerancia) {
