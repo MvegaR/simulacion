@@ -382,6 +382,7 @@ public class VentanaController implements Initializable{
 			disableFunctionControl();
 			disableSimularControl(); 
 		}else if(padre != null && !padre.getValue().equals("DataSets")){
+			System.out.println(padre.getValue());
 			if(getToogleButtonVerResultadoS().isSelected() && mapSimulador.containsKey(padre.getValue())){
 				cambiarIconoConsultasArbol();
 				tablaConsultaSimulada(selectItem, padre.getValue());
