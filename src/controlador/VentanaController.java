@@ -138,7 +138,7 @@ public class VentanaController implements Initializable{
 
 		TreeItem<String> rootItem = new TreeItem<String> ("DataSets", null);
 		for(String s: dataSets){
-			ImageView ico = new ImageView(new Image(getClass().getResource("/dbicon.png").toExternalForm()));
+			ImageView ico = new ImageView(new Image(VentanaController.class.getClassLoader().getResource("img/dbicon.png").toExternalForm()));
 			ico.setFitWidth(20);
 			ico.setFitHeight(20);
 			TreeItem<String> itemDataSet = new TreeItem<String>(s, ico);
@@ -163,33 +163,33 @@ public class VentanaController implements Initializable{
 		getToogleButtonVerResultadoS().setOnAction( e -> cambiarIconoConsultasArbol());
 
 
-		ImageView icoFuncion = new ImageView(new Image(getClass().getResource("/FxIcon.png").toExternalForm()));
+		ImageView icoFuncion = new ImageView(new Image(VentanaController.class.getClassLoader().getResource("img/FxIcon.png").toExternalForm()));
 		icoFuncion.setFitWidth(25);
 		icoFuncion.setFitHeight(25);
 		buttonGenerarF.setGraphic(icoFuncion);
 
-		ImageView icoSim = new ImageView(new Image(getClass().getResource("/simulationIcon.png").toExternalForm()));
+		ImageView icoSim = new ImageView(new Image(VentanaController.class.getClassLoader().getResource("img/simulationIcon.png").toExternalForm()));
 		icoSim.setFitWidth(25);
 		icoSim.setFitHeight(25);
 		buttonSimular.setGraphic(icoSim);
 
-		ImageView proceIcon = new ImageView(new Image(getClass().getResource("/procesarIcon.png").toExternalForm()));
+		ImageView proceIcon = new ImageView(new Image(VentanaController.class.getClassLoader().getResource("img/procesarIcon.png").toExternalForm()));
 		proceIcon.setFitWidth(25);
 		proceIcon.setFitHeight(25);
 		getButtonProcesar().setGraphic(proceIcon);
 
-		ImageView leerIcon = new ImageView(new Image(getClass().getResource("/leerIcon.png").toExternalForm()));
+		ImageView leerIcon = new ImageView(new Image(VentanaController.class.getClassLoader().getResource("img/leerIcon.png").toExternalForm()));
 		leerIcon.setFitWidth(25);
 		leerIcon.setFitHeight(25);
 		getButtonLeerDataSet().setGraphic(leerIcon);
 
-		ImageView verEcuIcon = new ImageView(new Image(getClass().getResource("/verEcuIcon.png").toExternalForm()));
+		ImageView verEcuIcon = new ImageView(new Image(VentanaController.class.getClassLoader().getResource("img/verEcuIcon.png").toExternalForm()));
 		verEcuIcon.setFitWidth(25);
 		verEcuIcon.setFitHeight(25);
 		getButtonVerFuncion().setGraphic(verEcuIcon);
 
 
-		ImageView verSimuIcon = new ImageView(new Image(getClass().getResource("/verIcon.png").toExternalForm()));
+		ImageView verSimuIcon = new ImageView(new Image(VentanaController.class.getClassLoader().getResource("img/verIcon.png").toExternalForm()));
 		verSimuIcon.setFitWidth(25);
 		verSimuIcon.setFitHeight(25);
 		getToobleButtonVerResultadoS().setGraphic(verSimuIcon);
@@ -887,7 +887,7 @@ public class VentanaController implements Initializable{
 				if(!mapHijosConsultas.containsKey(nombreDB)){
 					mapHijosConsultas.put(nombreDB, listaDeHijos);
 					for(ResultadoQuery rq: dataSet.getResultadosConsultas()){
-						ImageView ico = new ImageView(new Image(getClass().getResource("/queryIcon.png").toExternalForm()));
+						ImageView ico = new ImageView(new Image(VentanaController.class.getClassLoader().getResource("img/queryIcon.png").toExternalForm()));
 						ico.setFitWidth(20);
 						ico.setFitHeight(20);
 						TreeItem<String> itemQuery = new TreeItem<String>("Query "+nombreDB+" ID: "+rq.getIdQuery().toString(),ico);
@@ -998,6 +998,7 @@ public class VentanaController implements Initializable{
 				}else{
 					return;
 				}
+
 
 				getCargaLecturaDataSet().setProgress(0);
 
@@ -1110,9 +1111,9 @@ public class VentanaController implements Initializable{
 			for(TreeItem<String> t: mapHijosConsultas.get(s)){
 				ImageView ico;
 				if(getToobleButtonVerResultadoS().isSelected() && mapSimulador.containsKey(s)){
-					ico = new ImageView(new Image(getClass().getResource("/simulationIcon.png").toExternalForm()));
+					ico = new ImageView(new Image(VentanaController.class.getClassLoader().getResource("img/simulationIcon.png").toExternalForm()));
 				}else{
-					ico = new ImageView(new Image(getClass().getResource("/queryIcon.png").toExternalForm()));
+					ico = new ImageView(new Image(VentanaController.class.getClassLoader().getResource("img/queryIcon.png").toExternalForm()));
 				}
 				ico.setFitWidth(20);
 				ico.setFitHeight(20);

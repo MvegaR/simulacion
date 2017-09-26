@@ -33,6 +33,7 @@ public class Generar {
 	 */
 
 	public static void main(String[] args) {
+	
 		String fsp = System.getProperty("file.separator").toString();
 		//palabras comunes (se uso en todas ya que mejora la precisión, pero es de cran)
 		File palabrasComunesFile = new File("files"+fsp+"cacm"+fsp+"common_words");
@@ -102,7 +103,6 @@ public class Generar {
 		File documentosFileNPL = new File("files"+fsp+"npl"+fsp+"doc-text");
 		File consultasFileNPL= new File("files"+fsp+"npl"+fsp+"query-text");
 		File relevanciasFileNPL = new File("files"+fsp+"npl"+fsp+"rlv-ass");
-
 		getPrecisiones(null,documentosFileNPL, 
 				consultasFileNPL, relevanciasFileNPL, palabrasComunesFile, "NPL");
 		//*/
@@ -128,6 +128,7 @@ public class Generar {
 		getPrecisiones(null,documentosFileISWC2015, 
 				consultasFileISWC2015, relevanciasFileISWC2015, palabrasComunesFile, "ISWC2015");
 		//*/
+
 
 
 	}

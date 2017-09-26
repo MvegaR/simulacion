@@ -23,9 +23,8 @@
 /* Estilo de botón seleccionado */
 #bevel-grey:selected {
       -fx-background-color: 
-        linear-gradient(#aeaeae, #9b9b9b),
-        linear-gradient(#fcfcfc 0%, #d9d9d9 20%, #d6d6d6 100%),
-        linear-gradient(#aeaeae 0%, #f6f6f6 80%);
+         linear-gradient(to bottom, rgba(255,255,255,1) 0%, 
+         rgba(255,255,255,1) 51%, rgba(145,232,66,1) 100%);
     -fx-background-radius: 8,7,6;
     -fx-background-insets: 0,1,2;
     -fx-text-fill: black;
