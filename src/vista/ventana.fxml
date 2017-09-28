@@ -69,7 +69,7 @@
                                                    <children>
                                                       <BorderPane id="title" prefHeight="200.0" prefWidth="200.0">
                                                          <center>
-                                                            <Label fx:id="labelDataSetName" alignment="CENTER" prefHeight="37.0" prefWidth="373.0" text="DataSetName" BorderPane.alignment="CENTER">
+                                                            <Label fx:id="labelDataSetName" alignment="CENTER" prefHeight="37.0" prefWidth="373.0" text="Seleccione un DataSet" BorderPane.alignment="CENTER">
                                                                <font>
                                                                   <Font name="Times New Roman Bold" size="32.0" />
                                                                </font>
@@ -79,35 +79,27 @@
                                                             <Insets />
                                                          </GridPane.margin>
                                                       </BorderPane>
-                                                      <Label alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="333.0" text="Cantidad de documentos" GridPane.rowIndex="2">
+                                                      <Label alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="934.0" text="Cantidad de documentos" GridPane.rowIndex="2">
                                                          <font>
                                                             <Font name="Times New Roman" size="20.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="114.0" prefHeight="23.0" prefWidth="333.0" text="Cantidad de consultas" GridPane.rowIndex="3">
+                                                      <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="114.0" prefHeight="23.0" prefWidth="1215.0" text="Cantidad de consultas" GridPane.rowIndex="3">
                                                          <font>
                                                             <Font name="Times New Roman" size="20.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="160.0" prefHeight="23.0" prefWidth="333.0" text="Palabras totales comunes" GridPane.rowIndex="4">
+                                                      <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="160.0" prefHeight="23.0" prefWidth="1214.0" text="Palabras totales comunes" GridPane.rowIndex="4">
                                                          <font>
                                                             <Font name="Times New Roman" size="20.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="205.0" prefHeight="23.0" prefWidth="333.0" text="Palabras totales sin repetir no comunes" GridPane.rowIndex="5">
+                                                      <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="205.0" prefHeight="23.0" prefWidth="1218.0" text="Palabras totales sin repetir no comunes" GridPane.rowIndex="5">
                                                          <font>
                                                             <Font name="Times New Roman" size="20.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label fx:id="labelCantidadDocumentos" alignment="CENTER" layoutX="10.0" layoutY="114.0" prefHeight="23.0" prefWidth="333.0" text="0000" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                                         <font>
-                                                            <Font name="Times New Roman" size="20.0" />
-                                                         </font>
-                                                         <opaqueInsets>
-                                                            <Insets />
-                                                         </opaqueInsets>
-                                                      </Label>
-                                                      <Label fx:id="labelCantidadConsultas" alignment="CENTER" layoutX="348.0" layoutY="114.0" prefHeight="23.0" prefWidth="333.0" text="0000" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                      <Label fx:id="labelCantidadDocumentos" alignment="CENTER" layoutX="10.0" layoutY="114.0" prefHeight="23.0" prefWidth="1000.0" text="0000" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                                          <font>
                                                             <Font name="Times New Roman" size="20.0" />
                                                          </font>
@@ -115,7 +107,7 @@
                                                             <Insets />
                                                          </opaqueInsets>
                                                       </Label>
-                                                      <Label fx:id="labelPalabrasTotalesComunes" alignment="CENTER" layoutX="348.0" layoutY="160.0" prefHeight="23.0" prefWidth="333.0" text="0000" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                      <Label fx:id="labelCantidadConsultas" alignment="CENTER" layoutX="348.0" layoutY="114.0" prefHeight="23.0" prefWidth="1000.0" text="0000" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                                          <font>
                                                             <Font name="Times New Roman" size="20.0" />
                                                          </font>
@@ -123,7 +115,15 @@
                                                             <Insets />
                                                          </opaqueInsets>
                                                       </Label>
-                                                      <Label fx:id="labelPalabrasTotalesNoComunes" alignment="CENTER" layoutX="348.0" layoutY="205.0" prefHeight="23.0" prefWidth="333.0" text="0000" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                                      <Label fx:id="labelPalabrasTotalesComunes" alignment="CENTER" layoutX="348.0" layoutY="160.0" prefHeight="23.0" prefWidth="1000.0" text="0000" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                         <font>
+                                                            <Font name="Times New Roman" size="20.0" />
+                                                         </font>
+                                                         <opaqueInsets>
+                                                            <Insets />
+                                                         </opaqueInsets>
+                                                      </Label>
+                                                      <Label fx:id="labelPalabrasTotalesNoComunes" alignment="CENTER" layoutX="348.0" layoutY="205.0" prefHeight="23.0" prefWidth="1000.0" text="0000" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                                          <font>
                                                             <Font name="Times New Roman" size="20.0" />
                                                          </font>
@@ -133,45 +133,45 @@
                                                       </Label>
                                                       <BorderPane id="title" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                                                          <center>
-                                                            <ProgressBar id="bar" fx:id="cargaLecturaDataSet" prefHeight="27.0" prefWidth="201.0" progress="0.0" BorderPane.alignment="CENTER">
+                                                            <ProgressBar id="bar" fx:id="cargaLecturaDataSet" prefHeight="27.0" prefWidth="1360.0" progress="0.0" BorderPane.alignment="CENTER">
                                                                <effect>
                                                                   <MotionBlur />
                                                                </effect>
                                                                <BorderPane.margin>
-                                                                  <Insets />
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                </BorderPane.margin>
                                                             </ProgressBar>
                                                          </center>
                                                          <right>
                                                             <Button id="bevel-grey" fx:id="buttonLeerDataSet" mnemonicParsing="false" text="Leer Data Set" BorderPane.alignment="CENTER">
                                                                <BorderPane.margin>
-                                                                  <Insets right="20.0" />
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                </BorderPane.margin>
                                                             </Button>
                                                          </right>
                                                       </BorderPane>
                                                       <Separator prefWidth="200.0" GridPane.rowIndex="1" />
                                                       <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                      <Label alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="333.0" text="Procesar consultas, defina valor p@" GridPane.rowIndex="6">
+                                                      <Label alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="1216.0" text="Procesar consultas, defina valor p@" GridPane.rowIndex="6">
                                                          <font>
                                                             <Font name="Times New Roman" size="20.0" />
                                                          </font>
                                                       </Label>
-                                                      <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                                                         <center>
-                                                            <Spinner id="bevel-grey" fx:id="spinnerPin" editable="false" initialValue="30" max="100" min="1" prefHeight="25.0" prefWidth="110.0" BorderPane.alignment="CENTER">
-                                                               <BorderPane.margin>
-                                                                  <Insets left="20.0" />
-                                                               </BorderPane.margin>
-                                                            </Spinner>
-                                                         </center>
+                                                      <BorderPane prefHeight="35.0" prefWidth="1048.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                                          <right>
-                                                            <Button id="bevel-grey" fx:id="buttonProcesar" mnemonicParsing="false" text="Procesar" BorderPane.alignment="CENTER">
+                                                            <Button id="bevel-grey" fx:id="buttonProcesar" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" text="Procesar" BorderPane.alignment="CENTER">
                                                                <BorderPane.margin>
                                                                   <Insets right="20.0" />
                                                                </BorderPane.margin>
                                                             </Button>
                                                          </right>
+                                                         <center>
+                                                            <Spinner id="bevel-grey" fx:id="spinnerPin" editable="false" initialValue="30" max="100" min="1" prefHeight="25.0" prefWidth="111.0" BorderPane.alignment="CENTER_RIGHT">
+                                                               <BorderPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="40.0" top="5.0" />
+                                                               </BorderPane.margin>
+                                                            </Spinner>
+                                                         </center>
                                                       </BorderPane>
                                                    </children>
                                                    <padding>
@@ -180,7 +180,7 @@
                                                 </GridPane>
                                              </center>
                                              <bottom>
-                                                <ProgressBar id="bar" fx:id="cargaProcesarConsultas" prefHeight="23.0" prefWidth="750.0" progress="0.0" BorderPane.alignment="CENTER">
+                                                <ProgressBar id="bar" fx:id="cargaProcesarConsultas" prefHeight="23.0" prefWidth="1619.0" progress="0.0" BorderPane.alignment="CENTER">
                                                    <effect>
                                                       <MotionBlur />
                                                    </effect>
@@ -217,36 +217,42 @@
                                                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                          </GridPane.margin>
                                                       </Slider>
-                                                      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="333.0" text="Cantidad de intervalos de la función" GridPane.rowIndex="1">
+                                                      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="774.0" text="Cantidad de intervalos de la función" GridPane.rowIndex="1">
                                                          <font>
                                                             <Font name="Times New Roman" size="20.0" />
                                                          </font>
                                                       </Label>
                                                       <Button id="bevel-grey" fx:id="buttonGenerarF" mnemonicParsing="false" text="Generar función con 100 intervalos" GridPane.rowIndex="3" />
-                                                      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="333.0" text="Sensibilidad de la simulación" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                                      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="774.0" text="Sensibilidad de la simulación" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                                          <font>
                                                             <Font name="Times New Roman" size="20.0" />
                                                          </font>
                                                       </Label>
                                                       <Slider fx:id="sliderSensibilidad" blockIncrement="1.0" layoutX="15.0" layoutY="91.0" majorTickUnit="10.0" minorTickCount="10" prefHeight="38.0" prefWidth="272.0" showTickLabels="true" showTickMarks="true" value="50.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                                                       <Button id="bevel-grey" fx:id="buttonVerFuncion" mnemonicParsing="false" text="Ver función de distribución probabística global generada" GridPane.rowIndex="5" />
-                                                      <ProgressBar id="bar" fx:id="cargaF" prefHeight="27.0" prefWidth="328.0" progress="0.0" GridPane.rowIndex="4">
+                                                      <ProgressBar id="bar" fx:id="cargaF" prefHeight="27.0" prefWidth="1083.0" progress="0.0" GridPane.rowIndex="4">
                                                          <effect>
                                                             <MotionBlur />
                                                          </effect>
+                                                         <GridPane.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </GridPane.margin>
                                                       </ProgressBar>
-                                                      <ProgressBar id="bar" fx:id="cargaS" layoutX="15.0" layoutY="147.0" prefHeight="27.0" prefWidth="328.0" progress="0.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                                      <ProgressBar id="bar" fx:id="cargaS" layoutX="15.0" layoutY="147.0" prefHeight="27.0" prefWidth="1493.0" progress="0.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
                                                          <effect>
                                                             <MotionBlur />
                                                          </effect>
+                                                         <GridPane.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </GridPane.margin>
                                                       </ProgressBar>
                                                       <ToggleButton id="bevel-grey" fx:id="toogleButtonVerResultadoS" mnemonicParsing="false" text="Ver resultados simualación por consulta" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                                                      <Label fx:id="labelRelAcertadas" alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="333.0" text="Relevancias acertadas en simulación: " GridPane.rowIndex="7">
+                                                      <Label fx:id="labelRelAcertadas" alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="745.0" text="Relevancias acertadas en simulación: " GridPane.rowIndex="7">
                                                          <font>
                                                             <Font name="Times New Roman" size="20.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label fx:id="labelRelAcertadasReal" alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="296.0" prefHeight="23.0" prefWidth="333.0" text="Relevancias &quot;true&quot; acertadas:" GridPane.rowIndex="8">
+                                                      <Label fx:id="labelRelAcertadasReal" alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="296.0" prefHeight="23.0" prefWidth="908.0" text="Relevancias &quot;true&quot; acertadas:" GridPane.rowIndex="8">
                                                          <font>
                                                             <Font name="Times New Roman" size="20.0" />
                                                          </font>
@@ -273,7 +279,7 @@
                                                       <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                                                       <BorderPane id="title" prefHeight="200.0" prefWidth="200.0">
                                                          <center>
-                                                            <Label fx:id="labelDataSetName111" alignment="CENTER" text="Función" BorderPane.alignment="CENTER">
+                                                            <Label fx:id="labelDataSetName111" alignment="CENTER" prefHeight="29.0" prefWidth="892.0" text="Función" BorderPane.alignment="CENTER">
                                                                <font>
                                                                   <Font name="Times New Roman Bold" size="26.0" />
                                                                </font>
@@ -288,7 +294,7 @@
                                                       </BorderPane>
                                                       <BorderPane id="title" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                                                          <center>
-                                                            <Label fx:id="labelDataSetName11" alignment="CENTER" text="Simulación" BorderPane.alignment="CENTER">
+                                                            <Label fx:id="labelDataSetName11" alignment="CENTER" prefHeight="29.0" prefWidth="671.0" text="Simulación" BorderPane.alignment="CENTER">
                                                                <font>
                                                                   <Font name="Times New Roman Bold" size="26.0" />
                                                                </font>
@@ -362,7 +368,7 @@
          <right>
             <ImageView fitHeight="77.0" fitWidth="295.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
-                  <Image url="@/img/logo_ici.png"  />
+                  <Image url="@/img/logo_ici.png" />
                </image>
                <BorderPane.margin>
                   <Insets right="20.0" />

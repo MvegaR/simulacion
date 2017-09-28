@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class MainVentana extends Application {
@@ -18,9 +19,9 @@ public class MainVentana extends Application {
 	}
 	@Override
 	public void start(Stage windows) throws IOException {
-		String fsp = System.getProperty("file.separator").toString();
 		ResumenQueryController resumenController = null;
 		VentanaController ventanaController = null;
+		windows.getIcons().add(new Image(MainVentana.class.getResourceAsStream("/img/functionIcon.png")));
 		try {
 			
 			FXMLLoader loader = new FXMLLoader();
