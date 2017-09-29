@@ -1,7 +1,7 @@
-锘縫ackage modelo;
+package modelo;
 /**
  * 
- * Clase dise帽ada para almacenar la precisi贸n de una determinada consulta,
+ * Clase dise馻da para almacenar la precisi髇 de una determinada consulta,
  * cantidad de documentos relevantes de la consulta, valor p@ utilizado.
  * @author Marcos
  *
@@ -9,18 +9,18 @@
 public class Precision {
 	/** Identificador de la consulta */
 	Integer idConsulta;
-	/** Precisi贸n calculada de la consulta */
+	/** Precisi髇 calculada de la consulta */
 	Double precision;
 	/** Cantidad de documentos relevantes para la consulta */
 	Integer documentosRelevantes;
-	/** N煤mero de documentos m谩ximos a desplegar y a incluir en el c谩lculo de precisi贸n */
+	/** N鷐ero de documentos m醲imos a desplegar y a incluir en el c醠culo de precisi髇 */
 	Integer pIn;
 	/**
 	 * Constructor clase Precision
 	 * @param idConsulta Identificador de la consulta
 	 * @param precision precision de la consulta
 	 * @param documentosRelevantes cantidad de documentos relevantes en la consulta
-	 * @param pIn N煤mero de documentos m谩ximos a desplegar y a incluir en el c谩lculo de precisi贸n 
+	 * @param pIn N鷐ero de documentos m醲imos a desplegar y a incluir en el c醠culo de precisi髇 
 	 */
 	public Precision(Integer idConsulta, Double precision, Integer documentosRelevantes, Integer pIn) {
 		this.idConsulta = idConsulta;
@@ -43,14 +43,14 @@ public class Precision {
 		this.idConsulta = idConsulta;
 	}
 	/**
-	 * Entrega la precisi贸n
-	 * @return Precisi贸n, valor Real.
+	 * Entrega la precisi髇
+	 * @return Precisi髇, valor Real.
 	 */
 	public Double getPrecision() {
 		return precision;
 	}
 	/**
-	 * Cambia el valor de la precisi贸n
+	 * Cambia el valor de la precisi髇
 	 * @param precision nuevo valor
 	 */
 	public void setPrecision(Double precision) {

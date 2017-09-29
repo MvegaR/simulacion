@@ -523,7 +523,7 @@ public class VentanaController implements Initializable{
 	/**
 	 * Método que actualiza la tabla de datos con información detallada de una consulta
 	 * @param selectItem Contiene el id de la consulta (TreeItem)
-	 * @param padre Contiene el nombre de del data set (TreeItem)
+	 * @param nombreDB Contiene el nombre de del data set (TreeItem)
 	 */
 	@SuppressWarnings("unchecked")
 	private void tablaConsulta(TreeItem<String> selectItem, String nombreDB){
@@ -578,7 +578,7 @@ public class VentanaController implements Initializable{
 	/**
 	 * Método que actualiza la tabla de datos con información detallada de una consulta simulada
 	 * @param selectItem Contiene el id de la consulta (TreeItem)
-	 * @param padre Contiene el nombre de del data set (TreeItem)
+	 * @param nombreDB Contiene el nombre de del data set (TreeItem)
 	 */
 	@SuppressWarnings("unchecked")
 	private void tablaConsultaSimulada(TreeItem<String> selectItem, String nombreDB){
@@ -651,7 +651,7 @@ public class VentanaController implements Initializable{
 
 	/**
 	 * Método que muestra la función en la tabla
-	 * 
+	 * @param nombreDB Nombre del data set
 	 */
 	@SuppressWarnings("unchecked")
 	private void tablaFuncion(String nombreDB){
@@ -727,6 +727,7 @@ public class VentanaController implements Initializable{
 
 	/**
 	 * Método de evento para la generación de la función desde la interfaz grafica
+	 * @param intervalos Intervalos de la función
 	 */
 
 	private void generarFuncion(int intervalos){
@@ -753,6 +754,7 @@ public class VentanaController implements Initializable{
 	}
 	/**
 	 * Método de evento para generar la simulación y sus resultados para mostrarlos en la tabla
+	 * @param sensibilidad Sensibilidad seleccionada para la simulación 
 	 */
 
 	private void generarSimulacion(Double sensibilidad){
@@ -1173,7 +1175,7 @@ public class VentanaController implements Initializable{
 	}
 
 	/**
-	 * @param dataSetName the dataSetName to set
+	 * @param labelDataSetName the dataSetName to set
 	 */
 	public void setLabelDataSetName(Label labelDataSetName) {
 		this.labelDataSetName = labelDataSetName;
@@ -1418,7 +1420,7 @@ public class VentanaController implements Initializable{
 	}
 
 	/**
-	 * @param buttonVerResultadoS the buttonVerResultadoS to set
+	 * @param toogleButtonVerResultadoS the buttonVerResultadoS to set
 	 */
 	public void setToobleButtonVerResultadoS(ToggleButton toogleButtonVerResultadoS) {
 		this.toogleButtonVerResultadoS = toogleButtonVerResultadoS;

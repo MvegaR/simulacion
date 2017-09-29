@@ -97,7 +97,8 @@ public class Matrices {
 	 * @param q Consulta a calcular precisión
 	 * @param p Valor de p@
 	 * @param precisiones Lista para almazenar las precisiones y utilizarlas con su respectivos idDocumentos y p@
-	 * @param variable para activar o desactivar impresion por terminal
+	 * @param dataSet Puntero al data set para trabajar
+	 * @param output Para activar o desactivar impresion por terminal
 	 * @exception NullPointerException - ArrayList precisiones no puede ser nulo.
 	 */
 	public void obtenerPrecision(Consulta q, Integer p, ArrayList<Precision> precisiones, ResultadoDataSet dataSet, 
@@ -486,6 +487,7 @@ public class Matrices {
 	 * log10(totalDocumentos/totalDocumentosQueTieneLaPalabra<b>S</b>
 	 * si en la matriz de frecuencias tiene el valor de cero no se realiza 
 	 * cálculo se se agrega un 0 a la lista.
+	 * @param bar Barra de progreso para la interfaz grafica puede ser null
 	 */
 	public void obtenerFrecuenciasInversas(ProgressBar bar){
 		// log(totalDocumeºntos/cantidadOcurrenciasEnTodosLosDocumentos)

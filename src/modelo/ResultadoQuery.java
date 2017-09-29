@@ -4,11 +4,12 @@ import java.util.ArrayList;
 /**
  * Clase diseñada para almacenar los resultados de cada una de las consultas luego del análisis de relevancia
  * con el valor p@ (pIn) utilizado, el identificador de la consulta, la lista de resultados por cada documento 
- * @see {@link ResultadoQuery}, precisión promedio resultante, valor de sensibilidad promedio y total de documentos
+ * , precisión promedio resultante, valor de sensibilidad promedio y total de documentos
  * relevantes para esa consulta conocidos y total de documentos relevantes desplegados en el resultado.
  * @author Marcos
  *
  */
+
 public class ResultadoQuery {
 	
 	private Integer pIn;

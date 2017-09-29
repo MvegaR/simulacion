@@ -7,33 +7,55 @@ import modelo.ResultadoDataSet;
 import modelo.ResultadoDoc;
 import modelo.ResultadoQuery;
 /**
- * Clase controladora que cumple la funci�n de generar la funci�n de distribuci�n probabilistica global
+ * Clase controladora que realiza la generación de la función de distribución probabilistica global
  * @author Marcos
  *
  */
 public class GetEquation {
 
-
+	/**
+	 * Ecuación de distribución a generar
+	 */
 	private DistributionEquation equation;
+	/**
+	 * Barra de carga de la interfaz gráfica
+	 */
 	private ProgressBar barraDeCarga = null;
+	
+	/**
+	 * Constructor para la generación de la función de distribución de probabilidad gobal
+	 * @param cantidadIntervalos La cantidad de intervalos de la función a generarar
+	 * @param dataSet Puntero al data set a procesar
+	 */
 	
 	public GetEquation(Integer cantidadIntervalos, ResultadoDataSet dataSet){
 		if(cantidadIntervalos == null || cantidadIntervalos <= 0){
-			System.out.println("Cantidad intervalos invalido, se usar� 100 por defecto");
+			System.out.println("Cantidad intervalos invalido, se usará 100 por defecto");
 			cantidadIntervalos = 100;
 		}
 		equation = new DistributionEquation(cantidadIntervalos, dataSet);
 		
 	}
+	/**
+	 * Constructor de la clase
+	 * @param cantidadIntervalos La cantidad de interbalos de la función a generarar
+	 * @param dataSet Puntero al data set a procesar
+	 * @param barraDeCarga Barra de carga de la interfaz gráfica
+	 */
 	public GetEquation(Integer cantidadIntervalos, ResultadoDataSet dataSet, ProgressBar barraDeCarga){
 		if(cantidadIntervalos == null || cantidadIntervalos <= 0){
-			System.out.println("Cantidad intervalos invalido, se usar� 100 por defecto");
+			System.out.println("Cantidad intervalos invalido, se usará 100 por defecto");
 			cantidadIntervalos = 100;
 		}
 		equation = new DistributionEquation(cantidadIntervalos, dataSet);
 		this.barraDeCarga = barraDeCarga;
 		
 	}
+	
+	/**
+	 * Método para la generación de la función de distribución de probabilidad gobal
+	 * @return Retorna una función de distribución de probabilidad Ver: {@link DistributionEquation}
+	 */
 	
 	public DistributionEquation generarEquation(){
 		
@@ -44,9 +66,12 @@ public class GetEquation {
 		
 	}
 	
+	/**
+	 * Método privado para la generación de los intervalos 
+	 */
 	private void generarIntervalos(){
 		Double intervalo = 1.0/equation.getCantidadIntervalos();
-		//incluir primero, excluir �ltimo
+		//incluir primero, excluir �ltimo
 		for(Double i = 0.0; i < 1.0; i+= intervalo){
 			equation.getIntervalos().add(new ProbabilisticInterval(i, (i+intervalo)));
 			if(barraDeCarga != null){
@@ -57,7 +82,9 @@ public class GetEquation {
 			barraDeCarga.setProgress(0.33);
 		}
 	}
-	
+	/**
+	 * Método privado para la generación de las probabilidades de cada intervalo
+	 */
 	private void generarProbabilidades(){
 		
 		Double maxSim = 0.0;
@@ -125,10 +152,18 @@ public class GetEquation {
 	public void setEquation(DistributionEquation equation) {
 		this.equation = equation;
 	}
-	
+	/**
+	 * 
+	 * @param barraDeCarga La barra de carga
+	 */
 	public void setBarraDeCarga(ProgressBar barraDeCarga) {
 		this.barraDeCarga = barraDeCarga;
 	}
+	
+	/**
+	 * 
+	 * @return Barra de carga de la gráfica
+	 */
 	public ProgressBar getBarraDeCarga() {
 		return barraDeCarga;
 	}

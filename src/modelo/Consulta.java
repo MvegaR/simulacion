@@ -1,4 +1,4 @@
-﻿package modelo;
+package modelo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -17,13 +17,13 @@ public class Consulta {
 	private String query; //.W
 	/** Autores de la consulta, en el proyecto no se utilizó pero se encuentra presente en el archivo */
 	private ArrayList<String> autores; //.A ?
-	/** Identificador más detallado de la consulta, no se utilizó 
+	/** Identificador más detallado de la consulta, no se utilizó
 	 * en el proyecto pero se encuentra presente en el archivo */
 	private String fullId; //.N ?
-	/** Palabras válidas presentes en la consulta en una lista enlazada */
+	/** Palabras v�lidas presentes en la consulta en una lista enlazada */
 	private LinkedList<String> palabrasValidas;
 	/**
-	 * Constructor consulta, inicialización de variables.
+	 * Constructor consulta, inicializaci�n de variables.
 	 */
 	public Consulta() {
 		this.id = 0;
@@ -180,7 +180,7 @@ public class Consulta {
 	/**
 	 * Solo para BD Time: Obtiene las consultas desde un archivo de texto 
 	 * y rellena una lista entregada por parámetro de consultas generadas.
-	 * @param origenes Archivo de texto con las consultas
+	 * @param origen Archivo de texto con las consultas
 	 * @param consultas Lista de consultas a rellenar
 	 */
 	public static void generarConsultasTime(File origen, ArrayList<Consulta> consultas){

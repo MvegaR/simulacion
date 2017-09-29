@@ -105,11 +105,14 @@ public class FormatoResumenSimulacion {
 		return tolerancia;
 	}
 	/**
-	 * @param tolerencia the tolerencia to set
+	 * 
+	 * @param tolerancia Tolerancia de la simulación
 	 */
+	
 	public void setTolerancia(Double tolerancia) {
 		this.tolerancia = tolerancia;
 	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
