@@ -11,6 +11,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * Clase controladora de la escena gráfica que despliega el resumen 
+ * de una consulta o simulación en la ventana del proyecto
+ * - Cada atributo corresponde a un elemento gráfico-
+ */
 public class ResumenQueryController implements Initializable{
 
 	@FXML

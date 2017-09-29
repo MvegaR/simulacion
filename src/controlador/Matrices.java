@@ -487,7 +487,7 @@ public class Matrices {
 	 * log10(totalDocumentos/totalDocumentosQueTieneLaPalabra<b>S</b>
 	 * si en la matriz de frecuencias tiene el valor de cero no se realiza 
 	 * cálculo se se agrega un 0 a la lista.
-	 * @param bar Barra de progreso para la interfaz grafica puede ser null
+	 * @param bar Barra de progreso JavaFX para la interfaz gráfica puede ser null
 	 */
 	public void obtenerFrecuenciasInversas(ProgressBar bar){
 		// log(totalDocumeºntos/cantidadOcurrenciasEnTodosLosDocumentos)

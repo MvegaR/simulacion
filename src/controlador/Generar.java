@@ -214,8 +214,6 @@ public class Generar {
 		}
 		resultadosDataSet.add(dataSet); //guardando en la lista
 
-		eureqa(dataSet, 0.5, 10);
-
 		/*
 		GetEquation generadorEcuacion = new GetEquation(1000, dataSet);
 
@@ -238,31 +236,6 @@ public class Generar {
 		return precisiones;
 	}
 
-	public static void eureqa(ResultadoDataSet dataSet, Double tol, Integer q){
-		Integer cantidadDeGrupos = dataSet.getTotalConsultas()/q;
-		Integer Pin = dataSet.getResultadosConsultas().get(0).getpIn();
-		for(Integer i = 0; i < cantidadDeGrupos; i++){
-			System.out.println("Grupo "+(i+1)+" de "+cantidadDeGrupos);
-			for(Integer d = 0; d < Pin; d++){
-				Integer contadorRelevantes = 0;
-				Integer contadorNoRelevantes = 0;
-				for(Integer qi = 0; qi < q && ( (qi+1) + ((i+1)*q) ) <= dataSet.getTotalConsultas(); qi++){
-					//((qi+1) + ((i+1)*q))-1)
-					if(dataSet.getResultadosConsultas().get(qi).getResultadosDocumentos().get(d).getIsRel()){
-						contadorRelevantes++;
-					}else{
-						contadorNoRelevantes++;
-					}
-				}
-				Double resultado = contadorRelevantes.doubleValue()/(contadorRelevantes+contadorNoRelevantes);
-				System.out.println(resultado+"\t"+ (tol <= resultado ? "1":"0"));
-				
-			}
-			System.out.println("Fin grupo "+(i+1));
-
-		}
-
-	}
 
 
 

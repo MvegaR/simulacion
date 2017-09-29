@@ -1,6 +1,6 @@
 package modelo;
 /**
- * Clase para formatear tabla de la interfaz grafica para 
+ * Clase para formatear tabla de la interfaz gráfica para 
  * desplegar los intervalos de la ecuación
  * @author Marcos
  *

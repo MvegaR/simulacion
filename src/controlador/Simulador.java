@@ -9,21 +9,38 @@ import modelo.ProbabilisticInterval;
 import modelo.ResultadoDataSet;
 import modelo.ResultadoDoc;
 import modelo.ResultadoQuery;
-
+/**
+ * Clase que entrega los métodos para realizar una simulación 
+ * dado una ecuación de distribución de probabilidad.
+ * @author Marcos
+ *
+ */
 public class Simulador {
-
+	/** Base de datos original */
 	private ResultadoDataSet dataSetOriginal;
+	/** Base de datos despues de la simulación*/
 	private ResultadoDataSet dataSetSimulado;
+	/** Ecuación de distribución de probabilidad global a utilizar*/
 	private DistributionEquation equation;
+	/**Valor de la tolerancia a utilizar en la simulación*/
 	private Double tolerancia;
+	/**Barra gráfica de carga JavaFX para desplegar el proceso de simulación*/
 	private ProgressBar bar;
+	/** Resultados para ser desplegados en la ventana gráfica en la sección de datos*/
 	private ArrayList<ArrayList<FormatoSimulacion>> resultados;
+	/** Resultados para ser desplegados en la sección central*/
 	private ArrayList<FormatoResumenSimulacion> resultadosResumen;
+	/** Total de juicios de usuarios fallados en la simulación*/
 	private Integer totalGlobalFallados;
+	/** Total de juicios de usuario acertados en la simulación*/
 	private Integer totalGlobalAcertados;
+	/** Total de relevantes (por archivo de relevancia) acertados en la simulación*/
 	private Integer totalRelevantesFallados;
+	/** total relevancias (por archivo de relevencia) fallados en la simulación*/
 	private Integer totalGlobalRealesYSimulados;
+	/** Total relevantes (true) desplegados en el ranking original*/
 	private Integer ttotalRelevantesDesplegados;
+	/** Total relevantes desplegados en la simulación*/
 	private Integer ttotalRelevantesSimuladosDesplegados;
 
 
@@ -141,44 +158,6 @@ public class Simulador {
 
 	}
 
-
-	/**
-	 * Método para Imprimir y comparar simulacion para copiar a un excel
-	 */
-	public void imprimirParaExcelComparacion(){
-		Integer TtotalRelevantesDesplegados = 0;
-		Integer TtotalRelevantesSimuladosDesplegados = 0;
-		for(Integer i = 0; i < getDataSetOriginal().getResultadosConsultas().size(); i++){
-			Integer totalRelevantesRealesSimulados = 0;
-			for(Integer k = 0; 
-					k < getDataSetOriginal().getResultadosConsultas().get(i).getResultadosDocumentos().size(); k++){
-				ResultadoDoc resD = getDataSetOriginal().getResultadosConsultas().get(i).getResultadosDocumentos().get(k);
-				ResultadoDoc resSimD = getDataSetSimulado().getResultadosConsultas().get(i).getResultadosDocumentos().get(k);
-				Boolean igual = resD.getIsRel().equals(resSimD.getIsRel());
-				Integer idQ = resD.getIdQuery();
-				Integer idDoc = resD.getIdDoc();
-				Double disCos = resD.getDisCos();
-				Boolean relReal = resD.getIsRel();
-				Boolean relSimu = resSimD.getIsRel();
-				System.out.println(igual+"\t"+idQ+"\t"+idDoc+"\t"+disCos+"\t"+relReal+"\t"+relSimu);
-				if(resD.getIsRel() && resSimD.getIsRel()){
-					totalRelevantesRealesSimulados++;
-				}
-			}
-			Integer totalDesplegadosOriginales = getDataSetOriginal().getResultadosConsultas().get(i).getTotalDocReleventesDesplegados();
-			Integer totalDesplegadosSimulados = getDataSetSimulado().getResultadosConsultas().get(i).getTotalDocReleventesDesplegados();
-			System.out.println("Total desplegados originales"+"\t" + totalDesplegadosOriginales);
-
-			System.out.println("Total desplegados simulados"+"\t"+ totalDesplegadosSimulados);
-			System.out.println("Total relevantes originales y simulados\t"+totalRelevantesRealesSimulados);
-			System.out.println("Tolerancia utilizada"+"\t"+tolerancia);
-			TtotalRelevantesDesplegados+=totalDesplegadosOriginales;
-			TtotalRelevantesSimuladosDesplegados+=totalRelevantesRealesSimulados;
-			System.out.println("");
-			System.out.println("");
-		}
-		System.out.println(TtotalRelevantesSimuladosDesplegados*100/TtotalRelevantesDesplegados);
-	}
 
 	/**
 	 * Determina la relevancia del documento para la similitud entregada

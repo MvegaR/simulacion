@@ -11,26 +11,31 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-
+/**
+ * Clase principal final (Con método main con interfaz gráfica).
+ * @author Marcos
+ *
+ */
 public class MainVentana extends Application {
 
 	public static void main(String[] args) {
 		launch(args);
 	}
+
 	@Override
 	public void start(Stage windows) throws IOException {
 		ResumenQueryController resumenController = null;
 		VentanaController ventanaController = null;
 		windows.getIcons().add(new Image(MainVentana.class.getResourceAsStream("/img/functionIcon.png")));
 		try {
-			
+
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("resumenQuery.fxml"));
 			Parent root = (Parent) loader.load();
-			
+
 			resumenController = (ResumenQueryController) loader.getController();
 
-		
+
 			Scene scene = new Scene(root);
 
 			scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
@@ -53,12 +58,12 @@ public class MainVentana extends Application {
 			scene.getStylesheets().add(this.getClass().getResource("/css/style.css").toExternalForm());
 			windows.setTitle("Proyecto título - Obtención de una función de distribución probabilística "
 					+ "global para simular juicios de usuario - Por: Marcos Vega - 2017");
-			
+
 
 			windows.setScene(scene);
 			windows.show();
 			windows.setMaximized(true);
-		
+
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

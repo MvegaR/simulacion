@@ -40,7 +40,12 @@ import modelo.ResultadoDataSet;
 import modelo.ResultadoDoc;
 import modelo.ResultadoQuery;
 
-
+/**
+ * Clase controladora de la ventana principal
+ * Contiene eventos de cada botón y elemento de control y navegación de la gráfica
+ * @author Marcos
+ *
+ */
 
 @SuppressWarnings("rawtypes")
 public class VentanaController implements Initializable{
@@ -132,6 +137,10 @@ public class VentanaController implements Initializable{
 	/** hilo de generar simulación */
 	private Thread hiloSimulacion;
 
+	/**
+	 * Método que se ejecuta previamente a desplegar la escena gráfica en JavaFX
+	 * Contiene la carga inicial y la asignación de eventos a los elementos gráficos. 
+	 */
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -197,54 +206,7 @@ public class VentanaController implements Initializable{
 
 
 	}
-	/*
-	private void buscarMejor(){
-		new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				//getBotonBuscar().setDisable(true);
-				Double max = 0.0;
-				for(int i = 1; i <= 100;){
-					for(int j = 1; j <= 10000;){
-						if(hiloFuncion!=null && hiloFuncion.getState()==Thread.State.TERMINATED 
-								&& hiloSimulacion != null && hiloSimulacion.getState()==Thread.State.TERMINATED){
-							Integer totalAcertado = getMapSimulador().get(getTree().getSelectionModel().getSelectedItem().getValue().toString()).getTotalGlobalAcertados();
-							Integer totalFallado= getMapSimulador().get(getTree().getSelectionModel().getSelectedItem().getValue().toString()).getTotalGlobalFallados();
-							Integer total = totalFallado+totalAcertado;
-							Integer totalAcertadoTrue = getMapSimulador().get(getTree().getSelectionModel().getSelectedItem().getValue().toString()).getTotalGlobalRealesYSimulados();
-							Integer totalFalladoTrue= getMapSimulador().get(getTree().getSelectionModel().getSelectedItem().getValue().toString()).getTotalRelevantesFallados();
-							Integer totalTrue = totalFalladoTrue+totalAcertadoTrue;
-							Double t1 = (double)totalAcertado/(double)total;
-							Double t2 = (double)totalAcertadoTrue/(double)totalTrue;
-							if(max.compareTo(t2) < 0){
-								getSliderIntervalos().valueProperty().set(j);
-								getSliderSensibilidad().valueProperty().set(i);
-								max = t2;
-							}
-							generarFuncion(j);
-							generarSimulacion((double)i);
-							i++;
-							j+=100;
-						}else{
-
-							try {
-								Thread.sleep(100);
-							} catch (InterruptedException e) {
-
-								e.printStackTrace();
-							}
-						}
-
-					}
-				}
-
-			}
-		}).start();;
-
-	}
-	 */
-
+	
 	/**
 	 * Método de evento de slider de intervalos
 	 */

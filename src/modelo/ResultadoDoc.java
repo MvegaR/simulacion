@@ -3,7 +3,7 @@ package modelo;
 import java.util.ArrayList;
 /**
  * Clase diseñada para almacenar los resultados de los documentos de una consulta, con id de la consulta, id documento
- * distancia conseno, precisión, sensibilidad (recall), número total de palabras y una lista con las palabras
+ * distancia coseno, precisión, sensibilidad (recall), número total de palabras y una lista con las palabras
  * presentes en la consulta y documento
  * @author Marcos
  *

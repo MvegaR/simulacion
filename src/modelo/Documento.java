@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
 /**
- * Clase de documentos
  * Realiza la lectura de un archivo de texto que entrega identificador, título y cuerpo del documento, 
  * el resto de atributos no se utilizaron en el proyecto pero estaban presentes en la base de datos,
  * se asegura una lectura total del archivo documentos.
