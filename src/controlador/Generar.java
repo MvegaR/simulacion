@@ -15,7 +15,7 @@ import modelo.ResultadoDataSet;
 
 /**
  * Clase principal con método main (usado en la primera iteración del proyecto, en la segunda iteración
- * se usa un método main presente en otra clase que corresponde a la interfaz grafica), 
+ * se usa un método main presente en otra clase que corresponde a la interfaz gráfica), 
  * y algoritmo para la ejecución de cada módulo del proyecto paso a paso.
  * Incluye método para la lectura del fichero de palabras comunes
  * @author Marcos

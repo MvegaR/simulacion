@@ -217,19 +217,19 @@
                                                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                          </GridPane.margin>
                                                       </Slider>
-                                                      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="774.0" text="Cantidad de intervalos de la funci髇" GridPane.rowIndex="1">
+                                                      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="774.0" text="Cantidad de intervalos de la funci贸n" GridPane.rowIndex="1">
                                                          <font>
                                                             <Font name="Times New Roman" size="20.0" />
                                                          </font>
                                                       </Label>
-                                                      <Button id="bevel-grey" fx:id="buttonGenerarF" mnemonicParsing="false" text="Generar funci髇 con 100 intervalos" GridPane.rowIndex="3" />
-                                                      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="774.0" text="Sensibilidad de la simulaci髇" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                                      <Button id="bevel-grey" fx:id="buttonGenerarF" mnemonicParsing="false" text="Generar funci贸n con 100 intervalos" GridPane.rowIndex="3" />
+                                                      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="774.0" text="Sensibilidad de la simulaci贸n" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                                          <font>
                                                             <Font name="Times New Roman" size="20.0" />
                                                          </font>
                                                       </Label>
                                                       <Slider fx:id="sliderSensibilidad" blockIncrement="1.0" layoutX="15.0" layoutY="91.0" majorTickUnit="10.0" minorTickCount="10" prefHeight="38.0" prefWidth="272.0" showTickLabels="true" showTickMarks="true" value="50.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                                      <Button id="bevel-grey" fx:id="buttonVerFuncion" mnemonicParsing="false" text="Ver funci髇 de distribuci髇 probab韘tica global generada" GridPane.rowIndex="5" />
+                                                      <Button id="bevel-grey" fx:id="buttonVerFuncion" mnemonicParsing="false" text="Ver funci铆n de distribuci贸n probab铆stica global generada" GridPane.rowIndex="5" />
                                                       <ProgressBar id="bar" fx:id="cargaF" prefHeight="27.0" prefWidth="1083.0" progress="0.0" GridPane.rowIndex="4">
                                                          <effect>
                                                             <MotionBlur />
@@ -246,8 +246,8 @@
                                                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                          </GridPane.margin>
                                                       </ProgressBar>
-                                                      <ToggleButton id="bevel-grey" fx:id="toogleButtonVerResultadoS" mnemonicParsing="false" text="Ver resultados simualaci髇 por consulta" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                                                      <Label fx:id="labelRelAcertadas" alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="745.0" text="Relevancias acertadas en simulaci髇: " GridPane.rowIndex="7">
+                                                      <ToggleButton id="bevel-grey" fx:id="toogleButtonVerResultadoS" mnemonicParsing="false" text="Ver resultados simualaci贸n por consulta" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                                      <Label fx:id="labelRelAcertadas" alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="745.0" text="Relevancias acertadas en simulaci贸n: " GridPane.rowIndex="7">
                                                          <font>
                                                             <Font name="Times New Roman" size="20.0" />
                                                          </font>
@@ -279,7 +279,7 @@
                                                       <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                                                       <BorderPane id="title" prefHeight="200.0" prefWidth="200.0">
                                                          <center>
-                                                            <Label fx:id="labelDataSetName111" alignment="CENTER" prefHeight="29.0" prefWidth="892.0" text="Funci髇" BorderPane.alignment="CENTER">
+                                                            <Label fx:id="labelDataSetName111" alignment="CENTER" prefHeight="29.0" prefWidth="892.0" text="Funci贸n" BorderPane.alignment="CENTER">
                                                                <font>
                                                                   <Font name="Times New Roman Bold" size="26.0" />
                                                                </font>
@@ -294,7 +294,7 @@
                                                       </BorderPane>
                                                       <BorderPane id="title" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                                                          <center>
-                                                            <Label fx:id="labelDataSetName11" alignment="CENTER" prefHeight="29.0" prefWidth="671.0" text="Simulaci髇" BorderPane.alignment="CENTER">
+                                                            <Label fx:id="labelDataSetName11" alignment="CENTER" prefHeight="29.0" prefWidth="671.0" text="Simulaci贸n" BorderPane.alignment="CENTER">
                                                                <font>
                                                                   <Font name="Times New Roman Bold" size="26.0" />
                                                                </font>
@@ -356,7 +356,7 @@
             </ImageView>
          </left>
          <center>
-            <Label id="tituloProyecto" alignment="CENTER" contentDisplay="CENTER" prefHeight="128.0" prefWidth="986.0" text="&quot;OBTENCI覰 DE UNA FUNCI覰 DE DISTRIBUCI覰 PROBABIL蚐TICA GLOBAL PARA SIMULAR JUICIOS DE USUARIO&quot;" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+            <Label id="tituloProyecto" alignment="CENTER" contentDisplay="CENTER" prefHeight="128.0" prefWidth="986.0" text="&quot;OBTENCI脫N DE UNA FUNCI脫N DE DISTRIBUCI脫N PROBABIL脥STICA GLOBAL PARA SIMULAR JUICIOS DE USUARIO&quot;" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
                <font>
                   <Font name="Times New Roman" size="19.0" />
                </font>
