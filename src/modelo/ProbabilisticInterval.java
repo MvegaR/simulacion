@@ -10,7 +10,7 @@ public class ProbabilisticInterval {
 	private Double min;
 	private Double max;
 	/**
-	 * Contructor de la clase
+	 * Constructor de la clase
 	 * @param min Valor mínimo del intervalo
 	 * @param max Valor máximo del intervalo
 	 */

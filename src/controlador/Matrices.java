@@ -17,15 +17,14 @@ import modelo.ResultadoDataSet;
 import modelo.ResultadoDoc;
 import modelo.ResultadoQuery;
 /**
- * Incluye los métodos para calcular las matrices de frecuencia y frecuencia inversa
+ * Clase local que relaciona un documento con un determinado 
+ * valor de similitud calculado, para poder ordenar de mayor 
+ * a menor por similitud sin perder la referencia del documento
+ * Incluye los métodos para cálcular las matrices de frecuencia y frecuencia inversa
  *  @author Marcos
  */
 public class Matrices {
-	/**
-	 * Clase local que relaciona un documento con un determinado 
-	 * valor de similitud calculado, para poder ordenar de mayor 
-	 * a menor por similitud sin perder la referencia del documento
-	 */
+
 	class Similitud{
 		/** valor de similitud */
 		private Double valor;
@@ -94,7 +93,7 @@ public class Matrices {
 	}
 	/**
 	 * Obtiene la precisión de cada documento para la consulta q con un p@ entregado por parámetro
-	 * @param q Consulta a calcular precisión
+	 * @param q Consulta a cálcular precisión
 	 * @param p Valor de p@
 	 * @param precisiones Lista para almazenar las precisiones y utilizarlas con su respectivos idDocumentos y p@
 	 * @param dataSet Puntero al data set para trabajar
@@ -410,7 +409,7 @@ public class Matrices {
 	 * Método que rellena la matriz con las frecuencias de las 
 	 * palabras (set de palabras) con una barra opcional de carga
 	 * para la interfaz de usuario, de cada documento con una barra
-	 * de carga para la interfaz grafica (opcional).
+	 * de carga para la interfaz gráfica (opcional).
 	 * Por cada documento <b>d</b> de la lista de documentos 
 	 * (excluyendo documentos sin cuerpo o sin palabras), 
 	 * se crea una <b>lista</b> y se agrega a la lista de listas 
@@ -496,7 +495,7 @@ public class Matrices {
 		for(Documento d: documentos){
 			if(bar!=null){bar.setProgress(0.33+ (((count++))/documentos.size())/3);}
 			if(d != null && !d.getPalabrasValidas().isEmpty()){//quitando documentos sin cuerpo ni título
-				
+
 				ArrayList<Double> lista = new ArrayList<>();
 				matrizFrecunciasInversas.add(lista);
 				lista.add(d.getId()*1.0);  //agregando id documento al inicio de cada lista (como double)
@@ -525,7 +524,7 @@ public class Matrices {
 	 * por cada palabra <b>s</b> si la consulta <b>q</b> contiene la palabra <b>s</b> se calcula 
 	 * log10(cantidadDocumentos/totalDocumentosQuetenga<b>S</b>)
 	 * si la consulta no tiene la palabra se agrega 0 a la lista.
-	 * @param q Consulta a calcular similitud
+	 * @param q Consulta a cálcular similitud
 	 * @return Lista de similitudes de cada documento 
 	 */
 	public ArrayList<Similitud> calculoSimilitud(Consulta q){

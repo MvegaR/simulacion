@@ -15,7 +15,7 @@ import modelo.ResultadoDataSet;
 
 /**
  * Clase principal con método main (usado en la primera iteración del proyecto, en la segunda iteración
- * se usa un método main presente en otra clase que corresponde a la interfaz gráfica), 
+ * se usa un método main en el paquete "vista" que corresponde a la interfaz gráfica), 
  * y algoritmo para la ejecución de cada módulo del proyecto paso a paso.
  * Incluye método para la lectura del fichero de palabras comunes
  * @author Marcos
@@ -98,16 +98,6 @@ public class Generar {
 				consultasFileADI, relevanciasFileADI, palabrasComunesFile, "ADI");
 		//*/
 
-		//Archivos BD NPL (No usar, muy grande)
-		/*/
-		File documentosFileNPL = new File("files"+fsp+"npl"+fsp+"doc-text");
-		File consultasFileNPL= new File("files"+fsp+"npl"+fsp+"query-text");
-		File relevanciasFileNPL = new File("files"+fsp+"npl"+fsp+"rlv-ass");
-		getPrecisiones(null,documentosFileNPL, 
-				consultasFileNPL, relevanciasFileNPL, palabrasComunesFile, "NPL");
-		//*/
-
-
 		//Archivos BD TIME
 		//*/
 		File documentosFileTIME = new File("files"+fsp+"time"+fsp+"TIME.ALL");
@@ -121,7 +111,7 @@ public class Generar {
 
 		//Archivos BD ISWC2015
 		//La más pequeña
-		/*/
+		//*/
 		File documentosFileISWC2015 = new File("files"+fsp+"iswc2015"+fsp+"docs.txt");
 		File consultasFileISWC2015= new File("files"+fsp+"iswc2015"+fsp+"qrys.txt");
 		File relevanciasFileISWC2015 = new File("files"+fsp+"iswc2015"+fsp+"rel.txt");

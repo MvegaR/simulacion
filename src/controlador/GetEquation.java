@@ -38,7 +38,7 @@ public class GetEquation {
 	}
 	/**
 	 * Constructor de la clase
-	 * @param cantidadIntervalos La cantidad de interbalos de la función a generarar
+	 * @param cantidadIntervalos La cantidad de intervalos de la función a generar
 	 * @param dataSet Puntero al data set a procesar
 	 * @param barraDeCarga Barra de carga de la interfaz gráfica
 	 */
@@ -53,7 +53,7 @@ public class GetEquation {
 	}
 	
 	/**
-	 * Método para la generación de la función de distribución de probabilidad gobal
+	 * Método para la generación de la función de distribución de probabilidad global
 	 * @return Retorna una función de distribución de probabilidad Ver: {@link DistributionEquation}
 	 */
 	

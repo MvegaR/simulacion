@@ -41,8 +41,8 @@ import modelo.ResultadoDoc;
 import modelo.ResultadoQuery;
 
 /**
- * Clase controladora de la ventana principal
- * Contiene eventos de cada botón y elemento de control y navegación de la gráfica
+ * Clase controladora de la ventana principal.
+ * Contiene eventos de cada botón y elemento de control y navegación de la gráfica.
  * @author Marcos
  *
  */
@@ -115,23 +115,23 @@ public class VentanaController implements Initializable{
     private Button botonBuscar;
 	 */
 	/** Map para acceder a un resultado de datos dado el nombre del dataSet */
-	private HashMap<String, ResultadoDataSet> mapDataSets = new HashMap<>();
+	private HashMap <String, ResultadoDataSet> mapDataSets = new HashMap<>();
 	/**  Map para acceder a un resultado de datos de la simulacion dado el nombre del dataSet*/
-	private HashMap<String, Simulador> mapSimulador = new HashMap<>();
+	private HashMap <String, Simulador> mapSimulador = new HashMap<>();
 	/**  Map para acceder a un resultado de datos de la función dado el nombre del dataSet*/
-	private HashMap<String, DistributionEquation> mapGetEquation = new HashMap<>();
+	private HashMap <String, DistributionEquation> mapGetEquation = new HashMap<>();
 	/**  Map para acceder a un resultado de documentos dado el nombre del dataSet*/
-	private HashMap<String, ArrayList<Documento>> mapDocumentos = new HashMap<>();
+	private HashMap <String, ArrayList <Documento>> mapDocumentos = new HashMap<>();
 	/**  Map para acceder a un resultado de consultas dado el nombre del dataSet*/
-	private HashMap<String, ArrayList<Consulta>> mapConsultas = new HashMap<>();
+	private HashMap <String, ArrayList <Consulta>> mapConsultas = new HashMap<>();
 	/**  Map para acceder a un resultado de palabras comunes dado el nombre del dataSet*/
-	private HashMap<String, ArrayList<String>> mapPalabrasComunes = new HashMap<>();
+	private HashMap <String, ArrayList <String>> mapPalabrasComunes = new HashMap<>();
 	/**  Map para acceder a un resultado de relevancias dado el nombre del dataSet*/
-	private HashMap<String, ArrayList<Relevancia>> mapRelevancias = new HashMap<>();
+	private HashMap <String, ArrayList <Relevancia>> mapRelevancias = new HashMap<>();
 	/**  Map para acceder a un resultado de palabras válidas dado el nombre del dataSet*/
-	private HashMap<String, SortedSet<String>> MapSetDePalabras = new HashMap<>();
+	private HashMap <String, SortedSet <String>> MapSetDePalabras = new HashMap<>();
 	/**  Map para recordar puntero de los ítems de consultas de una consulta para poder quitarlos si es necesario*/
-	private HashMap<String, ArrayList<TreeItem<String>>> mapHijosConsultas = new HashMap<>();
+	private HashMap <String, ArrayList <TreeItem<String>>> mapHijosConsultas = new HashMap<>();
 	/** hilo de generar función */
 	private Thread hiloFuncion;
 	/** hilo de generar simulación */
@@ -147,7 +147,9 @@ public class VentanaController implements Initializable{
 
 		TreeItem<String> rootItem = new TreeItem<String> ("DataSets", null);
 		for(String s: dataSets){
-			ImageView ico = new ImageView(new Image(VentanaController.class.getClassLoader().getResource("img/dbicon.png").toExternalForm()));
+			ImageView ico = new ImageView(
+					new Image(VentanaController.class.getClassLoader()
+							.getResource("img/dbicon.png").toExternalForm()));
 			ico.setFitWidth(20);
 			ico.setFitHeight(20);
 			TreeItem<String> itemDataSet = new TreeItem<String>(s, ico);
@@ -172,33 +174,39 @@ public class VentanaController implements Initializable{
 		getToogleButtonVerResultadoS().setOnAction( e -> cambiarIconoConsultasArbol());
 
 
-		ImageView icoFuncion = new ImageView(new Image(VentanaController.class.getClassLoader().getResource("img/FxIcon.png").toExternalForm()));
+		ImageView icoFuncion = new ImageView(new Image(VentanaController.class.getClassLoader().
+				getResource("img/FxIcon.png").toExternalForm()));
 		icoFuncion.setFitWidth(25);
 		icoFuncion.setFitHeight(25);
 		buttonGenerarF.setGraphic(icoFuncion);
 
-		ImageView icoSim = new ImageView(new Image(VentanaController.class.getClassLoader().getResource("img/simulationIcon.png").toExternalForm()));
+		ImageView icoSim = new ImageView(new Image(VentanaController.class.getClassLoader().
+				getResource("img/simulationIcon.png").toExternalForm()));
 		icoSim.setFitWidth(25);
 		icoSim.setFitHeight(25);
 		buttonSimular.setGraphic(icoSim);
 
-		ImageView proceIcon = new ImageView(new Image(VentanaController.class.getClassLoader().getResource("img/procesarIcon.png").toExternalForm()));
+		ImageView proceIcon = new ImageView(new Image(VentanaController.class.getClassLoader().
+				getResource("img/procesarIcon.png").toExternalForm()));
 		proceIcon.setFitWidth(25);
 		proceIcon.setFitHeight(25);
 		getButtonProcesar().setGraphic(proceIcon);
 
-		ImageView leerIcon = new ImageView(new Image(VentanaController.class.getClassLoader().getResource("img/leerIcon.png").toExternalForm()));
+		ImageView leerIcon = new ImageView(new Image(VentanaController.class.getClassLoader().
+				getResource("img/leerIcon.png").toExternalForm()));
 		leerIcon.setFitWidth(25);
 		leerIcon.setFitHeight(25);
 		getButtonLeerDataSet().setGraphic(leerIcon);
 
-		ImageView verEcuIcon = new ImageView(new Image(VentanaController.class.getClassLoader().getResource("img/verEcuIcon.png").toExternalForm()));
+		ImageView verEcuIcon = new ImageView(new Image(VentanaController.class.getClassLoader().
+				getResource("img/verEcuIcon.png").toExternalForm()));
 		verEcuIcon.setFitWidth(25);
 		verEcuIcon.setFitHeight(25);
 		getButtonVerFuncion().setGraphic(verEcuIcon);
 
 
-		ImageView verSimuIcon = new ImageView(new Image(VentanaController.class.getClassLoader().getResource("img/verIcon.png").toExternalForm()));
+		ImageView verSimuIcon = new ImageView(new Image(VentanaController.class.getClassLoader().
+				getResource("img/verIcon.png").toExternalForm()));
 		verSimuIcon.setFitWidth(25);
 		verSimuIcon.setFitHeight(25);
 		getToobleButtonVerResultadoS().setGraphic(verSimuIcon);
@@ -360,9 +368,9 @@ public class VentanaController implements Initializable{
 		}
 	}
 	/**
-	 * Metodo para actualizar los datos del resumen de una consulta
+	 * Método para actualizar los datos del resumen de una consulta
 	 * @param selectItem Contiene el id de la consulta (TreeItem)
-	 * @param padre Contine el nombre de del data set (TreeItem)
+	 * @param padre Contiene el nombre de del data set (TreeItem)
 	 */
 	private void cambiarCentroToResumenQuery(TreeItem<String> selectItem, TreeItem<String> padre) {
 		if(getResumenController() != null){
@@ -404,9 +412,9 @@ public class VentanaController implements Initializable{
 
 	}
 	/**
-	 * Metodo para actualizar los datos del resumen de una consulta simulada
+	 * Método para actualizar los datos del resumen de una consulta simulada
 	 * @param selectItem Contiene el id de la consulta (TreeItem)
-	 * @param padre Contine el nombre de del data set (TreeItem)
+	 * @param padre Contiene el nombre de del data set (TreeItem)
 	 */
 	private void cambiarCentroToResumenQuerySimulada(TreeItem<String> selectItem, TreeItem<String> padre) {
 		if(getResumenController() != null){
@@ -640,7 +648,7 @@ public class VentanaController implements Initializable{
 	}
 
 	/**
-	 * Metodo que obtiene el resultado detallado de una consulta dado el id de la consulta y el nombre del data set
+	 * Método que obtiene el resultado detallado de una consulta dado el id de la consulta y el nombre del data set
 	 * @param idQ Id de la consulta
 	 * @param nombreDB Nombre del data set
 	 * @return Resultado detallado de la consulta {@link ResultadoDoc}
@@ -659,7 +667,7 @@ public class VentanaController implements Initializable{
 	}
 
 	/**
-	 * Metodo que obtiene el resultado detallado de una consulta simulada
+	 * Método que obtiene el resultado detallado de una consulta simulada
 	 * dado el id de la consulta y el nombre del data set
 	 * @param idQ Id de la consulta
 	 * @param nombreDB Nombre del data set
@@ -685,7 +693,7 @@ public class VentanaController implements Initializable{
 	}
 
 	/**
-	 * Método de evento para la generación de la función desde la interfaz grafica
+	 * Método de evento para la generación de la función desde la interfaz gráfica
 	 * @param intervalos Intervalos de la función
 	 */
 

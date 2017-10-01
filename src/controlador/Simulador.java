@@ -11,7 +11,7 @@ import modelo.ResultadoDoc;
 import modelo.ResultadoQuery;
 /**
  * Clase que entrega los métodos para realizar una simulación 
- * dado una ecuación de distribución de probabilidad.
+ * dado una ecuación de distribución de probabilidad global.
  * @author Marcos
  *
  */

@@ -13,9 +13,9 @@ import javafx.scene.layout.VBox;
 
 /** 
  * Clase controladora de la escena gráfica que despliega el resumen 
- * de una consulta o simulación en la ventana del proyecto
+ * de una consulta o simulación en la ventana del proyecto.
  * Es necesaria una representación en una clase para realizar la 
- * transicción entre escenas por código, reemplaza la zona central
+ * transición entre escenas por código, reemplaza la zona central
  * de la gráfica por el resumen que representa esta clase.
  * - Cada atributo corresponde a un elemento gráfico, 
  * clase creada automáticamente usando generadores del entorno de desarollo-
