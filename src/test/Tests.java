@@ -6,7 +6,6 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import org.junit.Before;
 import org.junit.Test;
-
 import controlador.*;
 import modelo.Consulta;
 import modelo.Documento;

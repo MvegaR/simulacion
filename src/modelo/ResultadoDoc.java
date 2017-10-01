@@ -1,5 +1,4 @@
 package modelo;
-
 import java.util.ArrayList;
 /**
  * Clase diseñada para almacenar los resultados de los documentos de una consulta, con id de la consulta, id documento

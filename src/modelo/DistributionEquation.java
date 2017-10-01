@@ -1,5 +1,4 @@
 package modelo;
-
 import java.util.ArrayList;
 /**
  * Clase diseñada para representar a la función de distribución probabilística global
@@ -15,13 +14,11 @@ public class DistributionEquation {
 	private Integer cantidadIntervalos;
 	/** referencia del ranking original para trabajar */
 	private ResultadoDataSet dataSet;
-	
 	/**
 	 * Constructor de la clase
 	 * @param cantidadIntervalos Cantidad de intervalos
 	 * @param dataSet Data set a utilizar
 	 */
-	
 	public DistributionEquation(Integer cantidadIntervalos, ResultadoDataSet dataSet) {
 		super();
 		this.cantidadIntervalos = cantidadIntervalos;
@@ -29,8 +26,6 @@ public class DistributionEquation {
 		this.intervalos = new ArrayList<>();
 		this.probabilidades = new ArrayList<>();
 	}
-	
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -42,63 +37,54 @@ public class DistributionEquation {
 		result = prime * result + ((dataSet == null) ? 0 : dataSet.hashCode());
 		return result;
 	}
-
 	/**
 	 * @return the intervalos
 	 */
 	public ArrayList<ProbabilisticInterval> getIntervalos() {
 		return intervalos;
 	}
-
 	/**
 	 * @param intervalos the intervalos to set
 	 */
 	public void setIntervalos(ArrayList<ProbabilisticInterval> intervalos) {
 		this.intervalos = intervalos;
 	}
-
 	/**
 	 * @return the probabilidades
 	 */
 	public ArrayList<Double> getProbabilidades() {
 		return probabilidades;
 	}
-
 	/**
 	 * @param probabilidades the probabilidades to set
 	 */
 	public void setProbabilidades(ArrayList<Double> probabilidades) {
 		this.probabilidades = probabilidades;
 	}
-
 	/**
 	 * @return the cantidadIntervalos
 	 */
 	public Integer getCantidadIntervalos() {
 		return cantidadIntervalos;
 	}
-
 	/**
 	 * @param cantidadIntervalos the cantidadIntervalos to set
 	 */
 	public void setCantidadIntervalos(Integer cantidadIntervalos) {
 		this.cantidadIntervalos = cantidadIntervalos;
 	}
-
 	/**
 	 * @return the dataSet
 	 */
 	public ResultadoDataSet getDataSet() {
 		return dataSet;
 	}
-
 	/**
 	 * @param dataSet the dataSet to set
 	 */
 	public void setDataSet(ResultadoDataSet dataSet) {
 		this.dataSet = dataSet;
 	}
-
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
@@ -123,8 +109,4 @@ public class DistributionEquation {
 			return false;
 		return true;
 	}
-	
-		
-	
-
 }

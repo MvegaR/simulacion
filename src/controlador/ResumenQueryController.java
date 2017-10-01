@@ -1,16 +1,11 @@
 package controlador;
-
-
-
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-
 /** 
  * Clase controladora de la escena gráfica que despliega el resumen 
  * de una consulta o simulación en la ventana del proyecto.
@@ -22,96 +17,66 @@ import javafx.scene.layout.VBox;
  *
  */
 public class ResumenQueryController implements Initializable{
-
 	@FXML
 	private BorderPane resumenDataSet;
-
 	@FXML
 	private Label labelDataSetName;
-
 	@FXML
 	private VBox vBox;
-
 	@FXML
 	private Label texto1;
-
 	@FXML
 	private Label texto2;
-
 	@FXML
 	private Label texto3;
-
 	@FXML
 	private Label texto4;
-
 	@FXML
 	private Label valor1;
-
 	@FXML
 	private Label valor2;
-
 	@FXML
 	private Label valor3;
-
 	@FXML
 	private Label valor4;
-
 	@FXML
 	private Label texto5;
-
 	@FXML
 	private Label valor5;
-
 	@FXML
 	private Label texto6;
-
 	@FXML
 	private Label valor6;
-
 	@FXML
 	private Label labelTituloSim;
-
 	@FXML
 	private Label texto11;
-
 	@FXML
 	private Label texto21;
-
 	@FXML
 	private Label texto31;
-
 	@FXML
 	private Label texto41;
-
 	@FXML
 	private BorderPane titulo2;
-
 	@FXML
 	private Label valor11;
-
 	@FXML
 	private Label valor21;
-
 	@FXML
 	private Label valor31;
-
 	@FXML
 	private Label valor41;
-
 	@FXML
 	private Label texto51;
-
 	@FXML
 	private Label valor51;
-
 	@FXML
 	private Label texto61;
-
 	@FXML
 	private Label valor61;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
 	}
 	/**
 	 * @return the resumenDataSet
@@ -462,10 +427,4 @@ public class ResumenQueryController implements Initializable{
 		this.vBox = vBox;
 	}
 	 
-
-
-
-
-
-
 }

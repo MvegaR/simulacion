@@ -172,9 +172,8 @@ public class Consulta {
 			e.printStackTrace();
 		}
 	}
-	
 	/**
-	 * Solo para BD Time: Obtiene las consultas desde un archivo de texto 
+	 * Solo para BD Time: Obtiene las consultas desde un archivo de texto
 	 * y rellena una lista entregada por parÃ¡metro de consultas generadas.
 	 * @param origen Archivo de texto con las consultas
 	 * @param consultas Lista de consultas a rellenar
@@ -193,7 +192,6 @@ public class Consulta {
 						cuerpo = null;
 						consultas.add(con);
 					}
-					
 					break;
 				}
 				if(line.contains("*FIND")){
@@ -219,8 +217,6 @@ public class Consulta {
 			e.printStackTrace();
 		}
 	}
-	
-	
 	/**
 	 * Obtiene el ID de la consulta
 	 * @return Identificador de la consulta
@@ -282,7 +278,7 @@ public class Consulta {
 		return id;
 	}
 	/**
-	 * Retorna la colecciÃ³n de palabras vÃ¡lidas, se necesita usar con el mÃ©todo generar 
+	 * Retorna la colecciÃ³n de palabras vÃ¡lidas, se necesita usar con el mÃ©todo generar
 	 * @return Lista de palabras vÃ¡lidas
 	 */
 	public LinkedList<String> getPalabrasValidas() {

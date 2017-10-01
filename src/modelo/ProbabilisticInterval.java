@@ -44,7 +44,6 @@ public class ProbabilisticInterval {
 	public void setMax(Double max) {
 		this.max = max;
 	}
-
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -80,10 +79,8 @@ public class ProbabilisticInterval {
 			return false;
 		return true;
 	}
-
 	@Override
 	public String toString() {
 		return "ProbabilisticInterval [min=" + min + ", max=" + max + "]";
 	}
-
 }

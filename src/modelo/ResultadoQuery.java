@@ -1,5 +1,4 @@
 package modelo;
-
 import java.util.ArrayList;
 /**
  * Clase diseñada para almacenar los resultados de cada una de las consultas luego del análisis de relevancia
@@ -9,7 +8,6 @@ import java.util.ArrayList;
  * @author Marcos
  *
  */
-
 public class ResultadoQuery {
 	
 	private Integer pIn;
@@ -42,7 +40,6 @@ public class ResultadoQuery {
 		this.totalDocRelevantesTotales = totalDocRelevantesTotales;
 		this.totalDocReleventesDesplegados = totalDocumentosRelevantesDesplegados;
 	}
-
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -53,21 +50,18 @@ public class ResultadoQuery {
 				+ ", totalDocRelevantesTotales=" + totalDocRelevantesTotales + ", totalDocReleventesDesplegados="
 				+ totalDocReleventesDesplegados + "]";
 	}
-
 	/**
 	 * @return the totalDocReleventesDesplegados
 	 */
 	public Integer getTotalDocReleventesDesplegados() {
 		return totalDocReleventesDesplegados;
 	}
-
 	/**
 	 * @param totalDocReleventesDesplegados the totalDocReleventesDesplegados to set
 	 */
 	public void setTotalDocReleventesDesplegados(Integer totalDocReleventesDesplegados) {
 		this.totalDocReleventesDesplegados = totalDocReleventesDesplegados;
 	}
-
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -85,7 +79,6 @@ public class ResultadoQuery {
 				+ ((totalDocReleventesDesplegados == null) ? 0 : totalDocReleventesDesplegados.hashCode());
 		return result;
 	}
-
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
@@ -214,5 +207,4 @@ public class ResultadoQuery {
 	
 	
 	
-
 }

@@ -18,22 +18,18 @@ package modelo;
  *   @author Marcos
  **/
 public class Referencia {
-
 	private Integer x;
 	private Integer tipo;
 	private Integer y;
-
 	public Referencia(Integer x, Integer tipo, Integer y){
 		this.x = x;
 		this.y = y;
 		this.tipo = tipo;
 	}
-
 	@Override
 	public String toString() {
 		return "Referencia [x=" + x + ", tipo=" + tipo + ", y=" + y + "]";
 	}
-
 	public Integer getX() {
 		return x;
 	}
@@ -43,5 +39,4 @@ public class Referencia {
 	public Integer getY() {
 		return y;
 	}
-
 }

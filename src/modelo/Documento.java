@@ -353,7 +353,6 @@ public class Documento {
 					title = ""+title;
 					line = sc.nextLine();
 					while(sc.hasNextLine() && !line.substring(0, 1).equals(".")){
-
 						title+=line;
 						line = sc.nextLine();
 					}
@@ -432,7 +431,6 @@ public class Documento {
 			e.printStackTrace();
 		}
 	}
-
 	/**
 	 * Solo para BD Time: Obtiene los documentos desde un archivo de texto 
 	 * y rellena una lista entregada por parámetro de documentos generados.
@@ -453,7 +451,6 @@ public class Documento {
 						cuerpo = null;
 						documentos.add(doc);
 					}
-
 					break;
 				}
 				if(line.contains("*TEXT")){
@@ -463,7 +460,6 @@ public class Documento {
 						documentos.add(doc);
 					}
 					String id[] = line.split("[ ]+");
-
 					doc = new Documento();
 					doc.setId(Integer.parseInt(id[1]));
 				}else{

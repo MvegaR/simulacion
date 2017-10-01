@@ -17,9 +17,8 @@ public class FormatoResumenSimulacion {
 	private Integer totalFallados;
 	/** Tolerancia utilizada */
 	private Double tolerancia;
-	
 	/**
-	 * 
+	 *
 	 * @param totalDesplegadosOriginales Total relevantes desplegados en el ranking original
 	 * @param totalDesplegadosSimulados Total relevantes simulados
 	 * @param totalSimuladosYOriginales Total de relevantes originales y simulados
@@ -27,7 +26,6 @@ public class FormatoResumenSimulacion {
 	 * @param totalFallados Total fallados
 	 * @param tolerancia Tolerancia utilizada en la simulación
 	 */
-	
 	public FormatoResumenSimulacion(Integer totalDesplegadosOriginales, Integer totalDesplegadosSimulados,
 			Integer totalSimuladosYOriginales, Integer totalAcertados, Integer totalFallados, Double tolerancia) {
 		super();
@@ -105,14 +103,12 @@ public class FormatoResumenSimulacion {
 		return tolerancia;
 	}
 	/**
-	 * 
+	 *
 	 * @param tolerancia Tolerancia de la simulación
 	 */
-	
 	public void setTolerancia(Double tolerancia) {
 		this.tolerancia = tolerancia;
 	}
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -182,7 +178,4 @@ public class FormatoResumenSimulacion {
 				+ totalSimuladosYOriginales + ", totalAcertados=" + totalAcertados + ", totalFallados=" + totalFallados
 				+ ", tolerancia=" + tolerancia + "]";
 	}
-	
-	
-
 }

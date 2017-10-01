@@ -1,12 +1,11 @@
 package modelo;
 /**
- * Clase para formatear tabla de la interfaz gráfica para 
+ * Clase para formatear tabla de la interfaz gráfica para
  * desplegar los intervalos de la ecuación
  * @author Marcos
  *
  */
 public class FormatoEcuacion {
-	
 	/** Número de intervalo*/
 	private Integer numero;
 	/** Valor mínimo del intervalo incluyente */
@@ -124,6 +123,4 @@ public class FormatoEcuacion {
 	public void setValor(Double valor) {
 		this.valor = valor;
 	}
-	
-
 }

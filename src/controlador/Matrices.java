@@ -7,7 +7,6 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.SortedSet;
-
 import javafx.scene.control.ProgressBar;
 import modelo.Consulta;
 import modelo.Documento;
@@ -24,7 +23,6 @@ import modelo.ResultadoQuery;
  *  @author Marcos
  */
 public class Matrices {
-
 	class Similitud{
 		/** valor de similitud */
 		private Double valor;
@@ -133,7 +131,6 @@ public class Matrices {
 		Integer contadorDocumentosRelevantes = 0;
 		Integer contadorTotalDocumentos = 0;
 		for(int i = 0; i < p && i < similitudes.size(); i++){
-
 			contadorTotalDocumentos++;
 			if(isRelevante(q.getId(), similitudes.get(i).getIdDocumento())){
 				contadorDocumentosRelevantes++;
@@ -149,7 +146,6 @@ public class Matrices {
 			+ " Similitud: "+ String.format("%19.16f",   similitudes.get(i).getValor()) 
 			+ " Relevante: " +isRelevante(q.getId(), similitudes.get(i).getIdDocumento()));
 			//*/
-
 			int r = 0;
 			if(isRelevante(q.getId(), similitudes.get(i).getIdDocumento())){
 				r = 1;
@@ -171,7 +167,6 @@ public class Matrices {
 			ResultadoDoc resultadoDocumento = new ResultadoDoc(q.getId(), similitudes.get(i).getIdDocumento(), 
 					similitudes.get(i).valor, isRelevante(q.getId(), similitudes.get(i).getIdDocumento()), 
 					relevanciaAcumulada, recallAcumulada, 0);
-
 			resultadoConsulta.getResultadosDocumentos().add(resultadoDocumento);
 			//fin guardar
 			if(output)
@@ -190,7 +185,6 @@ public class Matrices {
 						System.out.print("\t"+palabra);
 					resultadoDocumento.getWords().add(palabra);
 					//System.out.print("\t"+palabra+"\t" + count(getDocumento(similitudes.get(i).getIdDocumento(), documentos).getPalabrasValidas(), palabra) ); //!!!!!!!!!!!!!!!!
-
 				}
 			}
 			resultadoDocumento.setTWords(getDocumento(similitudes.get(i).getIdDocumento(), 
@@ -198,14 +192,11 @@ public class Matrices {
 			if(output)
 				System.out.println();
 			//System.out.println(q.getPalabrasValidas().size() +" - "+ getDocumento(similitudes.get(i).getIdDocumento(), documentos).getPalabrasValidas().size());
-
 			//*/
-
 		}
 		if(contadorTotalDocumentos != 0){
 			precision /= contadorTotalDocumentos;
 			recall /= contadorTotalDocumentos;
-
 		}
 		if(precision.isNaN() || palabras.isEmpty() || recall.isNaN()){
 			precision = 0.0;
@@ -228,11 +219,7 @@ public class Matrices {
 			System.out.println("Total relevantes"+"\t\t\t\t\t"+totalRelevantes(q));
 			System.out.println();
 		}
-
-
 	}
-
-
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -336,7 +323,6 @@ public class Matrices {
 		}
 		return count.doubleValue();
 	}
-
 	@SuppressWarnings("unused")
 	private int count(LinkedList<String> lista, String elemento){
 		int c = 0;
@@ -347,14 +333,12 @@ public class Matrices {
 		}
 		return c;
 	}
-
 	/**
 	 * Obtiene un documento dado su id
 	 * @param idDocumento id del documento a buscar
 	 * @param listaDocumentos lista con todos los documentos
 	 * @return Documento buscado
 	 */
-
 	public static Documento getDocumento(Integer idDocumento, ArrayList<Documento> listaDocumentos){
 		for(Documento d: listaDocumentos){
 			if(d.getId().equals(idDocumento)){
@@ -363,8 +347,6 @@ public class Matrices {
 		}
 		return null;
 	}
-
-
 	/**
 	 * Determina si existe relevancia de entre consulta y documento, 
 	 * segun la lista de relevancias creada con el archivo de relevancias
@@ -392,7 +374,6 @@ public class Matrices {
 	 * 
 	 */
 	public void obtenerFrecuencias(){
-
 		matrizFrecuncias.clear();
 		for(Documento d: documentos){
 			if(d != null && !d.getPalabrasValidas().isEmpty()){ //quitando documentos no validos
@@ -473,7 +454,6 @@ public class Matrices {
 			}
 		}
 	}
-
 	/**
 	 * Método que rellena la matriz con las frecuencias inversa de las palabras 
 	 * (set de palabras), de cada documento. 
@@ -495,7 +475,6 @@ public class Matrices {
 		for(Documento d: documentos){
 			if(bar!=null){bar.setProgress(0.33+ (((count++))/documentos.size())/3);}
 			if(d != null && !d.getPalabrasValidas().isEmpty()){//quitando documentos sin cuerpo ni título
-
 				ArrayList<Double> lista = new ArrayList<>();
 				matrizFrecunciasInversas.add(lista);
 				lista.add(d.getId()*1.0);  //agregando id documento al inicio de cada lista (como double)
@@ -550,15 +529,12 @@ public class Matrices {
 			Double sumatoria3 = 0.0;
 			Integer contador = 0;
 			for(Double d: vectorQ){ //vectorQ es menos largo en una unidad que list actual
-
 				sumatoria += d*list.get(contador+1); 
 				// +1 porque matrizFrecunciasInversas tiene el id del documento en primer lugar
 				sumatoria2 += d*d;
 				sumatoria3 += list.get(contador+1) *list.get(contador+1);
-
 				contador++;
 			}
-
 			vectorSimilitud.add(new Similitud( sumatoria / (Math.sqrt(sumatoria2 * sumatoria3)) , list.get(0).intValue())); 
 			//vectorSimilitud.add(new Similitud( sumatoria /(sumatoria2 + sumatoria3 - sumatoria) , list.get(0).intValue())); 
 			//list.get(0) tiene el id del documento

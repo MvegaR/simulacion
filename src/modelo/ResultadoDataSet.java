@@ -1,7 +1,5 @@
 package modelo;
-
 import java.util.ArrayList;
-
 /**
  * Clase diseñada para almacenar los datos de la base de datos y los resultados del procesamiento de similitud
  * contiene nombre de la base de datos, lista de resultados de cada consulta, el total de consultas, el total de 
@@ -9,10 +7,8 @@ import java.util.ArrayList;
  * @author Marcos
  *
  */
-
 public class ResultadoDataSet {
 	
-
 	private String setName;
 	private ArrayList<ResultadoQuery> resultadosConsultas;
 	private Integer totalConsultas;
@@ -45,84 +41,72 @@ public class ResultadoDataSet {
 	public String getSetName() {
 		return setName;
 	}
-
 	/**
 	 * @param setName the setName to set
 	 */
 	public void setSetName(String setName) {
 		this.setName = setName;
 	}
-
 	/**
 	 * @return the resultadosConsultas
 	 */
 	public ArrayList<ResultadoQuery> getResultadosConsultas() {
 		return resultadosConsultas;
 	}
-
 	/**
 	 * @param resultadosConsultas the resultadosConsultas to set
 	 */
 	public void setResultadosConsultas(ArrayList<ResultadoQuery> resultadosConsultas) {
 		this.resultadosConsultas = resultadosConsultas;
 	}
-
 	/**
 	 * @return the totalConsultas
 	 */
 	public Integer getTotalConsultas() {
 		return totalConsultas;
 	}
-
 	/**
 	 * @param totalConsultas the totalConsultas to set
 	 */
 	public void setTotalConsultas(Integer totalConsultas) {
 		this.totalConsultas = totalConsultas;
 	}
-
 	/**
 	 * @return the totalDocumentos
 	 */
 	public Integer getTotalDocumentos() {
 		return totalDocumentos;
 	}
-
 	/**
 	 * @param totalDocumentos the totalDocumentos to set
 	 */
 	public void setTotalDocumentos(Integer totalDocumentos) {
 		this.totalDocumentos = totalDocumentos;
 	}
-
 	/**
 	 * @return the totalPalabrasComunes
 	 */
 	public Integer getTotalPalabrasComunes() {
 		return totalPalabrasComunes;
 	}
-
 	/**
 	 * @param totalPalabrasComunes the totalPalabrasComunes to set
 	 */
 	public void setTotalPalabrasComunes(Integer totalPalabrasComunes) {
 		this.totalPalabrasComunes = totalPalabrasComunes;
 	}
-
 	/**
 	 * @return the totalpalabrasValidasNoComunes
 	 */
 	public Integer getTotalpalabrasValidasNoComunes() {
 		return totalpalabrasValidasNoComunes;
 	}
-
 	/**
 	 * @param totalpalabrasValidasNoComunes the totalpalabrasValidasNoComunes to set
 	 */
 	public void setTotalpalabrasValidasNoComunes(Integer totalpalabrasValidasNoComunes) {
 		this.totalpalabrasValidasNoComunes = totalpalabrasValidasNoComunes;
 	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -136,7 +120,6 @@ public class ResultadoDataSet {
 				+ ((totalpalabrasValidasNoComunes == null) ? 0 : totalpalabrasValidasNoComunes.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

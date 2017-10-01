@@ -2,17 +2,14 @@ package controlador;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-//import java.util.HashMap;
 import java.util.Scanner;
 import java.util.SortedSet;
 import java.util.TreeSet;
-
 import modelo.Consulta;
 import modelo.Documento;
 import modelo.Precision;
 import modelo.Relevancia;
 import modelo.ResultadoDataSet;
-
 /**
  * Clase principal con método main (usado en la primera iteración del proyecto, en la segunda iteración
  * se usa un método main en el paquete "vista" que corresponde a la interfaz gráfica), 
@@ -24,14 +21,11 @@ public class Generar {
 	/**
 	 * Lista de resultados @see {@link ResultadoDataSet}
 	 */
-
 	private static ArrayList<ResultadoDataSet> resultadosDataSet = new ArrayList<>();
-
 	/**
 	 * Método main (primera iteración, usado solo para depurar)
 	 * @param args Sin uso.
 	 */
-
 	public static void main(String[] args) {
 	
 		String fsp = System.getProperty("file.separator").toString();
@@ -42,7 +36,6 @@ public class Generar {
 		File documentosFileCACM = new File("files"+fsp+"cacm"+fsp+"cacm.all");
 		File consultasFileCACM = new File("files"+fsp+"cacm"+fsp+"query.text");
 		File relevanciasFileCACM = new File("files"+fsp+"cacm"+fsp+"qrels.text");
-
 		getPrecisiones(null,documentosFileCACM, 
 				consultasFileCACM, relevanciasFileCACM, palabrasComunesFile, "CACM");
 		//*/
@@ -51,7 +44,6 @@ public class Generar {
 		File documentosFileMED = new File("files"+fsp+"med"+fsp+"MED.ALL");
 		File consultasFileMED = new File("files"+fsp+"med"+fsp+"MED.QRY");
 		File relevanciasFileMED = new File("files"+fsp+"med"+fsp+"MED.REL");
-
 		getPrecisiones(null,documentosFileMED, 
 				consultasFileMED, relevanciasFileMED, palabrasComunesFile, "MED");
 		//*/
@@ -93,22 +85,18 @@ public class Generar {
 		File documentosFileADI = new File("files"+fsp+"adi"+fsp+"ADI.ALL");
 		File consultasFileADI = new File("files"+fsp+"adi"+fsp+"ADI.QRY");
 		File relevanciasFileADI = new File("files"+fsp+"adi"+fsp+"ADI.REL");
-
 		getPrecisiones(null,documentosFileADI, 
 				consultasFileADI, relevanciasFileADI, palabrasComunesFile, "ADI");
 		//*/
-
 		//Archivos BD TIME
 		//*/
 		File documentosFileTIME = new File("files"+fsp+"time"+fsp+"TIME.ALL");
 		File consultasFileTIME= new File("files"+fsp+"time"+fsp+"TIME.QUE");
 		File relevanciasFileTIME = new File("files"+fsp+"time"+fsp+"TIME.REL");
 		//File palabrasComunesFileTIME = new File("files"+fsp+"time"+fsp+"TIME.STP");//No es buena
-
 		getPrecisiones(null,documentosFileTIME, 
 				consultasFileTIME, relevanciasFileTIME, palabrasComunesFile, "TIME");
 		//*/
-
 		//Archivos BD ISWC2015
 		//La más pequeña
 		//*/
@@ -118,9 +106,6 @@ public class Generar {
 		getPrecisiones(null,documentosFileISWC2015, 
 				consultasFileISWC2015, relevanciasFileISWC2015, palabrasComunesFile, "ISWC2015");
 		//*/
-
-
-
 	}
 	/**
 	 * Método que realiza la ejecución del algoritmo para obtener matriz frecuencia, 
@@ -141,7 +126,6 @@ public class Generar {
 		ArrayList<Consulta> consultas = new ArrayList<>();
 		ArrayList<String> palabrasComunes = new ArrayList<>();
 		ArrayList<Relevancia> relevancias = new ArrayList<>();
-
 		if(nombreDB.equals("LISA")){
 			Documento.generarDocumentosLisa(documentosFiles, documentos);
 			Consulta.generarConsultasLisa(consultasFile, consultas);
@@ -190,31 +174,23 @@ public class Generar {
 				setDePalabras.add(s);
 			}
 		}
-
 		System.out.println("Palabras Totales sin repetir no comunes:\t" + setDePalabras.size());
 		ResultadoDataSet dataSet = new ResultadoDataSet(nombreDB, consultas.size(), documentos.size(), 
 				palabrasComunes.size(),  setDePalabras.size());
-
 		Matrices matriz = new Matrices(setDePalabras, documentos, consultas, relevancias, dataSet.getResultadosConsultas());
-
 		ArrayList<Precision> precisiones = new ArrayList<>();
 		//matriz.obtenerPrecision();
 		for(Consulta q: consultas){
 			matriz.obtenerPrecision(q, 10, precisiones, dataSet,true);
 		}
 		resultadosDataSet.add(dataSet); //guardando en la lista
-
 		/*
 		GetEquation generadorEcuacion = new GetEquation(1000, dataSet);
-
 		Simulador simu = new Simulador(dataSet, generadorEcuacion.generarEquation());
 		simu.simular(0.16);
 		simu.imprimirParaExcelComparacion();
 		 */
-
 		System.out.println("Fin "+nombreDB);
-
-
 		/*
 		System.out.println(consultas.get(0).getId());
 		System.out.println(consultas.get(0).getQuery());
@@ -225,10 +201,6 @@ public class Generar {
 		 */
 		return precisiones;
 	}
-
-
-
-
 	/**
 	 * Método que obtiene la lista de palabras comunes, como pronombres personales, conectores etc
 	 * @param file Archivo con las palabras

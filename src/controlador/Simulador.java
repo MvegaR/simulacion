@@ -1,5 +1,4 @@
 package controlador;
-
 import java.util.ArrayList;
 import javafx.scene.control.ProgressBar;
 import modelo.DistributionEquation;
@@ -59,13 +58,11 @@ public class Simulador {
 		this.ttotalRelevantesDesplegados = 0;
 		this.ttotalRelevantesSimuladosDesplegados = 0;
 	}
-
 	/**
 	 * Método que realiza la simulación de relevancia
 	 * @param tolerancia Tolerencia mínima para considerar un documento como relevante
 	 * @return {@link ResultadoDataSet} Copia de resultados del dataset original con relevancias simuladas
 	 */
-
 	public ResultadoDataSet simular(Double tolerancia){
 		this.tolerancia = tolerancia;
 		System.out.println(tolerancia);
@@ -78,7 +75,6 @@ public class Simulador {
 					resQ.getRecallPromedio(), -1, 0); //falta documentos relevantes totales y desplegados
 			Integer docRelDesplegados = 0;
 			for(ResultadoDoc resD: resQ.getResultadosDocumentos()){
-
 				ResultadoDoc resSimD = new ResultadoDoc(resD.getIdQuery(), resD.getIdDoc(), resD.getDisCos(), 
 						isRelSim(resD.getDisCos(), tolerancia), -1.0, -1.0, resD.getTWords()); 
 				//precision y recall dependen de los jucios reales, que no se tienen en una simualción
@@ -95,11 +91,8 @@ public class Simulador {
 				getBar().setProgress((count/(double)dataSetOriginal.getResultadosConsultas().size())/0.25);
 			}
 		}
-
 		return dataSetSimulado;
 	}
-
-
 	/**
 	 * Método para generar los datos para mostrarlos en tablas
 	 */
@@ -151,18 +144,13 @@ public class Simulador {
 					totalAcertados, totalFallados, tolerancia));
 			getBar().setProgress(0.25+ (double)i/(double)getDataSetOriginal().getResultadosConsultas().size());
 		}
-
-
 	}
-
-
 	/**
 	 * Determina la relevancia del documento para la similitud entregada
 	 * @param sim Distancia conseno o similitud
 	 * @param tol Tolerancia mínima para decir que es relevante
 	 * @return Si es o no relevante (Boolean)
 	 */
-
 	private Boolean isRelSim(Double sim, Double tol){
 		Boolean isRel = false;
 		Integer con = 0;
@@ -177,8 +165,6 @@ public class Simulador {
 		}
 		return isRel;
 	}
-
-
 	/**
 	 * @return the dataSetOriginal
 	 */
@@ -221,28 +207,24 @@ public class Simulador {
 	public Double getTolerancia() {
 		return tolerancia;
 	}
-
 	/**
 	 * @param tolerancia the tolerancia to set
 	 */
 	public void setTolerancia(Double tolerancia) {
 		this.tolerancia = tolerancia;
 	}
-
 	/**
 	 * @return the bar
 	 */
 	public ProgressBar getBar() {
 		return bar;
 	}
-
 	/**
 	 * @param bar the bar to set
 	 */
 	public void setBar(ProgressBar bar) {
 		this.bar = bar;
 	}
-
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -292,56 +274,48 @@ public class Simulador {
 			return false;
 		return true;
 	}
-
 	/**
 	 * @return the resultados
 	 */
 	public ArrayList<ArrayList<FormatoSimulacion>> getResultados() {
 		return resultados;
 	}
-
 	/**
 	 * @return the resultadosResumen
 	 */
 	public ArrayList<FormatoResumenSimulacion> getResultadosResumen() {
 		return resultadosResumen;
 	}
-
 	/**
 	 * @param resultadosResumen the resultadosResumen to set
 	 */
 	public void setResultadosResumen(ArrayList<FormatoResumenSimulacion> resultadosResumen) {
 		this.resultadosResumen = resultadosResumen;
 	}
-
 	/**
 	 * @param resultados the resultados to set
 	 */
 	public void setResultados(ArrayList<ArrayList<FormatoSimulacion>> resultados) {
 		this.resultados = resultados;
 	}
-
 	/**
 	 * @return the totalGlobalFallados
 	 */
 	public Integer getTotalGlobalFallados() {
 		return totalGlobalFallados;
 	}
-
 	/**
 	 * @param totalGlobalFallados the totalGlobalFallados to set
 	 */
 	public void setTotalGlobalFallados(Integer totalGlobalFallados) {
 		this.totalGlobalFallados = totalGlobalFallados;
 	}
-
 	/**
 	 * @return the totalGlobalAcertados
 	 */
 	public Integer getTotalGlobalAcertados() {
 		return totalGlobalAcertados;
 	}
-
 	/**
 	 * @param totalGlobalAcertados the totalGlobalAcertados to set
 	 */
@@ -354,49 +328,42 @@ public class Simulador {
 	public Integer getTotalRelevantesFallados() {
 		return totalRelevantesFallados;
 	}
-
 	/**
 	 * @param totalRelevantesFallados the totalRelevantesFallados to set
 	 */
 	public void setTotalRelevantesFallados(Integer totalRelevantesFallados) {
 		this.totalRelevantesFallados = totalRelevantesFallados;
 	}
-
 	/**
 	 * @return the totalGlobalRealesYSimulados
 	 */
 	public Integer getTotalGlobalRealesYSimulados() {
 		return totalGlobalRealesYSimulados;
 	}
-
 	/**
 	 * @param totalGlobalRealesYSimulados the totalGlobalRealesYSimulados to set
 	 */
 	public void setTotalGlobalRealesYSimulados(Integer totalGlobalRealesYSimulados) {
 		this.totalGlobalRealesYSimulados = totalGlobalRealesYSimulados;
 	}
-
 	/**
 	 * @return the ttotalRelevantesDesplegados
 	 */
 	public Integer getTtotalRelevantesDesplegados() {
 		return ttotalRelevantesDesplegados;
 	}
-
 	/**
 	 * @param ttotalRelevantesDesplegados the ttotalRelevantesDesplegados to set
 	 */
 	public void setTtotalRelevantesDesplegados(Integer ttotalRelevantesDesplegados) {
 		this.ttotalRelevantesDesplegados = ttotalRelevantesDesplegados;
 	}
-
 	/**
 	 * @return the ttotalRelevantesSimuladosDesplegados
 	 */
 	public Integer getTtotalRelevantesSimuladosDesplegados() {
 		return ttotalRelevantesSimuladosDesplegados;
 	}
-
 	/**
 	 * @param ttotalRelevantesSimuladosDesplegados the ttotalRelevantesSimuladosDesplegados to set
 	 */

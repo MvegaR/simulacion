@@ -1,5 +1,4 @@
 package controlador;
-
 import javafx.scene.control.ProgressBar;
 import modelo.DistributionEquation;
 import modelo.ProbabilisticInterval;
@@ -12,7 +11,6 @@ import modelo.ResultadoQuery;
  *
  */
 public class GetEquation {
-
 	/**
 	 * Ecuación de distribución a generar
 	 */
@@ -86,7 +84,6 @@ public class GetEquation {
 	 * Método privado para la generación de las probabilidades de cada intervalo
 	 */
 	private void generarProbabilidades(){
-		
 		Double maxSim = 0.0;
 		for(ResultadoQuery q: equation.getDataSet().getResultadosConsultas()){
 			for(ResultadoDoc d: q.getResultadosDocumentos()){
@@ -136,8 +133,6 @@ public class GetEquation {
 			barraDeCarga.setProgress(1.0);
 		}
 	}
-	
-	
 
 	/**
 	 * @return the equation
@@ -145,7 +140,6 @@ public class GetEquation {
 	public DistributionEquation getEquation() {
 		return equation;
 	}
-
 	/**
 	 * @param equation the equation to set
 	 */
@@ -167,6 +161,5 @@ public class GetEquation {
 	public ProgressBar getBarraDeCarga() {
 		return barraDeCarga;
 	}
-		
-	
+
 }
