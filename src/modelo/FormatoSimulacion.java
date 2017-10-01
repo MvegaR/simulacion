@@ -26,7 +26,8 @@ public class FormatoSimulacion {
 	 * @param userRelReal Relevancia o jucio de usuario del fichero de relevancia
 	 * @param userRelSim Relevencia o jucio de usuario simulado
 	 */
-	public FormatoSimulacion(Boolean igual, Integer idq, Integer iddoc, Double sim, Boolean userRelReal,
+	public FormatoSimulacion(Boolean igual, Integer idq, 
+			Integer iddoc, Double sim, Boolean userRelReal,
 			Boolean userRelSim) {
 		super();
 		this.igual = igual;

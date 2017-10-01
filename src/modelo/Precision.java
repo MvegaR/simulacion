@@ -22,7 +22,8 @@ public class Precision {
 	 * @param documentosRelevantes cantidad de documentos relevantes en la consulta
 	 * @param pIn Número de documentos máximos a desplegar y a incluir en el cálculo de precisión 
 	 */
-	public Precision(Integer idConsulta, Double precision, Integer documentosRelevantes, Integer pIn) {
+	public Precision(Integer idConsulta, Double precision, 
+			Integer documentosRelevantes, Integer pIn) {
 		this.idConsulta = idConsulta;
 		this.precision = precision;
 		this.documentosRelevantes = documentosRelevantes;

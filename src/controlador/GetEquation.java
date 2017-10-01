@@ -37,7 +37,8 @@ public class GetEquation {
 	 * @param dataSet Puntero al data set a procesar
 	 * @param barraDeCarga Barra de carga de la interfaz gráfica
 	 */
-	public GetEquation(Integer cantidadIntervalos, ResultadoDataSet dataSet, ProgressBar barraDeCarga){
+	public GetEquation(Integer cantidadIntervalos, 
+			ResultadoDataSet dataSet, ProgressBar barraDeCarga){
 		if(cantidadIntervalos == null || cantidadIntervalos <= 0){
 			System.out.println("Cantidad intervalos invalido, se usarÃ¡ 100 por defecto");
 			cantidadIntervalos = 100;

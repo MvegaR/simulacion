@@ -26,8 +26,13 @@ public class FormatoResumenSimulacion {
 	 * @param totalFallados Total fallados
 	 * @param tolerancia Tolerancia utilizada en la simulación
 	 */
-	public FormatoResumenSimulacion(Integer totalDesplegadosOriginales, Integer totalDesplegadosSimulados,
-			Integer totalSimuladosYOriginales, Integer totalAcertados, Integer totalFallados, Double tolerancia) {
+	public FormatoResumenSimulacion(
+			Integer totalDesplegadosOriginales, 
+			Integer totalDesplegadosSimulados,
+			Integer totalSimuladosYOriginales, 
+			Integer totalAcertados, 
+			Integer totalFallados, 
+			Double tolerancia) {
 		super();
 		this.totalDesplegadosOriginales = totalDesplegadosOriginales;
 		this.totalDesplegadosSimulados = totalDesplegadosSimulados;

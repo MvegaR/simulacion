@@ -65,7 +65,6 @@ public class Simulador {
 	 */
 	public ResultadoDataSet simular(Double tolerancia){
 		this.tolerancia = tolerancia;
-		System.out.println(tolerancia);
 		dataSetSimulado = new ResultadoDataSet(dataSetOriginal.getSetName(), dataSetOriginal.getTotalConsultas(), 
 				dataSetOriginal.getTotalConsultas(), dataSetOriginal.getTotalPalabrasComunes(), 
 				dataSetOriginal.getTotalpalabrasValidasNoComunes() );
@@ -287,7 +286,8 @@ public class Simulador {
 	/**
 	 * @param resultadosResumen the resultadosResumen to set
 	 */
-	public void setResultadosResumen(ArrayList<FormatoResumenSimulacion> resultadosResumen) {
+	public void setResultadosResumen(
+			ArrayList<FormatoResumenSimulacion> resultadosResumen) {
 		this.resultadosResumen = resultadosResumen;
 	}
 	/**

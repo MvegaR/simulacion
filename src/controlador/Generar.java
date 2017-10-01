@@ -118,7 +118,8 @@ public class Generar {
 	 * @param nombreDB Cadena de texto con el nombre de la base de datos.
 	 * @return Lista de precisiones para ser utilizada para posibles procesos siguientes
 	 */
-	public static ArrayList<Precision> getPrecisiones(ArrayList<File> documentosFiles,
+	public static ArrayList<Precision> getPrecisiones(
+			ArrayList<File> documentosFiles,
 			File documentosFile, File consultasFile, File relevanciasFile, 
 			File palabrasComunesFile, String nombreDB){
 		ArrayList<Documento> documentos = new ArrayList<>();

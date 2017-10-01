@@ -98,7 +98,8 @@ public class Matrices {
 	 * @param output Para activar o desactivar impresion por terminal
 	 * @exception NullPointerException - ArrayList precisiones no puede ser nulo.
 	 */
-	public void obtenerPrecision(Consulta q, Integer p, ArrayList<Precision> precisiones, ResultadoDataSet dataSet, 
+	public void obtenerPrecision(Consulta q, Integer p, 
+			ArrayList<Precision> precisiones, ResultadoDataSet dataSet, 
 			Boolean output){
 		if(precisiones == null){
 			throw new NullPointerException("ArrayList Precisiones no puede se nulo");
@@ -311,7 +312,8 @@ public class Matrices {
 	/**
 	 * @param resultadosConsultas the resultadosConsultas to set
 	 */
-	public void setResultadosConsultas(ArrayList<ResultadoQuery> resultadosConsultas) {
+	public void setResultadosConsultas(
+			ArrayList<ResultadoQuery> resultadosConsultas) {
 		this.resultadosConsultas = resultadosConsultas;
 	}
 	private Double totalRelevantes(Consulta q){
@@ -339,7 +341,8 @@ public class Matrices {
 	 * @param listaDocumentos lista con todos los documentos
 	 * @return Documento buscado
 	 */
-	public static Documento getDocumento(Integer idDocumento, ArrayList<Documento> listaDocumentos){
+	public static Documento getDocumento(Integer idDocumento, 
+			ArrayList<Documento> listaDocumentos){
 		for(Documento d: listaDocumentos){
 			if(d.getId().equals(idDocumento)){
 				return d;
@@ -428,7 +431,6 @@ public class Matrices {
 	 * cálculo se se agrega un 0 a la lista.
 	 */
 	public void obtenerFrecuenciasInversas(){
-		// log(totalDocumeºntos/cantidadOcurrenciasEnTodosLosDocumentos)
 		matrizFrecunciasInversas.clear();
 		for(Documento d: documentos){
 			if(d != null && !d.getPalabrasValidas().isEmpty()){//quitando documentos sin cuerpo ni título
@@ -535,7 +537,9 @@ public class Matrices {
 				sumatoria3 += list.get(contador+1) *list.get(contador+1);
 				contador++;
 			}
-			vectorSimilitud.add(new Similitud( sumatoria / (Math.sqrt(sumatoria2 * sumatoria3)) , list.get(0).intValue())); 
+			vectorSimilitud.add(new Similitud( 
+					sumatoria / (Math.sqrt(sumatoria2 * sumatoria3)) , 
+					list.get(0).intValue())); 
 			//vectorSimilitud.add(new Similitud( sumatoria /(sumatoria2 + sumatoria3 - sumatoria) , list.get(0).intValue())); 
 			//list.get(0) tiene el id del documento
 		}
@@ -557,7 +561,7 @@ public class Matrices {
 		Integer contador = 0;
 		if(posPalabrasEnSet != -1){
 			for(ArrayList<Integer> frecuencia: matrizFrecuncias){
-				if(frecuencia.get(posPalabrasEnSet+1) > 0){ //+1 porque la primera pos es el id del documento
+				if(frecuencia.get(posPalabrasEnSet+1) > 0){ //+1 porque la primera es el id del documento
 					contador++;
 				}
 			}

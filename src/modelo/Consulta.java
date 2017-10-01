@@ -20,7 +20,7 @@ public class Consulta {
 	/** Identificador más detallado de la consulta, no se utilizó
 	 * en el proyecto pero se encuentra presente en el archivo */
 	private String fullId; //.N ?
-	/** Palabras vÃ¡lidas presentes en la consulta en una lista enlazada */
+	/** Palabras válidas presentes en la consulta en una lista enlazada */
 	private LinkedList<String> palabrasValidas;
 	/**
 	 * Constructor consulta, inicialización de variables.
@@ -73,7 +73,7 @@ public class Consulta {
 	/**
 	 * Realiza la lectura de archivo de consultas y los inserta en una lista
 	 * @param origen Archivo de texto con consultas, no nula.
-	 * @param consultas ColecciÃ³n de consultas a rellenar, no nula.
+	 * @param consultas Colección de consultas a rellenar, no nula.
 	 */
 	public static void generarConsultas(File origen, ArrayList<Consulta> consultas){
 		try {
@@ -139,7 +139,7 @@ public class Consulta {
 	/**
 	 * Solo para LISA DB: Realiza la lectura de archivo de consultas y los inserta en una lista
 	 * @param origen Archivo de texto con consultas, no nula.
-	 * @param consultas ColecciÃ³n de consultas a rellenar, no nula.
+	 * @param consultas Colección de consultas a rellenar, no nula.
 	 */
 	public static void generarConsultasLisa(File origen, ArrayList<Consulta> consultas){
 		try {
@@ -174,7 +174,7 @@ public class Consulta {
 	}
 	/**
 	 * Solo para BD Time: Obtiene las consultas desde un archivo de texto
-	 * y rellena una lista entregada por parÃ¡metro de consultas generadas.
+	 * y rellena una lista entregada por parámetro de consultas generadas.
 	 * @param origen Archivo de texto con las consultas
 	 * @param consultas Lista de consultas a rellenar
 	 */
@@ -278,8 +278,8 @@ public class Consulta {
 		return id;
 	}
 	/**
-	 * Retorna la colecciÃ³n de palabras vÃ¡lidas, se necesita usar con el mÃ©todo generar
-	 * @return Lista de palabras vÃ¡lidas
+	 * Retorna la colección de palabras válidas, se necesita usar con el método generar
+	 * @return Lista de palabras válidas
 	 */
 	public LinkedList<String> getPalabrasValidas() {
 		return palabrasValidas;

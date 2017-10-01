@@ -333,7 +333,8 @@ public class VentanaController implements Initializable{
 	 * @param selectItem Contiene el id de la consulta (TreeItem)
 	 * @param padre Contiene el nombre de del data set (TreeItem)
 	 */
-	private void cambiarCentroToResumenQuery(TreeItem<String> selectItem, TreeItem<String> padre) {
+	private void cambiarCentroToResumenQuery(TreeItem<String> selectItem, 
+			TreeItem<String> padre) {
 		if(getResumenController() != null){
 			ResultadoQuery rq = getResultadoQueryById(selectItem.getValue().split(".* ID: ")[1],padre.getValue());
 			getResumenController().getLabelDataSetName().setText(
@@ -373,7 +374,8 @@ public class VentanaController implements Initializable{
 	 * @param selectItem Contiene el id de la consulta (TreeItem)
 	 * @param padre Contiene el nombre de del data set (TreeItem)
 	 */
-	private void cambiarCentroToResumenQuerySimulada(TreeItem<String> selectItem, TreeItem<String> padre) {
+	private void cambiarCentroToResumenQuerySimulada(TreeItem<String> selectItem, 
+			TreeItem<String> padre) {
 		if(getResumenController() != null){
 			Integer index = 0;
 			for(ResultadoQuery rqt: mapDataSets.get(padre.getValue()).getResultadosConsultas()){
@@ -934,7 +936,10 @@ public class VentanaController implements Initializable{
 		});
 		hiloLeer.start();
 	}
-	public void cambiarIconoConsultasArbol(){
+	/**
+	 * Método privado para el cambió de icono de entre consulta y consulta simulada
+	 */
+	private void cambiarIconoConsultasArbol(){
 		for(String s: mapHijosConsultas.keySet()){
 			for(TreeItem<String> t: mapHijosConsultas.get(s)){
 				ImageView ico;

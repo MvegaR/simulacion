@@ -48,10 +48,7 @@ a[name]:hover {
     text-decoration:none;
     color:#353833;
 }
-pre {
-    font-family:'Consolas', monospace;
-    font-size:14px;
-}
+
 h1 {
     font-size:20px;
 }
@@ -91,7 +88,9 @@ table tr td dt code {
     font-size:14px;
     vertical-align:top;
     word-break: break-all;
+	display: inline-block;
     padding-top:4px;
+	max-width:20%;
 }
 sup {
     font-size:8px;
@@ -368,10 +367,7 @@ ul.blockList ul.blockList ul.blockList ul.blockList li.blockListLast {
     border-bottom:none;
     padding-bottom:0;
 }
-table tr td dl, table tr td dl dt, table tr td dl dd {
-    margin-top:0;
-    margin-bottom:1px;
-}
+
 /*
 Table styles
 */
@@ -488,16 +484,29 @@ td.colOne, td.colFirst, td.colLast, .useSummary td, .constantsSummary td{
     padding-right:0px;
     padding-top:8px;
     padding-bottom:3px;
+	max-width:300px;
+	 /* These are technically the same, but use both */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  /* This is the dangerous one in WebKit, as it breaks things wherever */
+  word-break: break-all;
+  /* Instead use this non-standard one: */
+  word-break: break-word;
+
+  /* Adds a hyphen where the word breaks, if supported (No Blink) */
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
 }
 th.colFirst, th.colLast, th.colOne, .constantsSummary th {
     background:#dee3e9;
     text-align:left;
     padding:8px 3px 3px 7px;
 }
-td.colFirst, th.colFirst {
-    white-space:nowrap;
-    font-size:13px;
-}
+
 td.colLast, th.colLast {
     font-size:13px;
 }
@@ -510,11 +519,11 @@ td.colOne, th.colOne {
 .memberSummary td.colFirst, .memberSummary th.colFirst,
 .memberSummary td.colOne, .memberSummary th.colOne,
 .typeSummary td.colFirst{
-    width:25%;
+    width:50%;
     vertical-align:top;
 }
 td.colOne a:link, td.colOne a:active, td.colOne a:visited, td.colOne a:hover, td.colFirst a:link, td.colFirst a:active, td.colFirst a:visited, td.colFirst a:hover, td.colLast a:link, td.colLast a:active, td.colLast a:visited, td.colLast a:hover, .constantValuesContainer td a:link, .constantValuesContainer td a:active, .constantValuesContainer td a:visited, .constantValuesContainer td a:hover {
-    font-weight:bold;
+    font-weight:bold; 
 }
 .tableSubHeadingColor {
     background-color:#EEEEFF;
@@ -530,6 +539,21 @@ Content styles
 */
 .description pre {
     margin-top:0;
+	  /* These are technically the same, but use both */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  /* This is the dangerous one in WebKit, as it breaks things wherever */ 
+  word-break: break-all;
+  /* Instead use this non-standard one: */
+  word-break: break-word;
+
+  /* Adds a hyphen where the word breaks, if supported (No Blink) */
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
 }
 .deprecatedContent {
     margin:0;
@@ -590,4 +614,19 @@ div.block div.block span.interfaceName {
 
 div.contentContainer ul.blockList li.blockList h2{
     padding-bottom:0px;
+}
+pre {
+	  overflow-wrap: break-word;
+	
+ 	 display:block;
+
+    font-family:'Consolas', monospace;
+    font-size:14px;
+
+ white-space: pre-wrap;       /* css-3 */
+ white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+ white-space: -pre-wrap;      /* Opera 4-6 */
+ white-space: -o-pre-wrap;    /* Opera 7 */
+ word-wrap: break-word;       /* Internet Explorer 5.5+ */
+
 }
