@@ -29,8 +29,7 @@ public class Tests {
 		File docTest = new File("files"+fsp+"test"+fsp+"testDocumento.txt");
 		ArrayList<Documento> docs = new ArrayList<>();
 		Documento.generarDocumentos(docTest, docs);
-		
-		
+
 		assertTrue(docs.get(0).getId().equals(1));
 		System.out.println("Titulo:" +docs.get(0).getTitulo() );
 		assertTrue(docs.get(0).getTitulo().equals("Titulo Test"));
@@ -138,7 +137,7 @@ public class Tests {
 			}
 		}
 		this.resultadosDataset = new ResultadoDataSet("test", 1, 4, 6, 11);
-		
+
 	}
 	/*
 	 * Prueba unitaria de módulo de cálculo procesando 

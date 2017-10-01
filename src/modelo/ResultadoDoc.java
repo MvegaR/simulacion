@@ -53,7 +53,7 @@ public class ResultadoDoc {
 		return "ResultadoDocumento [idQuery=" + idQuery + ", idDoc=" + idDoc + ", disCos=" + disCos + ", isRel=" + isRel
 				+ ", precision=" + precision + ", recall=" + recall + ", tWords=" + tWords + ", words=" + words + "]";
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -185,8 +185,8 @@ public class ResultadoDoc {
 	public void setWords(ArrayList<String> words) {
 		this.words = words;
 	}
-	
-	
-	
-	
+
+
+
+
 }

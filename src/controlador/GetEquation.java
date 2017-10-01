@@ -19,20 +19,20 @@ public class GetEquation {
 	 * Barra de carga de la interfaz gráfica
 	 */
 	private ProgressBar barraDeCarga = null;
-	
+
 	/**
 	 * Constructor para la generación de la función de distribución de probabilidad gobal
 	 * @param cantidadIntervalos La cantidad de intervalos de la función a generarar
 	 * @param dataSet Puntero al data set a procesar
 	 */
-	
+
 	public GetEquation(Integer cantidadIntervalos, ResultadoDataSet dataSet){
 		if(cantidadIntervalos == null || cantidadIntervalos <= 0){
 			System.out.println("Cantidad intervalos invalido, se usarÃ¡ 100 por defecto");
 			cantidadIntervalos = 100;
 		}
 		equation = new DistributionEquation(cantidadIntervalos, dataSet);
-		
+
 	}
 	/**
 	 * Constructor de la clase
@@ -47,23 +47,23 @@ public class GetEquation {
 		}
 		equation = new DistributionEquation(cantidadIntervalos, dataSet);
 		this.barraDeCarga = barraDeCarga;
-		
+
 	}
-	
+
 	/**
 	 * Método para la generación de la función de distribución de probabilidad global
 	 * @return Retorna una función de distribución de probabilidad Ver: {@link DistributionEquation}
 	 */
-	
+
 	public DistributionEquation generarEquation(){
-		
+
 		generarIntervalos();
 		generarProbabilidades();
-		
+
 		return equation;
-		
+
 	}
-	
+
 	/**
 	 * Método privado para la generación de los intervalos 
 	 */
@@ -119,7 +119,7 @@ public class GetEquation {
 			}
 			System.out.println("F(x) para "+inte.getMin().floatValue()+" <= X < "+ inte.getMax().floatValue() +" es: "
 			+equation.getProbabilidades().get(equation.getProbabilidades().size()-1).toString());
-			
+
 			//reniciar contadores:
 			contadorDeDoc = 0;
 			contadorDeDocRelevantes = 0;
@@ -153,7 +153,7 @@ public class GetEquation {
 	public void setBarraDeCarga(ProgressBar barraDeCarga) {
 		this.barraDeCarga = barraDeCarga;
 	}
-	
+
 	/**
 	 * 
 	 * @return Barra de carga de la gráfica

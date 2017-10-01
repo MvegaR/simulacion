@@ -27,7 +27,7 @@ public class Generar {
 	 * @param args Sin uso.
 	 */
 	public static void main(String[] args) {
-	
+
 		String fsp = System.getProperty("file.separator").toString();
 		//palabras comunes (se uso en todas ya que mejora la precisión, pero es de cran)
 		File palabrasComunesFile = new File("files"+fsp+"cacm"+fsp+"common_words");
