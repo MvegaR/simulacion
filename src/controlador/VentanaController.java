@@ -489,7 +489,7 @@ public class VentanaController implements Initializable{
 	 */
 	@SuppressWarnings("unchecked")
 	private void tablaConsulta(TreeItem<String> selectItem, String nombreDB){
-		//System.out.println("Seleccionado consulta "+ selectItem.getValue());
+		
 		String idConsultaSeleccionada = selectItem.getValue().split(".* ID: ")[1];
 		TableColumn<ResultadoDoc, Integer> idConsulta = new TableColumn("ID Consulta");
 		idConsulta.setCellValueFactory(new PropertyValueFactory<>("idQuery"));
@@ -544,7 +544,6 @@ public class VentanaController implements Initializable{
 	 */
 	@SuppressWarnings("unchecked")
 	private void tablaConsultaSimulada(TreeItem<String> selectItem, String nombreDB){
-		//System.out.println("Seleccionado consulta "+ selectItem.getValue());
 		String idConsultaSeleccionada = selectItem.getValue().split(".* ID: ")[1];
 		TableColumn<FormatoSimulacion, Boolean> igual = new TableColumn<FormatoSimulacion, Boolean>("¿Igual?");
 		igual.setCellValueFactory(new PropertyValueFactory<>("igual"));
@@ -602,9 +601,7 @@ public class VentanaController implements Initializable{
 
 		TableColumn<FormatoSimulacion, Boolean> userRelSim = new TableColumn("Relevancia simualda");
 		userRelSim.setCellValueFactory(new PropertyValueFactory<>("userRelSim"));
-
-
-
+		
 		getTablaDatos().getColumns().clear();
 		getTablaDatos().getColumns().addAll(igual, idDocumento, similitud, sim, userRelReal, userRelSim);
 		getTablaDatos().setItems(getResultadoDocumentoConsultaSimulada(idConsultaSeleccionada, nombreDB));
@@ -1010,7 +1007,6 @@ public class VentanaController implements Initializable{
 
 
 				for(Documento d: documentos){
-					//System.out.println("Documento "+ d.getId()+" tiene: "+ d.getPalabrasValidas().size() + " palabras Validas");
 					for(String s: d.getPalabrasValidas()){
 						setDePalabras.add(s);
 					}
@@ -1626,18 +1622,5 @@ public class VentanaController implements Initializable{
 		this.lavelRelRealValor = lavelRelRealValor;
 	}
 
-	/*
-	 * @return the botonBuscar
-	 */
-	/*public Button getBotonBuscar() {
-		return botonBuscar;
-	}*/
-
-	/*
-	 * @param botonBuscar the botonBuscar to set
-	 */
-	/*public void setBotonBuscar(Button botonBuscar) {
-		this.botonBuscar = botonBuscar;
-	}*/
 
 }

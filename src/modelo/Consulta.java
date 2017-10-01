@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.Scanner;
 /**
  * Clase de consultas, con identificador, query (cuerpo consulta),
- * autores, identificador detallado, palabras vÃ¡lidas (no comunes)
+ * autores, identificador detallado, palabras válidas (no comunes)
  *
  * @author Marcos
  */
@@ -15,15 +15,15 @@ public class Consulta {
 	private Integer id; //I.
 	/** Texto de la consulta */
 	private String query; //.W
-	/** Autores de la consulta, en el proyecto no se utilizÃ³ pero se encuentra presente en el archivo */
+	/** Autores de la consulta, en el proyecto no se utilizó pero se encuentra presente en el archivo */
 	private ArrayList<String> autores; //.A ?
-	/** Identificador mÃ¡s detallado de la consulta, no se utilizÃ³
+	/** Identificador más detallado de la consulta, no se utilizó
 	 * en el proyecto pero se encuentra presente en el archivo */
 	private String fullId; //.N ?
-	/** Palabras vï¿½lidas presentes en la consulta en una lista enlazada */
+	/** Palabras vÃ¡lidas presentes en la consulta en una lista enlazada */
 	private LinkedList<String> palabrasValidas;
 	/**
-	 * Constructor consulta, inicializaciï¿½n de variables.
+	 * Constructor consulta, inicialización de variables.
 	 */
 	public Consulta() {
 		this.id = 0;
@@ -55,15 +55,13 @@ public class Consulta {
 	}
 	/**
 	 * Para generar contenido de la lista this.palabrasComunes, se quitan todas las palabras
-	 *  comunes y se deja en una lista enlazada todas las palabras en minÃºsculas.
-	 * Se asume que todas palabras no vÃ¡lidas (comunes) se encuentran en minÃºsculas.
+	 *  comunes y se deja en una lista enlazada todas las palabras en minúsculas.
+	 * Se asume que todas palabras no vÃ¡lidas (comunes) se encuentran en minúculas.
 	 * @param palabrasComunes Lista de palabras comunes para no agregar a la lista de this.palabrasValidas
 	 */
 	public void generarSetPalabras(ArrayList<String> palabrasComunes){
 		if(palabrasValidas != null && !this.query.equals("")){
 			String[] palabras = this.query.split("[\\W\\d]+");
-			// \W = no word character, \d digit character, \D no digit
-			//System.out.println("test:"+palabras);
 			palabrasValidas.clear();
 			for(String s: palabras){
 				if(s.length() > 1 && !palabrasComunes.contains(s.toLowerCase())){
@@ -87,8 +85,6 @@ public class Consulta {
 				if(!bloqueo){
 					line = sc.nextLine();
 					bloqueo = false;
-				}else{
-					//System.out.println(line);
 				}
 				if(con != null && line.contains(".A") && line.substring(0, 1).equals(".")){
 					ArrayList<String> autores = new ArrayList<String>();

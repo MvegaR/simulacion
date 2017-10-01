@@ -42,9 +42,6 @@ public class Simulador {
 	private Integer ttotalRelevantesDesplegados;
 	/** Total relevantes desplegados en la simulación*/
 	private Integer ttotalRelevantesSimuladosDesplegados;
-
-
-
 	/**
 	 * @param dataSetOriginal Información del data set original {@link ResultadoDataSet}
 	 * @param equation Ecuación de distribución probabilistica global a utilizar en la simualación

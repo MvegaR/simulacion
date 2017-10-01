@@ -35,7 +35,6 @@ public class Documento {
 	 * Constructor: inicializador de atributos
 	 */
 	public Documento() {
-		// TODO Auto-generated constructor stub
 		id = 0;
 		titulo = "";
 		cuerpo = "";
@@ -88,7 +87,6 @@ public class Documento {
 			String[] palabras = (cuerpo + " " + titulo).split("[\\W\\d]+");
 			// \W = no word character, \d digit character, \D no digit
 			palabrasValidas.clear();
-			//System.out.println(palabras.length);
 			for(String s: palabras){
 				if(s.length() > 1 && !palabrasComunes.contains(s.toLowerCase())){ 
 					//eliminar palabras de dos letras y comunes
@@ -272,8 +270,6 @@ public class Documento {
 				if(!bloqueo){
 					line = sc.nextLine();
 					bloqueo = false;
-				}else{
-					//System.out.println(line);
 				}
 				if(doc != null && line.contains(".X")  && line.substring(0, 1).equals(".")){
 					ArrayList<Referencia> referencias = new ArrayList<Referencia>();

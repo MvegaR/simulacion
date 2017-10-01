@@ -7,24 +7,24 @@ import modelo.ResultadoDataSet;
 import modelo.ResultadoDoc;
 import modelo.ResultadoQuery;
 /**
- * Clase controladora que realiza la generaci贸n de la funci贸n de distribuci贸n probabilistica global
+ * Clase controladora que realiza la generaci髇 de la funci髇 de distribuci髇 probabilistica global
  * @author Marcos
  *
  */
 public class GetEquation {
 
 	/**
-	 * Ecuaci贸n de distribuci贸n a generar
+	 * Ecuaci髇 de distribuci髇 a generar
 	 */
 	private DistributionEquation equation;
 	/**
-	 * Barra de carga de la interfaz gr谩fica
+	 * Barra de carga de la interfaz gr醘ica
 	 */
 	private ProgressBar barraDeCarga = null;
 	
 	/**
-	 * Constructor para la generaci贸n de la funci贸n de distribuci贸n de probabilidad gobal
-	 * @param cantidadIntervalos La cantidad de intervalos de la funci贸n a generarar
+	 * Constructor para la generaci髇 de la funci髇 de distribuci髇 de probabilidad gobal
+	 * @param cantidadIntervalos La cantidad de intervalos de la funci髇 a generarar
 	 * @param dataSet Puntero al data set a procesar
 	 */
 	
@@ -38,9 +38,9 @@ public class GetEquation {
 	}
 	/**
 	 * Constructor de la clase
-	 * @param cantidadIntervalos La cantidad de interbalos de la funci贸n a generarar
+	 * @param cantidadIntervalos La cantidad de interbalos de la funci髇 a generarar
 	 * @param dataSet Puntero al data set a procesar
-	 * @param barraDeCarga Barra de carga de la interfaz gr谩fica
+	 * @param barraDeCarga Barra de carga de la interfaz gr醘ica
 	 */
 	public GetEquation(Integer cantidadIntervalos, ResultadoDataSet dataSet, ProgressBar barraDeCarga){
 		if(cantidadIntervalos == null || cantidadIntervalos <= 0){
@@ -53,8 +53,8 @@ public class GetEquation {
 	}
 	
 	/**
-	 * M茅todo para la generaci贸n de la funci贸n de distribuci贸n de probabilidad gobal
-	 * @return Retorna una funci贸n de distribuci贸n de probabilidad Ver: {@link DistributionEquation}
+	 * M閠odo para la generaci髇 de la funci髇 de distribuci髇 de probabilidad gobal
+	 * @return Retorna una funci髇 de distribuci髇 de probabilidad Ver: {@link DistributionEquation}
 	 */
 	
 	public DistributionEquation generarEquation(){
@@ -67,7 +67,7 @@ public class GetEquation {
 	}
 	
 	/**
-	 * M茅todo privado para la generaci贸n de los intervalos 
+	 * M閠odo privado para la generaci髇 de los intervalos 
 	 */
 	private void generarIntervalos(){
 		Double intervalo = 1.0/equation.getCantidadIntervalos();
@@ -83,7 +83,7 @@ public class GetEquation {
 		}
 	}
 	/**
-	 * M茅todo privado para la generaci贸n de las probabilidades de cada intervalo
+	 * M閠odo privado para la generaci髇 de las probabilidades de cada intervalo
 	 */
 	private void generarProbabilidades(){
 		
@@ -162,7 +162,7 @@ public class GetEquation {
 	
 	/**
 	 * 
-	 * @return Barra de carga de la gr谩fica
+	 * @return Barra de carga de la gr醘ica
 	 */
 	public ProgressBar getBarraDeCarga() {
 		return barraDeCarga;
