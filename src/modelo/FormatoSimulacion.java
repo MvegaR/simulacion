@@ -1,4 +1,4 @@
-﻿package modelo;
+package modelo;
 /**
  * Clase modelo para desplegar en la tabla resultandos de la simulación
  * @author Marcos

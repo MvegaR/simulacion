@@ -1,4 +1,4 @@
-﻿package controlador;
+package controlador;
 
 import java.util.ArrayList;
 import javafx.scene.control.ProgressBar;

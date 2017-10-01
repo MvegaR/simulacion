@@ -1,4 +1,4 @@
-﻿package vista;
+package vista;
 
 import java.io.IOException;
 import java.net.MalformedURLException;

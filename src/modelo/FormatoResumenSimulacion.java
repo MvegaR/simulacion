@@ -1,4 +1,4 @@
-﻿package modelo;
+package modelo;
 /**
  * Clase diseñada para desplegar el resumen de la simulación de una consulta
  * @author Marcos

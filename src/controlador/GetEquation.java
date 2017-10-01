@@ -1,4 +1,4 @@
-﻿package controlador;
+package controlador;
 
 import javafx.scene.control.ProgressBar;
 import modelo.DistributionEquation;

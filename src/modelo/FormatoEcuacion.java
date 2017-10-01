@@ -1,4 +1,4 @@
-﻿package modelo;
+package modelo;
 /**
  * Clase para formatear tabla de la interfaz gráfica para 
  * desplegar los intervalos de la ecuación

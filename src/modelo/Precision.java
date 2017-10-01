@@ -1,4 +1,4 @@
-﻿package modelo;
+package modelo;
 /**
  * 
  * Clase diseñada para almacenar la precisión de una determinada consulta,

@@ -1,4 +1,4 @@
-﻿package controlador;
+package controlador;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
