@@ -1,17 +1,17 @@
-package modelo;
+ï»¿package modelo;
 /**
- * Clase para formatear tabla de la interfaz gráfica para 
- * desplegar los intervalos de la ecuación
+ * Clase para formatear tabla de la interfaz grÃ¡fica para 
+ * desplegar los intervalos de la ecuaciÃ³n
  * @author Marcos
  *
  */
 public class FormatoEcuacion {
 	
-	/** Número de intervalo*/
+	/** NÃºmero de intervalo*/
 	private Integer numero;
-	/** Valor mínimo del intervalo incluyente */
+	/** Valor mÃ­nimo del intervalo incluyente */
 	private Double min;
-	/** Valor máximo del intervalo excluyente */
+	/** Valor mÃ¡ximo del intervalo excluyente */
 	private Double max;
 	/** Valor de la probabilidad del intervalo*/
 	private Double valor;
@@ -64,9 +64,9 @@ public class FormatoEcuacion {
 	}
 	/**
 	 * Constructor de la clase
-	 * @param numero Número del intervalo
-	 * @param min Valor mínimo incluyente
-	 * @param max Valor máximo excluyente
+	 * @param numero NÃºmero del intervalo
+	 * @param min Valor mÃ­nimo incluyente
+	 * @param max Valor mÃ¡ximo excluyente
 	 * @param valor Valor de la probabilidad
 	 */
 	public FormatoEcuacion(Integer numero, Double min, Double max, Double valor) {

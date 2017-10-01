@@ -1,10 +1,10 @@
-package modelo;
+锘縫ackage modelo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 /**
- * Clase de Relevancia, contiene m閠odo para la lectura del fichero de texto de relevancias.
+ * Clase de Relevancia, contiene m茅todo para la lectura del fichero de texto de relevancias.
  * @author Marcos
  *
  */
@@ -87,8 +87,8 @@ public class Relevancia {
 		this.queryID = queryID;
 	}
 	/**
-	 * Obtiene desde un archivo la informaci髇 de relevancia de una consulta y un documento, 
-	 * rellenandolo en una lista con esa informaci髇
+	 * Obtiene desde un archivo la informaci贸n de relevancia de una consulta y un documento, 
+	 * rellenandolo en una lista con esa informaci贸n
 	 * @param file Archivo con la relevancia en formato: qid did 0 0                                          
 	 * @param relevancias Listado de Relevancias a rellenar
 	 * @param number Indica la columna a leer el asociado en el fichero en el archivo de relevancia
@@ -110,8 +110,8 @@ public class Relevancia {
 		}
 	}
 	/**
-	 * Solo para LISA DB: Obtiene desde un archivo la informaci髇 de relevancia 
-	 * de una consulta y un documento, rellenandolo en una lista con esa informaci髇
+	 * Solo para LISA DB: Obtiene desde un archivo la informaci贸n de relevancia 
+	 * de una consulta y un documento, rellenandolo en una lista con esa informaci贸n
 	 * @param file Archivo con la relevancia en formato: qid did 0 0                                          
 	 * @param relevancias Listado de Relevancias a rellenar
 	 */
@@ -142,8 +142,8 @@ public class Relevancia {
 	}
 	
 	/**
-	 * Solo para NPL DB: Obtiene desde un archivo la informaci髇 de relevancia 
-	 * de una consulta y un documento, rellenandolo en una lista con esa informaci髇
+	 * Solo para NPL DB: Obtiene desde un archivo la informaci贸n de relevancia 
+	 * de una consulta y un documento, rellenandolo en una lista con esa informaci贸n
 	 * @param file Archivo con la relevancia en formato: qid (did)*                                         
 	 * @param relevancias Listado de Relevancias a rellenar
 	 */
@@ -172,8 +172,8 @@ public class Relevancia {
 	}
 	
 	/**
-	 * Solo para TIME y ISWC2015: Obtiene desde un archivo la informaci髇 de relevancia 
-	 * de una consulta y un documento, rellenandolo en una lista con esa informaci髇
+	 * Solo para TIME y ISWC2015: Obtiene desde un archivo la informaci贸n de relevancia 
+	 * de una consulta y un documento, rellenandolo en una lista con esa informaci贸n
 	 * @param file Archivo con la relevancia en formato: qid did did did ...                                          
 	 * @param relevancias Listado de Relevancias a rellenar
 	 */

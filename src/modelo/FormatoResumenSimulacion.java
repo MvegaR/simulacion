@@ -1,6 +1,6 @@
-package modelo;
+﻿package modelo;
 /**
- * Clase dise�ada para desplegar el resumen de la simulaci�n de una consulta
+ * Clase diseñada para desplegar el resumen de la simulación de una consulta
  * @author Marcos
  *
  */
@@ -25,7 +25,7 @@ public class FormatoResumenSimulacion {
 	 * @param totalSimuladosYOriginales Total de relevantes originales y simulados
 	 * @param totalAcertados Total acertartados
 	 * @param totalFallados Total fallados
-	 * @param tolerancia Tolerancia utilizada en la simulaci�n
+	 * @param tolerancia Tolerancia utilizada en la simulación
 	 */
 	
 	public FormatoResumenSimulacion(Integer totalDesplegadosOriginales, Integer totalDesplegadosSimulados,
@@ -106,7 +106,7 @@ public class FormatoResumenSimulacion {
 	}
 	/**
 	 * 
-	 * @param tolerancia Tolerancia de la simulaci�n
+	 * @param tolerancia Tolerancia de la simulación
 	 */
 	
 	public void setTolerancia(Double tolerancia) {

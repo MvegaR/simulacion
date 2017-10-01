@@ -1,4 +1,4 @@
-package modelo;
+﻿package modelo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.Scanner;
 /**
  * Clase de consultas, con identificador, query (cuerpo consulta),
- * autores, identificador detallado, palabras v�lidas (no comunes)
+ * autores, identificador detallado, palabras válidas (no comunes)
  *
  * @author Marcos
  */
@@ -15,15 +15,15 @@ public class Consulta {
 	private Integer id; //I.
 	/** Texto de la consulta */
 	private String query; //.W
-	/** Autores de la consulta, en el proyecto no se utiliz� pero se encuentra presente en el archivo */
+	/** Autores de la consulta, en el proyecto no se utilizó pero se encuentra presente en el archivo */
 	private ArrayList<String> autores; //.A ?
-	/** Identificador m�s detallado de la consulta, no se utiliz�
+	/** Identificador más detallado de la consulta, no se utilizó
 	 * en el proyecto pero se encuentra presente en el archivo */
 	private String fullId; //.N ?
-	/** Palabras válidas presentes en la consulta en una lista enlazada */
+	/** Palabras vÃ¡lidas presentes en la consulta en una lista enlazada */
 	private LinkedList<String> palabrasValidas;
 	/**
-	 * Constructor consulta, inicializaci�n de variables.
+	 * Constructor consulta, inicialización de variables.
 	 */
 	public Consulta() {
 		this.id = 0;
@@ -55,8 +55,8 @@ public class Consulta {
 	}
 	/**
 	 * Para generar contenido de la lista this.palabrasComunes, se quitan todas las palabras
-	 *  comunes y se deja en una lista enlazada todas las palabras en min�sculas.
-	 * Se asume que todas palabras no válidas (comunes) se encuentran en min�culas.
+	 *  comunes y se deja en una lista enlazada todas las palabras en minúsculas.
+	 * Se asume que todas palabras no vÃ¡lidas (comunes) se encuentran en minúculas.
 	 * @param palabrasComunes Lista de palabras comunes para no agregar a la lista de this.palabrasValidas
 	 */
 	public void generarSetPalabras(ArrayList<String> palabrasComunes){
@@ -73,7 +73,7 @@ public class Consulta {
 	/**
 	 * Realiza la lectura de archivo de consultas y los inserta en una lista
 	 * @param origen Archivo de texto con consultas, no nula.
-	 * @param consultas Colección de consultas a rellenar, no nula.
+	 * @param consultas ColecciÃ³n de consultas a rellenar, no nula.
 	 */
 	public static void generarConsultas(File origen, ArrayList<Consulta> consultas){
 		try {
@@ -139,7 +139,7 @@ public class Consulta {
 	/**
 	 * Solo para LISA DB: Realiza la lectura de archivo de consultas y los inserta en una lista
 	 * @param origen Archivo de texto con consultas, no nula.
-	 * @param consultas Colección de consultas a rellenar, no nula.
+	 * @param consultas ColecciÃ³n de consultas a rellenar, no nula.
 	 */
 	public static void generarConsultasLisa(File origen, ArrayList<Consulta> consultas){
 		try {
@@ -175,7 +175,7 @@ public class Consulta {
 	
 	/**
 	 * Solo para BD Time: Obtiene las consultas desde un archivo de texto 
-	 * y rellena una lista entregada por parámetro de consultas generadas.
+	 * y rellena una lista entregada por parÃ¡metro de consultas generadas.
 	 * @param origen Archivo de texto con las consultas
 	 * @param consultas Lista de consultas a rellenar
 	 */
@@ -282,8 +282,8 @@ public class Consulta {
 		return id;
 	}
 	/**
-	 * Retorna la colección de palabras válidas, se necesita usar con el método generar 
-	 * @return Lista de palabras válidas
+	 * Retorna la colecciÃ³n de palabras vÃ¡lidas, se necesita usar con el mÃ©todo generar 
+	 * @return Lista de palabras vÃ¡lidas
 	 */
 	public LinkedList<String> getPalabrasValidas() {
 		return palabrasValidas;

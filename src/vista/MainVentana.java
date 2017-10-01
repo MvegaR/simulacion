@@ -1,4 +1,4 @@
-package vista;
+﻿package vista;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -12,7 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 /**
- * Clase principal final (Con m�todo main con interfaz gr�fica).
+ * Clase principal final (Con método main con interfaz gráfica).
  * @author Marcos
  *
  */
@@ -56,7 +56,7 @@ public class MainVentana extends Application {
 
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(this.getClass().getResource("/css/style.css").toExternalForm());
-			windows.setTitle("Proyecto t�tulo - Obtenci�n de una funci�n de distribuci�n probabil�stica "
+			windows.setTitle("Proyecto título - Obtención de una función de distribución probabilística "
 					+ "global para simular juicios de usuario - Por: Marcos Vega - 2017");
 
 

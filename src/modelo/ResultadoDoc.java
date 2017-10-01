@@ -1,9 +1,9 @@
-package modelo;
+锘縫ackage modelo;
 
 import java.util.ArrayList;
 /**
- * Clase dise馻da para almacenar los resultados de los documentos de una consulta, con id de la consulta, id documento
- * distancia coseno, precisi髇, sensibilidad (recall), n鷐ero total de palabras y una lista con las palabras
+ * Clase dise帽ada para almacenar los resultados de los documentos de una consulta, con id de la consulta, id documento
+ * distancia coseno, precisi贸n, sensibilidad (recall), n煤mero total de palabras y una lista con las palabras
  * presentes en la consulta y documento
  * @author Marcos
  *
@@ -17,7 +17,7 @@ public class ResultadoDoc {
 	private Double disCos;
 	/**Relevencia (jucio de usuario, puede ser null)*/
 	private Boolean isRel;
-	/**Precisi髇 de la posici髇 o raking del documento para la consulta*/
+	/**Precisi贸n de la posici贸n o raking del documento para la consulta*/
 	private Double precision;
 	/**Recall, documentosRelevantesDesplegados / documentosRelevantesTotales*/
 	private Double recall;
@@ -32,7 +32,7 @@ public class ResultadoDoc {
 	 * @param idDoc ID documento
 	 * @param disCos Distancia del coseno o similitud
 	 * @param isRel Relevencia (jucio de usuario, puede ser null)
-	 * @param precision Precisi髇 de la posici髇 o raking del documento para la consulta
+	 * @param precision Precisi贸n de la posici贸n o raking del documento para la consulta
 	 * @param recall Sensibilidad o recall, documentosRelevantesDesplegados / documentosRelevantesTotales
 	 * @param tWords total de palabras presentes en la consulta y documento
 	 *

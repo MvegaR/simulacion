@@ -1,4 +1,4 @@
-package controlador;
+Ôªøpackage controlador;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import modelo.ResultadoDataSet;
 import modelo.ResultadoDoc;
 import modelo.ResultadoQuery;
 /**
- * Incluye los mÈtodos para calcular las matrices de frecuencia y frecuencia inversa
+ * Incluye los m√©todos para calcular las matrices de frecuencia y frecuencia inversa
  *  @author Marcos
  */
 public class Matrices {
@@ -54,7 +54,7 @@ public class Matrices {
 		}
 	}//Fin clase Similitud.
 	//inicio atributos de this
-	/** Conjunto de palabras sin repetir, min˙sculas, ordenadas por alfabeto */
+	/** Conjunto de palabras sin repetir, min√∫sculas, ordenadas por alfabeto */
 	private SortedSet<String> palabras; //
 	/** Lista de lista de Integer, matriz de frecuencias */
 	private ArrayList<ArrayList<Integer>> matrizFrecuncias;
@@ -71,14 +71,14 @@ public class Matrices {
 	//fin atributos
 	/**
 	 * Constructor, inicializador de variables
-	 * @param palabras Conjunto (SortedSet) de palabras, por definiciÛn sin 
-	 * repeticiÛn (por hashcode() de String no equals()) y orden natural (alfabetico)
-	 * @param documentos ColecciÛn de documentos 
-	 * (ArrayList, arreglo tamaÒo adaptativo, no lista enlazada)
-	 * @param consultas ColecciÛn de consultas 
-	 * (ArrayList, arreglo tamaÒo adaptativo, no lista enlazada)
-	 * @param relevancias ColecciÛn de relevancia 
-	 * (ArrayList, arreglo tamaÒo adaptativo, no lista enlazada)
+	 * @param palabras Conjunto (SortedSet) de palabras, por definici√≥n sin 
+	 * repetici√≥n (por hashcode() de String no equals()) y orden natural (alfabetico)
+	 * @param documentos Colecci√≥n de documentos 
+	 * (ArrayList, arreglo tama√±o adaptativo, no lista enlazada)
+	 * @param consultas Colecci√≥n de consultas 
+	 * (ArrayList, arreglo tama√±o adaptativo, no lista enlazada)
+	 * @param relevancias Colecci√≥n de relevancia 
+	 * (ArrayList, arreglo tama√±o adaptativo, no lista enlazada)
 	 * @param resultadosConsultas Lista de resultados de cada consulta
 	 */
 	public Matrices(SortedSet<String> palabras, ArrayList<Documento> documentos, 
@@ -93,8 +93,8 @@ public class Matrices {
 		this.resultadosConsultas = resultadosConsultas;
 	}
 	/**
-	 * Obtiene la precisiÛn de cada documento para la consulta q con un p@ entregado por par·metro
-	 * @param q Consulta a calcular precisiÛn
+	 * Obtiene la precisi√≥n de cada documento para la consulta q con un p@ entregado por par√°metro
+	 * @param q Consulta a calcular precisi√≥n
 	 * @param p Valor de p@
 	 * @param precisiones Lista para almazenar las precisiones y utilizarlas con su respectivos idDocumentos y p@
 	 * @param dataSet Puntero al data set para trabajar
@@ -213,18 +213,18 @@ public class Matrices {
 			recall = 0.0;
 		}
 		precisiones.add(new Precision(q.getId(), precision, contadorDocumentosRelevantes, p));
-		//Guardando informaciÛn en memoria la informaciÛn de la consulta
+		//Guardando informaci√≥n en memoria la informaci√≥n de la consulta
 		resultadoConsulta.setPrecisionPromedio(precision);
 		resultadoConsulta.setRecallPromedio(recall);
 		resultadoConsulta.setTotalDocRelevantesTotales(totalRelevantes(q).intValue());
 		resultadoConsulta.setTotalDocReleventesDesplegados(contadorDocumentosRelevantes);
 		dataSet.getResultadosConsultas().add(resultadoConsulta);
 		/*
-		System.out.println("\t\tPrecisiÛn consulta Q"+q.getId()+"p@"+p+" es: "
+		System.out.println("\t\tPrecisi√≥n consulta Q"+q.getId()+"p@"+p+" es: "
 		+ String.format("%.10f", precision)+" Docs Relevantes: "+contadorDocumentosRelevantes+"\n");
 		//*/
 		if(output){
-			System.out.println("PrecisiÛn promedio"+"\t\t\t\t"+precision);
+			System.out.println("Precisi√≥n promedio"+"\t\t\t\t"+precision);
 			System.out.println("Recall promedio"+"\t\t\t\t\t"+recall);
 			System.out.println("Total relevantes"+"\t\t\t\t\t"+totalRelevantes(q));
 			System.out.println();
@@ -382,7 +382,7 @@ public class Matrices {
 		return false;
 	}
 	/**
-	 * MÈtodo que rellena la matriz con las frecuencias de las 
+	 * M√©todo que rellena la matriz con las frecuencias de las 
 	 * palabras (set de palabras), de cada documento.
 	 * Por cada documento <b>d</b> de la lista de documentos 
 	 * (excluyendo documentos sin cuerpo o sin palabras), 
@@ -407,7 +407,7 @@ public class Matrices {
 		}
 	}
 	/**
-	 * MÈtodo que rellena la matriz con las frecuencias de las 
+	 * M√©todo que rellena la matriz con las frecuencias de las 
 	 * palabras (set de palabras) con una barra opcional de carga
 	 * para la interfaz de usuario, de cada documento con una barra
 	 * de carga para la interfaz grafica (opcional).
@@ -435,23 +435,23 @@ public class Matrices {
 		}
 	}
 	/**
-	 * MÈtodo que rellena la matriz con las frecuencias inversa de las palabras 
+	 * M√©todo que rellena la matriz con las frecuencias inversa de las palabras 
 	 * (set de palabras), de cada documento. 
-	 * Por cada documento, con palabras v·lidas,
+	 * Por cada documento, con palabras v√°lidas,
 	 * se crea una <b>lista</b> de double que se almacena en una lista de listas 
 	 * (arraylist, es un arreglo, no lista enlazada),
-	 * la <b>lista</b> se rellena inicialmente con el id del documento, a continuaciÛn con 
-	 * los valores del c·lculo de frecuencia inversa
+	 * la <b>lista</b> se rellena inicialmente con el id del documento, a continuaci√≥n con 
+	 * los valores del c√°lculo de frecuencia inversa
 	 * por cada palabra <b>s</b> se calcula:
 	 * log10(totalDocumentos/totalDocumentosQueTieneLaPalabra<b>S</b>
 	 * si en la matriz de frecuencias tiene el valor de cero no se realiza 
-	 * c·lculo se se agrega un 0 a la lista.
+	 * c√°lculo se se agrega un 0 a la lista.
 	 */
 	public void obtenerFrecuenciasInversas(){
-		// log(totalDocume∫ntos/cantidadOcurrenciasEnTodosLosDocumentos)
+		// log(totalDocume¬∫ntos/cantidadOcurrenciasEnTodosLosDocumentos)
 		matrizFrecunciasInversas.clear();
 		for(Documento d: documentos){
-			if(d != null && !d.getPalabrasValidas().isEmpty()){//quitando documentos sin cuerpo ni tÌtulo
+			if(d != null && !d.getPalabrasValidas().isEmpty()){//quitando documentos sin cuerpo ni t√≠tulo
 				System.out.println("Frecuencia inversa documento: "+d.getId());
 				ArrayList<Double> lista = new ArrayList<>();
 				matrizFrecunciasInversas.add(lista);
@@ -476,26 +476,26 @@ public class Matrices {
 	}
 
 	/**
-	 * MÈtodo que rellena la matriz con las frecuencias inversa de las palabras 
+	 * M√©todo que rellena la matriz con las frecuencias inversa de las palabras 
 	 * (set de palabras), de cada documento. 
-	 * Por cada documento, con palabras v·lidas,
+	 * Por cada documento, con palabras v√°lidas,
 	 * se crea una <b>lista</b> de double que se almacena en una lista de listas 
 	 * (arraylist, es un arreglo, no lista enlazada),
-	 * la <b>lista</b> se rellena inicialmente con el id del documento, a continuaciÛn con 
-	 * los valores del c·lculo de frecuencia inversa
+	 * la <b>lista</b> se rellena inicialmente con el id del documento, a continuaci√≥n con 
+	 * los valores del c√°lculo de frecuencia inversa
 	 * por cada palabra <b>s</b> se calcula:
 	 * log10(totalDocumentos/totalDocumentosQueTieneLaPalabra<b>S</b>
 	 * si en la matriz de frecuencias tiene el valor de cero no se realiza 
-	 * c·lculo se se agrega un 0 a la lista.
-	 * @param bar Barra de progreso JavaFX para la interfaz gr·fica puede ser null
+	 * c√°lculo se se agrega un 0 a la lista.
+	 * @param bar Barra de progreso JavaFX para la interfaz gr√°fica puede ser null
 	 */
 	public void obtenerFrecuenciasInversas(ProgressBar bar){
-		// log(totalDocume∫ntos/cantidadOcurrenciasEnTodosLosDocumentos)
+		// log(totalDocume¬∫ntos/cantidadOcurrenciasEnTodosLosDocumentos)
 		Double count = 0.0;
 		matrizFrecunciasInversas.clear();
 		for(Documento d: documentos){
 			if(bar!=null){bar.setProgress(0.33+ (((count++))/documentos.size())/3);}
-			if(d != null && !d.getPalabrasValidas().isEmpty()){//quitando documentos sin cuerpo ni tÌtulo
+			if(d != null && !d.getPalabrasValidas().isEmpty()){//quitando documentos sin cuerpo ni t√≠tulo
 				
 				ArrayList<Double> lista = new ArrayList<>();
 				matrizFrecunciasInversas.add(lista);
@@ -519,7 +519,7 @@ public class Matrices {
 		}
 	}
 	/**
-	 * MÈtodo que realiza el c·lculo de similitud de la consulta entregada por par·metro
+	 * M√©todo que realiza el c√°lculo de similitud de la consulta entregada por par√°metro
 	 * Se crea el <b>vectorQ</b> de la consulta <b>q</b> y una 
 	 * lista <b>vectorSimilitud</b> para retornar (de la clase local similitud)
 	 * por cada palabra <b>s</b> si la consulta <b>q</b> contiene la palabra <b>s</b> se calcula 
@@ -567,7 +567,7 @@ public class Matrices {
 		return vectorSimilitud;
 	}
 	/**
-	 * MÈtodo que entrega la cantidad de documentos que tiene la palabra entregada por par·metro
+	 * M√©todo que entrega la cantidad de documentos que tiene la palabra entregada por par√°metro
 	 * @param palabra String a buscar en los documentos
 	 * @return Retorna la cantidad calculadora
 	 */
@@ -590,7 +590,7 @@ public class Matrices {
 		return contador;
 	}
 	/**
-	 * MÈtodo para imprimir matriz de frecuencias por pantalla
+	 * M√©todo para imprimir matriz de frecuencias por pantalla
 	 */
 	public void imprimirMatrizFrecuencias(){
 		for(ArrayList<Integer> l: matrizFrecuncias ){
@@ -601,7 +601,7 @@ public class Matrices {
 		}
 	}
 	/**
-	 * MÈtodo para imprimir matriz de frecuencia inversa por pantalla
+	 * M√©todo para imprimir matriz de frecuencia inversa por pantalla
 	 */
 	public void imprimirMatrizFrecuenciasInversas(){
 		for(ArrayList<Double> l: matrizFrecunciasInversas ){
@@ -612,7 +612,7 @@ public class Matrices {
 		}
 	}
 	/**
-	 * MÈtodo para crear un archivo de relevancia ID - Documento, 
+	 * M√©todo para crear un archivo de relevancia ID - Documento, 
 	 * para el caso de que los id del archivo de relevancias original 
 	 * este considerando posiciones de un arreglo en vez del ID
 	 */

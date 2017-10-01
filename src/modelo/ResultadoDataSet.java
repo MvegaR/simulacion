@@ -1,11 +1,11 @@
-package modelo;
+ï»¿package modelo;
 
 import java.util.ArrayList;
 
 /**
- * Clase diseñada para almacenar los datos de la base de datos y los resultados del procesamiento de similitud
+ * Clase diseÃ±ada para almacenar los datos de la base de datos y los resultados del procesamiento de similitud
  * contiene nombre de la base de datos, lista de resultados de cada consulta, el total de consultas, el total de 
- * documentos, total de palabras comunes y total de palabras únicas. 
+ * documentos, total de palabras comunes y total de palabras Ãºnicas. 
  * @author Marcos
  *
  */
@@ -26,7 +26,7 @@ public class ResultadoDataSet {
 	 * @param totalConsultas Total de consultas de la base de datos
 	 * @param totalDocumentos Total de documentos de la base de datos
 	 * @param totalPalabrasComunes Palabras comunes para no considerar
-	 * @param totalpalabrasValidasNoComunes Total de palabras únicas no comunes
+	 * @param totalpalabrasValidasNoComunes Total de palabras Ãºnicas no comunes
 	 */
 	public ResultadoDataSet(String setName, Integer totalConsultas, Integer totalDocumentos,
 			Integer totalPalabrasComunes, Integer totalpalabrasValidasNoComunes) {

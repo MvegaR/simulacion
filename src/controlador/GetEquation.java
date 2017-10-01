@@ -1,4 +1,4 @@
-package controlador;
+锘縫ackage controlador;
 
 import javafx.scene.control.ProgressBar;
 import modelo.DistributionEquation;
@@ -7,30 +7,30 @@ import modelo.ResultadoDataSet;
 import modelo.ResultadoDoc;
 import modelo.ResultadoQuery;
 /**
- * Clase controladora que realiza la generaci髇 de la funci髇 de distribuci髇 probabilistica global
+ * Clase controladora que realiza la generaci贸n de la funci贸n de distribuci贸n probabilistica global
  * @author Marcos
  *
  */
 public class GetEquation {
 
 	/**
-	 * Ecuaci髇 de distribuci髇 a generar
+	 * Ecuaci贸n de distribuci贸n a generar
 	 */
 	private DistributionEquation equation;
 	/**
-	 * Barra de carga de la interfaz gr醘ica
+	 * Barra de carga de la interfaz gr谩fica
 	 */
 	private ProgressBar barraDeCarga = null;
 	
 	/**
-	 * Constructor para la generaci髇 de la funci髇 de distribuci髇 de probabilidad gobal
-	 * @param cantidadIntervalos La cantidad de intervalos de la funci髇 a generarar
+	 * Constructor para la generaci贸n de la funci贸n de distribuci贸n de probabilidad gobal
+	 * @param cantidadIntervalos La cantidad de intervalos de la funci贸n a generarar
 	 * @param dataSet Puntero al data set a procesar
 	 */
 	
 	public GetEquation(Integer cantidadIntervalos, ResultadoDataSet dataSet){
 		if(cantidadIntervalos == null || cantidadIntervalos <= 0){
-			System.out.println("Cantidad intervalos invalido, se usar谩 100 por defecto");
+			System.out.println("Cantidad intervalos invalido, se usar脙隆 100 por defecto");
 			cantidadIntervalos = 100;
 		}
 		equation = new DistributionEquation(cantidadIntervalos, dataSet);
@@ -38,13 +38,13 @@ public class GetEquation {
 	}
 	/**
 	 * Constructor de la clase
-	 * @param cantidadIntervalos La cantidad de interbalos de la funci髇 a generarar
+	 * @param cantidadIntervalos La cantidad de interbalos de la funci贸n a generarar
 	 * @param dataSet Puntero al data set a procesar
-	 * @param barraDeCarga Barra de carga de la interfaz gr醘ica
+	 * @param barraDeCarga Barra de carga de la interfaz gr谩fica
 	 */
 	public GetEquation(Integer cantidadIntervalos, ResultadoDataSet dataSet, ProgressBar barraDeCarga){
 		if(cantidadIntervalos == null || cantidadIntervalos <= 0){
-			System.out.println("Cantidad intervalos invalido, se usar谩 100 por defecto");
+			System.out.println("Cantidad intervalos invalido, se usar脙隆 100 por defecto");
 			cantidadIntervalos = 100;
 		}
 		equation = new DistributionEquation(cantidadIntervalos, dataSet);
@@ -53,8 +53,8 @@ public class GetEquation {
 	}
 	
 	/**
-	 * M閠odo para la generaci髇 de la funci髇 de distribuci髇 de probabilidad gobal
-	 * @return Retorna una funci髇 de distribuci髇 de probabilidad Ver: {@link DistributionEquation}
+	 * M茅todo para la generaci贸n de la funci贸n de distribuci贸n de probabilidad gobal
+	 * @return Retorna una funci贸n de distribuci贸n de probabilidad Ver: {@link DistributionEquation}
 	 */
 	
 	public DistributionEquation generarEquation(){
@@ -67,11 +67,11 @@ public class GetEquation {
 	}
 	
 	/**
-	 * M閠odo privado para la generaci髇 de los intervalos 
+	 * M茅todo privado para la generaci贸n de los intervalos 
 	 */
 	private void generarIntervalos(){
 		Double intervalo = 1.0/equation.getCantidadIntervalos();
-		//incluir primero, excluir 锟絣timo
+		//incluir primero, excluir 茂驴陆ltimo
 		for(Double i = 0.0; i < 1.0; i+= intervalo){
 			equation.getIntervalos().add(new ProbabilisticInterval(i, (i+intervalo)));
 			if(barraDeCarga != null){
@@ -83,7 +83,7 @@ public class GetEquation {
 		}
 	}
 	/**
-	 * M閠odo privado para la generaci髇 de las probabilidades de cada intervalo
+	 * M茅todo privado para la generaci贸n de las probabilidades de cada intervalo
 	 */
 	private void generarProbabilidades(){
 		
@@ -162,7 +162,7 @@ public class GetEquation {
 	
 	/**
 	 * 
-	 * @return Barra de carga de la gr醘ica
+	 * @return Barra de carga de la gr谩fica
 	 */
 	public ProgressBar getBarraDeCarga() {
 		return barraDeCarga;

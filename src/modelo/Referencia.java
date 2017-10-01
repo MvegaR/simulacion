@@ -1,9 +1,9 @@
-package modelo;
+﻿package modelo;
 /**
  * Clase de referencias no utilizada en el proyecto, corresponde a las referencias de los documentos, 
  * nacesitaba una estructura de datos abstracta nueva para lectura.
  * 
- * Descripci�n en ingles pressente en el archivo, base de datos CACM:
+ * Descripción en ingles pressente en el archivo, base de datos CACM:
  * 4 : "bibliographic coupling" - if document id Y appears in the bibliographic
  *   coupling subvector for document X with a weight of w, it means X
  *   and Y have w common references in their bibliographies; the weight

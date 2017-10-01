@@ -1,11 +1,11 @@
-package modelo;
+ï»¿package modelo;
 /**
- * Clase modelo para desplegar en la tabla resultandos de la simulación
+ * Clase modelo para desplegar en la tabla resultandos de la simulaciÃ³n
  * @author Marcos
  *
  */
 public class FormatoSimulacion {
-	/**Si es igual o no el jucio de usuario del archivo de relevancia con la simulación */
+	/**Si es igual o no el jucio de usuario del archivo de relevancia con la simulaciÃ³n */
 	private Boolean igual;
 	/**Identificador de la consulta */
 	private Integer idq;
@@ -20,7 +20,7 @@ public class FormatoSimulacion {
 	
 	/**
 	 * Constructor de la clase
-	 * @param igual Si es igual o no el jucio de usuario del archivo de relevancia con la simulación
+	 * @param igual Si es igual o no el jucio de usuario del archivo de relevancia con la simulaciÃ³n
 	 * @param idq Identificador de la consulta
 	 * @param iddoc Identificador del documento
 	 * @param sim Valor de similitud o distancia conseno

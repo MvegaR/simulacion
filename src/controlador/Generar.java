@@ -1,4 +1,4 @@
-package controlador;
+锘縫ackage controlador;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -14,10 +14,10 @@ import modelo.Relevancia;
 import modelo.ResultadoDataSet;
 
 /**
- * Clase principal con m閠odo main (usado en la primera iteraci髇 del proyecto, en la segunda iteraci髇
- * se usa un m閠odo main presente en otra clase que corresponde a la interfaz gr醘ica), 
- * y algoritmo para la ejecuci髇 de cada m骴ulo del proyecto paso a paso.
- * Incluye m閠odo para la lectura del fichero de palabras comunes
+ * Clase principal con m茅todo main (usado en la primera iteraci贸n del proyecto, en la segunda iteraci贸n
+ * se usa un m茅todo main presente en otra clase que corresponde a la interfaz gr谩fica), 
+ * y algoritmo para la ejecuci贸n de cada m贸dulo del proyecto paso a paso.
+ * Incluye m茅todo para la lectura del fichero de palabras comunes
  * @author Marcos
  */
 public class Generar {
@@ -28,14 +28,14 @@ public class Generar {
 	private static ArrayList<ResultadoDataSet> resultadosDataSet = new ArrayList<>();
 
 	/**
-	 * M閠odo main (primera iteraci髇, usado solo para depurar)
+	 * M茅todo main (primera iteraci贸n, usado solo para depurar)
 	 * @param args Sin uso.
 	 */
 
 	public static void main(String[] args) {
 	
 		String fsp = System.getProperty("file.separator").toString();
-		//palabras comunes (se uso en todas ya que mejora la precisi髇, pero es de cran)
+		//palabras comunes (se uso en todas ya que mejora la precisi贸n, pero es de cran)
 		File palabrasComunesFile = new File("files"+fsp+"cacm"+fsp+"common_words");
 		//Archivos BD CACM
 		//*/
@@ -120,7 +120,7 @@ public class Generar {
 		//*/
 
 		//Archivos BD ISWC2015
-		//La m醩 peque馻
+		//La m谩s peque帽a
 		/*/
 		File documentosFileISWC2015 = new File("files"+fsp+"iswc2015"+fsp+"docs.txt");
 		File consultasFileISWC2015= new File("files"+fsp+"iswc2015"+fsp+"qrys.txt");
@@ -133,10 +133,10 @@ public class Generar {
 
 	}
 	/**
-	 * M閠odo que realiza la ejecuci髇 del algoritmo para obtener matriz frecuencia, 
-	 * matriz frecuencia inversa, similitud y precisi髇.
+	 * M茅todo que realiza la ejecuci贸n del algoritmo para obtener matriz frecuencia, 
+	 * matriz frecuencia inversa, similitud y precisi贸n.
 	 * @param documentosFiles Lista de Archivo con los documentos, si es null,
-	 *  el siguiente par醡etro no puede serlo.
+	 *  el siguiente par谩metro no puede serlo.
 	 * @param documentosFile Archivo con los documentos
 	 * @param consultasFile Archivo con las consultas
 	 * @param relevanciasFile Archivo con la relevancia de los documentos por consulta
@@ -240,7 +240,7 @@ public class Generar {
 
 
 	/**
-	 * M閠odo que obtiene la lista de palabras comunes, como pronombres personales, conectores etc
+	 * M茅todo que obtiene la lista de palabras comunes, como pronombres personales, conectores etc
 	 * @param file Archivo con las palabras
 	 * @param palabras lista de palabras a rellenar con las palabras del archivo
 	 */

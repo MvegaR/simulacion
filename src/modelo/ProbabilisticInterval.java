@@ -1,7 +1,7 @@
-package modelo;
+﻿package modelo;
 /**
- * Clase dise�ada para representar un intervalo con un m�nimo y un m�ximo 
- * como estructura b�sica para la funci�n de distribuci�n de probabilidad 
+ * Clase diseñada para representar un intervalo con un mínimo y un máximo 
+ * como estructura básica para la función de distribución de probabilidad 
  * global a generar.
  * @author Marcos
  *
@@ -11,8 +11,8 @@ public class ProbabilisticInterval {
 	private Double max;
 	/**
 	 * Contructor de la clase
-	 * @param min Valor m�nimo del intervalo
-	 * @param max Valor m�ximo del intervalo
+	 * @param min Valor mínimo del intervalo
+	 * @param max Valor máximo del intervalo
 	 */
 	public ProbabilisticInterval(Double min, Double max) {
 		super();

@@ -1,4 +1,4 @@
-package controlador;
+锘縫ackage controlador;
 
 import java.io.File;
 import java.net.URL;
@@ -42,7 +42,7 @@ import modelo.ResultadoQuery;
 
 /**
  * Clase controladora de la ventana principal
- * Contiene eventos de cada bot髇 y elemento de control y navegaci髇 de la gr醘ica
+ * Contiene eventos de cada bot贸n y elemento de control y navegaci贸n de la gr谩fica
  * @author Marcos
  *
  */
@@ -118,7 +118,7 @@ public class VentanaController implements Initializable{
 	private HashMap<String, ResultadoDataSet> mapDataSets = new HashMap<>();
 	/**  Map para acceder a un resultado de datos de la simulacion dado el nombre del dataSet*/
 	private HashMap<String, Simulador> mapSimulador = new HashMap<>();
-	/**  Map para acceder a un resultado de datos de la funci髇 dado el nombre del dataSet*/
+	/**  Map para acceder a un resultado de datos de la funci贸n dado el nombre del dataSet*/
 	private HashMap<String, DistributionEquation> mapGetEquation = new HashMap<>();
 	/**  Map para acceder a un resultado de documentos dado el nombre del dataSet*/
 	private HashMap<String, ArrayList<Documento>> mapDocumentos = new HashMap<>();
@@ -128,18 +128,18 @@ public class VentanaController implements Initializable{
 	private HashMap<String, ArrayList<String>> mapPalabrasComunes = new HashMap<>();
 	/**  Map para acceder a un resultado de relevancias dado el nombre del dataSet*/
 	private HashMap<String, ArrayList<Relevancia>> mapRelevancias = new HashMap<>();
-	/**  Map para acceder a un resultado de palabras v醠idas dado el nombre del dataSet*/
+	/**  Map para acceder a un resultado de palabras v谩lidas dado el nombre del dataSet*/
 	private HashMap<String, SortedSet<String>> MapSetDePalabras = new HashMap<>();
-	/**  Map para recordar puntero de los 韙ems de consultas de una consulta para poder quitarlos si es necesario*/
+	/**  Map para recordar puntero de los 铆tems de consultas de una consulta para poder quitarlos si es necesario*/
 	private HashMap<String, ArrayList<TreeItem<String>>> mapHijosConsultas = new HashMap<>();
-	/** hilo de generar funci髇 */
+	/** hilo de generar funci贸n */
 	private Thread hiloFuncion;
-	/** hilo de generar simulaci髇 */
+	/** hilo de generar simulaci贸n */
 	private Thread hiloSimulacion;
 
 	/**
-	 * M閠odo que se ejecuta previamente a desplegar la escena gr醘ica en JavaFX
-	 * Contiene la carga inicial y la asignaci髇 de eventos a los elementos gr醘icos. 
+	 * M茅todo que se ejecuta previamente a desplegar la escena gr谩fica en JavaFX
+	 * Contiene la carga inicial y la asignaci贸n de eventos a los elementos gr谩ficos. 
 	 */
 
 	@Override
@@ -208,11 +208,11 @@ public class VentanaController implements Initializable{
 	}
 	
 	/**
-	 * M閠odo de evento de slider de intervalos
+	 * M茅todo de evento de slider de intervalos
 	 */
 
 	private void sliderIntervalos(){
-		getButtonGenerarF().setText("Generar funci髇 con "+(int)getSliderIntervalos().getValue()+" intervalos");
+		getButtonGenerarF().setText("Generar funci贸n con "+(int)getSliderIntervalos().getValue()+" intervalos");
 		if((int)getSliderIntervalos().getValue() == 0){
 			getButtonGenerarF().setDisable(true);
 		}else{
@@ -221,10 +221,10 @@ public class VentanaController implements Initializable{
 	}
 
 	/**
-	 * M閠odo de control principal para la ventana, usado en el evento de selecci髇 de 韙em en el 醨bol
-	 * o cualquier situaci髇 de actualizaci髇 de datos de la ventana
-	 * Diferencia entre selecci髇 de una base de datos para desplegar su resumen
-	 * y la selecci髇 de una consulta para desplegar el detalle
+	 * M茅todo de control principal para la ventana, usado en el evento de selecci贸n de 铆tem en el 谩rbol
+	 * o cualquier situaci贸n de actualizaci贸n de datos de la ventana
+	 * Diferencia entre selecci贸n de una base de datos para desplegar su resumen
+	 * y la selecci贸n de una consulta para desplegar el detalle
 	 */
 
 	private void updateData() {
@@ -260,8 +260,8 @@ public class VentanaController implements Initializable{
 				getToogleButtonVerResultadoS().setDisable(true);
 				getToogleButtonVerResultadoS().setDisable(true);
 				getToogleButtonVerResultadoS().setDisable(true);
-				getLabelRelAcertadas().setText("Relevancias acertadas en simulaci髇");
-				getLabelRelAcertadasReal().setText("Relevancias (true) acertadas en simulaci髇");
+				getLabelRelAcertadas().setText("Relevancias acertadas en simulaci贸n");
+				getLabelRelAcertadasReal().setText("Relevancias (true) acertadas en simulaci贸n");
 				getLabelRelAcertadasValor().setText("??%" );
 				getLavelRelRealValor().setText("??%" );
 			}else{
@@ -283,15 +283,15 @@ public class VentanaController implements Initializable{
 					getToogleButtonVerResultadoS().setDisable(true);
 					getToogleButtonVerResultadoS().setDisable(true);
 					getToogleButtonVerResultadoS().setDisable(true);
-					getLabelRelAcertadas().setText("Relevancias acertadas en simulaci髇");
-					getLabelRelAcertadasReal().setText("Relevancias (true) acertadas en simulaci髇");
+					getLabelRelAcertadas().setText("Relevancias acertadas en simulaci贸n");
+					getLabelRelAcertadasReal().setText("Relevancias (true) acertadas en simulaci贸n");
 					getLabelRelAcertadasValor().setText("??%" );
 					getLavelRelRealValor().setText("??%" );
 
 				}else{
 					getCargaProcesarConsultas().setProgress(1.0);
 					enableFunctionControl();
-					//map funci髇
+					//map funci贸n
 					if(!getMapGetEquation().containsKey(selectItem.getValue().toString())){
 						disableSimularControl();
 						getButtonVerFuncion().setDisable(true);
@@ -302,13 +302,13 @@ public class VentanaController implements Initializable{
 						getButtonVerFuncion().setDisable(false);
 						enableSimularControl();
 						getCargaF().setProgress(1.0);
-						//map simulaci髇
+						//map simulaci贸n
 						if(!getMapSimulador().containsKey(selectItem.getValue().toString())){
 							getToogleButtonVerResultadoS().setDisable(true);
 							getToogleButtonVerResultadoS().setDisable(true);
 							getCargaS().setProgress(0);
-							getLabelRelAcertadas().setText("Relevancias acertadas en simulaci髇");
-							getLabelRelAcertadasReal().setText("Relevancias (true) acertadas en simulaci髇");
+							getLabelRelAcertadas().setText("Relevancias acertadas en simulaci贸n");
+							getLabelRelAcertadasReal().setText("Relevancias (true) acertadas en simulaci贸n");
 							getLabelRelAcertadasValor().setText("??%" );
 							getLavelRelRealValor().setText("??%" );
 
@@ -316,12 +316,12 @@ public class VentanaController implements Initializable{
 						}else{
 							getToogleButtonVerResultadoS().setDisable(false);
 							getCargaS().setProgress(1.0);
-							getLabelRelAcertadas().setText("Relevancias acertadas en simulaci髇");
+							getLabelRelAcertadas().setText("Relevancias acertadas en simulaci贸n");
 							Integer totalAcertado = getMapSimulador().get(selectItem.getValue().toString()).getTotalGlobalAcertados();
 							Integer totalFallado= getMapSimulador().get(selectItem.getValue().toString()).getTotalGlobalFallados();
 							Integer total = totalFallado+totalAcertado;
 							getLabelRelAcertadasValor().setText( (totalAcertado*100)/(total.doubleValue())+"%" );
-							getLabelRelAcertadasReal().setText("Relevancias (true) acertadas en simulaci髇");
+							getLabelRelAcertadasReal().setText("Relevancias (true) acertadas en simulaci贸n");
 							Integer totalAcertadoTrue = getMapSimulador().get(getTree().getSelectionModel().getSelectedItem().getValue().toString()).getTotalGlobalRealesYSimulados();
 							Integer totalFalladoTrue= getMapSimulador().get(getTree().getSelectionModel().getSelectedItem().getValue().toString()).getTotalRelevantesFallados();
 							Integer totalTrue = totalFalladoTrue+totalAcertadoTrue;
@@ -369,7 +369,7 @@ public class VentanaController implements Initializable{
 			ResultadoQuery rq = getResultadoQueryById(selectItem.getValue().split(".* ID: ")[1],padre.getValue());
 			getResumenController().getLabelDataSetName().setText(
 					getTree().getSelectionModel().getSelectedItem().getValue());
-			getResumenController().getTexto1().setText("Precisi髇 promedio");
+			getResumenController().getTexto1().setText("Precisi贸n promedio");
 			getResumenController().getTexto2().setText("Recall promedio");
 			getResumenController().getTexto3().setText("Total relevantes");
 			getResumenController().getTexto4().setText("Total relevantes desplegados");
@@ -422,7 +422,7 @@ public class VentanaController implements Initializable{
 			Simulador simulador = mapSimulador.get(padre.getValue());
 
 			getResumenController().getLabelDataSetName().setText(getTree().getSelectionModel().getSelectedItem().getValue());
-			getResumenController().getLabelTituloSim().setText("Simulaci髇 " +getLabelDataSetName().getText());
+			getResumenController().getLabelTituloSim().setText("Simulaci贸n " +getLabelDataSetName().getText());
 			getResumenController().getTexto1().setText("Total relevantes desplegados originales");
 			getResumenController().getTexto2().setText("Total relevantes desplegados simulados");
 			getResumenController().getTexto3().setText("Total relevantes simulados y originales");
@@ -446,7 +446,7 @@ public class VentanaController implements Initializable{
 			getPanelContenido().setCenter(getResumenController().getResumenDataSet());
 			getResumenController().getTitulo2().setVisible(true);
 
-			getResumenController().getLabelTituloSim().setText("Resumen global simulaci髇");
+			getResumenController().getLabelTituloSim().setText("Resumen global simulaci贸n");
 			getResumenController().getTexto11().setText("Total fallados");
 			getResumenController().getTexto21().setText("Total acertados");
 			getResumenController().getTexto31().setText("Total relevantes fallados");
@@ -467,7 +467,7 @@ public class VentanaController implements Initializable{
 
 	}
 	/**
-	 * Entrega un resultado de consulta para obtener informaci髇 del resumen
+	 * Entrega un resultado de consulta para obtener informaci贸n del resumen
 	 * @param idQ ID de la consulta (string)
 	 * @param nombreDB Nombre del data set (string)
 	 * @return Resultado {@link ResultadoQuery}
@@ -483,7 +483,7 @@ public class VentanaController implements Initializable{
 	}
 
 	/**
-	 * M閠odo que actualiza la tabla de datos con informaci髇 detallada de una consulta
+	 * M茅todo que actualiza la tabla de datos con informaci贸n detallada de una consulta
 	 * @param selectItem Contiene el id de la consulta (TreeItem)
 	 * @param nombreDB Contiene el nombre de del data set (TreeItem)
 	 */
@@ -500,7 +500,7 @@ public class VentanaController implements Initializable{
 		TableColumn<ResultadoDoc, Double> similitud = new TableColumn("Similitud");
 		similitud.setCellValueFactory(new PropertyValueFactory<>("disCos"));
 
-		TableColumn<ResultadoDoc, Boolean> isRel = new TableColumn("縀s relevante?");
+		TableColumn<ResultadoDoc, Boolean> isRel = new TableColumn("驴Es relevante?");
 		isRel.setCellValueFactory(new PropertyValueFactory<>("isRel"));
 		isRel.setCellFactory(column -> {
 			return new TableCell<ResultadoDoc, Boolean>() {
@@ -522,7 +522,7 @@ public class VentanaController implements Initializable{
 			};
 		});
 
-		TableColumn<ResultadoDoc, Double> precision = new TableColumn("Precisi髇");
+		TableColumn<ResultadoDoc, Double> precision = new TableColumn("Precisi贸n");
 		precision.setCellValueFactory(new PropertyValueFactory<>("precision"));
 
 		TableColumn<ResultadoDoc, Double> recall = new TableColumn("Recall");
@@ -538,14 +538,14 @@ public class VentanaController implements Initializable{
 	}
 
 	/**
-	 * M閠odo que actualiza la tabla de datos con informaci髇 detallada de una consulta simulada
+	 * M茅todo que actualiza la tabla de datos con informaci贸n detallada de una consulta simulada
 	 * @param selectItem Contiene el id de la consulta (TreeItem)
 	 * @param nombreDB Contiene el nombre de del data set (TreeItem)
 	 */
 	@SuppressWarnings("unchecked")
 	private void tablaConsultaSimulada(TreeItem<String> selectItem, String nombreDB){
 		String idConsultaSeleccionada = selectItem.getValue().split(".* ID: ")[1];
-		TableColumn<FormatoSimulacion, Boolean> igual = new TableColumn<FormatoSimulacion, Boolean>("縄gual?");
+		TableColumn<FormatoSimulacion, Boolean> igual = new TableColumn<FormatoSimulacion, Boolean>("驴Igual?");
 		igual.setCellValueFactory(new PropertyValueFactory<>("igual"));
 		igual.setCellFactory(column -> {
 			return new TableCell<FormatoSimulacion, Boolean>() {
@@ -609,7 +609,7 @@ public class VentanaController implements Initializable{
 	}
 
 	/**
-	 * M閠odo que muestra la funci髇 en la tabla
+	 * M茅todo que muestra la funci贸n en la tabla
 	 * @param nombreDB Nombre del data set
 	 */
 	@SuppressWarnings("unchecked")
@@ -685,8 +685,8 @@ public class VentanaController implements Initializable{
 	}
 
 	/**
-	 * M閠odo de evento para la generaci髇 de la funci髇 desde la interfaz grafica
-	 * @param intervalos Intervalos de la funci髇
+	 * M茅todo de evento para la generaci贸n de la funci贸n desde la interfaz grafica
+	 * @param intervalos Intervalos de la funci贸n
 	 */
 
 	private void generarFuncion(int intervalos){
@@ -712,8 +712,8 @@ public class VentanaController implements Initializable{
 		hiloFuncion.start();
 	}
 	/**
-	 * M閠odo de evento para generar la simulaci髇 y sus resultados para mostrarlos en la tabla
-	 * @param sensibilidad Sensibilidad seleccionada para la simulaci髇 
+	 * M茅todo de evento para generar la simulaci贸n y sus resultados para mostrarlos en la tabla
+	 * @param sensibilidad Sensibilidad seleccionada para la simulaci贸n 
 	 */
 
 	private void generarSimulacion(Double sensibilidad){
@@ -738,12 +738,12 @@ public class VentanaController implements Initializable{
 				Platform.runLater(new Runnable() {
 					@Override
 					public void run() {
-						getLabelRelAcertadas().setText("Relevancias acertadas en simulaci髇");
+						getLabelRelAcertadas().setText("Relevancias acertadas en simulaci贸n");
 						Integer totalAcertado = getMapSimulador().get(getTree().getSelectionModel().getSelectedItem().getValue().toString()).getTotalGlobalAcertados();
 						Integer totalFallado= getMapSimulador().get(getTree().getSelectionModel().getSelectedItem().getValue().toString()).getTotalGlobalFallados();
 						Integer total = totalFallado+totalAcertado;
 						getLabelRelAcertadasValor().setText( (totalAcertado*100)/(total.doubleValue())+"%" );
-						getLabelRelAcertadasReal().setText("Relevancias (true) acertadas en simulaci髇");
+						getLabelRelAcertadasReal().setText("Relevancias (true) acertadas en simulaci贸n");
 						Integer totalAcertadoTrue = getMapSimulador().get(getTree().getSelectionModel().getSelectedItem().getValue().toString()).getTotalGlobalRealesYSimulados();
 						Integer totalFalladoTrue= getMapSimulador().get(getTree().getSelectionModel().getSelectedItem().getValue().toString()).getTotalRelevantesFallados();
 						Integer totalTrue = totalFalladoTrue+totalAcertadoTrue;
@@ -760,7 +760,7 @@ public class VentanaController implements Initializable{
 	}
 
 	/**
-	 * Desactiva los botones y otros controles de la secci髇 de simular
+	 * Desactiva los botones y otros controles de la secci贸n de simular
 	 */
 	private void disableSimularControl(){
 		getSliderSensibilidad().setDisable(true);
@@ -768,7 +768,7 @@ public class VentanaController implements Initializable{
 		getToobleButtonVerResultadoS().setDisable(true);
 	}
 	/**
-	 * Activa los botones y otros controles de la secci髇 de simular
+	 * Activa los botones y otros controles de la secci贸n de simular
 	 */
 	private void enableSimularControl(){
 		getSliderSensibilidad().setDisable(false);
@@ -776,7 +776,7 @@ public class VentanaController implements Initializable{
 		getToobleButtonVerResultadoS().setDisable(false);
 	}
 	/**
-	 * Desactiva los botones y otros controles de la secci髇 del dataSet
+	 * Desactiva los botones y otros controles de la secci贸n del dataSet
 	 */
 	private void disableDataSetControl(){
 		getButtonLeerDataSet().setDisable(true);
@@ -784,7 +784,7 @@ public class VentanaController implements Initializable{
 		getButtonProcesar().setDisable(true);
 	}
 	/**
-	 * Desactiva los botones y otros controles de la secci髇 de la funci髇
+	 * Desactiva los botones y otros controles de la secci贸n de la funci贸n
 	 */
 	private void disableFunctionControl(){
 		getSliderIntervalos().setDisable(true);
@@ -792,7 +792,7 @@ public class VentanaController implements Initializable{
 		getButtonVerFuncion().setDisable(true);
 	}
 	/**
-	 * Activa los botones y otros controles de la secci髇 de la funci髇
+	 * Activa los botones y otros controles de la secci贸n de la funci贸n
 	 */
 	private void enableFunctionControl(){
 		getSliderIntervalos().setDisable(false);
@@ -802,7 +802,7 @@ public class VentanaController implements Initializable{
 
 
 	/**
-	 * M閠odo que ejecuta el c醠culo de matriz de frecuencia y frecuencia inversa 
+	 * M茅todo que ejecuta el c谩lculo de matriz de frecuencia y frecuencia inversa 
 	 * y carga los resultados de cada consulta del data set seleccionado
 	 */
 
@@ -891,7 +891,7 @@ public class VentanaController implements Initializable{
 
 
 	/**
-	 * M閠odo que realiza la lectura del data set seleccionado
+	 * M茅todo que realiza la lectura del data set seleccionado
 	 */
 	private void leerDataSet(){
 		Thread hiloLeer = new Thread(new Runnable() {
@@ -901,7 +901,7 @@ public class VentanaController implements Initializable{
 				getTree().setDisable(true);
 				getButtonLeerDataSet().setDisable(true);
 				String fsp = System.getProperty("file.separator").toString();
-				//palabras comunes (se uso en todas ya que mejora la precisi髇, pero es de cran)
+				//palabras comunes (se uso en todas ya que mejora la precisi贸n, pero es de cran)
 				File palabrasComunesFile = new File("files"+fsp+"cacm"+fsp+"common_words");
 
 				ArrayList<File> documentosFiles = null;

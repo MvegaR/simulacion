@@ -1,10 +1,10 @@
-package modelo;
+﻿package modelo;
 
 import java.util.ArrayList;
 /**
- * Clase dise�ada para almacenar los resultados de cada una de las consultas luego del an�lisis de relevancia
+ * Clase diseñada para almacenar los resultados de cada una de las consultas luego del análisis de relevancia
  * con el valor p@ (pIn) utilizado, el identificador de la consulta, la lista de resultados por cada documento 
- * , precisi�n promedio resultante, valor de sensibilidad promedio y total de documentos
+ * , precisión promedio resultante, valor de sensibilidad promedio y total de documentos
  * relevantes para esa consulta conocidos y total de documentos relevantes desplegados en el resultado.
  * @author Marcos
  *
@@ -24,7 +24,7 @@ public class ResultadoQuery {
 	 * Constructor de la clase.
 	 * @param pIn Valor p@, es la cantidad de documentos entregados como resultado (los mejores para la consulta)
 	 * @param idQuery Identificador de la consulta
-	 * @param precisionPromedio Precisi�n promedio resultante
+	 * @param precisionPromedio Precisión promedio resultante
 	 * @param recallPromedio Sensibilidad promedio resultante
 	 * @param totalDocRelevantesTotales Total de documentos relevantes para esta consulta existentes.
 	 * @param totalDocumentosRelevantesDesplegados Total de documentos relevantes que se mostraron en los resultados

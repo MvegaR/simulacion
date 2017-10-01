@@ -1,4 +1,4 @@
-package controlador;
+锘縫ackage controlador;
 
 import java.util.ArrayList;
 import javafx.scene.control.ProgressBar;
@@ -10,41 +10,41 @@ import modelo.ResultadoDataSet;
 import modelo.ResultadoDoc;
 import modelo.ResultadoQuery;
 /**
- * Clase que entrega los m閠odos para realizar una simulaci髇 
- * dado una ecuaci髇 de distribuci髇 de probabilidad.
+ * Clase que entrega los m茅todos para realizar una simulaci贸n 
+ * dado una ecuaci贸n de distribuci贸n de probabilidad.
  * @author Marcos
  *
  */
 public class Simulador {
 	/** Base de datos original */
 	private ResultadoDataSet dataSetOriginal;
-	/** Base de datos despues de la simulaci髇*/
+	/** Base de datos despues de la simulaci贸n*/
 	private ResultadoDataSet dataSetSimulado;
-	/** Ecuaci髇 de distribuci髇 de probabilidad global a utilizar*/
+	/** Ecuaci贸n de distribuci贸n de probabilidad global a utilizar*/
 	private DistributionEquation equation;
-	/**Valor de la tolerancia a utilizar en la simulaci髇*/
+	/**Valor de la tolerancia a utilizar en la simulaci贸n*/
 	private Double tolerancia;
-	/**Barra gr醘ica de carga JavaFX para desplegar el proceso de simulaci髇*/
+	/**Barra gr谩fica de carga JavaFX para desplegar el proceso de simulaci贸n*/
 	private ProgressBar bar;
-	/** Resultados para ser desplegados en la ventana gr醘ica en la secci髇 de datos*/
+	/** Resultados para ser desplegados en la ventana gr谩fica en la secci贸n de datos*/
 	private ArrayList<ArrayList<FormatoSimulacion>> resultados;
-	/** Resultados para ser desplegados en la secci髇 central*/
+	/** Resultados para ser desplegados en la secci贸n central*/
 	private ArrayList<FormatoResumenSimulacion> resultadosResumen;
-	/** Total de juicios de usuarios fallados en la simulaci髇*/
+	/** Total de juicios de usuarios fallados en la simulaci贸n*/
 	private Integer totalGlobalFallados;
-	/** Total de juicios de usuario acertados en la simulaci髇*/
+	/** Total de juicios de usuario acertados en la simulaci贸n*/
 	private Integer totalGlobalAcertados;
-	/** Total de relevantes (por archivo de relevancia) acertados en la simulaci髇*/
+	/** Total de relevantes (por archivo de relevancia) acertados en la simulaci贸n*/
 	private Integer totalRelevantesFallados;
-	/** total relevancias (por archivo de relevencia) fallados en la simulaci髇*/
+	/** total relevancias (por archivo de relevencia) fallados en la simulaci贸n*/
 	private Integer totalGlobalRealesYSimulados;
 	/** Total relevantes (true) desplegados en el ranking original*/
 	private Integer ttotalRelevantesDesplegados;
-	/** Total relevantes desplegados en la simulaci髇*/
+	/** Total relevantes desplegados en la simulaci贸n*/
 	private Integer ttotalRelevantesSimuladosDesplegados;
 	/**
-	 * @param dataSetOriginal Informaci髇 del data set original {@link ResultadoDataSet}
-	 * @param equation Ecuaci髇 de distribuci髇 probabilistica global a utilizar en la simualaci髇
+	 * @param dataSetOriginal Informaci贸n del data set original {@link ResultadoDataSet}
+	 * @param equation Ecuaci贸n de distribuci贸n probabilistica global a utilizar en la simualaci贸n
 	 */
 	public Simulador(ResultadoDataSet dataSetOriginal, DistributionEquation equation) {
 		super();
@@ -61,8 +61,8 @@ public class Simulador {
 	}
 
 	/**
-	 * M閠odo que realiza la simulaci髇 de relevancia
-	 * @param tolerancia Tolerencia m韓ima para considerar un documento como relevante
+	 * M茅todo que realiza la simulaci贸n de relevancia
+	 * @param tolerancia Tolerencia m铆nima para considerar un documento como relevante
 	 * @return {@link ResultadoDataSet} Copia de resultados del dataset original con relevancias simuladas
 	 */
 
@@ -81,7 +81,7 @@ public class Simulador {
 
 				ResultadoDoc resSimD = new ResultadoDoc(resD.getIdQuery(), resD.getIdDoc(), resD.getDisCos(), 
 						isRelSim(resD.getDisCos(), tolerancia), -1.0, -1.0, resD.getTWords()); 
-				//precision y recall dependen de los jucios reales, que no se tienen en una simualci髇
+				//precision y recall dependen de los jucios reales, que no se tienen en una simualci贸n
 				if(isRelSim(resD.getDisCos(), tolerancia)){
 					docRelDesplegados++;
 				}
@@ -101,7 +101,7 @@ public class Simulador {
 
 
 	/**
-	 * M閠odo para generar los datos para mostrarlos en tablas
+	 * M茅todo para generar los datos para mostrarlos en tablas
 	 */
 	public void generarResultados(){
 		for(Integer i = 0; i < getDataSetOriginal().getResultadosConsultas().size(); i++){
@@ -159,7 +159,7 @@ public class Simulador {
 	/**
 	 * Determina la relevancia del documento para la similitud entregada
 	 * @param sim Distancia conseno o similitud
-	 * @param tol Tolerancia m韓ima para decir que es relevante
+	 * @param tol Tolerancia m铆nima para decir que es relevante
 	 * @return Si es o no relevante (Boolean)
 	 */
 
