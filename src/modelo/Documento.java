@@ -1,11 +1,11 @@
-package modelo;
+锘縫ackage modelo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
 /**
- * Realiza la lectura de un archivo de texto que entrega identificador, t韙ulo y cuerpo del documento, 
+ * Realiza la lectura de un archivo de texto que entrega identificador, t铆tulo y cuerpo del documento, 
  * el resto de atributos no se utilizaron en el proyecto pero estaban presentes en la base de datos,
  * se asegura una lectura total del archivo documentos.
  *  @author Marcos
@@ -23,13 +23,13 @@ public class Documento {
 	private ArrayList<String> autores; //.A
 	/** Tags para indexar el documento */
 	private ArrayList<String> tags; //.K
-	/** C骴igos de identifiaci髇 del documento */
+	/** C贸digos de identificaci贸n del documento */
 	private ArrayList<String> codigos; //.C
-	/** Informaci髇 de la publicaci髇 del documento */
+	/** Informaci贸n de la publicaci贸n del documento */
 	private String infoPublicacion; //.N
 	/** Referencias presentes en el documento */
 	private ArrayList<Referencia> referencias; //.X
-	/** Palabras v醠idas en una lista enlazada */
+	/** Palabras v谩lidas en una lista enlazada */
 	private LinkedList<String> palabrasValidas;
 	/**
 	 * Constructor: inicializador de atributos
@@ -49,13 +49,13 @@ public class Documento {
 	/**
 	 * Constructor, inicializador de atributos
 	 * @param id Identificador documento
-	 * @param titulo T韙ulo del documento
+	 * @param titulo T铆tulo del documento
 	 * @param cuerpo Cuerpo del documento
-	 * @param fecha fecha publicaci髇 del documento
+	 * @param fecha fecha publicaci贸n del documento
 	 * @param tags Palabras claves para indexar el documento
-	 * @param codigos Codigos de la publicaci髇
+	 * @param codigos Codigos de la publicaci贸n
 	 * @param autores Autores del documento
-	 * @param infoPubliacion Informaci髇 de la publicaci髇
+	 * @param infoPubliacion Informaci贸n de la publicaci贸n
 	 * @param referencias Referencias a otros documentos
 	 */
 	public Documento(Integer id, String titulo, String cuerpo, String fecha, 
@@ -76,9 +76,9 @@ public class Documento {
 	/**
 	 * Para generar contenido de la lista this.palabrasComunes, se quitan 
 	 * todas las palabras comunes y se deja en una lista 
-	 * enlazada todas las palabras en min鷖culas.
-	 * Se asume que todas palabras no v醠idas (comunes) 
-	 * se encuentran en min鷖culas.
+	 * enlazada todas las palabras en min煤sculas.
+	 * Se asume que todas palabras no v谩lidas (comunes) 
+	 * se encuentran en min煤sculas.
 	 * @param palabrasComunes Lista de palabras comunes para no 
 	 * agregar a la lista de this.palabrasValidas
 	 */
@@ -90,7 +90,7 @@ public class Documento {
 			for(String s: palabras){
 				if(s.length() > 1 && !palabrasComunes.contains(s.toLowerCase())){ 
 					//eliminar palabras de dos letras y comunes
-					this.palabrasValidas.add(s.toLowerCase()); //Solo palabras min鷖culas
+					this.palabrasValidas.add(s.toLowerCase()); //Solo palabras min煤sculas
 				}
 			}
 		}
@@ -103,8 +103,8 @@ public class Documento {
 		return id;
 	}
 	/**
-	 * Obtener el t韙ulo del documento
-	 * @return El t韙ulo
+	 * Obtener el t铆tulo del documento
+	 * @return El t铆tulo
 	 */
 	public String getTitulo() {
 		return titulo;
@@ -117,7 +117,7 @@ public class Documento {
 		return cuerpo;
 	}
 	/**
-	 * Obtiene fecha publicaci髇 documento
+	 * Obtiene fecha publicaci贸n documento
 	 * @return Fecha
 	 */
 	public String getFecha() {
@@ -131,15 +131,15 @@ public class Documento {
 		return autores;
 	}
 	/**
-	 * Obtiene informaci髇 de la publicaci髇 del documento 
-	 * @return La informaci髇 de la publicaci髇
+	 * Obtiene informaci贸n de la publicaci贸n del documento 
+	 * @return La informaci贸n de la publicaci贸n
 	 */
 	public String getInfoPublicacion() {
 		return infoPublicacion;
 	}
 	/**
-	 * Obtiene c骴igos de la publicaci髇 del documento
-	 * @return Lista de c骴igos
+	 * Obtiene c贸digos de la publicaci贸n del documento
+	 * @return Lista de c贸digos
 	 */
 	public ArrayList<String> getCodigos() {
 		return codigos;
@@ -166,8 +166,8 @@ public class Documento {
 		this.id = id;
 	}
 	/**
-	 * Modifica el t韙ulo del documento
-	 * @param titulo Nuevo t韙ulo
+	 * Modifica el t铆tulo del documento
+	 * @param titulo Nuevo t铆tulo
 	 */
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
@@ -194,8 +194,8 @@ public class Documento {
 		this.autores = autores;
 	}
 	/**
-	 * Modifica la informaci髇 de la publicaci髇 del documento
-	 * @param infoPublicacion Nueva informaci髇 del documento
+	 * Modifica la informaci贸n de la publicaci贸n del documento
+	 * @param infoPublicacion Nueva informaci贸n del documento
 	 */
 	public void setInfoPublicacion(String infoPublicacion) {
 		this.infoPublicacion = infoPublicacion;
@@ -208,7 +208,7 @@ public class Documento {
 		this.referencias = referencias;
 	}
 	/**
-	 * Modifica la lista de c骴igos de la publicaci髇 del documento
+	 * Modifica la lista de c贸digos de la publicaci贸n del documento
 	 * @param codigos Nueva lista
 	 */
 	public void setCodigos(ArrayList<String> codigos) {
@@ -222,8 +222,8 @@ public class Documento {
 		this.tags = tags;
 	}
 	/**
-	 * Entrega la lista de palabras v醠idas presentes en el documento, luego del filtrado de palabras comunes.
-	 * @return Lista de palabras v醠idas
+	 * Entrega la lista de palabras v谩lidas presentes en el documento, luego del filtrado de palabras comunes.
+	 * @return Lista de palabras v谩lidas
 	 */
 	public LinkedList<String> getPalabrasValidas() {
 		return palabrasValidas;
@@ -256,7 +256,7 @@ public class Documento {
 	}
 	/**
 	 * Obtiene los documentos desde un archivo de texto y rellena 
-	 * una lista entregada por par醡etro de documentos generados.
+	 * una lista entregada por par谩metro de documentos generados.
 	 * @param origen Archivo de texto con los documentos
 	 * @param documentos Lista de documentos a rellenar
 	 */
@@ -392,7 +392,7 @@ public class Documento {
 	}
 	/**
 	 * Solo para BD LISA: Obtiene los documentos desde un archivo de texto 
-	 * y rellena una lista entregada por par醡etro de documentos generados.
+	 * y rellena una lista entregada por par谩metro de documentos generados.
 	 * @param origenes Archivo de texto con los documentos
 	 * @param documentos Lista de documentos a rellenar
 	 */
@@ -435,7 +435,7 @@ public class Documento {
 
 	/**
 	 * Solo para BD Time: Obtiene los documentos desde un archivo de texto 
-	 * y rellena una lista entregada por par醡etro de documentos generados.
+	 * y rellena una lista entregada por par谩metro de documentos generados.
 	 * @param origen Archivo de texto con los documentos
 	 * @param documentos Lista de documentos a rellenar
 	 */
