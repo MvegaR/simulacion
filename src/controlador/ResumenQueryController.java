@@ -1,4 +1,4 @@
-﻿package controlador;
+package controlador;
 
 
 
@@ -12,13 +12,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 /** 
- * Clase controladora de la escena gráfica que despliega el resumen 
- * de una consulta o simulación en la ventana del proyecto
- * Es necesaria una representación en una clase para realizar la 
- * transicción entre escenas por código, reemplaza la zona central
- * de la gráfica por el resumen que representa esta clase.
- * - Cada atributo corresponde a un elemento gráfico, 
- * clase creada automáticamente usando generadores del entorno de desarollo-
+ * Clase controladora de la escena gr�fica que despliega el resumen 
+ * de una consulta o simulaci�n en la ventana del proyecto
+ * Es necesaria una representaci�n en una clase para realizar la 
+ * transicci�n entre escenas por c�digo, reemplaza la zona central
+ * de la gr�fica por el resumen que representa esta clase.
+ * - Cada atributo corresponde a un elemento gr�fico, 
+ * clase creada autom�ticamente usando generadores del entorno de desarollo-
+ *
  */
 public class ResumenQueryController implements Initializable{
 
