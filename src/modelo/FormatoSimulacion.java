@@ -17,7 +17,6 @@ public class FormatoSimulacion {
 	private Boolean userRelReal;
 	/**Relevencia o jucio de usuario simulado */
 	private Boolean userRelSim;
-
 	/**
 	 * Constructor de la clase
 	 * @param igual Si es igual o no el jucio de usuario del archivo de relevancia con la simulación
@@ -168,5 +167,4 @@ public class FormatoSimulacion {
 			return false;
 		return true;
 	}
-
 }

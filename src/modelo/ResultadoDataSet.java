@@ -8,14 +8,12 @@ import java.util.ArrayList;
  *
  */
 public class ResultadoDataSet {
-
 	private String setName;
 	private ArrayList<ResultadoQuery> resultadosConsultas;
 	private Integer totalConsultas;
 	private Integer totalDocumentos;
 	private Integer totalPalabrasComunes;
 	private Integer totalpalabrasValidasNoComunes;
-
 	/**
 	 * Constructor de la clase
 	 * @param setName Nombre de la base de datos
@@ -34,7 +32,6 @@ public class ResultadoDataSet {
 		this.totalPalabrasComunes = totalPalabrasComunes;
 		this.totalpalabrasValidasNoComunes = totalpalabrasValidasNoComunes;
 	}
-
 	/**
 	 * @return the setName
 	 */
@@ -161,5 +158,4 @@ public class ResultadoDataSet {
 			return false;
 		return true;
 	}
-
 }

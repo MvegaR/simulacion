@@ -9,7 +9,6 @@ import java.util.ArrayList;
  *
  */
 public class ResultadoQuery {
-
 	private Integer pIn;
 	private Integer idQuery;
 	private ArrayList<ResultadoDoc> resultadosDocumentos;
@@ -17,7 +16,6 @@ public class ResultadoQuery {
 	private Double recallPromedio;
 	private Integer totalDocRelevantesTotales;
 	private Integer totalDocReleventesDesplegados;
-
 	/**
 	 * Constructor de la clase.
 	 * @param pIn Valor p@, es la cantidad de documentos entregados como resultado (los mejores para la consulta)
@@ -27,7 +25,6 @@ public class ResultadoQuery {
 	 * @param totalDocRelevantesTotales Total de documentos relevantes para esta consulta existentes.
 	 * @param totalDocumentosRelevantesDesplegados Total de documentos relevantes que se mostraron en los resultados
 	 */
-
 	public ResultadoQuery(Integer pIn, Integer idQuery,
 			Double precisionPromedio, Double recallPromedio, Integer totalDocRelevantesTotales, 
 			Integer totalDocumentosRelevantesDesplegados) {
@@ -200,5 +197,4 @@ public class ResultadoQuery {
 	public void setTotalDocRelevantesTotales(Integer totalDocRelevantesTotales) {
 		this.totalDocRelevantesTotales = totalDocRelevantesTotales;
 	}
-
 }

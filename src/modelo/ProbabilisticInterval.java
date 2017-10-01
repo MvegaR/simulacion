@@ -18,7 +18,6 @@ public class ProbabilisticInterval {
 		super();
 		this.min = min;
 		this.max = max;
-
 	}
 	/**
 	 * @return the min

@@ -14,7 +14,6 @@ import javafx.stage.Stage;
  * @author Marcos
  *
  */
-
 public class MainVentana extends Application {
 	public static void main(String[] args) {
 		launch(args);

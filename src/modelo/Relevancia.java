@@ -140,7 +140,6 @@ public class Relevancia {
 			e.printStackTrace();
 		}
 	}
-
 	/**
 	 * Solo para NPL DB: Obtiene desde un archivo la información de relevancia 
 	 * de una consulta y un documento, rellenandolo en una lista con esa información
@@ -157,7 +156,6 @@ public class Relevancia {
 				while(!line.equals("   /")){
 					line = sc.nextLine();
 					String[] lineSplit = line.split("\\D" );
-
 					for(String l: lineSplit){
 						if(l.equals("")) continue;
 						relevancias.add(new Relevancia(Integer.parseInt(id), Integer.parseInt(l)));
@@ -170,7 +168,6 @@ public class Relevancia {
 			e.printStackTrace();
 		}
 	}
-
 	/**
 	 * Solo para TIME y ISWC2015: Obtiene desde un archivo la información de relevancia 
 	 * de una consulta y un documento, rellenandolo en una lista con esa información
@@ -186,15 +183,12 @@ public class Relevancia {
 					continue;
 				}
 				String[] lineSplit = line.split("[ ]+");
-
 				for(int i = 1; i<lineSplit.length; i++){
 					Integer idQuery = Integer.parseInt(lineSplit[0]);
 					Integer idDoc = Integer.parseInt(lineSplit[i]);
-
 					relevancias.add(new Relevancia(idQuery, idDoc));
 					//System.out.println(idQuery+ " - " +idDoc);
 				}
-
 			}
 			sc.close();
 		} catch (FileNotFoundException e) {
