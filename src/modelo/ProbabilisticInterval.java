@@ -1,4 +1,4 @@
-﻿package modelo;
+package modelo;
 /**
  * Clase diseñada para representar un intervalo con un mínimo y un máximo 
  * como estructura básica para la función de distribución de probabilidad 
