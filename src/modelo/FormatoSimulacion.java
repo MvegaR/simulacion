@@ -169,5 +169,4 @@ public class FormatoSimulacion {
 		return true;
 	}
 
-
 }

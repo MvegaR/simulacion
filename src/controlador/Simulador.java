@@ -138,7 +138,6 @@ public class Simulador {
 			Integer totalDesplegadosOriginales = getDataSetOriginal().getResultadosConsultas().get(i).getTotalDocReleventesDesplegados();
 			Integer totalDesplegadosSimulados = getDataSetSimulado().getResultadosConsultas().get(i).getTotalDocReleventesDesplegados();
 
-
 			getResultadosResumen().add(new FormatoResumenSimulacion(totalDesplegadosOriginales, 
 					totalDesplegadosSimulados, totalRelevantesRealesSimulados, 
 					totalAcertados, totalFallados, tolerancia));

@@ -201,10 +201,4 @@ public class ResultadoQuery {
 		this.totalDocRelevantesTotales = totalDocRelevantesTotales;
 	}
 
-
-
-
-
-
-
 }

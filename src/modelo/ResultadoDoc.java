@@ -186,7 +186,4 @@ public class ResultadoDoc {
 		this.words = words;
 	}
 
-
-
-
 }
