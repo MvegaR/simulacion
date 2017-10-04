@@ -26,7 +26,7 @@ public class GetEquation {
 	 */
 	public GetEquation(Integer cantidadIntervalos, ResultadoDataSet dataSet){
 		if(cantidadIntervalos == null || cantidadIntervalos <= 0){
-			System.out.println("Cantidad intervalos invalido, se usarÃ¡ 100 por defecto");
+			System.out.println("Cantidad intervalos invalido, se usará 100 por defecto");
 			cantidadIntervalos = 100;
 		}
 		equation = new DistributionEquation(cantidadIntervalos, dataSet);
@@ -40,7 +40,7 @@ public class GetEquation {
 	public GetEquation(Integer cantidadIntervalos, 
 			ResultadoDataSet dataSet, ProgressBar barraDeCarga){
 		if(cantidadIntervalos == null || cantidadIntervalos <= 0){
-			System.out.println("Cantidad intervalos invalido, se usarÃ¡ 100 por defecto");
+			System.out.println("Cantidad intervalos invalido, se usará 100 por defecto");
 			cantidadIntervalos = 100;
 		}
 		equation = new DistributionEquation(cantidadIntervalos, dataSet);

@@ -110,7 +110,7 @@ public class Relevancia {
 		}
 	}
 	/**
-	 * Solo para LISA DB: Obtiene desde un archivo la información de relevancia 
+	 * Sólo para LISA DB: Obtiene desde un archivo la información de relevancia 
 	 * de una consulta y un documento, rellenandolo en una lista con esa información
 	 * @param file Archivo con la relevancia en formato: qid did 0 0                                          
 	 * @param relevancias Listado de Relevancias a rellenar
@@ -141,7 +141,7 @@ public class Relevancia {
 		}
 	}
 	/**
-	 * Solo para NPL DB: Obtiene desde un archivo la información de relevancia 
+	 * Sólo para NPL DB: Obtiene desde un archivo la información de relevancia 
 	 * de una consulta y un documento, rellenandolo en una lista con esa información
 	 * @param file Archivo con la relevancia en formato: qid (did)*                                         
 	 * @param relevancias Listado de Relevancias a rellenar
@@ -169,7 +169,7 @@ public class Relevancia {
 		}
 	}
 	/**
-	 * Solo para TIME y ISWC2015: Obtiene desde un archivo la información de relevancia 
+	 * Sólo para TIME y ISWC2015: Obtiene desde un archivo la información de relevancia 
 	 * de una consulta y un documento, rellenandolo en una lista con esa información
 	 * @param file Archivo con la relevancia en formato: qid did did did ...                                          
 	 * @param relevancias Listado de Relevancias a rellenar

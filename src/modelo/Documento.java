@@ -90,7 +90,7 @@ public class Documento {
 			for(String s: palabras){
 				if(s.length() > 1 && !palabrasComunes.contains(s.toLowerCase())){ 
 					//eliminar palabras de dos letras y comunes
-					this.palabrasValidas.add(s.toLowerCase()); //Solo palabras minúsculas
+					this.palabrasValidas.add(s.toLowerCase()); //Sólo palabras minúsculas
 				}
 			}
 		}
@@ -390,7 +390,7 @@ public class Documento {
 		}
 	}
 	/**
-	 * Solo para BD LISA: Obtiene los documentos desde un archivo de texto 
+	 * Sólo para BD LISA: Obtiene los documentos desde un archivo de texto 
 	 * y rellena una lista entregada por parámetro de documentos generados.
 	 * @param origenes Archivo de texto con los documentos
 	 * @param documentos Lista de documentos a rellenar
@@ -432,7 +432,7 @@ public class Documento {
 		}
 	}
 	/**
-	 * Solo para BD Time: Obtiene los documentos desde un archivo de texto 
+	 * Sólo para BD Time: Obtiene los documentos desde un archivo de texto 
 	 * y rellena una lista entregada por parámetro de documentos generados.
 	 * @param origen Archivo de texto con los documentos
 	 * @param documentos Lista de documentos a rellenar

@@ -150,7 +150,7 @@ public class Tests {
 		//matriz.obtenerPrecision();
 		System.out.println("Inicio "+"Test funcionalidad básica");
 		matriz.obtenerPrecision(consultas.get(0), 4, precisiones, resultadosDataset,true);
-		assertTrue(precisiones.get(0).getPrecision()-0.52 <= 0.009); //comparacion de solo dos decimales
+		assertTrue(precisiones.get(0).getPrecision()-0.52 <= 0.009); //comparación de sólo dos decimales
 		System.out.println("Fin "+"Test funcionalidad básica");
 	}
 	/*
@@ -198,7 +198,7 @@ public class Tests {
 		//matriz.obtenerPrecision();
 		System.out.println("Inicio "+"Test documento nulo");
 		matriz.obtenerPrecision(consultas.get(0), 4, precisiones, resultadosDataset, true);
-		assertTrue(precisiones.get(0).getPrecision()-0.52 <= 0.009); //comparacion de solo dos decimales
+		assertTrue(precisiones.get(0).getPrecision()-0.52 <= 0.009); //comparación de sólo dos decimales
 		System.out.println("Fin "+"Test Documento nulo");
 	}
 	/*
@@ -212,7 +212,7 @@ public class Tests {
 		//matriz.obtenerPrecision();
 		System.out.println("Inicio "+"Test Consulta nula");
 		matriz.obtenerPrecision(null, 4, precisiones, resultadosDataset, true);
-		assertTrue(precisiones.get(0).getPrecision()-0.52 <= 0.009); //comparacion de solo dos decimales
+		assertTrue(precisiones.get(0).getPrecision()-0.52 <= 0.009); //comparación de sólo dos decimales
 		System.out.println("Fin "+"Test Consulta nula");
 	}
 }

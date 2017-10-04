@@ -56,7 +56,7 @@ public class Consulta {
 	/**
 	 * Para generar contenido de la lista this.palabrasComunes, se quitan todas las palabras
 	 *  comunes y se deja en una lista enlazada todas las palabras en minúsculas.
-	 * Se asume que todas palabras no vÃ¡lidas (comunes) se encuentran en minúculas.
+	 * Se asume que todas palabras no válidas (comunes) se encuentran en minúculas.
 	 * @param palabrasComunes Lista de palabras comunes para no agregar a la lista de this.palabrasValidas
 	 */
 	public void generarSetPalabras(ArrayList<String> palabrasComunes){
@@ -137,7 +137,7 @@ public class Consulta {
 		}
 	}
 	/**
-	 * Solo para LISA DB: Realiza la lectura de archivo de consultas y los inserta en una lista
+	 * Sólo para LISA DB: Realiza la lectura de archivo de consultas y los inserta en una lista
 	 * @param origen Archivo de texto con consultas, no nula.
 	 * @param consultas Colección de consultas a rellenar, no nula.
 	 */
@@ -173,7 +173,7 @@ public class Consulta {
 		}
 	}
 	/**
-	 * Solo para BD Time: Obtiene las consultas desde un archivo de texto
+	 * Sólo para BD Time: Obtiene las consultas desde un archivo de texto
 	 * y rellena una lista entregada por parámetro de consultas generadas.
 	 * @param origen Archivo de texto con las consultas
 	 * @param consultas Lista de consultas a rellenar

@@ -23,7 +23,7 @@ public class Generar {
 	 */
 	private static ArrayList<ResultadoDataSet> resultadosDataSet = new ArrayList<>();
 	/**
-	 * Método main (primera iteración, usado solo para depurar)
+	 * Método main (primera iteración, usado sólo para depurar)
 	 * @param args Sin uso.
 	 */
 	public static void main(String[] args) {
