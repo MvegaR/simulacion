@@ -840,7 +840,13 @@ public class VentanaController implements Initializable{
 					consultasFile= new File("datasets"+fsp+"iswc2015"+fsp+"qrys.txt");
 					relevanciasFile = new File("datasets"+fsp+"iswc2015"+fsp+"rel.txt");
 				}else{
+					getCargaLecturaDataSet().setProgress(1);
+					getSpinnerPin().setDisable(false);
+					getButtonProcesar().setDisable(false);
+					getTree().setDisable(false);
+					getButtonLeerDataSet().setDisable(false);
 					return;
+					
 				}
 				getCargaLecturaDataSet().setProgress(0);
 				ArrayList<Documento> documentos = new ArrayList<>();
