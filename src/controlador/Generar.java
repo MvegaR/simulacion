@@ -29,79 +29,79 @@ public class Generar {
 	public static void main(String[] args) {
 		String fsp = System.getProperty("file.separator").toString();
 		//palabras comunes (se uso en todas ya que mejora la precisión, pero es de cran)
-		File palabrasComunesFile = new File("files"+fsp+"cacm"+fsp+"common_words");
+		File palabrasComunesFile = new File("datasets"+fsp+"cacm"+fsp+"common_words");
 		//Archivos BD CACM
 		//*/
-		File documentosFileCACM = new File("files"+fsp+"cacm"+fsp+"cacm.all");
-		File consultasFileCACM = new File("files"+fsp+"cacm"+fsp+"query.text");
-		File relevanciasFileCACM = new File("files"+fsp+"cacm"+fsp+"qrels.text");
+		File documentosFileCACM = new File("datasets"+fsp+"cacm"+fsp+"cacm.all");
+		File consultasFileCACM = new File("datasets"+fsp+"cacm"+fsp+"query.text");
+		File relevanciasFileCACM = new File("datasets"+fsp+"cacm"+fsp+"qrels.text");
 		getPrecisiones(null,documentosFileCACM, 
 				consultasFileCACM, relevanciasFileCACM, palabrasComunesFile, "CACM");
 		//*/
 		//Archivos BD MED
 		//*/
-		File documentosFileMED = new File("files"+fsp+"med"+fsp+"MED.ALL");
-		File consultasFileMED = new File("files"+fsp+"med"+fsp+"MED.QRY");
-		File relevanciasFileMED = new File("files"+fsp+"med"+fsp+"MED.REL");
+		File documentosFileMED = new File("datasets"+fsp+"med"+fsp+"MED.ALL");
+		File consultasFileMED = new File("datasets"+fsp+"med"+fsp+"MED.QRY");
+		File relevanciasFileMED = new File("datasets"+fsp+"med"+fsp+"MED.REL");
 		getPrecisiones(null,documentosFileMED, 
 				consultasFileMED, relevanciasFileMED, palabrasComunesFile, "MED");
 		//*/
 		// Archivos BD CRAN
 		//*/
-		File documentosFileCRAN = new File("files"+fsp+"cran"+fsp+"cran.all.1400");
-		File consultasFileCRAN = new File("files"+fsp+"cran"+fsp+"cran.qry");
-		File relevanciasFileCRAN = new File("files"+fsp+"cran"+fsp+"cranFix.rel");
+		File documentosFileCRAN = new File("datasets"+fsp+"cran"+fsp+"cran.all.1400");
+		File consultasFileCRAN = new File("datasets"+fsp+"cran"+fsp+"cran.qry");
+		File relevanciasFileCRAN = new File("datasets"+fsp+"cran"+fsp+"cranFix.rel");
 		getPrecisiones(null, documentosFileCRAN, 
 				consultasFileCRAN, relevanciasFileCRAN, palabrasComunesFile, "CRAN");
 		//*/
 		// Archivos DB CISI
 		//*/
-		File documentosFileCISI = new File("files"+fsp+"cisi"+fsp+"CISI.all");
-		File consultasFileCISI = new File("files"+fsp+"cisi"+fsp+"CISI.qry");
-		File relevanciasFileCISI = new File("files"+fsp+"cisi"+fsp+"CISI.rel");
+		File documentosFileCISI = new File("datasets"+fsp+"cisi"+fsp+"CISI.all");
+		File consultasFileCISI = new File("datasets"+fsp+"cisi"+fsp+"CISI.qry");
+		File relevanciasFileCISI = new File("datasets"+fsp+"cisi"+fsp+"CISI.rel");
 		getPrecisiones(null, documentosFileCISI, 
 				consultasFileCISI, relevanciasFileCISI, palabrasComunesFile, "CISI");
 		//*/
 		//Archivos BD LISA
 		//*/
 		ArrayList<File> documentosFilesLisa = new ArrayList<>();
-		documentosFilesLisa.add(new File("files"+fsp+"lisa"+fsp+"LISA0.501"));
-		documentosFilesLisa.add(new File("files"+fsp+"lisa"+fsp+"LISA1.501"));
-		documentosFilesLisa.add(new File("files"+fsp+"lisa"+fsp+"LISA2.501"));
-		documentosFilesLisa.add(new File("files"+fsp+"lisa"+fsp+"LISA3.501"));
-		documentosFilesLisa.add(new File("files"+fsp+"lisa"+fsp+"LISA4.501"));
-		documentosFilesLisa.add(new File("files"+fsp+"lisa"+fsp+"LISA5.501"));
-		documentosFilesLisa.add(new File("files"+fsp+"lisa"+fsp+"LISA5.627"));
-		documentosFilesLisa.add(new File("files"+fsp+"lisa"+fsp+"LISA5.850"));
-		File ConsultasFileLISA = new File("files"+fsp+"lisa"+fsp+"LISA.QUE");
-		File RelevanciasFileLisa = new File("files"+fsp+"lisa"+fsp+"LISA.REL");
+		documentosFilesLisa.add(new File("datasets"+fsp+"lisa"+fsp+"LISA0.501"));
+		documentosFilesLisa.add(new File("datasets"+fsp+"lisa"+fsp+"LISA1.501"));
+		documentosFilesLisa.add(new File("datasets"+fsp+"lisa"+fsp+"LISA2.501"));
+		documentosFilesLisa.add(new File("datasets"+fsp+"lisa"+fsp+"LISA3.501"));
+		documentosFilesLisa.add(new File("datasets"+fsp+"lisa"+fsp+"LISA4.501"));
+		documentosFilesLisa.add(new File("datasets"+fsp+"lisa"+fsp+"LISA5.501"));
+		documentosFilesLisa.add(new File("datasets"+fsp+"lisa"+fsp+"LISA5.627"));
+		documentosFilesLisa.add(new File("datasets"+fsp+"lisa"+fsp+"LISA5.850"));
+		File ConsultasFileLISA = new File("datasets"+fsp+"lisa"+fsp+"LISA.QUE");
+		File RelevanciasFileLisa = new File("datasets"+fsp+"lisa"+fsp+"LISA.REL");
 		getPrecisiones(documentosFilesLisa, null, 
 				ConsultasFileLISA, RelevanciasFileLisa, palabrasComunesFile, "LISA");
 		//*/
 		//Encontradas en internet
 		//Archivos BD ADI
 		//*/
-		File documentosFileADI = new File("files"+fsp+"adi"+fsp+"ADI.ALL");
-		File consultasFileADI = new File("files"+fsp+"adi"+fsp+"ADI.QRY");
-		File relevanciasFileADI = new File("files"+fsp+"adi"+fsp+"ADI.REL");
+		File documentosFileADI = new File("datasets"+fsp+"adi"+fsp+"ADI.ALL");
+		File consultasFileADI = new File("datasets"+fsp+"adi"+fsp+"ADI.QRY");
+		File relevanciasFileADI = new File("datasets"+fsp+"adi"+fsp+"ADI.REL");
 		getPrecisiones(null,documentosFileADI, 
 				consultasFileADI, relevanciasFileADI, palabrasComunesFile, "ADI");
 		//*/
 		//Archivos BD TIME
 		//*/
-		File documentosFileTIME = new File("files"+fsp+"time"+fsp+"TIME.ALL");
-		File consultasFileTIME= new File("files"+fsp+"time"+fsp+"TIME.QUE");
-		File relevanciasFileTIME = new File("files"+fsp+"time"+fsp+"TIME.REL");
-		//File palabrasComunesFileTIME = new File("files"+fsp+"time"+fsp+"TIME.STP");//No es buena
+		File documentosFileTIME = new File("datasets"+fsp+"time"+fsp+"TIME.ALL");
+		File consultasFileTIME= new File("datasets"+fsp+"time"+fsp+"TIME.QUE");
+		File relevanciasFileTIME = new File("datasets"+fsp+"time"+fsp+"TIME.REL");
+		//File palabrasComunesFileTIME = new File("datasets"+fsp+"time"+fsp+"TIME.STP");//No es buena
 		getPrecisiones(null,documentosFileTIME, 
 				consultasFileTIME, relevanciasFileTIME, palabrasComunesFile, "TIME");
 		//*/
 		//Archivos BD ISWC2015
 		//La más pequeña
 		//*/
-		File documentosFileISWC2015 = new File("files"+fsp+"iswc2015"+fsp+"docs.txt");
-		File consultasFileISWC2015= new File("files"+fsp+"iswc2015"+fsp+"qrys.txt");
-		File relevanciasFileISWC2015 = new File("files"+fsp+"iswc2015"+fsp+"rel.txt");
+		File documentosFileISWC2015 = new File("datasets"+fsp+"iswc2015"+fsp+"docs.txt");
+		File consultasFileISWC2015= new File("datasets"+fsp+"iswc2015"+fsp+"qrys.txt");
+		File relevanciasFileISWC2015 = new File("datasets"+fsp+"iswc2015"+fsp+"rel.txt");
 		getPrecisiones(null,documentosFileISWC2015, 
 				consultasFileISWC2015, relevanciasFileISWC2015, palabrasComunesFile, "ISWC2015");
 		//*/

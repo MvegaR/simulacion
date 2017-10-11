@@ -47,7 +47,7 @@ import modelo.ResultadoQuery;
 @SuppressWarnings("rawtypes")
 public class VentanaController implements Initializable{
 	/** Array con los nombres de las los data set utilizados en el proyecto */
-	private final String[] dataSets = {"CACM", "MED", "CRAN", "CISI", "LISA", "ADI", "TIME", "ISWC2015"};
+	private String[] dataSets;
 	/** Puntero al controlador del panel de resumen, para reemplazar el panel central cuando se necesite */
 	private ResumenQueryController resumenController;
 	@FXML
@@ -135,6 +135,7 @@ public class VentanaController implements Initializable{
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		this.cargarDBs();
 		TreeItem<String> rootItem = new TreeItem<String> ("DataSets", null);
 		for(String s: dataSets){
 			ImageView ico = new ImageView(
@@ -792,52 +793,52 @@ public class VentanaController implements Initializable{
 				getButtonLeerDataSet().setDisable(true);
 				String fsp = System.getProperty("file.separator").toString();
 				//palabras comunes (se uso en todas ya que mejora la precisión, pero es de cran)
-				File palabrasComunesFile = new File("files"+fsp+"cacm"+fsp+"common_words");
+				File palabrasComunesFile = new File("datasets"+fsp+"cacm"+fsp+"common_words");
 				ArrayList<File> documentosFiles = null;
 				File documentosFile = null;
 				File consultasFile = null;
 				File relevanciasFile = null;
 				String nombreDB = getLabelDataSetName().getText();
 				if(getLabelDataSetName().getText().equals("CACM")){
-					documentosFile = new File("files"+fsp+"cacm"+fsp+"cacm.all");
-					consultasFile= new File("files"+fsp+"cacm"+fsp+"query.text");
-					relevanciasFile = new File("files"+fsp+"cacm"+fsp+"qrels.text");
+					documentosFile = new File("datasets"+fsp+"cacm"+fsp+"cacm.all");
+					consultasFile= new File("datasets"+fsp+"cacm"+fsp+"query.text");
+					relevanciasFile = new File("datasets"+fsp+"cacm"+fsp+"qrels.text");
 				}else if(getLabelDataSetName().getText().equals("MED")){
-					documentosFile= new File("files"+fsp+"med"+fsp+"MED.ALL");
-					consultasFile= new File("files"+fsp+"med"+fsp+"MED.QRY");
-					relevanciasFile= new File("files"+fsp+"med"+fsp+"MED.REL");
+					documentosFile= new File("datasets"+fsp+"med"+fsp+"MED.ALL");
+					consultasFile= new File("datasets"+fsp+"med"+fsp+"MED.QRY");
+					relevanciasFile= new File("datasets"+fsp+"med"+fsp+"MED.REL");
 				}else if(getLabelDataSetName().getText().equals("CRAN")){
-					documentosFile= new File("files"+fsp+"cran"+fsp+"cran.all.1400");
-					consultasFile= new File("files"+fsp+"cran"+fsp+"cran.qry");
-					relevanciasFile= new File("files"+fsp+"cran"+fsp+"cranFix.rel");
+					documentosFile= new File("datasets"+fsp+"cran"+fsp+"cran.all.1400");
+					consultasFile= new File("datasets"+fsp+"cran"+fsp+"cran.qry");
+					relevanciasFile= new File("datasets"+fsp+"cran"+fsp+"cranFix.rel");
 				}else if(getLabelDataSetName().getText().equals("CISI")){
-					documentosFile= new File("files"+fsp+"cisi"+fsp+"CISI.all");
-					consultasFile= new File("files"+fsp+"cisi"+fsp+"CISI.qry");
-					relevanciasFile= new File("files"+fsp+"cisi"+fsp+"CISI.rel");
+					documentosFile= new File("datasets"+fsp+"cisi"+fsp+"CISI.all");
+					consultasFile= new File("datasets"+fsp+"cisi"+fsp+"CISI.qry");
+					relevanciasFile= new File("datasets"+fsp+"cisi"+fsp+"CISI.rel");
 				}else if(getLabelDataSetName().getText().equals("LISA")){
 					documentosFiles= new ArrayList<>();
-					documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA0.501"));
-					documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA1.501"));
-					documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA2.501"));
-					documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA3.501"));
-					documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA4.501"));
-					documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA5.501"));
-					documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA5.627"));
-					documentosFiles.add(new File("files"+fsp+"lisa"+fsp+"LISA5.850"));
-					consultasFile= new File("files"+fsp+"lisa"+fsp+"LISA.QUE");
-					relevanciasFile= new File("files"+fsp+"lisa"+fsp+"LISA.REL");
+					documentosFiles.add(new File("datasets"+fsp+"lisa"+fsp+"LISA0.501"));
+					documentosFiles.add(new File("datasets"+fsp+"lisa"+fsp+"LISA1.501"));
+					documentosFiles.add(new File("datasets"+fsp+"lisa"+fsp+"LISA2.501"));
+					documentosFiles.add(new File("datasets"+fsp+"lisa"+fsp+"LISA3.501"));
+					documentosFiles.add(new File("datasets"+fsp+"lisa"+fsp+"LISA4.501"));
+					documentosFiles.add(new File("datasets"+fsp+"lisa"+fsp+"LISA5.501"));
+					documentosFiles.add(new File("datasets"+fsp+"lisa"+fsp+"LISA5.627"));
+					documentosFiles.add(new File("datasets"+fsp+"lisa"+fsp+"LISA5.850"));
+					consultasFile= new File("datasets"+fsp+"lisa"+fsp+"LISA.QUE");
+					relevanciasFile= new File("datasets"+fsp+"lisa"+fsp+"LISA.REL");
 				}else if(getLabelDataSetName().getText().equals("ADI")){
-					documentosFile= new File("files"+fsp+"adi"+fsp+"ADI.ALL");
-					consultasFile= new File("files"+fsp+"adi"+fsp+"ADI.QRY");
-					relevanciasFile= new File("files"+fsp+"adi"+fsp+"ADI.REL");
+					documentosFile= new File("datasets"+fsp+"adi"+fsp+"ADI.ALL");
+					consultasFile= new File("datasets"+fsp+"adi"+fsp+"ADI.QRY");
+					relevanciasFile= new File("datasets"+fsp+"adi"+fsp+"ADI.REL");
 				}else if(getLabelDataSetName().getText().equals("TIME")){
-					documentosFile= new File("files"+fsp+"time"+fsp+"TIME.ALL");
-					consultasFile= new File("files"+fsp+"time"+fsp+"TIME.QUE");
-					relevanciasFile= new File("files"+fsp+"time"+fsp+"TIME.REL");
+					documentosFile= new File("datasets"+fsp+"time"+fsp+"TIME.ALL");
+					consultasFile= new File("datasets"+fsp+"time"+fsp+"TIME.QUE");
+					relevanciasFile= new File("datasets"+fsp+"time"+fsp+"TIME.REL");
 				}else if(getLabelDataSetName().getText().equals("ISWC2015")){
-					documentosFile = new File("files"+fsp+"iswc2015"+fsp+"docs.txt");
-					consultasFile= new File("files"+fsp+"iswc2015"+fsp+"qrys.txt");
-					relevanciasFile = new File("files"+fsp+"iswc2015"+fsp+"rel.txt");
+					documentosFile = new File("datasets"+fsp+"iswc2015"+fsp+"docs.txt");
+					consultasFile= new File("datasets"+fsp+"iswc2015"+fsp+"qrys.txt");
+					relevanciasFile = new File("datasets"+fsp+"iswc2015"+fsp+"rel.txt");
 				}else{
 					return;
 				}
@@ -954,6 +955,23 @@ public class VentanaController implements Initializable{
 			}
 		}
 	}
+	/**
+	 * Método privado que carga los nombres de las bases de datos presentes en la carpeta "datasets"
+	 */
+	private void cargarDBs(){
+		File files = new File("datasets");
+		if(files.isDirectory()){
+			dataSets = new String[files.listFiles().length];
+			int i = 0;
+			for(File f: files.listFiles()){
+				dataSets[i] = f.getName().toUpperCase();
+				i++;
+			}
+		}
+		
+	}
+	
+	
 	/**
 	 * @return the tree
 	 */
