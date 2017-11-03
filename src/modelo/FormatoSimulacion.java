@@ -5,7 +5,7 @@ package modelo;
  *
  */
 public class FormatoSimulacion {
-	/**Si es igual o no el jucio de usuario del archivo de relevancia con la simulación */
+	/**Si es igual o no el juicio de usuario del archivo de relevancia con la simulación */
 	private Boolean igual;
 	/**Identificador de la consulta */
 	private Integer idq;
@@ -13,18 +13,18 @@ public class FormatoSimulacion {
 	private Integer iddoc;
 	/**Valor de similitud o distancia conseno */
 	private Double sim;
-	/**Relevancia o jucio de usuario del fichero de relevancia */
+	/**Relevancia o juicio de usuario del fichero de relevancia */
 	private Boolean userRelReal;
-	/**Relevencia o jucio de usuario simulado */
+	/**Relevencia o juicio de usuario simulado */
 	private Boolean userRelSim;
 	/**
 	 * Constructor de la clase
-	 * @param igual Si es igual o no el jucio de usuario del archivo de relevancia con la simulación
+	 * @param igual Si es igual o no el juicio de usuario del archivo de relevancia con la simulación
 	 * @param idq Identificador de la consulta
 	 * @param iddoc Identificador del documento
 	 * @param sim Valor de similitud o distancia conseno
-	 * @param userRelReal Relevancia o jucio de usuario del fichero de relevancia
-	 * @param userRelSim Relevencia o jucio de usuario simulado
+	 * @param userRelReal Relevancia o juicio de usuario del fichero de relevancia
+	 * @param userRelSim Relevencia o juicio de usuario simulado
 	 */
 	public FormatoSimulacion(Boolean igual, Integer idq, 
 			Integer iddoc, Double sim, Boolean userRelReal,

@@ -26,7 +26,7 @@ public class Tests {
 	 */
 	@Test
 	public void testLecturaDocumento(){
-		File docTest = new File("files"+fsp+"test"+fsp+"testDocumento.txt");
+		File docTest = new File("dataSets"+fsp+"test"+fsp+"testDocumento.txt");
 		ArrayList<Documento> docs = new ArrayList<>();
 		Documento.generarDocumentos(docTest, docs);
 		assertTrue(docs.get(0).getId().equals(1));
@@ -40,7 +40,7 @@ public class Tests {
 	 */
 	@Test
 	public void testLecturaDocumentoVacio(){
-		File docTest = new File("files"+fsp+"test"+fsp+"testDocumentoVacio.txt");
+		File docTest = new File("dataSets"+fsp+"test"+fsp+"testDocumentoVacio.txt");
 		ArrayList<Documento> docs = new ArrayList<>();
 		Documento.generarDocumentos(docTest, docs);
 		assertTrue(docs.size() == 0);
@@ -51,7 +51,7 @@ public class Tests {
 	 */
 	@Test
 	public void testLecturaConsulta(){
-		File conTest = new File("files"+fsp+"test"+fsp+"testConsulta.txt");
+		File conTest = new File("dataSets"+fsp+"test"+fsp+"testConsulta.txt");
 		ArrayList<Consulta> cons = new ArrayList<>();
 		Consulta.generarConsultas(conTest, cons);
 		assertTrue(cons.get(0).getId().equals(1));
@@ -63,7 +63,7 @@ public class Tests {
 	 */
 	@Test
 	public void testLecturaConsultaVacia(){
-		File conTest = new File("files"+fsp+"test"+fsp+"testConsultaVacia.txt");
+		File conTest = new File("dataSets"+fsp+"test"+fsp+"testConsultaVacia.txt");
 		ArrayList<Consulta> cons = new ArrayList<>();
 		Consulta.generarConsultas(conTest, cons);
 		assertTrue(cons.size() == 0);
@@ -75,7 +75,7 @@ public class Tests {
 	 */
 	@Test
 	public void testLecturaRelevancia(){
-		File relTest = new File("files"+fsp+"test"+fsp+"testRelevancia.txt");
+		File relTest = new File("dataSets"+fsp+"test"+fsp+"testRelevancia.txt");
 		ArrayList<Relevancia> rls = new ArrayList<>();
 		Relevancia.getRelevancia(relTest, rls, 1);
 		assertTrue(rls.get(0).getQueryID().equals(3) && rls.get(0).getDocID().equals(30));
@@ -86,7 +86,7 @@ public class Tests {
 	 */
 	@Test
 	public void testLecturaRelevanciaVacia(){
-		File relTest = new File("files"+fsp+"test"+fsp+"testRelevanciaVacia.txt");
+		File relTest = new File("dataSets"+fsp+"test"+fsp+"testRelevanciaVacia.txt");
 		ArrayList<Relevancia> rls = new ArrayList<>();
 		Relevancia.getRelevancia(relTest, rls, 1);
 		assertTrue(rls.size() == 0);

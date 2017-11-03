@@ -76,7 +76,7 @@ public class Simulador {
 			for(ResultadoDoc resD: resQ.getResultadosDocumentos()){
 				ResultadoDoc resSimD = new ResultadoDoc(resD.getIdQuery(), resD.getIdDoc(), resD.getDisCos(), 
 						isRelSim(resD.getDisCos(), tolerancia), -1.0, -1.0, resD.getTWords()); 
-				//precision y recall dependen de los jucios reales, que no se tienen en una simualción
+				//precision y recall dependen de los juicios reales, que no se tienen en una simualción
 				if(isRelSim(resD.getDisCos(), tolerancia)){
 					docRelDesplegados++;
 				}

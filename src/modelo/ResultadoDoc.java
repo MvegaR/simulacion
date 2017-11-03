@@ -14,7 +14,7 @@ public class ResultadoDoc {
 	private Integer idDoc;
 	/**Distancia del coseno o similitud*/
 	private Double disCos;
-	/**Relevencia (jucio de usuario, puede ser null)*/
+	/**Relevencia (juicio de usuario, puede ser null)*/
 	private Boolean isRel;
 	/**Precisión de la posición o raking del documento para la consulta*/
 	private Double precision;
@@ -30,7 +30,7 @@ public class ResultadoDoc {
 	 * @param idQuery ID consulta
 	 * @param idDoc ID documento
 	 * @param disCos Distancia del coseno o similitud
-	 * @param isRel Relevencia (jucio de usuario, puede ser null)
+	 * @param isRel Relevencia (juicio de usuario, puede ser null)
 	 * @param precision Precisión de la posición o raking del documento para la consulta
 	 * @param recall Sensibilidad o recall, documentosRelevantesDesplegados / documentosRelevantesTotales
 	 * @param tWords total de palabras presentes en la consulta y documento
