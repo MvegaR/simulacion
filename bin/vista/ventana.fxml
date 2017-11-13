@@ -347,12 +347,12 @@
       <BorderPane id="fondo1" prefHeight="111.0" prefWidth="1461.0" BorderPane.alignment="CENTER">
          <left>
             <ImageView fitHeight="103.0" fitWidth="215.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-               <image>
-                  <Image url="@/img/logo.png" />
-               </image>
                <BorderPane.margin>
                   <Insets bottom="10.0" left="20.0" top="10.0" />
                </BorderPane.margin>
+               <image>
+                  <Image url="img/logo.png" />
+               </image>
             </ImageView>
          </left>
          <center>

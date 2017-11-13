@@ -16,9 +16,9 @@ public class Precision {
 	/** Número de documentos máximos a desplegar y a incluir en el cálculo de precisión */
 	Integer pIn;
 	/**
-	 * Constructor clase Precision
+	 * Constructor clase Precisión
 	 * @param idConsulta Identificador de la consulta
-	 * @param precision precision de la consulta
+	 * @param precision precisión de la consulta
 	 * @param documentosRelevantes cantidad de documentos relevantes en la consulta
 	 * @param pIn Número de documentos máximos a desplegar y a incluir en el cálculo de precisión 
 	 */

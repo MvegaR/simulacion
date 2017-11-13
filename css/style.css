@@ -1,0 +1,141 @@
+/* Estilo de botón */
+#bevel-grey {
+    -fx-background-color: 
+        linear-gradient(#f2f2f2, #d6d6d6),
+        linear-gradient(#fcfcfc 0%, #d9d9d9 20%, #d6d6d6 100%),
+        linear-gradient(#dddddd 0%, #f6f6f6 50%);
+    -fx-background-radius: 8,7,6;
+    -fx-background-insets: 0,1,2;
+    -fx-text-fill: black;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+/* Estilo de botón presionado */
+#bevel-grey:pressed {
+      -fx-background-color: 
+        linear-gradient(#aeaeae, #9b9b9b),
+        linear-gradient(#fcfcfc 0%, #d9d9d9 20%, #d6d6d6 100%),
+        linear-gradient(#aeaeae 0%, #f6f6f6 80%);
+    -fx-background-radius: 8,7,6;
+    -fx-background-insets: 0,1,2;
+    -fx-text-fill: black;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+/* Estilo de botón seleccionado */
+#bevel-grey:selected {
+      -fx-background-color: 
+         linear-gradient(to bottom, rgba(255,255,255,1) 0%, 
+         rgba(255,255,255,1) 51%, rgba(145,232,66,1) 100%);
+    -fx-background-radius: 8,7,6;
+    -fx-background-insets: 0,1,2;
+    -fx-text-fill: black;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+/* Estilo de las barras de título del proyecto*/
+#fondo1{
+-fx-background-color: linear-gradient(to top, rgba(73,155,234,0.2) 0%, rgba(0,150,200,0.9) 100%);
+}
+
+/* Fondo degradado azul para títulos*/
+#title{
+  -fx-background-color: linear-gradient(to top, rgba(73,155,234,0.2) 0%, rgba(0,150,200,0.7) 100%);
+}
+/* degradado blanco y naranja para las barras de carga*/
+.progress-bar > .bar {
+    -fx-background-color: linear-gradient(
+        from 0px .75em to .75em 0px,
+        repeat,
+        rgb(253, 151, 31) 0%,
+        rgb(253, 151, 31) 49%,
+        derive(rgb(253, 151, 31), 30%) 50%,
+        derive(rgb(253, 151, 31), 30%) 99%
+    );
+}
+
+/*
+Colores para las tablas de datos
+fuente: http://acodigo.blogspot.cl/2015/11/estilos-css-para-tableview-javafx.html
+formato para las celdas del tableview
+*/
+.table-cell {     
+    -fx-padding: 0.5em 0.5em 0.1em 0.3em;
+    -fx-border-color: -fx-box-border -fx-box-border transparent transparent;  
+    -fx-font: 13px "Segoe UI";    
+    -fx-border-insets: 0;
+}
+
+/* color de fondo para cuando el raton este sobre la celda */
+.table-cell:hover {
+    -fx-background-color: #c1c1c1;
+}
+
+/* color para filas vacias, 
+    aplicar el mismo color cuando el raton este sobre una celda de una fila vacia  */
+.table-row-cell:empty, .table-cell:empty:hover {
+    -fx-background-color: whitesmoke;
+}
+ 
+/* eliminar borde de celdas en las filas vacias */
+.table-row-cell:empty .table-cell {
+    -fx-border-width: 0px;
+}
+
+/* Fondo naranja */
+#fondoNaranja{
+    -fx-background-color: 
+    linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 85%, rgba(255,175,75,1) 100%);
+}
+
+/* color de una fila cuando en raton se encuentra sobre la misma  */
+.table-view:row-selection .table-row-cell:filled:hover { 
+    -fx-background-color: rgba(28, 183, 236, 0.25);
+}
+
+/* color de una fila cuando en raton se encuentra sobre una fila que esta seleccionada */
+.table-view:row-selection .table-row-cell:filled:selected:hover { 
+    -fx-background-color: rgba(232, 203, 148, 0.90);
+}
+
+/* color de una fila seleccionada por el usuario */
+.table-view:row-selection .table-row-cell:filled:selected { 
+    -fx-background-color: rgba(28, 183, 236, 0.65);
+}
+
+/* eliminar border del table que aparece cuando el mismo tiene el foco */
+.table-view, .table-view:focused {
+  -fx-background-color: transparent,-fx-box-border,-fx-control-inner-background;
+  -fx-background-insets: -1.4, 0, 1;
+  -fx-background-radius: 1.4, 0, 0;
+}
+ 
+/* centrar y cambiar color de los titulos de columnas */
+.table-view .column-header .label{
+    -fx-text-fill: #52677A;
+    -fx-alignment: CENTER;
+}
+
+/* color de fondo del titulo de columna cuando en roton esta sobre ella */
+.table-view .column-header:hover {
+    -fx-background-color: whitesmoke;
+}
+
+/* tamaño, bordes y color de fondo de los titulos */
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: white;    
+    -fx-size: 45;
+    -fx-border-color: -fx-box-border;
+    -fx-border-width: 0 1 3 0;
+    -fx-border-insets: 0;
+}
+
+/* hacer transparente el fondo de los titulos */
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+
+/* estylo para el boton que permite ocultar o mostrar las columnas */
+.table-view .show-hide-columns-button {
+    -fx-background-color: white;
+    -fx-border-color: -fx-box-border;
+    -fx-border-insets: 0;
+}

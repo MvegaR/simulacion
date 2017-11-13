@@ -792,8 +792,8 @@ public class VentanaController implements Initializable{
 				getTree().setDisable(true);
 				getButtonLeerDataSet().setDisable(true);
 				String fsp = System.getProperty("file.separator").toString();
-				//palabras comunes (se uso en todas ya que mejora la precisión, pero es de cran)
-				File palabrasComunesFile = new File("datasets"+fsp+"cacm"+fsp+"common_words");
+				//palabras comunes
+				File palabrasComunesFile = new File("datasets"+fsp+"palabras_comunes");
 				ArrayList<File> documentosFiles = null;
 				File documentosFile = null;
 				File consultasFile = null;
@@ -839,6 +839,10 @@ public class VentanaController implements Initializable{
 					documentosFile = new File("datasets"+fsp+"iswc2015"+fsp+"docs.txt");
 					consultasFile= new File("datasets"+fsp+"iswc2015"+fsp+"qrys.txt");
 					relevanciasFile = new File("datasets"+fsp+"iswc2015"+fsp+"rel.txt");
+				}else if(getLabelDataSetName().getText().length() > 0){
+					documentosFile = new File("datasets"+fsp+getLabelDataSetName().getText().toLowerCase()+fsp+"docs.txt");
+					consultasFile= new File("datasets"+fsp+getLabelDataSetName().getText().toLowerCase()+fsp+"qrs.txt");
+					relevanciasFile = new File("datasets"+fsp+getLabelDataSetName().getText().toLowerCase()+fsp+"rel.txt");
 				}else{
 					getCargaLecturaDataSet().setProgress(1);
 					getSpinnerPin().setDisable(false);
@@ -970,8 +974,10 @@ public class VentanaController implements Initializable{
 			dataSets = new String[files.listFiles().length];
 			int i = 0;
 			for(File f: files.listFiles()){
-				dataSets[i] = f.getName().toUpperCase();
-				i++;
+				if(f.isDirectory()){
+					dataSets[i] = f.getName().toUpperCase();
+					i++;
+				}
 			}
 		}
 		
